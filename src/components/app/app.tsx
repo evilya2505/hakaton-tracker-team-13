@@ -1,25 +1,20 @@
 import React from "react";
-import logo from "../../logo.svg";
+import logo from "../../images/KT logo.svg";
+import supportLogo from "../../images/tg-logo.svg"
 import app from "./app.module.css";
 
 function App() {
   return (
-    <div className={app.app}>
-      <header className={app.appHeader}>
-        <img src={logo} className={app.appLogo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>{" "}
-        <a
-          className={app.appLink}
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={app.appPage}>
+      <div className={app.appMain}>
+        <img src={logo} className={app.appLogo} alt="Логотип карьерного трека" />
+        <div className={app.appSupport}>
+         <img src={supportLogo} className={app.appSupportLogo} alt="Логитип службы поддержки" />
+         <p className={app.appSupportTitle}>Написать в поддержку</p>
+      </div>
+      <p className={app.appCopyright}>&copy; Карьерный трекер, 2023</p>
     </div>
+    </div >
   );
 }
 
