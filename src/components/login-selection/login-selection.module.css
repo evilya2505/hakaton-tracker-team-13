@@ -1,0 +1,39 @@
+.fieldset {
+  border: none;
+  text-align: left;
+  margin: 0 auto 24px;
+  padding: 0;
+}
+
+.buttons {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  width: 250px;
+}
+
+.link:not(:last-of-type) {
+  margin-bottom: 24px;
+}
+
+.button {
+  border-radius: 6px !important;
+  padding: 12px 0 !important;
+  font-size: 16px !important;
+  font-family: "YS Text" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+  text-transform: initial !important;
+  border-color: #1d6bf3 !important;
+  color: #1d6bf3 !important;
+}
+
+.button:hover {
+  background-color: #1d6bf3 !important;
+  color: #fff !important;
+}

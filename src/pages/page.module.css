@@ -1,0 +1,58 @@
+.wrapper {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.page {
+  border-radius: 10px;
+  background-color: #ffff;
+  max-width: 338px;
+}
+
+.title {
+  margin: 0 0 28px;
+  padding: 0;
+  color: #000;
+  font-size: 24px;
+  font-family: "YS Display";
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.additionalSection {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.additionalText {
+  margin: 0 11px 0 0;
+  color: #b5b5b7;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  -webkit-transition: opacity 0.2s, opacity 0.2s linear;
+  -o-transition: opacity 0.2s, opacity 0.2s linear;
+  transition: opacity 0.2s, opacity 0.2s linear;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
