@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import SubmitButton from "../submit-button/submit-button";
-import { forgotPasswordSchema } from "../validations/forgot-passsword-validations";
+import { forgotPasswordSchema } from "../../validations/forgot-passsword-validations";
 import { ForgotPasswordFormValues } from "../../utils/types";
 
 const LoginInputsForm: React.FC<{}> = (): JSX.Element => {

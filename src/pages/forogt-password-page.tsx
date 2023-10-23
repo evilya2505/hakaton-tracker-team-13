@@ -13,7 +13,7 @@ const ForgotPasswordPage: React.FC<{}> = (): JSX.Element => {
         <h1 className={page.title}>Восстановление пароля</h1>
         {path === "/forgot-password/success" ? (
           <p className={forgotPasswordPage.text}>
-            Отправили ссылку для восстановления пароля на почту mail@mail.mail{" "}
+            Отправили ссылку для восстановления пароля на почту mail@mail.mail
           </p>
         ) : (
           <LoginInputsForm />

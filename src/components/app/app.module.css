@@ -1,5 +1,5 @@
 .appPage {
-  background-color: #1A1B22;
+  background-color: #1a1b22;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +52,7 @@
   line-height: 20px;
   letter-spacing: 0em;
   text-align: center;
-  color: #B5B5B7;
+  color: #b5b5b7;
   margin: 0;
 }
 
@@ -63,7 +63,7 @@
   line-height: 20px;
   letter-spacing: 0em;
   text-align: center;
-  color: #B5B5B7;
+  color: #b5b5b7;
   position: absolute;
   margin: 0 auto;
   left: 0;
