@@ -20,3 +20,15 @@ body {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 } */
+
+:root {
+  --main-black-900: #1a1b22;
+  --main-black-500: #797981;
+  --main-black-100: #dde0e4;
+  --main-grey: #f9fafb;
+  --main-white: #fff;
+  --main-blue: #5a9bff;
+  --main-blue-main: #1d6bf3;
+  --main-blue-bg: #f1f6ff;
+  --main-red: #ff0200;
+}
