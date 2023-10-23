@@ -1,23 +1,13 @@
 import React from "react";
 import loginInputsForm from "./login-inputs-form.module.css";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-
-type LoginFormValues = {
-  email: string;
-  password: string;
-};
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Неверный формат email.")
-    .required("Поле обязательное."),
-  password: yup.string().required("Поле обязательное."),
-});
+import SubmitButton from "../submit-button/submit-button";
+import { LoginFormValues } from "../../utils/types";
+import { loginSchema } from "../validations/login-validations";
 
 const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
   const form = useForm<LoginFormValues>({
@@ -25,14 +15,13 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
       email: "",
       password: "",
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log(errors.email?.message);
     console.log("Form data submitted:", data);
   };
 
@@ -44,7 +33,6 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
     >
       <fieldset className={loginInputsForm.fieldset}>
         <p className={loginInputsForm.text}>Войти в аккаунт</p>
-
         <TextField
           fullWidth
           className={loginInputsForm.input}
@@ -75,17 +63,13 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
         >
           Не помню пароль
         </Link>
-        <Button
-          type="submit"
-          fullWidth
-          className={loginInputsForm["button"]}
-          variant="contained"
-          disabled={
+
+        <SubmitButton
+          isDisabled={
             !(formState.dirtyFields.email && formState.dirtyFields.password)
           }
-        >
-          Войти
-        </Button>
+          text={"Войти"}
+        />
       </fieldset>
     </form>
   );

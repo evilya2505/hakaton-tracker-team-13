@@ -1,36 +1,27 @@
 import React from "react";
 import forgotPasswordForm from "./forgot-password-form.module.css";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
-
-type LoginFormValues = {
-  email: string;
-};
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Неверный формат email.")
-    .required("Поле обязательное."),
-});
+import SubmitButton from "../submit-button/submit-button";
+import { forgotPasswordSchema } from "../validations/forgot-passsword-validations";
+import { ForgotPasswordFormValues } from "../../utils/types";
 
 const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const form = useForm<LoginFormValues>({
+  const form = useForm<ForgotPasswordFormValues>({
     defaultValues: {
       email: "",
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(forgotPasswordSchema),
   });
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const onSubmit = (data: LoginFormValues) => {
+  const onSubmit = (data: ForgotPasswordFormValues) => {
     console.log("Form data submitted:", data);
     navigate("/forgot-password/success");
   };
@@ -58,15 +49,10 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
           {...register("email")}
         />
 
-        <Button
-          type="submit"
-          fullWidth
-          className={forgotPasswordForm["button"]}
-          variant="contained"
-          disabled={!formState.dirtyFields.email}
-        >
-          Продолжить
-        </Button>
+        <SubmitButton
+          isDisabled={!formState.dirtyFields.email}
+          text={"Продолжить"}
+        />
       </fieldset>
     </form>
   );
