@@ -30,3 +30,47 @@
     url(./SuisseIntl-Bold.otf) format("otf"),
     url(./SuisseIntl-Bold.ttf) format("ttf");
 }
+
+@font-face {
+  font-family: "YS Text";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./YS\ Text-Regular.woff2) format("woff2"),
+    url(./YS\ Text-Regular.woff) format("woff"),
+    url(./YS\ Text-Regular.otf) format("otf"),
+    url(./YS\ Text-Regular.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: "YS Text";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(./YS\ Text-Medium.woff2) format("woff2"),
+    url(./YS\ Text-Medium.woff) format("woff"),
+    url(./YS\ Text-Medium.otf) format("otf"),
+    url(./YS\ Text-Medium.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: "YS Text";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(./YS\ Text-Bold.woff2) format("woff2"),
+    url(./YS\ Text-Bold.woff) format("woff"),
+    url(./YS\ Text-Bold.otf) format("otf"),
+    url(./YS\ Text-Bold.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: "YS Display";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(./YS\ Display-Medium.woff2) format("woff2"),
+    url(./YS\ Display-Medium.woff) format("woff"),
+    url(./YS\ Display-Medium.otf) format("otf"),
+    url(./YS\ Display-Medium.ttf) format("ttf");
+}

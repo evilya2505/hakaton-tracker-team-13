@@ -1,8 +1,17 @@
 @import url(./fonts/fonts.css);
 
+p,
+h1,
+h2,
+h3,
+h4 {
+  caret-color: transparent;
+}
+
 body {
   margin: 0;
-  font-family: 'Suisse Intl', 'Arial', sans-serif;
+  font-family: "YS Text", "Arial", sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
