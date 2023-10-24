@@ -7,7 +7,7 @@ import studentModal from './student-modal.module.css';
 import SubmitButton from '../submit-button/submit-button';
 import MainStudentCv from '../main-student-cv/main-student-cv';
 
-export default function StudenModal() {
+export default function StudentModal() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

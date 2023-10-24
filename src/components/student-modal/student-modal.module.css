@@ -9,13 +9,13 @@
     font-weight: 400 !important;
     line-height: 20px !important;
     text-transform: initial !important;
-    border-color: #1d6bf3 !important;
-    color: #1d6bf3 !important;
+    border-color: var(--main-blue-main) !important;
+    color: var(--main-blue-main) !important;
   }
   
   .button:hover {
-    background-color: #1d6bf3 !important;
-    color: #fff !important;
+    background-color: var(--main-blue-main) !important;
+    color: var(--main-white) !important;
   }
 
   .buttons {

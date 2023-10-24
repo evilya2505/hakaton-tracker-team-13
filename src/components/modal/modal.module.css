@@ -5,7 +5,7 @@
   height: fit-content;
   border-radius: 20px;
   width: fit-content;
-  background-color: white;
+  background-color: var(--main-white);
   position: relative;
 }
 
