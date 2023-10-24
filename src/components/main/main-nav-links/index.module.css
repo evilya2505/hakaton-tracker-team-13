@@ -9,8 +9,27 @@
 .link {
   text-decoration: none;
   color: var(--main-black-300);
+  padding-left: 28px;
+  background-repeat: no-repeat;
+  background-position: left;
 }
 
 .link:hover {
   color: var(--main-white);
+}
+
+.link_type_applicants {
+  background-image: url(../../../images/Users\ \(1\).svg);
+}
+
+.link_type_vacancies {
+  background-image: url(../../../images/Folder\ \(1\).svg);
+}
+
+.link_type_statistics {
+  background-image: url(../../../images/ChartPieSlice\(unactive\).svg);
+}
+
+.link_type_planer {
+  background-image: url(../../../images/diary.svg);
 }
