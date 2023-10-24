@@ -1,0 +1,15 @@
+.container {
+    min-width: 165px;
+    background-color: var(--main-black-900);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 36px 8px 32px 8px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+}
