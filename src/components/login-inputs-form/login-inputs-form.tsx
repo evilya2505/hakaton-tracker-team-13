@@ -64,6 +64,7 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
         </Link>
 
         <SubmitButton
+          isFullWidth={true}
           isDisabled={
             !(formState.dirtyFields.email && formState.dirtyFields.password)
           }
