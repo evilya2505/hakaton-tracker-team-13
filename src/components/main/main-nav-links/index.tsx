@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 
 const MainNavLinks: React.FC<{}> = (): JSX.Element => {
   return (
-    <ul className={mainNavLinks.container}>
-      {/* <li>
-        <Link to="/">Соискатели</Link>
+    <ul className={mainNavLinks.list}>
+      <li>
+        <Link to="/applicants" className={mainNavLinks.link}>Соискатели</Link>
       </li>
       <li>
-        <Link to="/">Мои вакансии</Link>
+        <Link to="/vacancies" className={mainNavLinks.link}>Мои вакансии</Link>
       </li>
       <li>
-        <Link to="/">Статистика</Link>
+        <Link to="/statistics" className={mainNavLinks.link}>Статистика</Link>
       </li>
       <li>
-        <Link to="/">Планер</Link>
-      </li> */}
+        <Link to="/planer" className={mainNavLinks.link}>Планер</Link>
+      </li>
     </ul>
   );
 };
