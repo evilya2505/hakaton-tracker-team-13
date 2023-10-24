@@ -1,0 +1,104 @@
+.student {
+  max-width: 1025px;
+  border: 1px solid red;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 24px 10px 10px;
+  display: flex;
+  overflow-y: scroll;
+  height: 579px;
+}
+
+.student::-webkit-scrollbar {
+  margin-right: 24px;
+  width: 4px;
+  height: 4px;
+  background: rgba(26, 27, 34, 0.2);
+}
+
+.student::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.studentInfo {
+  border: 1px solid red;
+}
+
+.name {
+  margin: 0;
+  padding: 0;
+  color: #1a1b22;
+  font-family: "YS Display";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.city {
+  margin: 0;
+  padding: 0;
+  color: #1a1b22;
+  font-family: "YS Text";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.image {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+}
+
+.subtitle {
+  margin: 0;
+  padding: 0;
+  color: #1a1b22;
+  font-family: "YS Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.text {
+  overflow-wrap: break-word;
+  border: 1px solid red;
+  max-width: 796px;
+  margin: 0;
+  padding: 0;
+  color: #1a1b22;
+  font-family: "YS Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.middleInfo {
+  display: flex;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  color: #1a1b22;
+  font-family: "YS Display";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.statistics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.statistic {
+  border-radius: 6px;
+  background-color: #fff9d3;
+}

@@ -7,8 +7,21 @@ import LoginSelection from "../login-selection/login-selection";
 import LoginPage from "../../pages/login";
 import LoginInputsForm from "../login-inputs-form/login-inputs-form";
 import ForgotPasswordPage from "../../pages/forogt-password-page";
+import BasicModal from "../modal/modal";
+import MainStudentInfo from "../main-student-info/main-student-info";
+import { Button } from "@mui/material";
 
 function App() {
+  const [isUserModalVisible, setIsUserModalVisible] =
+    React.useState<boolean>(false);
+
+  function closeModal() {
+    setIsUserModalVisible(false);
+  }
+
+  function openUserModal() {
+    setIsUserModalVisible(true);
+  }
   return (
     <div className={app.appPage}>
       <div className={app.appMain}>
@@ -26,7 +39,11 @@ function App() {
             <Route path="success" element={<ForgotPasswordPage />} />
           </Route>
         </Routes>
+        <Button onClick={openUserModal}>Open modal</Button>
 
+        <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
+          <MainStudentInfo />
+        </BasicModal>
         <div className={app.appSupport}>
           <img
             src={supportLogo}
