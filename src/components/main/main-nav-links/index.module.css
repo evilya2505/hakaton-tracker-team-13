@@ -1,9 +1,14 @@
 .list {
+  height: 100%;
   list-style: none;
   padding: 32px 0 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.item {
+  margin-top: auto;
 }
 
 .link {
@@ -32,4 +37,12 @@
 
 .link_type_planer {
   background-image: url(../../../images/diary.svg);
+}
+
+.link_type_settings {
+  background-image: url(../../../images/Gear.svg);
+}
+
+.link_type_logout {
+  background-image: url(../../../images/SignOut\ \(1\).svg);
 }

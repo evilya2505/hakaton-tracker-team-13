@@ -24,6 +24,16 @@ const MainNavLinks: React.FC<{}> = (): JSX.Element => {
           Планер
         </Link>
       </li>
+      <li className={mainNavLinks.item}>
+        <Link to="/settings" className={`${mainNavLinks.link} ${mainNavLinks.link_type_settings}`}>
+          Настройки
+        </Link>
+      </li>
+      <li>
+        <Link to="/" className={`${mainNavLinks.link} ${mainNavLinks.link_type_logout}`}>
+          Выход
+        </Link>
+      </li>
     </ul>
   );
 };
