@@ -3,7 +3,14 @@ import ApplicantsCard from "./applicants-card";
 import { useEffect } from "react";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
-  const applicantsCardList = Array<JSX.Element>;
+  // type applicantsCardList = {
+
+  // };
+
+  // export type LoginFormValues = {
+  //   email: string;
+  //   password: string;
+  // };
 
   // useEffect(() => {
   //   for (let index = 0; index < 12; index++) {
@@ -16,6 +23,9 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
     <div className={applicants.container}>
       <h2 className={applicants.title}>Соискатели</h2>
       <ul className={applicants.list}>
+        <li>
+          <ApplicantsCard />
+        </li>
         <li>
           <ApplicantsCard />
         </li>
