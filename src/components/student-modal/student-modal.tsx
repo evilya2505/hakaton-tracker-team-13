@@ -22,8 +22,8 @@ export default function StudentModal() {
           <Tab label="Резюме" />
         </Tabs>
       </div>
-      {value == 0 && <MainStudentInfo />}
-      {value == 1 && <MainStudentCv />}
+      {value === 0 && <MainStudentInfo />}
+      {value === 1 && <MainStudentCv />}
       <div className={studentModal.buttons}>
         <Button
             className={studentModal.button}

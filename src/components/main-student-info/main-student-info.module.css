@@ -86,7 +86,8 @@
 .statistic {
   text-align: center;
   border-radius: 6px;
-  padding: 10px 36px;
+  padding: 10px 0;
+  width: 133px;
 }
 
 .statistic:not(:last-of-type) {

@@ -8,7 +8,6 @@ import LoginPage from "../../pages/login";
 import LoginInputsForm from "../login-inputs-form/login-inputs-form";
 import ForgotPasswordPage from "../../pages/forogt-password-page";
 import BasicModal from "../modal/modal";
-import { Button } from "@mui/material";
 import StudentModal from "../student-modal/student-modal";
 
 function App() {
@@ -39,11 +38,7 @@ function App() {
             <Route path="success" element={<ForgotPasswordPage />} />
           </Route>
         </Routes>
-        <Button onClick={openUserModal}>Open modal</Button>
 
-        <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
-          <StudentModal />
-        </BasicModal>
         <div className={app.appSupport}>
           <img
             src={supportLogo}
@@ -54,6 +49,9 @@ function App() {
         </div>
         <p className={app.appCopyright}>&copy; Карьерный трекер, 2023</p>
       </div>
+      <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
+          <StudentModal />
+        </BasicModal>
     </div>
   );
 }
