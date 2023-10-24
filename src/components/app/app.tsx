@@ -10,6 +10,7 @@ import ForgotPasswordPage from "../../pages/forogt-password-page";
 import BasicModal from "../modal/modal";
 import MainStudentInfo from "../main-student-info/main-student-info";
 import { Button } from "@mui/material";
+import StudenModal from "../student-modal/student-moda";
 
 function App() {
   const [isUserModalVisible, setIsUserModalVisible] =
@@ -42,7 +43,7 @@ function App() {
         <Button onClick={openUserModal}>Open modal</Button>
 
         <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
-          <MainStudentInfo />
+          <StudenModal />
         </BasicModal>
         <div className={app.appSupport}>
           <img

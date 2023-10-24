@@ -50,6 +50,7 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
         />
 
         <SubmitButton
+          isFullWidth={true}
           isDisabled={!formState.dirtyFields.email}
           text={"Продолжить"}
         />

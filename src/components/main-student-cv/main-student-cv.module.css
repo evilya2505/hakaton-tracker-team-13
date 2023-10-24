@@ -1,0 +1,101 @@
+.wrapper {
+    margin: 20px 0 0;
+    max-width: 1025px;
+    /* border: 1px solid red; */
+    background-color: white;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; 
+    color: #1A1B22;
+}
+
+.button { 
+    margin-left: 266px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    -webkit-transition: opacity 0.2s, opacity 0.2s linear;
+    -o-transition: opacity 0.2s, opacity 0.2s linear;
+    transition: opacity 0.2s, opacity 0.2s linear;
+}
+
+.button:hover {
+    opacity: .7;
+}
+
+.buttonText {
+    color: var(--main-blue-main, #1D6BF3);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-left: 8px;
+}
+
+.downloadSection {
+    display: flex;
+}
+
+.experienceList {
+    padding:0;
+    overflow-y: scroll;
+    height: 392px;
+}
+
+.experienceList::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background: rgba(26, 27, 34, 0.2);
+  }
+  
+  .experienceList::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+  }
+  
+  .duration {
+    color: #797981;
+  }
+
+  .subtitle{
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+    font-family: 'YS Display';
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .list {
+    list-style-type:disc;
+    overflow-wrap: break-word;
+    max-width: 644px;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+  }
+
+  .experienceItem {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .experienceItem:not(:last-of-type) {
+    margin-bottom: 16px;
+  }
+
+  .text {
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  .experienceDescription {
+    margin-right: 137px;
+  }

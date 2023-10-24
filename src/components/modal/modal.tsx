@@ -20,8 +20,6 @@ export default function BasicModal({
         className={modal.overlay}
         open={isVisible}
         onClose={closePopup}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <div className={modal.modal}>
           <button className={modal.button} onClick={closePopup}>

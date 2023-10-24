@@ -1,0 +1,30 @@
+.button {
+    margin-right: 27px !important;
+    width: 250px !important;
+    border-radius: 6px !important;
+    padding: 12px 0 !important;
+    font-size: 16px !important;
+    font-family: "YS Text" !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    text-transform: initial !important;
+    border-color: #1d6bf3 !important;
+    color: #1d6bf3 !important;
+  }
+  
+  .button:hover {
+    background-color: #1d6bf3 !important;
+    color: #fff !important;
+  }
+
+  .buttons {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .test {
+    width: 250px;
+  }
