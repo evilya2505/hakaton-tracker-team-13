@@ -49,6 +49,7 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
         </li>
       </ul>
     </div>
+
   );
 };
 
