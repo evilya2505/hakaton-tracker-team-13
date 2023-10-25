@@ -26,7 +26,7 @@ function App() {
           <Route path="/planer" element={<Planer />} />
           <Route path="/settings" element={<Planer />} />
         </Route>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login/*" element={<Login />} />
       </Routes>
     </>
   );

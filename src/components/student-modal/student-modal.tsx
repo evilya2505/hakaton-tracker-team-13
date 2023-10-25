@@ -32,7 +32,7 @@ export default function StudentModal({ selectedCard }: IModalProps) {
         </Tabs>
       </div>
       {value === 0 && <MainStudentInfo selectedCard={selectedCard} />}
-      {value === 1 && <MainStudentCv />}
+      {value === 1 && <MainStudentCv selectedCard={selectedCard} />}
       <div className={studentModal.buttons}>
         <Button className={studentModal.button} variant="outlined">
           Скрыть

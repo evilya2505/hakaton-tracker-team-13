@@ -1,6 +1,12 @@
 import mainStudentCv from "./main-student-cv.module.css";
 import downloadIcon from "../../../images/download.svg";
-export default function MainStudentCv({}) {
+import { applicant } from "../../../constants/applicantsList";
+
+interface IModalProps {
+  selectedCard: applicant;
+}
+
+export default function MainStudentCv({ selectedCard }: IModalProps) {
   return (
     <div className={mainStudentCv.wrapper}>
       <div className={mainStudentCv.downloadSection}>
@@ -49,7 +55,6 @@ export default function MainStudentCv({}) {
               <p className={mainStudentCv.subtitle}>UX/UI дизайнер</p>
               <ul className={mainStudentCv.list}>
                 <li>
-                  {" "}
                   <h2 className={mainStudentCv.text}>Описание обязанностей</h2>
                   <p className={mainStudentCv.deal}>
                     .....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
