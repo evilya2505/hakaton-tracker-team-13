@@ -1,4 +1,5 @@
 .container {
+  margin-right: 24px;
 }
 
 .title {
@@ -13,4 +14,16 @@
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
+  overflow-y: scroll;
+  max-height: calc(100vh - 90px);
+}
+
+.list::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: rgba(26, 27, 34, 0.2);
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
 }
