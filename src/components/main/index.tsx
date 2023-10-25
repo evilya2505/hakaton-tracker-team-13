@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import main from "./index.module.css";
-import Navigation from "./main-navigation";
+import Navigation from "./common/main-navigation";
 
 const Main: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
   return (

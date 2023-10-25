@@ -1,5 +1,6 @@
 import applicants from "./index.module.css";
 import ApplicantsCard from "./applicants-card";
+import page from "../index.module.css";
 import { useEffect } from "react";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
@@ -20,7 +21,7 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
   // }, []);
 
   return (
-    <div className={applicants.container}>
+    <div className={`${page.pageElement} ${applicants.container}`}>
       <h2 className={applicants.title}>Соискатели</h2>
       <ul className={applicants.list}>
         <li>

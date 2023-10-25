@@ -1,3 +1,9 @@
 .page {
     display: flex;
 }
+
+.pageElement {
+    margin-left: 189px;
+    margin-top: 36px;
+    width: 100%;
+}

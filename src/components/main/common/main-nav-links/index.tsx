@@ -1,6 +1,6 @@
 import mainNavLinks from "./index.module.css";
-import MainNavLink from "../main-nav-link";
-import { navLinksList } from "../../../constants/navLinksList";
+import MainNavLink from "../../common/main-nav-link";
+import { navLinksList } from "../../../../constants/navLinksList";
 
 const MainNavLinks: React.FC<{}> = (): JSX.Element => {
   return (
