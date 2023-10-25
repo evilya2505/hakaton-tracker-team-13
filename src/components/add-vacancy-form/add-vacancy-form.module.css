@@ -1,0 +1,35 @@
+.form {
+    margin: 28px 0 0;
+    padding: 0;
+    /* max-width: 854px; */
+}
+
+.fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.fieldset:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.inputSection {
+    margin-right: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-top: 4px;
+    width: 320px;
+}
+
+.diapason {
+    border: none;
+    padding: 0;
+    margin: 4px 0 0;
+}

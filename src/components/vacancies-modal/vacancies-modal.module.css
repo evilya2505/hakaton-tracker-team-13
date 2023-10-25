@@ -1,0 +1,17 @@
+.modal {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.form {
+    max-width: 854px;
+}
+
+.title {
+    font-family: 'YS Display';
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px; 
+}
