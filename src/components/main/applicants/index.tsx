@@ -22,11 +22,12 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
       <h2 className={applicants.title}>Соискатели</h2>
       <ul className={applicants.list}>
         {cardsList.map(
-          (element: { name: string; city: string; age: string }, index) => {
+          (element: { name: string; awards: string; city: string; age: string }, index) => {
             return (
               <li key={index} onClick={openUserModal}>
                 <ApplicantsCard
                   name={element.name}
+                  awards={element.awards}
                   city={element.city}
                   age={element.age}
                   onClick={openUserModal}
