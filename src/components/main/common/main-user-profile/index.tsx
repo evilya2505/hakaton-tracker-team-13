@@ -1,6 +1,6 @@
 import mainUserProfile from "./index.module.css";
-import avatar from "../../../images/avatar.png";
-import partners from "../../../images/partners.svg";
+import avatar from "../../../../images/avatar.png";
+import partners from "../../../../images/partners.svg";
 
 const MainUserProfile: React.FC<{}> = (): JSX.Element => {
   return (

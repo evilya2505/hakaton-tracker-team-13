@@ -36,12 +36,14 @@ function App() {
           <Route path="/vacancies" element={<Vacancies />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/planer" element={<Planer />} />
+          <Route path="/settings" element={<Planer />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>
       <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
         <StudentModal />
       </BasicModal>
+
     </>
   );
 }

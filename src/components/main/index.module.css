@@ -1,3 +1,10 @@
 .page {
     display: flex;
+    height: 100%;
+}
+
+.pageElement {
+    margin-left: 189px;
+    margin-top: 36px;
+    width: 100%;
 }

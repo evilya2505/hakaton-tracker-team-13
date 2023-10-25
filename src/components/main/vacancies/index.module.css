@@ -1,4 +1,12 @@
-.container {
-    width: 100%;
-    margin: 0;
+.title {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+.activeVacancies {
+  padding: 0;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

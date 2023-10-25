@@ -1,52 +1,25 @@
 import applicants from "./index.module.css";
 import ApplicantsCard from "./applicants-card";
-import { useEffect } from "react";
+import page from "../index.module.css";
+import { cardsList } from "../../../constants/cardsList";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
-  // type applicantsCardList = {
-
-  // };
-
-  // export type LoginFormValues = {
-  //   email: string;
-  //   password: string;
-  // };
-
-  // useEffect(() => {
-  //   for (let index = 0; index < 12; index++) {
-  //     applicantsCardList.append(<ApplicantsCard />);
-  //   }
-  //   console.log(applicantsCardList);
-  // }, []);
-
   return (
-    <div className={applicants.container}>
+    <div className={`${page.pageElement} ${applicants.container}`}>
       <h2 className={applicants.title}>Соискатели</h2>
       <ul className={applicants.list}>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
-        <li>
-          <ApplicantsCard />
-        </li>
+      {cardsList.map((element: { name: string; city: string, age: string }, index) => {
+        return (
+          <li>
+            <ApplicantsCard
+              key={index}
+              name={element.name}
+              city={element.city}
+              age={element.age}
+            />
+          </li>
+        );
+      })}
       </ul>
     </div>
 
