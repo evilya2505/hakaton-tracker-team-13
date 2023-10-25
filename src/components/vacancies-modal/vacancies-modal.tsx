@@ -22,7 +22,7 @@ const VacanciesModal: React.FC<{}> = (): JSX.Element => {
           <Tab label="Основная информация" />
           <Tab label="Описание вакансии" />
         </Tabs>
-        {value === 0 && <AddVacancyForm />}
+        {<AddVacancyForm value={value}/>}
       </div>
     </div>
   );

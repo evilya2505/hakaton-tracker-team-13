@@ -5,11 +5,8 @@
     line-height: 20px;
 }
 
-.form {
-    max-width: 854px;
-}
-
 .title {
+    margin-bottom: 32px;
     font-family: 'YS Display';
     font-size: 24px;
     font-weight: 500;

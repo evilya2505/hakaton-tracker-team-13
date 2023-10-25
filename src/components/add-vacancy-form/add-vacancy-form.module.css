@@ -24,7 +24,13 @@
 }
 
 .input {
-    margin-top: 4px;
+    color: var(--main-black-900);
+    font-family: 'YS Text';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 142.857% */
+    margin-top: 4px !important;
     width: 320px;
 }
 
@@ -32,4 +38,44 @@
     border: none;
     padding: 0;
     margin: 4px 0 0;
+}
+
+.buttonWrapper {
+    width: 250px;
+    margin: 23px auto 0;
+}
+
+.mainFieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.fieldsetColumns {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: none;
+    column-gap: 24px;
+}
+
+.multiLineInput {
+    width: 450px;
+    height: 100px;
+    margin-top: 4px !important;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.label {
+    color: var(--main-black-900);
+    font-family: 'YS Text';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
 }
