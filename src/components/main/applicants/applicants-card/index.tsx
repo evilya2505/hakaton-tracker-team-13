@@ -23,15 +23,11 @@ const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 interface ApplicantsCardProps {
   applicant: applicant;
-  onClick: () => void;
 }
 
-const ApplicantsCard = ({
-  applicant,
-  onClick,
-}: ApplicantsCardProps): JSX.Element => {
+const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
   return (
-    <div className={applicantsCard.card} onClick={onClick}>
+    <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
         <div className={applicantsCard.info}>
           <img

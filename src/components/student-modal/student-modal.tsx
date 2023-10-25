@@ -6,8 +6,13 @@ import { Button } from "@mui/material";
 import studentModal from "./student-modal.module.css";
 import SubmitButton from "../submit-button/submit-button";
 import MainStudentCv from "../main-student-cv/main-student-cv";
+import { applicant } from "../../constants/applicantsList";
 
-export default function StudentModal() {
+interface IModalProps {
+  selectedCard: applicant;
+}
+
+export default function StudentModal({ selectedCard }: IModalProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -26,7 +31,7 @@ export default function StudentModal() {
           <Tab label="Резюме" />
         </Tabs>
       </div>
-      {value === 0 && <MainStudentInfo />}
+      {value === 0 && <MainStudentInfo selectedCard={selectedCard} />}
       {value === 1 && <MainStudentCv />}
       <div className={studentModal.buttons}>
         <Button className={studentModal.button} variant="outlined">
