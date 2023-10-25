@@ -2,13 +2,27 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import img from "../../../../images/img.jpg";
 import applicantsCard from "./index.module.css";
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import Zoom from '@mui/material/Zoom';
 
 const BootstrapButton = styled(Button)({
   textTransform: "none",
 });
 
+const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+  },
+}));
+
 interface ApplicantsCardProps {
   name: string;
+  awards: string;
   city: string;
   age: string;
   onClick: () => void;
@@ -16,6 +30,7 @@ interface ApplicantsCardProps {
 
 const ApplicantsCard = ({
   name,
+  awards,
   age,
   city,
   onClick,
@@ -26,7 +41,12 @@ const ApplicantsCard = ({
         <div className={applicantsCard.info}>
           <img src={img} className={applicantsCard.img} alt="Фото" />
           <div className={applicantsCard.profile}>
-            <h4 className={applicantsCard.name}>🔥 {name}</h4>
+            <div className={applicantsCard.applicant}>
+              <LightTooltip title="Победитель хакатона" placement="top-start" TransitionComponent={Zoom}>
+                <div className={applicantsCard.awards}>{awards}</div>
+              </LightTooltip>
+              <h4 className={applicantsCard.name}>{name}</h4>
+            </div>
             <p className={applicantsCard.tag}>
               {city}, {age}
             </p>
