@@ -1,30 +1,33 @@
 .button {
-    margin-right: 27px !important;
-    width: 250px !important;
-    border-radius: 6px !important;
-    padding: 12px 0 !important;
-    font-size: 16px !important;
-    font-family: "YS Text" !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    line-height: 20px !important;
-    text-transform: initial !important;
-    border-color: var(--main-blue-main) !important;
-    color: var(--main-blue-main) !important;
-  }
-  
-  .button:hover {
-    background-color: var(--main-blue-main) !important;
-    color: var(--main-white) !important;
-  }
+  margin-right: 27px !important;
+  width: 250px !important;
+  border-radius: 6px !important;
+  padding: 12px 0 !important;
+  font-size: 16px !important;
+  font-family: "YS Text" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+  text-transform: initial !important;
+  border-color: var(--main-blue-main) !important;
+  color: var(--main-blue-main) !important;
+}
 
-  .buttons {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.button:hover {
+  background-color: var(--main-blue-main) !important;
+  color: var(--main-white) !important;
+}
 
-  .test {
-    width: 250px;
-  }
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.test {
+  width: 250px;
+}
+
+.modal {
+  width: fit-content;
+}

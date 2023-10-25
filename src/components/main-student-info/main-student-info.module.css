@@ -1,11 +1,13 @@
+.wrapper {
+  margin-bottom: 40px;
+}
+
 .student {
   margin: 20px 0 0;
   max-width: 1025px;
-  /* border: 1px solid red; */
   background-color: var(--main-white);
   display: flex;
   overflow-y: scroll;
-  height: 467px;
 }
 
 .student::-webkit-scrollbar {
@@ -19,12 +21,11 @@
 }
 
 .studentInfo {
-  /* border: 1px solid red; */
   font-size: 16px;
   font-style: normal;
   color: var(--main-black-900);
   font-weight: 400;
-  line-height: 20px; 
+  line-height: 20px;
 }
 
 .name {
@@ -66,6 +67,7 @@
 .middleInfo {
   margin-top: 20px;
   display: flex;
+  align-items: flex-start;
 }
 
 .title {
@@ -108,6 +110,17 @@
   margin-bottom: 6px;
 }
 
+.mainInfoElementContacts {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainInfo {
+  list-style: none;
+  margin: 0 0 0 52px;
+  padding: 0;
+}
+
 .contactsList {
   list-style: none;
   margin: 0;
@@ -126,4 +139,3 @@
 .bottomInfo {
   margin-top: 32px;
 }
-
