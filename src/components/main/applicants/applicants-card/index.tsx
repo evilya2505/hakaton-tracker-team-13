@@ -7,15 +7,22 @@ const BootstrapButton = styled(Button)({
   textTransform: "none",
 });
 
-const ApplicantsCard: React.FC<{}> = (): JSX.Element => {
+interface ApplicantsCardProps {
+  name: string;
+  city: string;
+  age: string;
+}
+
+
+const ApplicantsCard = ({name, age, city}: ApplicantsCardProps): JSX.Element => {
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
         <div className={applicantsCard.info}>
           <img src={img} className={applicantsCard.img} alt="Фото" />
           <div className={applicantsCard.profile}>
-            <h4 className={applicantsCard.name}>🔥 Анна Короткова</h4>
-            <p className={applicantsCard.tag}>Санкт-Петербург, 24 года</p>
+            <h4 className={applicantsCard.name}>🔥 {name}</h4>
+            <p className={applicantsCard.tag}>{city}, {age}</p>
           </div>
         </div>
         <div className={applicantsCard.activity}>
