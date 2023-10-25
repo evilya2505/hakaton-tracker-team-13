@@ -1,0 +1,101 @@
+.card {
+  width: 336px;
+  height: 204px;
+  padding: 16px;
+  border: 1px solid var(--main-black-100);
+  border-radius: 16px;
+  box-shadow: 2px 0px 12px 0px #83828240;
+  cursor: pointer;
+  transition: box-shadow 0.2s, opacity 0.2s linear;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.vacancy {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.name {
+  font-family: YS Text;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--main-black-900);
+  margin: 0;
+}
+
+.settings {
+  display: flex;
+  gap: 12px;
+}
+
+.edit {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../../images/edit.svg);
+  transition: all .2s ease;
+}
+
+.edit:hover {
+  transform: scale(1.2);
+}
+
+.delete {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../../images/delete.svg);
+  transition: all .2s ease;
+}
+
+.delete:hover {
+  transform: scale(1.2);
+}
+
+;
+
+.status {
+  font-family: YS Text;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--main-black-900);
+  margin-bottom: 4px;
+}
+
+.dataInfo {
+  position: absolute;
+  left: 16px;
+  bottom: 24px;
+}
+
+.dataTitle {
+  font-family: YS Text;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--main-black-500);
+  margin-bottom: 4px;
+}
+
+.dataCreate {
+  font-family: YS Text;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--main-black-900);
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import vacancies from "./index.module.css";
 import page from "../index.module.css";
 import { Tabs, Tab, Box } from "@mui/material";
+import VacanciesCard from "./vacancies-card";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,9 +53,10 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <div className={vacancies.activeVacancies}>
+        <VacanciesCard />
+        {/* <div className={vacancies.activeVacancies}>
           <p>Вы еще не создали ни одной вакансии</p>
-        </div>
+        </div> */}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <div className={vacancies.activeVacancies}>
