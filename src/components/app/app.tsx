@@ -32,7 +32,10 @@ function App() {
             </Main>
           }
         >
-          <Route path="/applicants" element={<Applicants />} />
+          <Route
+            path="/applicants"
+            element={<Applicants openUserModal={openUserModal} />}
+          />
           <Route path="/vacancies" element={<Vacancies />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/planer" element={<Planer />} />
@@ -43,7 +46,6 @@ function App() {
       <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
         <StudentModal />
       </BasicModal>
-
     </>
   );
 }
