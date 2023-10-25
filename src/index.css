@@ -11,6 +11,7 @@ h4 {
 
 body {
   margin: 0;
+  height: 100vh;
   font-family: "YS Text", "Arial", sans-serif;
 
   -webkit-font-smoothing: antialiased;
