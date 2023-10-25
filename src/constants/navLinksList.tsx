@@ -20,7 +20,7 @@ export const navLinksList: Array<{ name: string; title: string }> = [
     title: "Настройки",
   },
   {
-    name: "login",
+    name: "logout",
     title: "Выход",
   },
 ];
