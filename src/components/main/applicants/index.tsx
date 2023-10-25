@@ -24,7 +24,7 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
         {cardsList.map(
           (element: { name: string; city: string; age: string }, index) => {
             return (
-              <li key={index}>
+              <li key={index} onClick={openUserModal}>
                 <ApplicantsCard
                   name={element.name}
                   city={element.city}
