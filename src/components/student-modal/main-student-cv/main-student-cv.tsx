@@ -1,10 +1,5 @@
-import React, { ReactNode } from "react";
-import Modal from "@mui/material/Modal";
-import modal from "./modal.module.css";
-import CloseIcon from "@mui/icons-material/Close";
 import mainStudentCv from "./main-student-cv.module.css";
-import DownloadIcon from "@mui/icons-material/Download";
-import downloadIcon from "../../images/download.svg";
+import downloadIcon from "../../../images/download.svg";
 export default function MainStudentCv({}) {
   return (
     <div className={mainStudentCv.wrapper}>

@@ -3,9 +3,9 @@ import app from "./index.module.css";
 import logo from "../../images/KT logo.svg";
 import supportLogo from "../../images/tg-logo.svg";
 import { Routes, Route } from "react-router-dom";
-import LoginSelection from "../login-selection/login-selection";
+import LoginSelection from "./login-selection/login-selection";
 import LoginPage from "../../pages/login";
-import LoginInputsForm from "../login-inputs-form/login-inputs-form";
+import LoginInputsForm from "./login-inputs-form/login-inputs-form";
 import ForgotPasswordPage from "../../pages/forogt-password-page";
 
 const Login: React.FC<{}> = (): JSX.Element => {

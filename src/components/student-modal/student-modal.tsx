@@ -1,11 +1,11 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import MainStudentInfo from "../main-student-info/main-student-info";
+import MainStudentInfo from "./main-student-info/main-student-info";
 import { Button } from "@mui/material";
 import studentModal from "./student-modal.module.css";
 import SubmitButton from "../submit-button/submit-button";
-import MainStudentCv from "../main-student-cv/main-student-cv";
+import MainStudentCv from "./main-student-cv/main-student-cv";
 import { applicant } from "../../constants/applicantsList";
 
 interface IModalProps {
