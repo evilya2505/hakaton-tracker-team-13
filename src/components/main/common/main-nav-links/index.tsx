@@ -7,12 +7,8 @@ const MainNavLinks: React.FC<{}> = (): JSX.Element => {
     <ul className={mainNavLinks.list}>
       {navLinksList.map((element: { name: string; title: string }, index) => {
         return (
-          <li className={mainNavLinks.item}>
-            <MainNavLink
-              key={index}
-              name={element.name}
-              title={element.title}
-            />
+          <li key={index} className={mainNavLinks.item}>
+            <MainNavLink name={element.name} title={element.title} />
           </li>
         );
       })}
