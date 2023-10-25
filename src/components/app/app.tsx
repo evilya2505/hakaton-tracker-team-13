@@ -20,10 +20,7 @@ function App() {
             </Main>
           }
         >
-          <Route
-            path="/applicants"
-            element={<Applicants openUserModal={openUserModal} />}
-          />
+          <Route path="/applicants" element={<Applicants />} />
           <Route path="/vacancies" element={<Vacancies />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/planer" element={<Planer />} />
