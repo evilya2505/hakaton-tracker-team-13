@@ -1,10 +1,10 @@
 .wrapper {
   margin-bottom: 40px;
 }
+
 .student {
   margin: 20px 0 0;
   max-width: 1025px;
-  /* border: 1px solid red; */
   background-color: var(--main-white);
   display: flex;
   overflow-y: scroll;
