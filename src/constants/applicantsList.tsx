@@ -1,3 +1,12 @@
+type workExp = {
+  workStart: string; // начало работы
+  workEnd: string; // конец работы
+  workTotal: string; // всего
+  companyName: string; // название компании
+  position: string; // должность
+  resp: string; // обязанности
+}
+
 export type applicant = {
   firstName: string; // имя
   lastName: string; // фамилия
@@ -11,9 +20,24 @@ export type applicant = {
   course: string; // название оконченного курса
   graduationDate: string; // дата окончания (строка формата 'апрель 2023')
   workFormat: string; // формат работы
+  // добавила новые поля
+  grade: string; // грейд
+  salary: number; // зп
+  contacts: string; // контакты
+  about: string; // о себе
+  workExpirience: Array<workExp>; // массив из объектов мест работы
 };
 
 export type applicantsList = Array<applicant>;
+
+const exp: workExp = {
+  workStart: 'Апрель 2022',
+  workEnd: 'Настоящее время',
+  workTotal: '9 месяцев',
+  companyName: 'Яндекс',
+  position: 'Frontent-разработчик',
+  resp: 'Улыбаться и пить кофе'
+}
 
 export const applicants: applicantsList = [
   {
@@ -30,6 +54,11 @@ export const applicants: applicantsList = [
     course: "Дизайнер интерфейсов",
     graduationDate: "апрель 2023",
     workFormat: "удаленный",
+    grade: 'Junior',
+    salary: 50000,
+    contacts: '+799999999999',
+    about: 'Улыбаюсь и пью кофе',
+    workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Алия",
@@ -45,6 +74,11 @@ export const applicants: applicantsList = [
     course: "Web-разработчик",
     graduationDate: "июнь 2022",
     workFormat: "офис",
+    grade: 'Junior',
+    salary: 50000,
+    contacts: '+799999999999',
+    about: 'Улыбаюсь и пью кофе',
+    workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Иван",
@@ -59,6 +93,11 @@ export const applicants: applicantsList = [
     course: "Python-разработчик",
     graduationDate: "август 2023",
     workFormat: "удаленный",
+    grade: 'Junior',
+    salary: 50000,
+    contacts: '+799999999999',
+    about: 'Улыбаюсь и пью кофе',
+    workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Петр",
@@ -73,6 +112,11 @@ export const applicants: applicantsList = [
     course: "Дизайнер интерфейсов",
     graduationDate: "февраль 2023",
     workFormat: "удаленный",
+    grade: 'Junior',
+    salary: 50000,
+    contacts: '+799999999999',
+    about: 'Улыбаюсь и пью кофе',
+    workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Александра",
@@ -87,5 +131,10 @@ export const applicants: applicantsList = [
     course: "Дизайнер интерфейсов",
     graduationDate: "апрель 2023",
     workFormat: "удаленный",
+    grade: 'Junior',
+    salary: 50000,
+    contacts: '+799999999999',
+    about: 'Улыбаюсь и пью кофе',
+    workExpirience: [exp, exp, exp],
   },
 ];
