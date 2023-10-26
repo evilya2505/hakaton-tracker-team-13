@@ -5,6 +5,7 @@ import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 import Zoom from "@mui/material/Zoom";
 import { applicant } from "../../../../constants/applicantsList";
 import ageRender from "../../../../utils/ageRender";
+import { SyntheticEvent } from "react";
 
 const BootstrapButton = styled(Button)({
   textTransform: "none",
@@ -26,6 +27,13 @@ interface ApplicantsCardProps {
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
+  function handleHide(e: SyntheticEvent) {
+    e.stopPropagation();
+  }
+
+  function handleAdd(e: SyntheticEvent) {
+    e.stopPropagation();
+  }
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
@@ -82,10 +90,18 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
         </div>
       </div>
       <div className={applicantsCard.buttons}>
-        <BootstrapButton className={applicantsCard.hide} variant="outlined">
+        <BootstrapButton
+          className={applicantsCard.hide}
+          variant="outlined"
+          onClick={handleHide}
+        >
           Скрыть
         </BootstrapButton>
-        <BootstrapButton className={applicantsCard.add} variant="contained">
+        <BootstrapButton
+          className={applicantsCard.add}
+          variant="contained"
+          onClick={handleAdd}
+        >
           Добавить
         </BootstrapButton>
       </div>
