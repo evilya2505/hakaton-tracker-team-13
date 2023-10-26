@@ -1,26 +1,10 @@
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import applicantsCard from "./index.module.css";
-import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
-import Zoom from "@mui/material/Zoom";
 import { applicant } from "../../../../constants/applicantsList";
 import ageRender from "../../../../utils/ageRender";
 import { SyntheticEvent } from "react";
-
-const BootstrapButton = styled(Button)({
-  textTransform: "none",
-});
-
-const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: theme.palette.common.white,
-    color: "rgba(0, 0, 0, 0.87)",
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
-  },
-}));
+import Zoom from "@mui/material/Zoom";
+import AwardsTooltip from "./tooltip"
+import CustomButton from "./button"
 
 interface ApplicantsCardProps {
   applicant: applicant;
@@ -46,17 +30,19 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           <div className={applicantsCard.profile}>
             <div className={applicantsCard.applicant}>
               {(applicant.isWinner || applicant.responses > 9) && (
-                <LightTooltip
+                <AwardsTooltip
                   title="Победитель хакатона"
-                  placement="top-start"
-                  TransitionComponent={Zoom}
+                  placement="top"
+                  // TransitionComponent={Zoom}
+                  color="secondary"
+                  arrow
                 >
                   <div className={applicantsCard.awards}>
                     {applicant.isWinner
                       ? "🏆"
                       : "🔥"}
                   </div>
-                </LightTooltip>
+                </AwardsTooltip>
               )}
               <h4 className={applicantsCard.name}>
                 {applicant.firstName} {applicant.lastName}
@@ -94,20 +80,20 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
         </div>
       </div>
       <div className={applicantsCard.buttons}>
-        <BootstrapButton
+        <CustomButton
           className={applicantsCard.hide}
           variant="outlined"
           onClick={handleHide}
         >
           Скрыть
-        </BootstrapButton>
-        <BootstrapButton
+        </CustomButton>
+        <CustomButton
           className={applicantsCard.add}
           variant="contained"
           onClick={handleAdd}
         >
           Добавить
-        </BootstrapButton>
+        </CustomButton>
       </div>
     </div>
   );
