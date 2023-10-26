@@ -30,4 +30,6 @@
 
 .modal {
   width: fit-content;
+  min-height: 659px;
+  min-width: 1025px;
 }
