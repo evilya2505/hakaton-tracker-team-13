@@ -66,10 +66,11 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({value}): JSX.Element =>
                     <label htmlFor={"name"} className={addVacancyForm.label}>Название вакансии</label>
                     <TextField 
                     error={errors.name?.message !== undefined}
-                    helperText={errors.name?.message}
+                    // helperText={errors.name?.message}
                     type="text"
                     {...register("name")}
                     inputProps={{style: {height: "9px", padding: "10px auto 10px 12px", color: '#1A1B22', fontFamily: 'YS Text', fontSize: '14px', fontWeight: '400', lineHeight: '20px' }}} className={addVacancyForm.input} id="name" variant="outlined" />
+                    <label className={addVacancyForm.error}>{errors.name?.message || " "}</label>
                 </div>
                 <div className={addVacancyForm.inputSection}>
                     <label htmlFor={"city"} className={addVacancyForm.label}>Город поиска</label>
@@ -79,6 +80,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({value}): JSX.Element =>
                     helperText={errors.city?.message}
                     inputProps={{style: {height: "8px", padding: "10px auto 10px 12px", color: '#1A1B22', fontFamily: 'YS Text', fontSize: '14px', fontWeight: '400', lineHeight: '20px' }}}
                     className={addVacancyForm.input}  id="city"  variant="outlined" />  
+                    <label className={addVacancyForm.error}>{errors.city?.message || " "}</label>
                 </div>
                 <div className={addVacancyForm.checkboxWrapper}>
                     <FormControlLabel 
