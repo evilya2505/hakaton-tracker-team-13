@@ -103,7 +103,7 @@ export const applicants: applicantsList = [
     grade: "Junior",
     salary: 50000,
     contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
+    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     workExpirience: [exp, exp, exp],
   },
   {
@@ -123,7 +123,7 @@ export const applicants: applicantsList = [
     grade: "Junior",
     salary: 50000,
     contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
+    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     workExpirience: [exp, exp, exp],
   },
   {
