@@ -6,7 +6,7 @@ import { setModalVisibility } from "../../services/reducers/vacancies";
 import { AddVacancyFormValues } from "../../utils/types";
 import addVacancyPreviewModal from './add-vacancy-preview-modal.module.css';
 
-const AddVacancyPreviewModal: React.FC<{}> = ({}): JSX.Element => {
+const AddVacancyPreviewModal: React.FC<{}> = (): JSX.Element => {
     const dispatch = useDispatch();
     const isOpened:boolean = useSelector((store) => store.vacancies.isPreviewModalVisible);
     const currentVacancy:AddVacancyFormValues | null = useSelector((store) => store.vacancies.currentVacancy);

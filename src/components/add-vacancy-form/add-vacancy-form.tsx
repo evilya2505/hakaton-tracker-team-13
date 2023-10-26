@@ -16,7 +16,7 @@ interface IAddVacancyFormProps {
 }
 
 const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({value}): JSX.Element => {
-    const disptach = useDispatch();
+    const dispatch = useDispatch();
     const isOpened:boolean = useSelector((store) => store.vacancies.isPreviewModalVisible)
     const form = useForm<AddVacancyFormValues>({
         defaultValues: {
@@ -52,9 +52,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({value}): JSX.Element =>
 
       React.useEffect(() => {
         if (isOpened) {
-            disptach(setCurrentVacancyData(getValues()));
+            dispatch(setCurrentVacancyData(getValues()));
         }
-      }, [isOpened])
+      }, [isOpened, dispatch, getValues])
     
   return (
     <form className={addVacancyForm.form} onSubmit={handleSubmit(onSubmit)} noValidate>
