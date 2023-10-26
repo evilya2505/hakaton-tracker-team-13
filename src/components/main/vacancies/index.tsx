@@ -3,6 +3,7 @@ import vacancies from "./index.module.css";
 import page from "../index.module.css";
 import { Tabs, Tab, Box } from "@mui/material";
 import VacanciesCard from "./vacancies-card";
+import BasicModal from "../../modal/modal";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -35,12 +36,29 @@ function a11yProps(index: number) {
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
   const [value, setValue] = useState(0);
+  const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
+
+  function openModal() {
+    setIsBellModalVisible(true);
+  }
+
+  function closeModal() {
+    setIsBellModalVisible(false);
+  }
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   return (
     <div className={`${page.pageElement} ${vacancies.container}`}>
-      <h2 className={vacancies.title}>Мои вакансии</h2>
+      <div className={vacancies.titleContainer}>
+        <h2 className={vacancies.title}>Мои вакансии</h2>
+        <button
+          type="button"
+          className={vacancies.notificationsButton}
+          onClick={openModal}
+        ></button>
+      </div>
       <Box>
         <Tabs
           value={value}
@@ -68,6 +86,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
           <p>Нет ни одной вакансии в архиве</p>
         </div>
       </CustomTabPanel>
+      <BasicModal closePopup={closeModal} isVisible={isBellModalVisible}>
+        <div>Новые уведомления</div>
+      </BasicModal>
     </div>
   );
 };
