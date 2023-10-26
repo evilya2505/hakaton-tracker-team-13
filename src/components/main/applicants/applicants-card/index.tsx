@@ -45,15 +45,19 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           />
           <div className={applicantsCard.profile}>
             <div className={applicantsCard.applicant}>
-              <LightTooltip
-                title="Победитель хакатона"
-                placement="top-start"
-                TransitionComponent={Zoom}
-              >
-                <div className={applicantsCard.awards}>
-                  {applicant.isWinner ? "🏆" : applicant.responses > 9 && "🔥"}
-                </div>
-              </LightTooltip>
+              {(applicant.isWinner || applicant.responses > 9) && (
+                <LightTooltip
+                  title="Победитель хакатона"
+                  placement="top-start"
+                  TransitionComponent={Zoom}
+                >
+                  <div className={applicantsCard.awards}>
+                    {applicant.isWinner
+                      ? "🏆"
+                      : applicant.responses > 9 && "🔥"}
+                  </div>
+                </LightTooltip>
+              )}
               <h4 className={applicantsCard.name}>
                 {applicant.firstName} {applicant.lastName}
               </h4>
