@@ -34,19 +34,19 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Грейд: </h3>
-                <p className={mainStudentInfo.text}>Middle</p>
+                <p className={mainStudentInfo.text}>{selectedCard.grade}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Дата окончания: </h3>
                 <p className={mainStudentInfo.text}>{selectedCard.graduationDate}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
-                <h3 className={mainStudentInfo.subtitle}>Формат работы:</h3>
+                <h3 className={mainStudentInfo.subtitle}>Формат работы: </h3>
                 <p className={mainStudentInfo.text}>{selectedCard.workFormat}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Зарплата:</h3>
-                <p className={mainStudentInfo.text}>1000 000 Р</p>
+                <p className={mainStudentInfo.text}>{selectedCard.salary} Р</p>
               </li>
               <li
                 className={`${mainStudentInfo.mainInfoElement} ${mainStudentInfo.mainInfoElementContacts}`}
@@ -70,8 +70,7 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
           <div className={mainStudentInfo.bottomInfo}>
             <h2 className={mainStudentInfo.title}>О себе</h2>
             <p className={mainStudentInfo.text}>
-              Текст о себе от кандидата, количество символов ограничено
-              .............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+              {selectedCard.about}
             </p>
           </div>
         </div>

@@ -77,7 +77,7 @@ export const applicants: applicantsList = [
     grade: 'Junior',
     salary: 50000,
     contacts: '+799999999999',
-    about: 'Улыбаюсь и пью кофе',
+    about: 'Не улыбаюсь и пью винишко',
     workExpirience: [exp, exp, exp],
   },
   {
