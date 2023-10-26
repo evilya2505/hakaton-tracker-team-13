@@ -5,6 +5,9 @@ import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import CreateVacancyButton from "./create-button";
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
   const [value, setValue] = useState("1");
@@ -37,15 +40,19 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
           <Tab label="Черновики" value="2" />
           <Tab label="Архив" value="3" />
         </TabList>
-        <TabPanel value="1">
+        <TabPanel className={vacancies.list} value="1">
           <VacanciesCard />
           {/* <div className={vacancies.activeVacancies}>
             <p>Вы еще не создали ни одной вакансии</p>
           </div> */}
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
         </TabPanel>
         <TabPanel value="2">
           <div className={vacancies.activeVacancies}>
             <p>Вы еще не создали ни одного черновика</p>
+            <CreateVacancyButton /> 
           </div>
         </TabPanel>
         <TabPanel value="3">

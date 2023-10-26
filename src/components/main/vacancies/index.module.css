@@ -9,6 +9,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .titleContainer {
@@ -25,4 +27,10 @@
   background-position: center;
   border: none;
   cursor: pointer;
+}
+
+.list {
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
