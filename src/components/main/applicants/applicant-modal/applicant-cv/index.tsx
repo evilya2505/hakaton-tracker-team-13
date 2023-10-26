@@ -24,8 +24,8 @@ export default function MainStudentCv({ selectedCard }: IModalProps) {
       <div className={mainStudentCv.experience}>
         <h2 className={mainStudentCv.title}>Опыт работы:</h2>
         <ul className={mainStudentCv.experienceList}>
-          {workExp.map((element: workExp) => {
-            return <WorkExpItem workExp={element} />;
+          {workExp.map((element: workExp, index) => {
+            return <WorkExpItem key={index} workExp={element} />;
           })}
         </ul>
       </div>
