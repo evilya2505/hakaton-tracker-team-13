@@ -54,7 +54,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
                   <div className={applicantsCard.awards}>
                     {applicant.isWinner
                       ? "🏆"
-                      : applicant.responses > 9 && "🔥"}
+                      : "🔥"}
                   </div>
                 </LightTooltip>
               )}
