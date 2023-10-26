@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 
-const AwardsTooltip = styled(({ className, ...props }: TooltipProps) => (
+const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
@@ -15,4 +15,4 @@ const AwardsTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-export default AwardsTooltip;
+export default CustomTooltip;
