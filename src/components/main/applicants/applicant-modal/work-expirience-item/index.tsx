@@ -1,5 +1,5 @@
 import workExpItem from "./index.module.css";
-import { workExp } from "../../../constants/applicantsList";
+import { workExp } from "../../../../../constants/applicantsList";
 
 interface WorkExpProps {
   workExp: workExp;

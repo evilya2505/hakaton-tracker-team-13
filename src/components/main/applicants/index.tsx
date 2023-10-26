@@ -4,7 +4,7 @@ import ApplicantsCard from "./applicants-card";
 import page from "../index.module.css";
 import { applicant, applicants } from "../../../constants/applicantsList";
 import BasicModal from "../../modal/modal";
-import StudentModal from "../../student-modal/student-modal";
+import StudentModal from "./applicant-modal";
 import ApplicantsFilter from "./applicants-filter";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {

@@ -1,6 +1,6 @@
-import mainStudentInfo from "./main-student-info.module.css";
-import { applicant } from "../../../constants/applicantsList";
-import ageRender from "../../../utils/ageRender";
+import mainStudentInfo from "./index.module.css";
+import { applicant } from "../../../../../constants/applicantsList";
+import ageRender from "../../../../../utils/ageRender";
 
 interface IModalProps {
   selectedCard: applicant;

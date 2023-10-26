@@ -1,8 +1,8 @@
-import mainStudentCv from "./main-student-cv.module.css";
-import downloadIcon from "../../../images/download.svg";
-import { applicant } from "../../../constants/applicantsList";
+import mainStudentCv from "./index.module.css";
+import downloadIcon from "../../../../../images/download.svg";
+import { applicant } from "../../../../../constants/applicantsList";
 import WorkExpItem from "../work-expirience-item";
-import { workExp } from "../../../constants/applicantsList";
+import { workExp } from "../../../../../constants/applicantsList";
 
 interface IModalProps {
   selectedCard: applicant;
