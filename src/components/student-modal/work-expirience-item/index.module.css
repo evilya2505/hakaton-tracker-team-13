@@ -1,0 +1,40 @@
+.experienceItem {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.experienceItem:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+.experienceTime {
+  margin-right: 30px;
+  max-width: 144px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.experienceDescription {
+  max-width: 644px;
+  margin-right: 0;
+}
+
+.duration {
+  color: var(--main-black-500);
+}
+
+.subtitle {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-family: "YS Display";
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}

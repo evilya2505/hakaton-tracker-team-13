@@ -1,11 +1,11 @@
-type workExp = {
+export type workExp = {
   workStart: string; // начало работы
   workEnd: string; // конец работы
   workTotal: string; // всего
   companyName: string; // название компании
   position: string; // должность
   resp: string; // обязанности
-}
+};
 
 export type applicant = {
   firstName: string; // имя
@@ -31,13 +31,19 @@ export type applicant = {
 export type applicantsList = Array<applicant>;
 
 const exp: workExp = {
-  workStart: 'Апрель 2022',
-  workEnd: 'Настоящее время',
-  workTotal: '9 месяцев',
-  companyName: 'Яндекс',
-  position: 'Frontent-разработчик',
-  resp: 'Улыбаться и пить кофе'
-}
+  workStart: "Апрель 2022",
+  workEnd: "Настоящее время",
+  workTotal: "9 месяцев",
+  companyName: "Яндекс",
+  position: "Frontent-разработчик",
+  resp: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+  minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat. Duis aute irure dolor in
+  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+  culpa qui officia deserunt mollit anim id est laborum.`,
+};
 
 export const applicants: applicantsList = [
   {
@@ -54,10 +60,10 @@ export const applicants: applicantsList = [
     course: "Дизайнер интерфейсов",
     graduationDate: "апрель 2023",
     workFormat: "удаленный",
-    grade: 'Junior',
+    grade: "Junior",
     salary: 50000,
-    contacts: '+799999999999',
-    about: 'Улыбаюсь и пью кофе',
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
     workExpirience: [exp, exp, exp],
   },
   {
@@ -74,16 +80,17 @@ export const applicants: applicantsList = [
     course: "Web-разработчик",
     graduationDate: "июнь 2022",
     workFormat: "офис",
-    grade: 'Junior',
+    grade: "Junior",
     salary: 50000,
-    contacts: '+799999999999',
-    about: 'Не улыбаюсь и пью винишко',
+    contacts: "+799999999999",
+    about: "Не улыбаюсь и пью винишко",
     workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Иван",
     lastName: "Иванов",
-    avatar: "https://images.unsplash.com/photo-1696887350319-86341eda4b71?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1696887350319-86341eda4b71?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     isWinner: true,
     city: "Москва",
     age: 35,
@@ -93,16 +100,17 @@ export const applicants: applicantsList = [
     course: "Python-разработчик",
     graduationDate: "август 2023",
     workFormat: "удаленный",
-    grade: 'Junior',
+    grade: "Junior",
     salary: 50000,
-    contacts: '+799999999999',
-    about: 'Улыбаюсь и пью кофе',
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
     workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Петр",
     lastName: "Петров",
-    avatar: "https://images.unsplash.com/photo-1697472925037-e38438b132b0?auto=format&fit=crop&q=80&w=1965&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1697472925037-e38438b132b0?auto=format&fit=crop&q=80&w=1965&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     isWinner: false,
     city: "Барнаул",
     age: 30,
@@ -112,16 +120,17 @@ export const applicants: applicantsList = [
     course: "Дизайнер интерфейсов",
     graduationDate: "февраль 2023",
     workFormat: "удаленный",
-    grade: 'Junior',
+    grade: "Junior",
     salary: 50000,
-    contacts: '+799999999999',
-    about: 'Улыбаюсь и пью кофе',
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
     workExpirience: [exp, exp, exp],
   },
   {
     firstName: "Александра",
     lastName: "Александрова",
-    avatar: "https://images.unsplash.com/photo-1689193504709-2ccf8bf64be1?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    avatar:
+      "https://images.unsplash.com/photo-1689193504709-2ccf8bf64be1?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     isWinner: true,
     city: "Санкт-Петербург",
     age: 24,
@@ -131,10 +140,10 @@ export const applicants: applicantsList = [
     course: "Дизайнер интерфейсов",
     graduationDate: "апрель 2023",
     workFormat: "удаленный",
-    grade: 'Junior',
+    grade: "Junior",
     salary: 50000,
-    contacts: '+799999999999',
-    about: 'Улыбаюсь и пью кофе',
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
     workExpirience: [exp, exp, exp],
   },
 ];
