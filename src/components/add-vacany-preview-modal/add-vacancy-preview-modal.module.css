@@ -1,0 +1,23 @@
+.container {
+    color: var(--main-black-900);
+    font-family: 'YS Text';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    width: 477px;
+    text-align: left;
+}
+
+.title {
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.list {
+    margin: 0;
+}
+
+.section:not(:last-of-type) {
+    margin-bottom: 22px;
+}
