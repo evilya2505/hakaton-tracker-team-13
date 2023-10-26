@@ -18,18 +18,14 @@
   color: var(--main-white) !important;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .test {
   width: 250px;
+  margin: auto;
 }
 
 .modal {
-  width: fit-content;
-  min-height: 659px;
+  width: 100%;
   min-width: 1025px;
+  display: flex;
+  flex-direction: column;
 }

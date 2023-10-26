@@ -69,7 +69,7 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
           </div>
           <div className={mainStudentInfo.bottomInfo}>
             <h2 className={mainStudentInfo.title}>О себе</h2>
-            <p className={mainStudentInfo.text}>
+            <p className={mainStudentInfo.about}>
               {selectedCard.about}
             </p>
           </div>

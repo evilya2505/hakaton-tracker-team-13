@@ -8,6 +8,7 @@
   background-color: var(--main-white);
   display: flex;
   overflow-y: scroll;
+  justify-content: space-between;
 }
 
 .student::-webkit-scrollbar {
@@ -63,6 +64,15 @@
   padding: 0;
   font-size: 16px;
   font-weight: 400;
+}
+
+.about {
+  overflow-wrap: break-word;
+  max-width: 796px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+  min-height: 87px;
 }
 
 .middleInfo {

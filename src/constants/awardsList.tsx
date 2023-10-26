@@ -7,6 +7,6 @@ export const awardsList: { winner: award; more10Responses: award } = {
   },
   more10Responses: {
     emoji: "🔥",
-    title: "10 откликов в неделю",
+    title: "Делает 10 откликов в неделю",
   },
 };

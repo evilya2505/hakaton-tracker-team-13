@@ -33,14 +33,9 @@ export default function StudentModal({ selectedCard }: IModalProps) {
       </div>
       {value === 0 && <MainStudentInfo selectedCard={selectedCard} />}
       {value === 1 && <MainStudentCv selectedCard={selectedCard} />}
-      <div className={studentModal.buttons}>
-        <Button className={studentModal.button} variant="outlined">
-          Скрыть
-        </Button>
         <div className={studentModal.test}>
           <SubmitButton text="Добавить" isDisabled={false} isFullWidth={true} />
         </div>
-      </div>
     </div>
   );
 }
