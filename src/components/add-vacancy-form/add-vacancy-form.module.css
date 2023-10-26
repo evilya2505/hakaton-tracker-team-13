@@ -1,0 +1,100 @@
+.form {
+    margin: 20px 0 0;
+    padding: 0;
+    height: 449px;
+    width: 924px;
+}
+
+.fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.fieldset:not(:last-of-type) {
+    margin-bottom: 18.4px;
+}
+
+.inputSection {
+    margin-right: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    color: var(--main-black-900);
+    font-family: 'YS Text';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; 
+    margin-top: 4px !important;
+    width: 320px;
+}
+
+.diapason {
+    border: none;
+    padding: 0;
+    margin: 4px 0 0;
+}
+
+.buttonWrapper {
+    width: 250px;
+    margin: 30px auto 0;
+}
+
+.mainFieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.fieldsetColumns {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: none;
+    /* column-gap: 24px; */
+}
+
+.multiLineInput {
+    width: 450px;
+    margin-top: 4px !important;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.label {
+    color: var(--main-black-900);
+    font-family: 'YS Text';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.checkboxWrapper {
+    margin-left: 10px;
+    margin-bottom: 6px;
+    margin-top: 24px;
+}
+
+.dropDownList { 
+    color: var(--main-black-900) !important;
+    font-family: 'YS Text' !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+}
