@@ -4,10 +4,10 @@ import MainNavLinks from "../main-nav-links";
 
 const Navigation: React.FC<{}> = (): JSX.Element => {
   return (
-    <div className={navigation.container}>
+    <nav className={navigation.container}>
       <MainUserProfile />
       <MainNavLinks />
-    </div>
+    </nav>
   );
 };
 

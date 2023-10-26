@@ -1,0 +1,61 @@
+.link {
+  opacity: 1;
+  text-decoration: none;
+  color: var(--main-black-300);
+  padding-left: 28px;
+  background-repeat: no-repeat;
+  background-position: left;
+  transform: opacity ease 3s;
+}
+
+.link:hover {
+  opacity: .8;
+}
+
+.link_active {
+  color: var(--main-white);
+}
+
+.link_type_applicants {
+  background-image: url(../../../../images/Users.svg);
+}
+
+.link_type_applicants.link_active {
+  background-image: url(../../../../images/Users-active.svg);
+}
+
+.link_type_vacancies {
+  background-image: url(../../../../images/Folder.svg);
+}
+
+.link_type_vacancies.link_active {
+  background-image: url(../../../../images/Folder-active.svg);
+}
+
+.link_type_statistics {
+  background-image: url(../../../../images/ChartPieSlice.svg);
+}
+
+.link_type_statistics.link_active {
+  background-image: url(../../../../images/ChartPieSlice-active.svg);
+}
+
+.link_type_planer {
+  background-image: url(../../../../images/diary.svg);
+}
+
+.link_type_planer.link_active {
+  background-image: url(../../../../images/diary-active.svg);
+}
+
+.link_type_settings {
+  background-image: url(../../../../images/Gear.svg);
+}
+
+.link_type_settings.link_active {
+  background-image: url(../../../../images/Gear-active.svg);
+}
+
+.link_type_logout {
+  background-image: url(../../../../images/SignOut.svg);
+}

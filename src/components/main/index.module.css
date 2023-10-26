@@ -4,7 +4,6 @@
 }
 
 .pageElement {
-    margin-left: 189px;
-    margin-top: 36px;
+    margin: 36px 40px 0 189px;
     width: 100%;
 }

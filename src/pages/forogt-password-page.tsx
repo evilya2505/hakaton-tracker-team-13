@@ -1,6 +1,6 @@
 import React from "react";
 import page from "./page.module.css";
-import LoginInputsForm from "../components/forgot-passsword-form/forgot-password-form";
+import LoginInputsForm from "../components/login/forgot-passsword-form/forgot-password-form";
 import { Link, useLocation } from "react-router-dom";
 import forgotPasswordPage from "./forgot-password-page.module.css";
 

@@ -1,13 +1,18 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import MainStudentInfo from "../main-student-info/main-student-info";
+import MainStudentInfo from "./main-student-info/main-student-info";
 import { Button } from "@mui/material";
 import studentModal from "./student-modal.module.css";
 import SubmitButton from "../submit-button/submit-button";
-import MainStudentCv from "../main-student-cv/main-student-cv";
+import MainStudentCv from "./main-student-cv/main-student-cv";
+import { applicant } from "../../constants/applicantsList";
 
-export default function StudentModal() {
+interface IModalProps {
+  selectedCard: applicant;
+}
+
+export default function StudentModal({ selectedCard }: IModalProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -26,8 +31,8 @@ export default function StudentModal() {
           <Tab label="Резюме" />
         </Tabs>
       </div>
-      {value === 0 && <MainStudentInfo />}
-      {value === 1 && <MainStudentCv />}
+      {value === 0 && <MainStudentInfo selectedCard={selectedCard} />}
+      {value === 1 && <MainStudentCv selectedCard={selectedCard} />}
       <div className={studentModal.buttons}>
         <Button className={studentModal.button} variant="outlined">
           Скрыть

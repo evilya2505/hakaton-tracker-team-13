@@ -4,9 +4,9 @@ import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import SubmitButton from "../submit-button/submit-button";
-import { LoginFormValues } from "../../utils/types";
-import { loginSchema } from "../../validations/login-validations";
+import SubmitButton from "../../submit-button/submit-button";
+import { LoginFormValues } from "../../../utils/types";
+import { loginSchema } from "../../../validations/login-validations";
 
 const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
   const form = useForm<LoginFormValues>({

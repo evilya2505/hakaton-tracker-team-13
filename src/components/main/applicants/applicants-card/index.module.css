@@ -33,11 +33,14 @@
 .img {
   width: 56px;
   height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile {
   display: flex;
   flex-direction: column;
+  max-width: 162px;
 }
 
 .applicant {
@@ -60,6 +63,8 @@
   text-align: left;
   margin: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tag {

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import mainNavLink from "./index.module.css";
+import "./index.css";
 
 interface MainNavLinkProps {
   name: string;
@@ -7,17 +7,15 @@ interface MainNavLinkProps {
 }
 
 const MainNavLink = ({ name, title }: MainNavLinkProps): JSX.Element => {
+  const linksClass = "link_type_" + name;
   const location = useLocation();
   return (
-      <Link
-        to={`/${name}`}
-        className={`
-        ${mainNavLink.link} 
-        ${mainNavLink.link_type_applicants} 
-        ${location.pathname === `/${name}` && mainNavLink.link_active}`}
-      >
-        {title}
-      </Link>
+    <Link
+      to={`/${name === 'logout' ? 'login' : name}`}
+      className={`link ${linksClass} ${location.pathname === `/${name}` && "link_active"}`}
+    >
+      {title}
+    </Link>
   );
 };
 

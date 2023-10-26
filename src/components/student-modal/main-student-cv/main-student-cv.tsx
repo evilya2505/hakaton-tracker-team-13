@@ -1,11 +1,12 @@
-import React, { ReactNode } from "react";
-import Modal from "@mui/material/Modal";
-import modal from "./modal.module.css";
-import CloseIcon from "@mui/icons-material/Close";
 import mainStudentCv from "./main-student-cv.module.css";
-import DownloadIcon from "@mui/icons-material/Download";
-import downloadIcon from "../../images/download.svg";
-export default function MainStudentCv({}) {
+import downloadIcon from "../../../images/download.svg";
+import { applicant } from "../../../constants/applicantsList";
+
+interface IModalProps {
+  selectedCard: applicant;
+}
+
+export default function MainStudentCv({ selectedCard }: IModalProps) {
   return (
     <div className={mainStudentCv.wrapper}>
       <div className={mainStudentCv.downloadSection}>
@@ -54,7 +55,6 @@ export default function MainStudentCv({}) {
               <p className={mainStudentCv.subtitle}>UX/UI дизайнер</p>
               <ul className={mainStudentCv.list}>
                 <li>
-                  {" "}
                   <h2 className={mainStudentCv.text}>Описание обязанностей</h2>
                   <p className={mainStudentCv.deal}>
                     .....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................

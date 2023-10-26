@@ -1,20 +1,26 @@
-import React from "react";
 import mainStudentInfo from "./main-student-info.module.css";
-import studentImage from "../../images/testStudentImage.png";
+import { applicant } from "../../../constants/applicantsList";
+import ageRender from "../../../utils/ageRender";
 
-export default function MainStudentInfo() {
+interface IModalProps {
+  selectedCard: applicant;
+}
+
+export default function MainStudentInfo({ selectedCard }: IModalProps) {
   return (
     <div className={mainStudentInfo.wrapper}>
       <div className={mainStudentInfo.student}>
         <div className={mainStudentInfo.studentInfo}>
           <div className={mainStudentInfo.topInfo}>
-            <h1 className={mainStudentInfo.name}>Максим Иванченко</h1>
-            <p className={mainStudentInfo.city}>Москва, 32 года</p>
+            <h1 className={mainStudentInfo.name}>
+              {selectedCard.firstName} {selectedCard.lastName}
+            </h1>
+            <p className={mainStudentInfo.city}>{selectedCard.city}, {ageRender(selectedCard.age)}</p>
           </div>
 
           <div className={mainStudentInfo.middleInfo}>
             <img
-              src={studentImage}
+              src={selectedCard.avatar}
               className={mainStudentInfo.image}
               alt="изображение студента"
             />
@@ -23,7 +29,7 @@ export default function MainStudentInfo() {
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Курс:</h3>
                 <p className={mainStudentInfo.text}>
-                  Дизайн мобильный и кросс-платформенных приложений
+                  {selectedCard.course}
                 </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
@@ -32,11 +38,11 @@ export default function MainStudentInfo() {
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Дата окончания: </h3>
-                <p className={mainStudentInfo.text}>апрель 2023</p>
+                <p className={mainStudentInfo.text}>{selectedCard.graduationDate}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Формат работы:</h3>
-                <p className={mainStudentInfo.text}>Офис</p>
+                <p className={mainStudentInfo.text}>{selectedCard.workFormat}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Зарплата:</h3>
@@ -74,19 +80,19 @@ export default function MainStudentInfo() {
             className={mainStudentInfo.statistic}
             style={{ backgroundColor: "#FFF9D3" }}
           >
-            <h3 className={mainStudentInfo.subtitle}>40</h3>откликов
+            <h3 className={mainStudentInfo.subtitle}>{selectedCard.responses}</h3>откликов
           </li>
           <li
             className={mainStudentInfo.statistic}
             style={{ backgroundColor: "#CCC2ED" }}
           >
-            <h3 className={mainStudentInfo.subtitle}>14</h3>тестовых
+            <h3 className={mainStudentInfo.subtitle}>{selectedCard.completedTestTasks}</h3>тестовых
           </li>
           <li
             className={mainStudentInfo.statistic}
             style={{ backgroundColor: "#C2E5CE" }}
           >
-            <h3 className={mainStudentInfo.subtitle}>10</h3>собеседований
+            <h3 className={mainStudentInfo.subtitle}>{selectedCard.interviews}</h3>собеседований
           </li>
         </ul>
       </div>

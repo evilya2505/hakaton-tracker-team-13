@@ -10,3 +10,19 @@
   justify-content: center;
   align-items: center;
 }
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notificationsButton {
+  background-image: url(../../../images/Bell.svg);
+  height: 32px;
+  width: 32px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+}
