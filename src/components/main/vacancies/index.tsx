@@ -57,11 +57,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
           {/* <div className={vacancies.activeVacancies}>
             <p>Вы еще не создали ни одной вакансии</p>
           </div> */}
-          <button onClick={handleOpenVacancyModal}>
-          <Fab color="primary" aria-label="add">
+          <Fab color="primary" aria-label="add" onClick={handleOpenVacancyModal}>
             <AddIcon />
           </Fab>
-          </button>
         </TabPanel>
         <TabPanel value="2">
           <div className={vacancies.activeVacancies}>
