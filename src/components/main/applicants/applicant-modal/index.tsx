@@ -1,13 +1,21 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import MainStudentInfo from "./applicant-info";
 import studentModal from "./index.module.css";
 import MainStudentCv from "./applicant-cv";
 import { TogglingButton } from "../applicants-card/toggling-button";
+import { useSelector } from "../../../../services/hooks";
 
 export default function StudentModal() {
   const [value, setValue] = React.useState(0);
+  const selectedCard = useSelector(
+    (state) => state.applicants.selectedCardData
+  );
+
+  const [isAdded, setIsAdded] = useState(
+    selectedCard.responseStatus === "Кандидат"
+  );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -28,7 +36,7 @@ export default function StudentModal() {
       {value === 0 && <MainStudentInfo />}
       {value === 1 && <MainStudentCv />}
       <div className={studentModal.test}>
-        <TogglingButton />
+        <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded} />
       </div>
     </div>
   );

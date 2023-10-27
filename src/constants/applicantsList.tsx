@@ -88,7 +88,7 @@ export const applicants: applicantsList = [
     workExpirience: [exp1, exp2, exp3],
     studyingStatus: "Студент",
     workStatus: "Около-релевантный",
-    responseStatus: "Кандидат",
+    responseStatus: "Отклик",
   },
   {
     firstName: "Venus",
@@ -111,7 +111,7 @@ export const applicants: applicantsList = [
     workExpirience: [exp3, exp1, exp2],
     studyingStatus: "Студент",
     workStatus: "Около-релевантный",
-    responseStatus: "Кандидат",
+    responseStatus: "Отклик",
   },
   {
     firstName: "Francis",
