@@ -8,7 +8,7 @@ import arrowDownIcon from "../../images/arrow_down.svg";
 import arrowUpIcon from "../../images/arrow_up.svg";
 import deleteIcon from "../../images/delete.svg";
 import { Divider } from "@mui/material";
-import { SearchBar } from "../search-form/search-form";
+import SearchBar from "../search-form/search-form";
 
 const createCheckbox = (label: string) => {
   return (
@@ -110,7 +110,7 @@ const FiltersMenu = () => {
               !isDirectionsOpened ? (
                 <img src={arrowDownIcon} alt="иконка вниз" />
               ) : (
-                <img src={arrowUpIcon} alt="иконка вниз" />
+                <img src={arrowUpIcon} alt="иконка вверх" />
               )
             }
           >
@@ -141,7 +141,7 @@ const FiltersMenu = () => {
               !isCityOpened ? (
                 <img src={arrowDownIcon} alt="иконка вниз" />
               ) : (
-                <img src={arrowUpIcon} alt="иконка вниз" />
+                <img src={arrowUpIcon} alt="иконка вверх" />
               )
             }
           >
@@ -154,7 +154,7 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            <SearchBar />
+            <SearchBar text="Поиск города" />
             <Chip
               sx={{
                 ".css-6od3lo-MuiChip-label": {
@@ -182,7 +182,7 @@ const FiltersMenu = () => {
               !isExperienceOpened ? (
                 <img src={arrowDownIcon} alt="иконка вниз" />
               ) : (
-                <img src={arrowUpIcon} alt="иконка вниз" />
+                <img src={arrowUpIcon} alt="иконка вверх" />
               )
             }
           >
@@ -211,7 +211,7 @@ const FiltersMenu = () => {
               !isTypeOpened ? (
                 <img src={arrowDownIcon} alt="иконка вниз" />
               ) : (
-                <img src={arrowUpIcon} alt="иконка вниз" />
+                <img src={arrowUpIcon} alt="иконка вверх" />
               )
             }
           >

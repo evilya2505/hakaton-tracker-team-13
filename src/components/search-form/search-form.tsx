@@ -5,14 +5,18 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import { InputAdornment } from "@mui/material";
 
-export const SearchBar = () => {
+interface ISearchBarProps {
+  text: string;
+}
+
+const SearchBar: React.FC<ISearchBarProps> = ({ text }): JSX.Element => {
   return (
     <form className={searchBar.form}>
       <TextField
         id="search-bar"
         className={searchBar.textField}
         variant="outlined"
-        placeholder="Поиск"
+        placeholder={text}
         size="small"
         sx={{
           ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
@@ -53,3 +57,5 @@ export const SearchBar = () => {
     </form>
   );
 };
+
+export default SearchBar;

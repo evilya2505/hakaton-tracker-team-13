@@ -1,7 +1,7 @@
 import { useState } from "react";
 import applicantsFilter from "./index.module.css";
 import FilterModal from "../../../filter-modal";
-import { SearchBar } from "../../../search-form/search-form";
+import SearchBar from "../../../search-form/search-form";
 import VacanciesDropDown from "../../../vacancies-drop-down/vacancies-drop-down";
 import FiltersMenu from "../../../filters-menu/filters-menu";
 
@@ -19,12 +19,10 @@ const ApplicantsFilter: React.FC<{}> = (): JSX.Element => {
 
   return (
     <div className={applicantsFilter.container}>
-      <p>
-        <SearchBar />
-      </p>
-      <p>
-        <VacanciesDropDown />
-      </p>
+      <div className={applicantsFilter.searchWrapper}>
+        <SearchBar text="Поиск" />
+      </div>
+      <VacanciesDropDown />
       <FiltersMenu />
       <FilterModal closePopup={closeModal} isVisible={isFilterModalVisible} />
     </div>
