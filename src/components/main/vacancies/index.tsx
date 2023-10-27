@@ -5,6 +5,7 @@ import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
+import NotifyModal from "../../notifications-modal/modal"
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import CreateVacancyButton from "./create-button";
@@ -24,11 +25,11 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
     setIsAddVacancyModalOpened(false);
   }
 
-  function openModal() {
+  function openNotifyModal() {
     setIsBellModalVisible(true);
   }
-
-  function closeModal() {
+  
+  function closeNotifyModal() {
     setIsBellModalVisible(false);
   }
 
@@ -43,7 +44,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
         <button
           type="button"
           className={vacancies.notificationsButton}
-          onClick={openModal}
+          onClick={openNotifyModal}
         ></button>
       </div>
       <TabContext value={value}>
@@ -74,9 +75,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
         </TabPanel>
       </TabContext>
 
-      <BasicModal closePopup={closeModal} isVisible={isBellModalVisible}>
+      <NotifyModal closePopup={closeNotifyModal} isVisible={isBellModalVisible}>
         <div>Новые уведомления</div>
-      </BasicModal>
+      </NotifyModal>
 
       <BasicModal isVisible={isAddVacancyModalOpened} closePopup={handleCloseVacancyModal}>
         <VacanciesModal />

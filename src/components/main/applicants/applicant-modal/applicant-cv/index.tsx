@@ -1,15 +1,15 @@
 import mainStudentCv from "./index.module.css";
 import downloadIcon from "../../../../../images/download.svg";
-import { applicant } from "../../../../../constants/applicantsList";
+import { useSelector } from "../../../../../services/hooks";
 import WorkExpItem from "../work-expirience-item";
 import { workExp } from "../../../../../constants/applicantsList";
 
-interface IModalProps {
-  selectedCard: applicant;
-}
-
-export default function MainStudentCv({ selectedCard }: IModalProps) {
+export default function MainStudentCv() {
+  const selectedCard = useSelector(
+    (state) => state.applicants.selectedCardData
+  );
   const workExp: Array<workExp> = selectedCard.workExpirience;
+
   return (
     <div className={mainStudentCv.wrapper}>
       <div className={mainStudentCv.downloadSection}>
