@@ -1,23 +1,15 @@
 import applicantsCard from "./index.module.css";
 import { applicant } from "../../../../constants/applicantsList";
 import ageRender from "../../../../utils/ageRender";
-import { SyntheticEvent } from "react";
-import Zoom from "@mui/material/Zoom";
-import AwardsTooltip from "./tooltip"
-import CustomButton from "./button"
+import AwardsTooltip from "./awards-tooltip";
+import ActivityScale from "./activity-scale";
+import { TogglingButton } from "./toggling-button";
 
 interface ApplicantsCardProps {
   applicant: applicant;
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
-  function handleHide(e: SyntheticEvent) {
-    e.stopPropagation();
-  }
-
-  function handleAdd(e: SyntheticEvent) {
-    e.stopPropagation();
-  }
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
@@ -29,21 +21,10 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           />
           <div className={applicantsCard.profile}>
             <div className={applicantsCard.applicant}>
-              {(applicant.isWinner || applicant.responses > 9) && (
-                <AwardsTooltip
-                  title="Победитель хакатона"
-                  placement="top"
-                  // TransitionComponent={Zoom}
-                  color="secondary"
-                  arrow
-                >
-                  <div className={applicantsCard.awards}>
-                    {applicant.isWinner
-                      ? "🏆"
-                      : "🔥"}
-                  </div>
-                </AwardsTooltip>
-              )}
+              <AwardsTooltip
+                isWinner={applicant.isWinner}
+                more10Responses={applicant.responses > 9}
+              />
               <h4 className={applicantsCard.name}>
                 {applicant.firstName} {applicant.lastName}
               </h4>
@@ -53,48 +34,34 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
             </p>
           </div>
         </div>
-        <div className={applicantsCard.activity}>
-          <div className={applicantsCard.activityResponse}>
-            {applicant.responses}
-          </div>
-          <div className={applicantsCard.activityTesting}>
-            {applicant.completedTestTasks}
-          </div>
-          <div className={applicantsCard.activityInterview}>
-            {applicant.interviews}
-          </div>
-        </div>
-        <div className={applicantsCard.education}>
-          <div className={applicantsCard.educationItem}>
+        <ActivityScale
+          responses={applicant.responses}
+          completedTestTasks={applicant.completedTestTasks}
+          interviews={applicant.interviews}
+        />
+        <ul className={applicantsCard.infoList}>
+          <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Курс: </span>
             {applicant.course}
-          </div>
-          <div className={applicantsCard.educationItem}>
+          </li>
+          <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Дата окончания: </span>
             {applicant.graduationDate}
-          </div>
-          <div className={applicantsCard.educationItem}>
+          </li>
+          <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Формат работы: </span>
             {applicant.workFormat}
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
-      <div className={applicantsCard.buttons}>
-        <CustomButton
-          className={applicantsCard.hide}
-          variant="outlined"
-          onClick={handleHide}
-        >
-          Скрыть
-        </CustomButton>
-        <CustomButton
-          className={applicantsCard.add}
-          variant="contained"
-          onClick={handleAdd}
-        >
-          Добавить
-        </CustomButton>
-      </div>
+      {/* <CustomButton
+        className={applicantsCard.add}
+        variant="contained"
+        onClick={handleAdd}
+      >
+        Добавить
+      </CustomButton> */}
+      <TogglingButton />
     </div>
   );
 };

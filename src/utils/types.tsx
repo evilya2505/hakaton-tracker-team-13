@@ -27,3 +27,8 @@ export type AddVacancyFormValues = {
   workConditions: string;
   selectionStages: string;
 }
+
+export type awardsProps = {
+  isWinner: boolean;
+  more10Responses: boolean;
+};

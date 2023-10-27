@@ -57,7 +57,7 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
           {...register("password")}
         />
         <Link
-          to="/forgot-password"
+          to="/login/forgot-password"
           className={loginInputsForm.additionalButton}
         >
           Не помню пароль

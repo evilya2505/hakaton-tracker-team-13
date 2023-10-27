@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.addButton {
+  box-shadow: none !important;
+  padding: 10px 20px !important;
+  background-color: var(--main-blue) !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-family: "YS Text" !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  text-transform: initial !important;
+  width: 105px !important;
+  border-radius: 6px !important;
+}
+
+.addButton:hover {
+  background-color: #1d6bf3 !important;
+}
+
+.deleteButton {
+  box-shadow: none !important;
+  padding: 10px 20px !important;
+  background-color: var(--main-grey) !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-family: "YS Text" !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+  text-transform: initial !important;
+  width: 105px !important;
+  border-radius: 6px !important;
+  color: var(--main-black-500) !important;
+  opacity: 1 !important;
+  transform: opacity ease 1s !important;
+}
+
+.deleteButton:hover {
+    opacity: .8 !important;
+}
