@@ -1,13 +1,12 @@
 import mainStudentInfo from "./index.module.css";
-import { applicant } from "../../../../../constants/applicantsList";
 import ageRender from "../../../../../utils/ageRender";
 import { formatDate } from "../../../../../utils/formatDate";
+import { useSelector } from "../../../../../services/hooks";
 
-interface IModalProps {
-  selectedCard: applicant;
-}
-
-export default function MainStudentInfo({ selectedCard }: IModalProps) {
+export default function MainStudentInfo() {
+  const selectedCard = useSelector(
+    (state) => state.applicants.selectedCardData
+  );
   return (
     <div className={mainStudentInfo.wrapper}>
       <div className={mainStudentInfo.student}>
@@ -16,7 +15,9 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
             <h1 className={mainStudentInfo.name}>
               {selectedCard.firstName} {selectedCard.lastName}
             </h1>
-            <p className={mainStudentInfo.city}>{selectedCard.city}, {ageRender(selectedCard.age)}</p>
+            <p className={mainStudentInfo.city}>
+              {selectedCard.city}, {ageRender(selectedCard.age)}
+            </p>
           </div>
 
           <div className={mainStudentInfo.middleInfo}>
@@ -29,9 +30,7 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
             <ul className={mainStudentInfo.mainInfo}>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Курс:</h3>
-                <p className={mainStudentInfo.text}>
-                  {selectedCard.course}
-                </p>
+                <p className={mainStudentInfo.text}>{selectedCard.course}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Грейд: </h3>
@@ -39,11 +38,15 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Дата окончания: </h3>
-                <p className={mainStudentInfo.text}>{formatDate(selectedCard.graduationDate)}</p>
+                <p className={mainStudentInfo.text}>
+                  {formatDate(selectedCard.graduationDate)}
+                </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Формат работы: </h3>
-                <p className={mainStudentInfo.text}>{selectedCard.workFormat}</p>
+                <p className={mainStudentInfo.text}>
+                  {selectedCard.workFormat}
+                </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Зарплата:</h3>
@@ -70,9 +73,7 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
           </div>
           <div className={mainStudentInfo.bottomInfo}>
             <h2 className={mainStudentInfo.title}>О себе</h2>
-            <p className={mainStudentInfo.about}>
-              {selectedCard.about}
-            </p>
+            <p className={mainStudentInfo.about}>{selectedCard.about}</p>
           </div>
         </div>
         <ul className={mainStudentInfo.statistics}>
@@ -80,19 +81,28 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
             className={mainStudentInfo.statistic}
             style={{ backgroundColor: "#FFF9D3" }}
           >
-            <h3 className={mainStudentInfo.subtitle}>{selectedCard.responses}</h3>откликов
+            <h3 className={mainStudentInfo.subtitle}>
+              {selectedCard.responses}
+            </h3>
+            откликов
           </li>
           <li
             className={mainStudentInfo.statistic}
             style={{ backgroundColor: "#CCC2ED" }}
           >
-            <h3 className={mainStudentInfo.subtitle}>{selectedCard.completedTestTasks}</h3>тестовых
+            <h3 className={mainStudentInfo.subtitle}>
+              {selectedCard.completedTestTasks}
+            </h3>
+            тестовых
           </li>
           <li
             className={mainStudentInfo.statistic}
             style={{ backgroundColor: "#C2E5CE" }}
           >
-            <h3 className={mainStudentInfo.subtitle}>{selectedCard.interviews}</h3>собеседований
+            <h3 className={mainStudentInfo.subtitle}>
+              {selectedCard.interviews}
+            </h3>
+            собеседований
           </li>
         </ul>
       </div>
