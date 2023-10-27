@@ -5,12 +5,15 @@ import AwardsTooltip from "./awards-tooltip";
 import ActivityScale from "./activity-scale";
 import { TogglingButton } from "./toggling-button";
 import { formatDate } from "../../../../utils/formatDate";
+import { useState } from "react";
 
 interface ApplicantsCardProps {
   applicant: applicant;
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
+  const [isAdded, setIsAdded] = useState(applicant.responseStatus === 'Кандидат');
+  
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
@@ -62,7 +65,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
       >
         Добавить
       </CustomButton> */}
-      <TogglingButton />
+      <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded}/>
     </div>
   );
 };

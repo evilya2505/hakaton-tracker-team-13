@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "../../../services/hooks";
+import {
+  setSelectedCardData,
+  setUserModalVisibility,
+} from "../../../services/reducers/applicants";
 import applicantsPage from "./index.module.css";
-import ApplicantsCard from "./applicants-card";
 import page from "../index.module.css";
 import { applicant, applicants } from "../../../constants/applicantsList";
+import ApplicantsCard from "./applicants-card";
 import BasicModal from "../../modal/modal";
 import StudentModal from "./applicant-modal";
 import ApplicantsFilter from "./applicants-filter";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
-  const [isUserModalVisible, setIsUserModalVisible] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const isUserModalVisible = useSelector(
+    (state) => state.applicants.isUserModalVisible
+  );
 
-  const [selectedCard, setSelectedCard] = useState<applicant>(Object);
-
-  function closeModal() {
-    setIsUserModalVisible(false);
+  function closeUserModal() {
+    dispatch(setUserModalVisibility(false));
   }
 
   function openUserModal(card: applicant) {
-    setIsUserModalVisible(true);
-    setSelectedCard(card);
+    dispatch(setUserModalVisibility(true));
+    dispatch(setSelectedCardData(card));
   }
   return (
     <div className={`${page.pageElement} ${applicantsPage.container}`}>
@@ -33,8 +39,8 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
           );
         })}
       </ul>
-      <BasicModal closePopup={closeModal} isVisible={isUserModalVisible}>
-        <StudentModal selectedCard={selectedCard} />
+      <BasicModal closePopup={closeUserModal} isVisible={isUserModalVisible}>
+        <StudentModal />
       </BasicModal>
     </div>
   );
