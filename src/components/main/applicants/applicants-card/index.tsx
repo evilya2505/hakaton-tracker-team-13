@@ -1,19 +1,15 @@
 import applicantsCard from "./index.module.css";
 import { applicant } from "../../../../constants/applicantsList";
 import ageRender from "../../../../utils/ageRender";
-import { SyntheticEvent } from "react";
 import AwardsTooltip from "./awards-tooltip";
-import CustomButton from "./button";
 import ActivityScale from "./activity-scale";
+import { TogglingButton } from "./toggling-button";
 
 interface ApplicantsCardProps {
   applicant: applicant;
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
-  function handleAdd(e: SyntheticEvent) {
-    e.stopPropagation();
-  }
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
@@ -58,13 +54,14 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           </li>
         </ul>
       </div>
-      <CustomButton
+      {/* <CustomButton
         className={applicantsCard.add}
         variant="contained"
         onClick={handleAdd}
       >
         Добавить
-      </CustomButton>
+      </CustomButton> */}
+      <TogglingButton />
     </div>
   );
 };
