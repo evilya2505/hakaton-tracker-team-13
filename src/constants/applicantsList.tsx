@@ -25,6 +25,11 @@ export type applicant = {
   contacts: string; // контакты
   about: string; // о себе
   workExpirience: Array<workExp>; // массив из объектов мест работы
+
+  // добавила еще поля
+  studyingStatus: string; // учебный статус
+  responseStatus: string; // статус отклика
+  workStatus: string; // опыт работы
 };
 
 export type applicantsList = Array<applicant>;
@@ -81,6 +86,9 @@ export const applicants: applicantsList = [
     about:
       "Что разум человека может постигнуть и во что он может поверить, того он способен достичь",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Venus",
@@ -101,6 +109,9 @@ export const applicants: applicantsList = [
     about:
       "Что разум человека может постигнуть и во что он может поверить, того он способен достичь",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Francis",
@@ -120,6 +131,9 @@ export const applicants: applicantsList = [
     contacts: "+7(482)609-48-74",
     about: "Стремитесь не к успеху, а к ценностям, которые он дает",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Seth",
@@ -139,6 +153,9 @@ export const applicants: applicantsList = [
     contacts: "+7(592)574-76-41",
     about: "Стремитесь не к успеху, а к ценностям, которые он дает",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Cruz",
@@ -158,6 +175,9 @@ export const applicants: applicantsList = [
     contacts: "+7(994)498-21-00",
     about: "Я ничьих мнений не разделяю; я имею свои.",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Отклик",
   },
   {
     firstName: "Yvonne",
@@ -177,6 +197,9 @@ export const applicants: applicantsList = [
     contacts: "+7(363)550-64-08",
     about: "Я ничьих мнений не разделяю; я имею свои.",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Stella",
@@ -197,6 +220,9 @@ export const applicants: applicantsList = [
     about:
       "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха.",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Отклик",
   },
   {
     firstName: "Nolan",
@@ -217,6 +243,9 @@ export const applicants: applicantsList = [
     about:
       "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха.",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Aretha",
@@ -237,6 +266,9 @@ export const applicants: applicantsList = [
     about:
       "Через 20 лет вы будете больше разочарованы теми вещами, которые вы не делали, чем теми, которые вы сделали. Так отчальте от тихой пристани. Почувствуйте попутный ветер в вашем парусе. Двигайтесь вперед, действуйте, открывайте!",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Joan",
@@ -257,6 +289,9 @@ export const applicants: applicantsList = [
     about:
       "Через 20 лет вы будете больше разочарованы теми вещами, которые вы не делали, чем теми, которые вы сделали. Так отчальте от тихой пристани. Почувствуйте попутный ветер в вашем парусе. Двигайтесь вперед, действуйте, открывайте!",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Uriel",
@@ -277,6 +312,9 @@ export const applicants: applicantsList = [
     about:
       "Что-то недоброе таится в мужчинах, избегающих вина, игр, общества прелестных женщин, застольной беседы. Такие люди или тяжело больны, или втайне ненавидят окружающих. Правда, возможны исключения.",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Отклик",
   },
   {
     firstName: "Brenna",
@@ -297,6 +335,9 @@ export const applicants: applicantsList = [
     about:
       "Что-то недоброе таится в мужчинах, избегающих вина, игр, общества прелестных женщин, застольной беседы. Такие люди или тяжело больны, или втайне ненавидят окружающих. Правда, возможны исключения.",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Ryan",
@@ -317,6 +358,9 @@ export const applicants: applicantsList = [
     about:
       "Я помню чудное мгновенье: Передо мной явилась ты, Как мимолетное виденье, Как гений чистой красоты.",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Indira",
@@ -337,6 +381,9 @@ export const applicants: applicantsList = [
     about:
       "Я помню чудное мгновенье: Передо мной явилась ты, Как мимолетное виденье, Как гений чистой красоты.",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Clarke",
@@ -357,6 +404,9 @@ export const applicants: applicantsList = [
     about:
       "Что разум человека может постигнуть и во что он может поверить, того он способен достичь",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Selma",
@@ -377,6 +427,9 @@ export const applicants: applicantsList = [
     about:
       "Что разум человека может постигнуть и во что он может поверить, того он способен достичь",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Ralph",
@@ -396,6 +449,9 @@ export const applicants: applicantsList = [
     contacts: "+7(241)697-36-69",
     about: "Стремитесь не к успеху, а к ценностям, которые он дает",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Galvin",
@@ -415,6 +471,9 @@ export const applicants: applicantsList = [
     contacts: "+7(792)665-06-78",
     about: "Стремитесь не к успеху, а к ценностям, которые он дает",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Gannon",
@@ -434,6 +493,9 @@ export const applicants: applicantsList = [
     contacts: "+7(496)214-41-24",
     about: "Я ничьих мнений не разделяю; я имею свои.",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Yeo",
@@ -453,6 +515,9 @@ export const applicants: applicantsList = [
     contacts: "+7(146)865-17-04",
     about: "Я ничьих мнений не разделяю; я имею свои.",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Tara",
@@ -473,6 +538,9 @@ export const applicants: applicantsList = [
     about:
       "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха.",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Martena",
@@ -493,6 +561,9 @@ export const applicants: applicantsList = [
     about:
       "За свою карьеру я пропустил более 9000 бросков, проиграл почти 300 игр. 26 раз мне доверяли сделать финальный победный бросок, и я промахивался. Я терпел поражения снова, и снова, и снова. И именно поэтому я добился успеха.",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Georgia",
@@ -513,6 +584,9 @@ export const applicants: applicantsList = [
     about:
       "Через 20 лет вы будете больше разочарованы теми вещами, которые вы не делали, чем теми, которые вы сделали. Так отчальте от тихой пристани. Почувствуйте попутный ветер в вашем парусе. Двигайтесь вперед, действуйте, открывайте!",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Lilah",
@@ -533,6 +607,9 @@ export const applicants: applicantsList = [
     about:
       "Через 20 лет вы будете больше разочарованы теми вещами, которые вы не делали, чем теми, которые вы сделали. Так отчальте от тихой пристани. Почувствуйте попутный ветер в вашем парусе. Двигайтесь вперед, действуйте, открывайте!",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Laura",
@@ -553,6 +630,9 @@ export const applicants: applicantsList = [
     about:
       "Что-то недоброе таится в мужчинах, избегающих вина, игр, общества прелестных женщин, застольной беседы. Такие люди или тяжело больны, или втайне ненавидят окружающих. Правда, возможны исключения.",
     workExpirience: [exp1, exp2, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Darryl",
@@ -573,6 +653,9 @@ export const applicants: applicantsList = [
     about:
       "Что-то недоброе таится в мужчинах, избегающих вина, игр, общества прелестных женщин, застольной беседы. Такие люди или тяжело больны, или втайне ненавидят окружающих. Правда, возможны исключения.",
     workExpirience: [exp3, exp1, exp2],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Laurel",
@@ -593,6 +676,9 @@ export const applicants: applicantsList = [
     about:
       "Я помню чудное мгновенье: Передо мной явилась ты, Как мимолетное виденье, Как гений чистой красоты.",
     workExpirience: [exp2, exp1, exp3],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   {
     firstName: "Axel",
@@ -613,6 +699,9 @@ export const applicants: applicantsList = [
     about:
       "Я помню чудное мгновенье: Передо мной явилась ты, Как мимолетное виденье, Как гений чистой красоты.",
     workExpirience: [exp2, exp3, exp1],
+    studyingStatus: "Студент",
+    workStatus: "Около-релевантный",
+    responseStatus: "Кандидат",
   },
   // {
   // 	"firstName": "Jordan",

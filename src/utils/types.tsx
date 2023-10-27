@@ -60,6 +60,9 @@ export type applicant = {
   contacts: string; // контакты
   about: string; // о себе
   workExpirience: Array<workExp>; // массив из объектов мест работы
+  studyingStatus: string; // учебный статус
+  responseStatus: string; // статус отклика
+  workStatus: string; // опыт работы
 };
 
 export type applicantsList = Array<applicant>;
