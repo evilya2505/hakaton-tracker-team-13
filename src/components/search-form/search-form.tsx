@@ -7,7 +7,7 @@ import { InputAdornment } from "@mui/material";
 
 export const SearchBar = () => {
   return (
-    <form>
+    <form className={searchBar.form}>
       <TextField
         id="search-bar"
         className={searchBar.textField}

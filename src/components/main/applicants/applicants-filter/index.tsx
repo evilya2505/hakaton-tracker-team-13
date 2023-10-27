@@ -3,6 +3,7 @@ import applicantsFilter from "./index.module.css";
 import FilterModal from "../../../filter-modal";
 import { SearchBar } from "../../../search-form/search-form";
 import VacanciesDropDown from "../../../vacancies-drop-down/vacancies-drop-down";
+import FiltersMenu from "../../../filters-menu/filters-menu";
 
 const ApplicantsFilter: React.FC<{}> = (): JSX.Element => {
   const [isFilterModalVisible, setIsFilterModalVisible] =
@@ -24,7 +25,7 @@ const ApplicantsFilter: React.FC<{}> = (): JSX.Element => {
       <p>
         <VacanciesDropDown />
       </p>
-      <button onClick={openModal}>Фильтры</button>
+      <FiltersMenu />
       <FilterModal closePopup={closeModal} isVisible={isFilterModalVisible} />
     </div>
   );
