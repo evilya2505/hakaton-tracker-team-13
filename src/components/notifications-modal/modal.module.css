@@ -1,0 +1,55 @@
+.modal {
+  width: 357px;
+  min-height: 112px;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: var(--main-white);
+  position: absolute;
+  left: calc(50vw - 357px/2);
+  top: calc(45vh - 112px/2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.message {
+  font-family: YS Text;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: var(--main-black-900);
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.cancelButton {
+  height: 40px;
+  width: 156px;
+  font-family: YS Text;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: var(--main-blue-main);
+}
+
+.confirmButton {
+  height: 40px;
+  width: 156px;
+  font-family: YS Text;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: var(--main-white);
+}
