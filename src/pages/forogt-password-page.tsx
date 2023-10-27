@@ -11,7 +11,7 @@ const ForgotPasswordPage: React.FC<{}> = (): JSX.Element => {
     <section className={page.wrapper}>
       <div className={`${page.page} ${forgotPasswordPage.page}`}>
         <h1 className={page.title}>Восстановление пароля</h1>
-        {path === "/forgot-password/success" ? (
+        {path === "/login/forgot-password/success" ? (
           <p className={forgotPasswordPage.text}>
             Отправили ссылку для восстановления пароля на почту mail@mail.mail
           </p>

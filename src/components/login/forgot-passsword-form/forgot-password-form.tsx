@@ -23,7 +23,7 @@ const LoginInputsForm: React.FC<{}> = (): JSX.Element => {
 
   const onSubmit = (data: ForgotPasswordFormValues) => {
     console.log("Form data submitted:", data);
-    navigate("/forgot-password/success");
+    navigate("success");
   };
 
   return (
