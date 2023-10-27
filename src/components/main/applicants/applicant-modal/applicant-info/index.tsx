@@ -1,6 +1,7 @@
 import mainStudentInfo from "./index.module.css";
 import { applicant } from "../../../../../constants/applicantsList";
 import ageRender from "../../../../../utils/ageRender";
+import { formatDate } from "../../../../../utils/formatDate";
 
 interface IModalProps {
   selectedCard: applicant;
@@ -38,7 +39,7 @@ export default function MainStudentInfo({ selectedCard }: IModalProps) {
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Дата окончания: </h3>
-                <p className={mainStudentInfo.text}>{selectedCard.graduationDate}</p>
+                <p className={mainStudentInfo.text}>{formatDate(selectedCard.graduationDate)}</p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Формат работы: </h3>

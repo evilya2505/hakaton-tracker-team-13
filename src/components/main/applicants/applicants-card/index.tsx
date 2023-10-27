@@ -4,6 +4,7 @@ import ageRender from "../../../../utils/ageRender";
 import AwardsTooltip from "./awards-tooltip";
 import ActivityScale from "./activity-scale";
 import { TogglingButton } from "./toggling-button";
+import { formatDate } from "../../../../utils/formatDate";
 
 interface ApplicantsCardProps {
   applicant: applicant;
@@ -46,7 +47,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Дата окончания: </span>
-            {applicant.graduationDate}
+            {formatDate(applicant.graduationDate)}
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Формат работы: </span>
