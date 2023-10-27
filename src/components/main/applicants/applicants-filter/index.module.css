@@ -1,4 +1,8 @@
 .container {
-    display: flex;
-    gap: 30px;
+  display: flex;
+  gap: 30px;
+}
+
+.searchWrapper {
+  width: 519px;
 }
