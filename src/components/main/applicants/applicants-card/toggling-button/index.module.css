@@ -13,7 +13,6 @@
   font-weight: 500 !important;
   line-height: 20px !important;
   text-transform: initial !important;
-  width: 105px !important;
   border-radius: 6px !important;
 }
 
@@ -31,7 +30,6 @@
   font-weight: 500 !important;
   line-height: 20px !important;
   text-transform: initial !important;
-  width: 105px !important;
   border-radius: 6px !important;
   color: var(--main-black-500) !important;
   opacity: 1 !important;

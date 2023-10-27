@@ -16,6 +16,7 @@ export const TogglingButton = () => {
           className={togglingButton.addButton}
           variant="contained"
           onClick={toggleState}
+          fullWidth={true}
         >
           Добавить
         </Button>
@@ -25,6 +26,7 @@ export const TogglingButton = () => {
           className={togglingButton.deleteButton}
           variant="contained"
           onClick={toggleState}
+          fullWidth={true}
         >
           Добавлен
         </Button>
