@@ -13,7 +13,9 @@ body {
   margin: 0;
   height: 100vh;
   font-family: "YS Text", "Arial", sans-serif;
-
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,7 +27,7 @@ body {
 
 :root {
   --main-black-900: #1a1b22;
-  --main-black-300: #B5B5B7;
+  --main-black-300: #b5b5b7;
   --main-black-500: #797981;
   --main-black-100: #dde0e4;
   --main-grey: #f9fafb;

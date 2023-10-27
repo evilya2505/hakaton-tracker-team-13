@@ -7,8 +7,8 @@ const VacanciesCard = () => {
       <div className={vacanciesCard.vacancy}>
         <h4 className={vacanciesCard.name}>UX/UI-дизайнер (Junior)</h4>
         <div className={vacanciesCard.settings}>
-          <div className={vacanciesCard.edit} onClick={() => { }} />
-          <div className={vacanciesCard.delete} onClick={() => { }} />
+          <div className={vacanciesCard.edit} onClick={() => {}} />
+          <div className={vacanciesCard.delete} onClick={() => {}} />
         </div>
       </div>
       <p className={vacanciesCard.status}>Подходящие кандидаты: 54</p>
@@ -19,6 +19,5 @@ const VacanciesCard = () => {
       </div>
     </section>
   );
-}
+};
 export default VacanciesCard;
-
