@@ -9,13 +9,16 @@
 
 .list {
   list-style: none;
-  padding: 10px 0 0 10px;
+  padding: 0;
   margin: 0;
+  margin-top: 32px;
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
   overflow-y: scroll;
   max-height: calc(100vh - 90px);
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .list::-webkit-scrollbar {

@@ -14,7 +14,7 @@ const createCheckbox = (label: string) => {
   return (
     <FormControlLabel
       sx={{
-        ".css-g3c0gg-MuiFormControlLabel-root": {
+        ".MuiFormControlLabel-root": {
           marginBottom: "8px",
           color: "#1A1B22",
           fontFamily: "YS Text",
@@ -22,10 +22,7 @@ const createCheckbox = (label: string) => {
           fontWeight: "400",
           lineHeight: "20px",
         },
-        ".css-2tnjwj-MuiButtonBase-root-MuiCheckbox-root": {
-          padding: "0",
-        },
-        ".css-gd9q31-MuiButtonBase-root-MuiCheckbox-root": {
+        ".MuiCheckbox-root": {
           padding: "0 10px 0 0",
         },
       }}
@@ -96,7 +93,7 @@ const FiltersMenu = () => {
         Фильтры
       </Button>
       <Menu
-        sx={{ ".css-6hp17o-MuiList-root-MuiMenu-list": { padding: "16px" } }}
+        sx={{ ".MuiMenu-list": { padding: "16px" } }}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
@@ -157,7 +154,7 @@ const FiltersMenu = () => {
             <SearchBar text="Поиск города" />
             <Chip
               sx={{
-                ".css-6od3lo-MuiChip-label": {
+                ".MuiChip-label": {
                   color: "#1D6BF3",
                   fontFamily: "YS Text",
                   fontSize: "13px",

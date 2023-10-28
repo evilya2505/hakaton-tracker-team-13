@@ -20,7 +20,7 @@
 
 .test {
   width: 250px;
-  margin: auto;
+  margin: 10px auto 0;
 }
 
 .modal {

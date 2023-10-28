@@ -9,6 +9,7 @@ import Statistics from "../main/statistics";
 import Planer from "../main/planer";
 import Vacancy from "../main/vacancies/vacancy";
 import EditVacancy from "../main/vacancies/vacancy/edit-vacancy/inex";
+import Settings from "../main/settings";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           </Route>
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/planer" element={<Planer />} />
-          <Route path="/settings" element={<Planer />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
         <Route path="/login/*" element={<Login />} />
       </Routes>

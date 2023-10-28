@@ -84,7 +84,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   error={errors.name?.message !== undefined}
-                  helperText={errors.name?.message}
                   type="text"
                   {...register("name")}
                   inputProps={{
@@ -102,6 +101,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   id="name"
                   variant="outlined"
                 />
+
+                <label className={addVacancyForm.error}>
+                  {errors.name?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label htmlFor={"city"} className={addVacancyForm.label}>
@@ -110,7 +113,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("city")}
                   error={errors.city?.message !== undefined}
-                  helperText={errors.city?.message}
                   inputProps={{
                     style: {
                       height: "8px",
@@ -126,6 +128,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   id="city"
                   variant="outlined"
                 />
+
+                <label className={addVacancyForm.error}>
+                  {errors.city?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.checkboxWrapper}>
                 <FormControlLabel
@@ -162,15 +168,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("experience")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="experience"
@@ -187,6 +192,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.experience?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label htmlFor={"grade"} className={addVacancyForm.label}>
@@ -195,16 +204,15 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("grade")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "10px 12px",
-                        height: "8px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "10px 12px",
+                      height: "8px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="grade"
@@ -221,6 +229,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.grade?.message || " "}
+                </label>
               </div>
             </fieldset>
 
@@ -232,15 +244,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("languade")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="language"
@@ -257,6 +268,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.languade?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label
@@ -268,15 +283,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("languageLevel")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="languageLevel"
@@ -293,6 +307,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.languageLevel?.message || " "}
+                </label>
               </div>
             </fieldset>
             <fieldset className={addVacancyForm.fieldset}>
@@ -301,48 +319,57 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   Уровень дохода в месяц
                 </label>
                 <fieldset className={addVacancyForm.diapason}>
-                  <TextField
-                    type="number"
-                    {...register("salaryFrom")}
-                    // error={errors.salaryFrom?.message !== undefined}
-                    // helperText={errors.salaryFrom?.message}
-                    inputProps={{
-                      style: {
-                        height: "9px",
-                        padding: "10px auto 10px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
-                    }}
-                    sx={{ width: "320px", marginRight: "12px" }}
-                    placeholder="От"
-                    id="salaryFrom"
-                    variant="outlined"
-                  />
-                  <TextField
-                    type="number"
-                    {...register("salaryTo")}
-                    // error={errors.salaryTo?.message !== undefined}
-                    // helperText={errors.salaryTo?.message}
-                    inputProps={{
-                      style: {
-                        height: "9px",
-                        padding: "10px auto 10px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
-                    }}
-                    sx={{ width: "153px" }}
-                    placeholder="До"
-                    id="salaryTo"
-                    variant="outlined"
-                  />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <TextField
+                      type="number"
+                      {...register("salaryFrom")}
+                      error={errors.salaryFrom?.message !== undefined}
+                      inputProps={{
+                        style: {
+                          height: "9px",
+                          padding: "10px auto 10px 12px",
+                          color: "#1A1B22",
+                          fontFamily: "YS Text",
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          lineHeight: "20px",
+                        },
+                      }}
+                      sx={{ width: "320px", marginRight: "12px" }}
+                      placeholder="От"
+                      id="salaryFrom"
+                      variant="outlined"
+                    />
+                    <label className={addVacancyForm.error}>
+                      {errors.salaryFrom?.message || " "}
+                    </label>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <TextField
+                      type="number"
+                      {...register("salaryTo")}
+                      error={errors.salaryTo?.message !== undefined}
+                      inputProps={{
+                        style: {
+                          height: "9px",
+                          padding: "10px auto 10px 12px",
+                          color: "#1A1B22",
+                          fontFamily: "YS Text",
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          lineHeight: "20px",
+                        },
+                      }}
+                      sx={{ width: "153px" }}
+                      placeholder="До"
+                      id="salaryTo"
+                      variant="outlined"
+                    />
+                    <label className={addVacancyForm.error}>
+                      {errors.salaryTo?.message || " "}
+                    </label>
+                  </div>
+
                 </fieldset>
               </div>
               <div className={addVacancyForm.inputSection}>
@@ -352,15 +379,16 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("currency")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
+
                     marginTop: "4px",
                   }}
                   id="currency"
@@ -377,6 +405,11 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.currency?.message || " "}
+                </label>
+
               </div>
             </fieldset>
             <fieldset className={addVacancyForm.fieldset}>
@@ -387,15 +420,16 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("typeOfWork")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
+
                   }}
                   className={addVacancyForm.input}
                   id="typeOfWork"
@@ -412,23 +446,32 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.typeOfWork?.message || " "}
+                </label>
               </div>
-              <div className={addVacancyForm.inputSection}>
+              <div
+                className={addVacancyForm.inputSection}
+                style={{ marginBottom: "2px" }}
+              >
+
                 <label htmlFor={"workHours"} className={addVacancyForm.label}>
                   График работы
                 </label>
                 <TextField
                   {...register("workHours")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
+
                   }}
                   className={addVacancyForm.input}
                   id="workHours"
@@ -445,11 +488,17 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
+                <label className={addVacancyForm.error}>
+                  {errors.workHours?.message || " "}
+                </label>
+
               </div>
             </fieldset>
           </fieldset>
         )}
         {(value === 1 || value === 3) && (
+
           <fieldset className={addVacancyForm.fieldsetColumns}>
             <div className={addVacancyForm.column}>
               <div className={addVacancyForm.inputSection}>
@@ -461,8 +510,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("aboutVacancy")}
-                  // error={errors.aboutVacancy?.message !== undefined}
-                  // helperText={errors.aboutVacancy?.message}
+
+                  error={errors.aboutVacancy?.message !== undefined}
                   className={addVacancyForm.multiLineInput}
                   id="aboutVacancy"
                   multiline
@@ -492,6 +541,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+                <label className={addVacancyForm.error}>
+                  {errors.aboutVacancy?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label htmlFor={"duty"} className={addVacancyForm.label}>
@@ -499,8 +551,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("duty")}
-                  // error={errors.duty?.message !== undefined}
-                  // helperText={errors.duty?.message}
+                  error={errors.duty?.message !== undefined}
                   className={addVacancyForm.multiLineInput}
                   id="duty"
                   multiline
@@ -530,6 +581,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+
+                <label className={addVacancyForm.error}>
+                  {errors.duty?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label
@@ -541,8 +596,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("workConditions")}
                   className={addVacancyForm.multiLineInput}
-                  // error={errors.workConditions?.message !== undefined}
-                  // helperText={errors.workConditions?.message}
+                  error={errors.workConditions?.message !== undefined}
                   id="workConditions"
                   multiline
                   rows={2.9}
@@ -571,6 +625,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+
+                <label className={addVacancyForm.error}>
+                  {errors.workConditions?.message || " "}
+                </label>
               </div>
             </div>
 
@@ -584,8 +642,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("requirmentsMandatory")}
-                  // error={errors.requirmentsMandatory?.message !== undefined}
-                  // helperText={errors.requirmentsMandatory?.message}
+                  error={errors.requirmentsMandatory?.message !== undefined}
                   className={addVacancyForm.multiLineInput}
                   id="requirmentsMandatory"
                   multiline
@@ -615,6 +672,10 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+
+                <label className={addVacancyForm.error}>
+                  {errors.requirmentsMandatory?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label
@@ -625,8 +686,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("requirmentsOptional")}
-                  // error={errors.requirmentsOptional?.message !== undefined}
-                  // helperText={errors.requirmentsOptional?.message}
+                  error={errors.requirmentsOptional?.message !== undefined}
                   className={addVacancyForm.multiLineInput}
                   id="requirmentsOptional"
                   multiline
@@ -656,6 +716,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+                <label className={addVacancyForm.error}>
+                  {errors.requirmentsOptional?.message || " "}
+                </label>
               </div>
               <div className={addVacancyForm.inputSection}>
                 <label
@@ -666,8 +729,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("selectionStages")}
-                  // error={errors.selectionStages?.message !== undefined}
-                  // helperText={errors.selectionStages?.message}
+                  error={errors.selectionStages?.message !== undefined}
                   rows={2.9}
                   sx={{
                     "& .MuiInputBase-root::-webkit-scrollbar": {
@@ -697,6 +759,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   id="selectionStages"
                   multiline
                 />
+                <label className={addVacancyForm.error}>
+                  {errors.selectionStages?.message || " "}
+                </label>
               </div>
             </div>
           </fieldset>

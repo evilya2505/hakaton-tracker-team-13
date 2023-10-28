@@ -13,9 +13,9 @@
   align-items: flex-start;
 }
 
-.fieldset:not(:last-of-type) {
-  margin-bottom: 18.4px;
-}
+/* .fieldset:not(:last-of-type) {
+    margin-bottom: 18.4px;
+} */
 
 .inputSection {
   margin-right: 24px;
@@ -38,6 +38,8 @@
   border: none;
   padding: 0;
   margin: 4px 0 0;
+
+  display: flex;
 }
 
 .buttonWrapper {
@@ -72,7 +74,6 @@
 .column {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
 }
 
 .label {
@@ -88,7 +89,6 @@
   margin-left: 10px;
   margin-bottom: 6px;
   margin-top: 24px;
-}
 
 .dropDownList {
   color: var(--main-black-900) !important;
@@ -96,5 +96,16 @@
   font-size: 14px !important;
   font-style: normal !important;
   font-weight: 400 !important;
-  line-height: 20px !important;
+  /* line-height: 20px !important; */
+}
+
+.error {
+  margin-top: 4px;
+  height: 12px;
+  color: var(--main-red, #ff0200);
+  font-family: "YS Text";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
 }
