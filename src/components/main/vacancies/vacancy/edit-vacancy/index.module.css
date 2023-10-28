@@ -1,0 +1,15 @@
+.container {
+  max-width: 1243px;
+  overflow-y: scroll;
+  max-height: calc(100vh - 350px);
+}
+
+.container::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: rgba(26, 27, 34, 0.2);
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}

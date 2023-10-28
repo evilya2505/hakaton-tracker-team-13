@@ -11,11 +11,15 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CreateVacancyButton from "./create-button";
 import VacanciesModal from "../../vacancies-modal/vacancies-modal";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { vacancies, vacancy } from "../../../constants/vacanciesList";
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [value, setValue] = useState("1");
-  // const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
+
+  const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
   const [isAddVacancyModalOpened, setIsAddVacancyModalOpened] =
     useState<boolean>(false);
 
@@ -42,6 +46,10 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  function handleCardClick() {
+    navigate("vacancy");
+  }
 
   return (
     <div className={`${page.pageElement} ${vacanciesPage.container}`}>

@@ -1,0 +1,55 @@
+.title {
+  color: var(--main-black-900);
+  font-family: "YS Display";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 187px !important;
+  text-transform: initial !important;
+  color: var(--main-black-900) !important;
+  font-family: "YS Display" !important;
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+}
+
+.tagsList {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tag:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.chip {
+  border-radius: 4px !important;
+  background-color: #f9fafb !important;
+}
+
+.section {
+  margin: 36px 0 27px;
+  max-width: 1243px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.date {
+  color: var(--main-black-900);
+  font-family: "YS Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}

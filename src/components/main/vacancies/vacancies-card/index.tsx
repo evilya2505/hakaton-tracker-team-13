@@ -8,7 +8,7 @@ interface VacanciesCardProps {
 
 const VacanciesCard = ({ vacancy }: VacanciesCardProps) => {
   return (
-    <section className={vacanciesCard.card}>
+    <section className={vacanciesCard.card} onClick={handleCardClick}>
       <div className={vacanciesCard.vacancy}>
         <h4 className={vacanciesCard.name}>{vacancy.title} ({vacancy.grade})</h4>
         <div className={vacanciesCard.settings}>
