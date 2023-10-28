@@ -166,15 +166,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("experience")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="experience"
@@ -202,16 +201,15 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("grade")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "10px 12px",
-                        height: "8px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "10px 12px",
+                      height: "8px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="grade"
@@ -242,15 +240,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("languade")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="language"
@@ -281,15 +278,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("languageLevel")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="languageLevel"
@@ -376,15 +372,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("currency")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                     marginTop: "4px",
                   }}
                   id="currency"
@@ -414,15 +409,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("typeOfWork")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="typeOfWork"
@@ -453,15 +447,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("workHours")}
                   sx={{
-                    ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "8px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
+                    ".MuiOutlinedInput-input": {
+                      padding: "8px 12px",
+                      color: "#1A1B22",
+                      fontFamily: "YS Text",
+                      fontSize: "14px",
+                      fontWeight: "400",
+                      lineHeight: "20px",
+                    },
                   }}
                   className={addVacancyForm.input}
                   id="workHours"
