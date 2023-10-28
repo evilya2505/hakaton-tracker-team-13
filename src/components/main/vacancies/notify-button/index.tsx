@@ -18,7 +18,7 @@ export default function NotifyBell() {
     // <IconButton aria-label="cart">
       <StyledBadge
 
-       badgeContent={4} //количество непрочитанных уведомлений
+      //  badgeContent={4} //количество непрочитанных уведомлений
 
       color="primary"
       anchorOrigin={{
