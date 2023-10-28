@@ -6,11 +6,11 @@ import {
 } from "../../../services/reducers/applicants";
 import applicantsPage from "./index.module.css";
 import page from "../index.module.css";
-import { applicant, applicants } from "../../../constants/applicantsList";
 import ApplicantsCard from "./applicants-card";
 import BasicModal from "../../modal/modal";
 import StudentModal from "./applicant-modal";
 import ApplicantsFilter from "./applicants-filter";
+import { TApplicant } from "../../../utils/types";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -18,11 +18,13 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
     (state) => state.applicants.isUserModalVisible
   );
 
+  const applicants = useSelector((state) => state.applicants.applicants);
+
   function closeUserModal() {
     dispatch(setUserModalVisibility(false));
   }
 
-  function openUserModal(card: applicant) {
+  function openUserModal(card: TApplicant) {
     dispatch(setUserModalVisibility(true));
     dispatch(setSelectedCardData(card));
   }
@@ -31,9 +33,9 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
       <h2 className={applicantsPage.title}>Соискатели</h2>
       <ApplicantsFilter />
       <ul className={applicantsPage.list}>
-        {applicants.map((element: applicant, index) => {
+        {applicants.map((element: TApplicant) => {
           return (
-            <li key={index} onClick={() => openUserModal(element)}>
+            <li key={element.id} onClick={() => openUserModal(element)}>
               <ApplicantsCard applicant={element} />
             </li>
           );

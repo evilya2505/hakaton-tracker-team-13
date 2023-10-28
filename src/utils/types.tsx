@@ -74,13 +74,23 @@ export type TApplicant = {
   city: string;
   age: number;
   course: string;
-  graduation_date: string;
+  graduation_date: Date;
   schedule: string;
   work_status: string;
   edu_status: string;
-  response_count: string;
-  test_task_count: string;
-  interview_count: string;
+  response_count: number;
+  test_task_count: number;
+  interview_count: number;
+  // new
+  grade: string;
+  salary: number; // зп
+  contacts: string; // контакты
+  about: string; // о себе
+  workExpirience: Array<workExp>; // массив из объектов мест работы
+  studyingStatus: string; // учебный статус
+  responseStatus: string; // статус отклика
+  workStatus: string; // опыт работы
+
 };
 
 export type applicantsList = Array<applicant>;
