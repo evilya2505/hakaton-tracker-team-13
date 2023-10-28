@@ -30,7 +30,10 @@
 }
 
 .list {
+  list-style: none;
+  padding: 0;
   display: flex;
   gap: 30px;
   align-items: center;
+  flex-wrap: wrap;
 }
