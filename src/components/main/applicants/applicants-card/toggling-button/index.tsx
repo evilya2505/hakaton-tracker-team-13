@@ -29,11 +29,11 @@ export const TogglingButton = ({ isAdded, setIsAdded } : togglingButtonProps) =>
         <Button
           type="button"
           className={togglingButton.deleteButton}
-          variant="contained"
+          variant="outlined"
           onClick={toggleState}
           fullWidth={true}
         >
-          Добавлен
+          Удалить из списка
         </Button>
       )}
     </div>
