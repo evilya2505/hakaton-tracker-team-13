@@ -32,15 +32,19 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
     <div className={`${page.pageElement} ${applicantsPage.container}`}>
       <h2 className={applicantsPage.title}>Соискатели</h2>
       <ApplicantsFilter />
-      <ul className={applicantsPage.list}>
-        {applicants.map((element: TApplicant) => {
-          return (
-            <li key={element.id} onClick={() => openUserModal(element)}>
-              <ApplicantsCard applicant={element} />
-            </li>
-          );
-        })}
-      </ul>
+      {applicants.length > 0 ? (
+        <ul className={applicantsPage.list}>
+          {applicants.map((element: TApplicant) => {
+            return (
+              <li key={element.id} onClick={() => openUserModal(element)}>
+                <ApplicantsCard applicant={element} />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div className={applicantsPage.notFoundContainer}>Ничего не найдено</div>
+      )}
       <BasicModal closePopup={closeUserModal} isVisible={isUserModalVisible}>
         <StudentModal />
       </BasicModal>
