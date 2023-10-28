@@ -1,9 +1,14 @@
 import vacanciesCard from "./index.module.css";
 // import DeleteIcon from '@mui/icons-material/Delete';
+interface IVacanciesCardProps {
+  handleCardClick: () => void;
+}
 
-const VacanciesCard = () => {
+const VacanciesCard: React.FC<IVacanciesCardProps> = ({
+  handleCardClick,
+}): JSX.Element => {
   return (
-    <section className={vacanciesCard.card}>
+    <section className={vacanciesCard.card} onClick={handleCardClick}>
       <div className={vacanciesCard.vacancy}>
         <h4 className={vacanciesCard.name}>UX/UI-дизайнер (Junior)</h4>
         <div className={vacanciesCard.settings}>

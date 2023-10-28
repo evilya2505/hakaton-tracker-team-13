@@ -1,8 +1,8 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import compareApplicantsModal from "./compare-applicants-modal.module.css";
-import MainInfoModal from "../main-info-modal/main-info-modal";
+import compareApplicantsModal from "./index.module.css";
+import MainInfoModal from "../main-info-modal";
 
 export default function CompareApplicantsModal() {
   const [value, setValue] = React.useState(0);

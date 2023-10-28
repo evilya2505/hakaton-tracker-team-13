@@ -1,7 +1,7 @@
 .table {
   width: calc(100vw - 165px) !important;
   height: 454px !important;
-  overflow-x: scroll !important;
+  overflow: scroll !important;
   box-shadow: none !important;
 }
 

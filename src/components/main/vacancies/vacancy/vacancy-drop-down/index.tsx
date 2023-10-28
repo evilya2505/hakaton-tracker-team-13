@@ -1,6 +1,6 @@
-import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import React from "react";
-import vacancyDropDown from "./vacancy-drop-down.module.css";
+import vacancyDropDown from "./index.module.css";
 import { applicantStatuses } from "../../../../../constants/applicantStatuses";
 export default function VacancyDropDown() {
   const [vacancy, setVacancy] = React.useState([]);

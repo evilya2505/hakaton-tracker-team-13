@@ -14,24 +14,22 @@ import {
   Button,
   Menu,
 } from "@mui/material";
-import table from "./table.module.css";
+import table from "./index.module.css";
 import telegramIcon from "../../../../../images/telegram.svg";
 import emailIcon from "../../../../../images/email.svg";
 import { applicantStatuses } from "../../../../../constants/applicantStatuses";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { applicantsList } from "../../../../../constants/applicantsList";
 import SearchBar from "../../../../search-form/search-form";
-import VacancyDropDown from "../vacancy-drop-down/vacancy-drop-down";
+import VacancyDropDown from "../vacancy-drop-down";
 import FiltersMenu from "../../../../filters-menu/filters-menu";
 import calndarIcon from "../../../../../images/Calendar.svg";
 import compareIcon from "../../../../../images/compare.svg";
 import BasicModal from "../../../../modal/modal";
-import StudentModal from "../../../applicants/applicant-modal";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CompareApplicantsModal from "../compare-applicants-modal/compare-applicants-moda";
+import CompareApplicantsModal from "../compare-applicants-modal";
 
 const applicants = [
   {
@@ -52,6 +50,7 @@ const applicants = [
     grade: "Junior",
     salary: 50000,
     contacts: "+799999999999",
+    status: 3,
     about: "Улыбаюсь и пью кофе",
   },
   {
@@ -72,6 +71,7 @@ const applicants = [
     grade: "Junior",
     salary: 50000,
     contacts: "+799999999999",
+    status: 3,
     about: "Не улыбаюсь и пью винишко",
   },
   {
@@ -92,6 +92,7 @@ const applicants = [
     grade: "Junior",
     salary: 50000,
     contacts: "+799999999999",
+    status: 3,
     about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
   },
   {
@@ -112,6 +113,7 @@ const applicants = [
     grade: "Junior",
     salary: 50000,
     contacts: "+799999999999",
+    status: 3,
     about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
   },
   {
@@ -133,6 +135,7 @@ const applicants = [
     salary: 50000,
     contacts: "+799999999999",
     about: "Улыбаюсь и пью кофе",
+    status: 3,
   },
   {
     id: 7,
@@ -153,6 +156,7 @@ const applicants = [
     salary: 50000,
     contacts: "+799999999999",
     about: "Улыбаюсь и пью кофе",
+    status: 4,
   },
   {
     id: 8,
@@ -173,6 +177,154 @@ const applicants = [
     salary: 50000,
     contacts: "+799999999999",
     about: "Не улыбаюсь и пью винишко",
+    status: 6,
+  },
+  {
+    id: 9,
+    firstName: "Анна",
+    lastName: "Короткова",
+    avatar:
+      "https://images.unsplash.com/photo-1693438672953-409b661134fd?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: false,
+    city: "Санкт-Петербург",
+    age: 24,
+    responses: 40,
+    completedTestTasks: 14,
+    interviews: 10,
+    course: "Дизайнер интерфейсов",
+    graduationDate: "апрель 2023",
+    workFormat: "удаленный",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
+    status: 5,
+  },
+  {
+    id: 10,
+    firstName: "Алия",
+    lastName: "Шархимуллина",
+    avatar:
+      "https://images.unsplash.com/photo-1697472106815-829bad01f7b8?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: false,
+    city: "Казань",
+    age: 28,
+    responses: 1,
+    completedTestTasks: 10,
+    interviews: 9,
+    course: "Web-разработчик",
+    graduationDate: "июнь 2022",
+    workFormat: "офис",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    about: "Не улыбаюсь и пью винишко",
+    status: 4,
+  },
+  {
+    id: 11,
+    firstName: "Иван",
+    lastName: "Иванов",
+    avatar:
+      "https://images.unsplash.com/photo-1696887350319-86341eda4b71?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: true,
+    city: "Москва",
+    age: 35,
+    responses: 0,
+    completedTestTasks: 0,
+    interviews: 0,
+    course: "Python-разработчик",
+    graduationDate: "август 2023",
+    workFormat: "удаленный",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    status: 2,
+    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+  },
+  {
+    id: 12,
+    firstName: "Петр",
+    lastName: "Петров",
+    avatar:
+      "https://images.unsplash.com/photo-1697472925037-e38438b132b0?auto=format&fit=crop&q=80&w=1965&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: false,
+    city: "Барнаул",
+    age: 30,
+    responses: 35,
+    completedTestTasks: 20,
+    interviews: 5,
+    course: "Дизайнер интерфейсов",
+    graduationDate: "февраль 2023",
+    workFormat: "удаленный",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    status: 1,
+    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+  },
+  {
+    id: 13,
+    firstName: "Александра",
+    lastName: "Александрова",
+    avatar:
+      "https://images.unsplash.com/photo-1689193504709-2ccf8bf64be1?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: true,
+    city: "Санкт-Петербург",
+    age: 24,
+    responses: 0,
+    completedTestTasks: 1,
+    interviews: 0,
+    course: "Дизайнер интерфейсов",
+    graduationDate: "апрель 2023",
+    workFormat: "удаленный",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
+    status: 4,
+  },
+  {
+    id: 14,
+    firstName: "Анна",
+    lastName: "Короткова",
+    avatar:
+      "https://images.unsplash.com/photo-1693438672953-409b661134fd?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: false,
+    city: "Санкт-Петербург",
+    age: 24,
+    responses: 40,
+    completedTestTasks: 14,
+    interviews: 50,
+    course: "Дизайнер интерфейсов",
+    graduationDate: "апрель 2023",
+    workFormat: "удаленный",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    about: "Улыбаюсь и пью кофе",
+    status: 3,
+  },
+  {
+    id: 15,
+    firstName: "Алия",
+    lastName: "Шархимуллина",
+    avatar:
+      "https://images.unsplash.com/photo-1697472106815-829bad01f7b8?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    isWinner: true,
+    city: "Казань",
+    age: 28,
+    responses: 10,
+    completedTestTasks: 5,
+    interviews: 100,
+    course: "Web-разработчик",
+    graduationDate: "июнь 2022",
+    workFormat: "офис",
+    grade: "Junior",
+    salary: 50000,
+    contacts: "+799999999999",
+    about: "Не улыбаюсь и пью винишко",
+    status: 1,
   },
 ];
 
@@ -236,7 +388,7 @@ const CandidateTable = () => {
   const handleAllCandidateSelection = () => {
     let tempArray = [...selectedCandidates];
 
-    if (selectedCandidates.length == applicants.length) {
+    if (selectedCandidates.length === applicants.length) {
       tempArray = [];
     } else {
       for (let i = 0; i < applicants.length; i++) {
@@ -260,7 +412,7 @@ const CandidateTable = () => {
           </div>
           <FiltersMenu />
         </div>
-        {selectedCandidates.length == 1 && (
+        {selectedCandidates.length === 1 && (
           <>
             <Button
               onClick={handleMainMenuClick}
@@ -284,7 +436,7 @@ const CandidateTable = () => {
             </Menu>
           </>
         )}
-        {selectedCandidates.length == 2 && (
+        {selectedCandidates.length === 2 && (
           <Button
             onClick={handleOpenCompareModal}
             className={`${table.buttonOutlined}`}
@@ -310,7 +462,7 @@ const CandidateTable = () => {
               <TableCell size="small">
                 <Checkbox
                   checked={
-                    selectedCandidates.length == applicants.length
+                    selectedCandidates.length === applicants.length
                       ? true
                       : false
                   }
@@ -429,7 +581,8 @@ const CandidateTable = () => {
                   <TextField
                     {...register("status")}
                     sx={{
-                      backgroundColor: applicantStatuses[1].color,
+                      backgroundColor:
+                        applicantStatuses[candidate.status].color,
                       ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
                         {
                           padding: "8px 12px",
@@ -442,7 +595,7 @@ const CandidateTable = () => {
                     }}
                     className={table.input}
                     id="status"
-                    defaultValue="1"
+                    value={applicantStatuses[candidate.status].id}
                     select
                   >
                     {applicantStatuses.map((option, index) => (

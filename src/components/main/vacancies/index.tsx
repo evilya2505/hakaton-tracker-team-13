@@ -9,9 +9,9 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CreateVacancyButton from "./create-button";
 import VacanciesModal from "../../vacancies-modal/vacancies-modal";
-import { Link, Outlet, Route, Routes } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 const Vacancies: React.FC<{}> = (): JSX.Element => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [value, setValue] = useState("1");
   const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
@@ -39,6 +39,10 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
     setValue(newValue);
   };
 
+  function handleCardClick() {
+    navigate("vacancy");
+  }
+
   return (
     <div className={`${page.pageElement} ${vacancies.container}`}>
       {location.pathname.includes("vacancy") ? (
@@ -60,9 +64,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
               <Tab label="Архив" value="3" />
             </TabList>
             <TabPanel className={vacancies.list} value="1">
-              <Link to="vacancy">
-                <VacanciesCard />
-              </Link>
+              <VacanciesCard handleCardClick={handleCardClick} />
               {/* <div className={vacancies.activeVacancies}>
           <p>Вы еще не создали ни одной вакансии</p>
         </div> */}

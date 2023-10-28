@@ -24,7 +24,7 @@
 .tagsList {
   display: flex;
   padding: 0;
-  margin: 0 0 27px;
+  margin: 0;
   list-style: none;
 }
 
@@ -37,9 +37,8 @@
   background-color: #f9fafb !important;
 }
 
-.titleContainer {
-  margin: 36px 0 16px;
-
+.section {
+  margin: 36px 0 27px;
   max-width: 1243px;
   display: flex;
   align-items: flex-end;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import applicantCompareCard from "./applicant-compare-card.module.css";
+import applicantCompareCard from "./index.module.css";
 import { Avatar, Chip } from "@mui/material";
 
 export default function ApplicantCompareCard() {
