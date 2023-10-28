@@ -38,6 +38,7 @@
   border: none;
   padding: 0;
   margin: 4px 0 0;
+  display: flex;
 }
 
 .buttonWrapper {

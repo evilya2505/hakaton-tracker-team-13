@@ -317,52 +317,56 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   Уровень дохода в месяц
                 </label>
                 <fieldset className={addVacancyForm.diapason}>
-                  <TextField
-                    type="number"
-                    {...register("salaryFrom")}
-                    error={errors.salaryFrom?.message !== undefined}
-                    inputProps={{
-                      style: {
-                        height: "9px",
-                        padding: "10px auto 10px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
-                    }}
-                    sx={{ width: "320px", marginRight: "12px" }}
-                    placeholder="От"
-                    id="salaryFrom"
-                    variant="outlined"
-                  />
-                  <label className={addVacancyForm.error}>
-                    {errors.salaryFrom?.message || " "}
-                  </label>
-                  <TextField
-                    type="number"
-                    {...register("salaryTo")}
-                    error={errors.salaryTo?.message !== undefined}
-                    inputProps={{
-                      style: {
-                        height: "9px",
-                        padding: "10px auto 10px 12px",
-                        color: "#1A1B22",
-                        fontFamily: "YS Text",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        lineHeight: "20px",
-                      },
-                    }}
-                    sx={{ width: "153px" }}
-                    placeholder="До"
-                    id="salaryTo"
-                    variant="outlined"
-                  />
-                  <label className={addVacancyForm.error}>
-                    {errors.salaryTo?.message || " "}
-                  </label>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <TextField
+                      type="number"
+                      {...register("salaryFrom")}
+                      error={errors.salaryFrom?.message !== undefined}
+                      inputProps={{
+                        style: {
+                          height: "9px",
+                          padding: "10px auto 10px 12px",
+                          color: "#1A1B22",
+                          fontFamily: "YS Text",
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          lineHeight: "20px",
+                        },
+                      }}
+                      sx={{ width: "320px", marginRight: "12px" }}
+                      placeholder="От"
+                      id="salaryFrom"
+                      variant="outlined"
+                    />
+                    <label className={addVacancyForm.error}>
+                      {errors.salaryFrom?.message || " "}
+                    </label>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <TextField
+                      type="number"
+                      {...register("salaryTo")}
+                      error={errors.salaryTo?.message !== undefined}
+                      inputProps={{
+                        style: {
+                          height: "9px",
+                          padding: "10px auto 10px 12px",
+                          color: "#1A1B22",
+                          fontFamily: "YS Text",
+                          fontSize: "14px",
+                          fontWeight: "400",
+                          lineHeight: "20px",
+                        },
+                      }}
+                      sx={{ width: "153px" }}
+                      placeholder="До"
+                      id="salaryTo"
+                      variant="outlined"
+                    />
+                    <label className={addVacancyForm.error}>
+                      {errors.salaryTo?.message || " "}
+                    </label>
+                  </div>
                 </fieldset>
               </div>
               <div className={addVacancyForm.inputSection}>
