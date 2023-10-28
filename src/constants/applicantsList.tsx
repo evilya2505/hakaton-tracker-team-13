@@ -70,7 +70,7 @@ export const applicants: applicantsList = [
   {
     firstName: "Judah",
     lastName: "Waters",
-    avatar: "https://random.imagecdn.app/200/200",
+    avatar: " https://source.unsplash.com/random",
     isWinner: false,
     city: "Lipetsk",
     age: 33,
@@ -93,7 +93,7 @@ export const applicants: applicantsList = [
   {
     firstName: "Venus",
     lastName: "Tate",
-    avatar: "https://random.imagecdn.app/200/200",
+    avatar: " https://source.unsplash.com/random",
     isWinner: true,
     city: "Sakhalin",
     age: 35,
