@@ -43,7 +43,7 @@ export const vacancies: vacanciesList = [
     conditions: "условия",
     stages: "этапы отбора",
     archive: false,
-    pubDate: new Date(28/10/2023),
+    pubDate: new Date(),
   },
   {
     title: "UX/UI-дизайнер",
@@ -64,7 +64,7 @@ export const vacancies: vacanciesList = [
     conditions: "условия",
     stages: "этапы отбора",
     archive: false,
-    pubDate: new Date(28/10/2023),
+    pubDate: new Date(),
   },
   {
     title: "Frontend-разработчик",
@@ -85,6 +85,6 @@ export const vacancies: vacanciesList = [
     conditions: "условия",
     stages: "этапы отбора",
     archive: false,
-    pubDate: new Date(28/10/2023),
+    pubDate: new Date(),
   },
 ];
