@@ -7,6 +7,7 @@ import Applicants from "../main/applicants";
 import Vacancies from "../main/vacancies";
 import Statistics from "../main/statistics";
 import Planer from "../main/planer";
+import Settings from "../main/settings";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path="/vacancies" element={<Vacancies />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/planer" element={<Planer />} />
-          <Route path="/settings" element={<Planer />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
         <Route path="/login/*" element={<Login />} />
       </Routes>
