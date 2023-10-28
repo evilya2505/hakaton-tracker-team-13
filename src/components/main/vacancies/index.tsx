@@ -5,39 +5,33 @@ import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
-// import NotifyBell from "./notify-button";
 import BasicPopover from "./notify-modal";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CreateVacancyButton from "./create-button";
 import VacanciesModal from "../../vacancies-modal/vacancies-modal";
-import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { vacancies, vacancy } from "../../../constants/vacanciesList";
+import { setAddVacancyModalVisibility } from "../../../services/reducers/vacancies";
+import { useSelector, useDispatch } from "../../../services/hooks";
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
   const [value, setValue] = useState("1");
 
-  const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
-  const [isAddVacancyModalOpened, setIsAddVacancyModalOpened] =
-    useState<boolean>(false);
+  const dispatch = useDispatch();
+  const isAddVacancyModalVisible = useSelector(
+    (state) => state.vacancies.isAddVacancyModalVisible
+  );
 
   function handleOpenVacancyModal() {
-    setIsAddVacancyModalOpened(true);
+    dispatch(setAddVacancyModalVisibility(true));
   }
 
   function handleCloseVacancyModal() {
-    setIsAddVacancyModalOpened(false);
+    dispatch(setAddVacancyModalVisibility(false));
   }
-
-  // function openNotifyModal() {
-  //   setIsBellModalVisible(true);
-  // }
-
-  // function closeNotifyModal() {
-  //   setIsBellModalVisible(false);
-  // }
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -64,18 +58,21 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
               <Tab label="Архив" value="3" />
             </TabList>
             <TabPanel className={vacanciesPage.list} value="1">
-              <ul className={vacanciesPage.list}>
-                {vacancies.map((element: vacancy, index) => {
-                  return (
-                    <li key={index} onClick={handleCardClick}>
-                      <VacanciesCard vacancy={element} />
-                    </li>
-                  );
-                })}
-              </ul>
-              {/* <div className={vacancies.activeVacancies}>
-            <p>Вы еще не создали ни одной вакансии</p>
-          </div> */}
+              {vacancies.length > 0 ? (
+                <ul className={vacanciesPage.list}>
+                  {vacancies.map((element: vacancy, index) => {
+                    return (
+                      <li key={index} onClick={handleCardClick}>
+                        <VacanciesCard vacancy={element} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <div className={vacanciesPage.activeVacancies}>
+                  <p>Вы еще не создали ни одной вакансии</p>
+                </div>
+              )}
               <div className={vacanciesPage.buttonFixed}>
                 <Fab
                   color="primary"
@@ -99,12 +96,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
               </div>
             </TabPanel>
           </TabContext>
-          {/* <BasicPopover closePopup={closeNotifyModal} isVisible={isBellModalVisible}>
-        <div>Новые уведомления</div>
-      </BasicPopover> */}
 
           <BasicModal
-            isVisible={isAddVacancyModalOpened}
+            isVisible={isAddVacancyModalVisible}
             closePopup={handleCloseVacancyModal}
           >
             <VacanciesModal />
