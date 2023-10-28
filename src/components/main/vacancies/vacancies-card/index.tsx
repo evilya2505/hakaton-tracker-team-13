@@ -1,5 +1,4 @@
 import vacanciesCard from "./index.module.css";
-// import DeleteIcon from '@mui/icons-material/Delete';
 import { vacancy } from "../../../../constants/vacanciesList";
 import { formatFullDate } from "../../../../utils/formatDate";
 

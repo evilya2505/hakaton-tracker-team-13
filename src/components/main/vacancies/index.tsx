@@ -5,7 +5,8 @@ import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
-import NotifyModal from "../../notifications-modal/modal";
+// import NotifyBell from "./notify-button";
+import BasicPopover from "./notify-modal"
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CreateVacancyButton from "./create-button";
@@ -14,7 +15,7 @@ import { vacancies, vacancy } from "../../../constants/vacanciesList";
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
   const [value, setValue] = useState("1");
-  const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
+  // const [isBellModalVisible, setIsBellModalVisible] = useState<boolean>(false);
   const [isAddVacancyModalOpened, setIsAddVacancyModalOpened] =
     useState<boolean>(false);
 
@@ -26,13 +27,13 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
     setIsAddVacancyModalOpened(false);
   }
 
-  function openNotifyModal() {
-    setIsBellModalVisible(true);
-  }
+  // function openNotifyModal() {
+  //   setIsBellModalVisible(true);
+  // }
 
-  function closeNotifyModal() {
-    setIsBellModalVisible(false);
-  }
+  // function closeNotifyModal() {
+  //   setIsBellModalVisible(false);
+  // }
 
   function handleCardClick() {
     console.log('open vacancy');
@@ -46,11 +47,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
     <div className={`${page.pageElement} ${vacanciesPage.container}`}>
       <div className={vacanciesPage.titleContainer}>
         <h2 className={vacanciesPage.title}>Мои вакансии</h2>
-        <button
-          type="button"
-          className={vacanciesPage.notificationsButton}
-          onClick={openNotifyModal}
-        ></button>
+        <BasicPopover />
       </div>
       <TabContext value={value}>
         <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -71,18 +68,22 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
           {/* <div className={vacancies.activeVacancies}>
             <p>Вы еще не создали ни одной вакансии</p>
           </div> */}
-          <Fab
-            color="primary"
-            aria-label="add"
-            onClick={handleOpenVacancyModal}
-          >
-            <AddIcon />
-          </Fab>
+          <div className={vacanciesPage.buttonFixed}>
+            <Fab
+              color="primary"
+              aria-label="add"
+              onClick={handleOpenVacancyModal}
+            >
+              <AddIcon />
+            </Fab>
+          </div>
         </TabPanel>
         <TabPanel value="2">
           <div className={vacanciesPage.activeVacancies}>
             <p>Вы еще не создали ни одного черновика</p>
+
             <CreateVacancyButton />
+
           </div>
         </TabPanel>
         <TabPanel value="3">
@@ -91,10 +92,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
           </div>
         </TabPanel>
       </TabContext>
-
-      <NotifyModal closePopup={closeNotifyModal} isVisible={isBellModalVisible}>
+      {/* <BasicPopover closePopup={closeNotifyModal} isVisible={isBellModalVisible}>
         <div>Новые уведомления</div>
-      </NotifyModal>
+      </BasicPopover> */}
 
       <BasicModal
         isVisible={isAddVacancyModalOpened}
@@ -102,7 +102,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
       >
         <VacanciesModal />
       </BasicModal>
-    </div>
+    </div >
   );
 };
 
