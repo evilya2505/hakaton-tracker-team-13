@@ -13,19 +13,35 @@ import Settings from "../main/settings";
 import mainApi from "../../utils/MainApi";
 import { useDispatch } from "../../services/hooks";
 import { setApplicants } from "../../services/reducers/applicants";
+import { setVacancies } from "../../services/reducers/vacancies";
 
 function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    getVacancies();
+    getApplicants();
+  }, []);
+
+  function getVacancies() {
+    mainApi.getVacancies().then((res) => {
+      console.log("vacancies");
+      console.log(res.results);
+      dispatch(setVacancies(res.results));
+    });
+  }
+
+  function getApplicants() {
     mainApi
       .getApplicants()
       .then((res) => {
-        console.log(res);
+        console.log("applicants");
+        console.log(res.results);
         dispatch(setApplicants(res.results));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
+
   return (
     <>
       <Routes>
