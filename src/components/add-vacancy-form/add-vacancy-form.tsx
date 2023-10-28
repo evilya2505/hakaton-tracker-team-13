@@ -439,7 +439,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
               </div>
               <div
                 className={addVacancyForm.inputSection}
-                style={{ marginBottom: "7px" }}
+                style={{ marginBottom: "2px" }}
               >
                 <label htmlFor={"workHours"} className={addVacancyForm.label}>
                   График работы
