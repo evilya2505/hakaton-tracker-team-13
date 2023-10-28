@@ -8,6 +8,7 @@ class MainApi {
 
   _getRequestResult(res) {
     if (res.ok) {
+      console.log(true);
       return res.json();
     } else {
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -19,6 +20,7 @@ class MainApi {
       method: "GET",
       headers: {
         ...this._headers,
+        Authorization: `Bearer `,
       },
     }).then((res) => this._getRequestResult(res));
   }
@@ -211,9 +213,9 @@ class MainApi {
 // Создание экземпляра класса Api
 const mainApi = new MainApi({
   baseUrl: "http://130.193.38.180/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
 });
 
 export default mainApi;
