@@ -14,7 +14,7 @@ interface IModalProps {
   closePopup: () => void;
 }
 
-export default function NotifyModal({
+export default function ConfirmModal({
   children,
   closePopup,
   isVisible,

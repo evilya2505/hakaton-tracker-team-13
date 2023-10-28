@@ -1,5 +1,5 @@
 .wrapper {
-  margin: 12px 17px 0 0;
+  margin: 19px 17px 0 0;
   max-width: 1025px;
   background-color: var(--main-white);
   font-size: 16px;
@@ -44,7 +44,7 @@
 }
 
 .experienceList {
-  max-width: 945px;
+  max-width: 1005px;
   margin: 0;
   padding: 0;
   overflow-y: scroll;
