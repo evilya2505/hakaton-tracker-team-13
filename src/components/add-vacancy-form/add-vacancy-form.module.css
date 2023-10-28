@@ -1,7 +1,7 @@
 .form {
   margin: 20px 0 0;
   padding: 0;
-  height: 449px;
+  height: 100%;
   width: 924px;
 }
 
@@ -38,6 +38,7 @@
   border: none;
   padding: 0;
   margin: 4px 0 0;
+
   display: flex;
 }
 

@@ -1,0 +1,110 @@
+.applicant {
+  width: 532px;
+  height: 523px;
+  padding: 24px 20px;
+  box-shadow: 0px 4px 6px 0px rgba(176, 190, 197, 0.3);
+  border: 1px solid var(--additional-brown, rgba(169, 145, 117, 0.26));
+  font-family: "YS Text";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--main-black-900);
+}
+
+.mainInfo {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.personalInfoContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.avataer {
+  margin-right: 8px;
+  width: 56px;
+  height: 56px;
+}
+
+.personalInfo {
+  object-fit: cover;
+  object-position: center;
+}
+
+.fullName {
+  margin-bottom: 4px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.personalInfoText {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.personalInfoText:not(:last-of-type) {
+  margin-bottom: 4px;
+}
+
+.jobStatus {
+  color: var(--main-blue-main);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 8px;
+}
+
+.salary {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px; /* 123.077% */
+}
+
+.courseTitle {
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.sectionTitle {
+  margin-bottom: 12px;
+
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.text {
+  display: flex;
+}
+
+.section {
+  margin-top: 20px;
+}
+.educationText {
+  font-style: italic;
+}
+
+.skillsList {
+  row-gap: 8px;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.skill:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.chip {
+  border-radius: 4px !important;
+  background-color: #f9fafb !important;
+}

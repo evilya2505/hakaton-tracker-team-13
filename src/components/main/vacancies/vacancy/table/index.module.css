@@ -1,0 +1,115 @@
+.table {
+  width: calc(100vw - 165px) !important;
+  height: 454px !important;
+  overflow: scroll !important;
+  box-shadow: none !important;
+}
+
+.table::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+  background: rgba(26, 27, 34, 0.2) !important;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background-color: #8585ad !important;
+}
+
+.candidate {
+  display: flex;
+  height: 40px;
+}
+
+.cell {
+  padding: 0 !important;
+}
+
+.input {
+  color: var(--main-black-900);
+  font-family: "YS Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 4px !important;
+  width: 199px;
+}
+
+.dropDownList {
+  color: var(--main-black-900) !important;
+  font-family: "YS Text" !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 20px !important;
+}
+
+.avatar {
+  margin-right: 8px;
+  border-radius: 100%;
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.choosen {
+  margin-bottom: 12px;
+  color: var(--main-black-500);
+  font-family: "YS Text";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.filterContainer {
+  max-width: 1243px;
+  margin: 20px 0 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.wrapper {
+  width: 278px;
+  margin-right: 24px;
+}
+
+.text {
+  color: var(--main-black-900);
+  font-family: "YS Text";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 4px;
+}
+
+.filtersWrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.button {
+  padding: 10px 20px !important;
+  color: var(--main-white) !important;
+  text-align: center !important;
+  text-transform: initial !important;
+  font-family: "YS Text" !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+}
+
+.buttonOutlined {
+  padding: 9px 27px !important;
+  color: var(--main-blue-main) !important;
+  text-align: center !important;
+  text-transform: initial !important;
+  font-family: "YS Text" !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+}

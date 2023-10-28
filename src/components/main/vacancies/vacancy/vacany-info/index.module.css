@@ -1,0 +1,35 @@
+.wrapper {
+  padding: 24px 28px;
+  max-height: calc(100vh - 400px);
+  width: 580px;
+  background: var(--main-blue-bg);
+  border-radius: 12px;
+}
+.container {
+  max-height: calc(100vh - 400px);
+  overflow-y: scroll;
+  border-radius: 12px;
+  width: 100%;
+  color: var(--main-black-900);
+  font-family: "YS Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  /* padding: 24px 28px; */
+  padding-right: 10px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.container::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: rgba(26, 27, 34, 0.2);
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}

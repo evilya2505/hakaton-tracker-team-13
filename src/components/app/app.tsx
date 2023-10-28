@@ -7,6 +7,8 @@ import Applicants from "../main/applicants";
 import Vacancies from "../main/vacancies";
 import Statistics from "../main/statistics";
 import Planer from "../main/planer";
+import Vacancy from "../main/vacancies/vacancy";
+import EditVacancy from "../main/vacancies/vacancy/edit-vacancy/inex";
 import Settings from "../main/settings";
 import mainApi from "../../utils/MainApi";
 import { useDispatch } from "../../services/hooks";
@@ -36,7 +38,11 @@ function App() {
           }
         >
           <Route path="/applicants" element={<Applicants />} />
-          <Route path="/vacancies" element={<Vacancies />} />
+          <Route path="/vacancies" element={<Vacancies />}>
+            <Route path="vacancy" element={<Vacancy />}>
+              <Route path="edit" element={<EditVacancy />} />
+            </Route>
+          </Route>
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/planer" element={<Planer />} />
           <Route path="/settings" element={<Settings />} />

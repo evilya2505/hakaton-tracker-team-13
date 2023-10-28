@@ -1,0 +1,33 @@
+.info {
+  display: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.infoVisible {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  border: none;
+  max-width: 580px;
+}
+
+.text {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.button {
+  padding: 0px !important;
+  width: 100% !important;
+  color: var(--main-black-900) !important;
+  font-family: "YS Text" !important;
+  font-size: 18px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}

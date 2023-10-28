@@ -75,7 +75,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
       noValidate
     >
       <fieldset className={addVacancyForm.mainFieldset}>
-        {value === 0 && (
+        {(value === 0 || value === 3) && (
           <fieldset className={addVacancyForm.mainFieldset}>
             <fieldset className={addVacancyForm.fieldset}>
               <div className={addVacancyForm.inputSection}>
@@ -101,6 +101,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   id="name"
                   variant="outlined"
                 />
+
                 <label className={addVacancyForm.error}>
                   {errors.name?.message || " "}
                 </label>
@@ -127,6 +128,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   id="city"
                   variant="outlined"
                 />
+
                 <label className={addVacancyForm.error}>
                   {errors.city?.message || " "}
                 </label>
@@ -190,6 +192,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.experience?.message || " "}
                 </label>
@@ -226,6 +229,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.grade?.message || " "}
                 </label>
@@ -264,6 +268,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.languade?.message || " "}
                 </label>
@@ -302,6 +307,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.languageLevel?.message || " "}
                 </label>
@@ -363,6 +369,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {errors.salaryTo?.message || " "}
                     </label>
                   </div>
+
                 </fieldset>
               </div>
               <div className={addVacancyForm.inputSection}>
@@ -372,6 +379,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("currency")}
                   sx={{
+
                     ".MuiOutlinedInput-input": {
                       padding: "8px 12px",
                       color: "#1A1B22",
@@ -380,6 +388,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       fontWeight: "400",
                       lineHeight: "20px",
                     },
+
                     marginTop: "4px",
                   }}
                   id="currency"
@@ -396,9 +405,11 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.currency?.message || " "}
                 </label>
+
               </div>
             </fieldset>
             <fieldset className={addVacancyForm.fieldset}>
@@ -409,6 +420,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("typeOfWork")}
                   sx={{
+
                     ".MuiOutlinedInput-input": {
                       padding: "8px 12px",
                       color: "#1A1B22",
@@ -417,6 +429,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       fontWeight: "400",
                       lineHeight: "20px",
                     },
+
                   }}
                   className={addVacancyForm.input}
                   id="typeOfWork"
@@ -433,6 +446,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.typeOfWork?.message || " "}
                 </label>
@@ -441,12 +455,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 className={addVacancyForm.inputSection}
                 style={{ marginBottom: "2px" }}
               >
+
                 <label htmlFor={"workHours"} className={addVacancyForm.label}>
                   График работы
                 </label>
                 <TextField
                   {...register("workHours")}
                   sx={{
+
                     ".MuiOutlinedInput-input": {
                       padding: "8px 12px",
                       color: "#1A1B22",
@@ -455,6 +471,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       fontWeight: "400",
                       lineHeight: "20px",
                     },
+
                   }}
                   className={addVacancyForm.input}
                   id="workHours"
@@ -471,14 +488,17 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
                 </TextField>
+
                 <label className={addVacancyForm.error}>
                   {errors.workHours?.message || " "}
                 </label>
+
               </div>
             </fieldset>
           </fieldset>
         )}
-        {value === 1 && (
+        {(value === 1 || value === 3) && (
+
           <fieldset className={addVacancyForm.fieldsetColumns}>
             <div className={addVacancyForm.column}>
               <div className={addVacancyForm.inputSection}>
@@ -490,6 +510,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("aboutVacancy")}
+
                   error={errors.aboutVacancy?.message !== undefined}
                   className={addVacancyForm.multiLineInput}
                   id="aboutVacancy"
@@ -560,6 +581,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+
                 <label className={addVacancyForm.error}>
                   {errors.duty?.message || " "}
                 </label>
@@ -603,6 +625,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+
                 <label className={addVacancyForm.error}>
                   {errors.workConditions?.message || " "}
                 </label>
@@ -649,6 +672,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     },
                   }}
                 />
+
                 <label className={addVacancyForm.error}>
                   {errors.requirmentsMandatory?.message || " "}
                 </label>

@@ -10,7 +10,9 @@ const VacanciesCard = ({ vacancy }: VacanciesCardProps) => {
   return (
     <section className={vacanciesCard.card}>
       <div className={vacanciesCard.vacancy}>
-        <h4 className={vacanciesCard.name}>{vacancy.title} ({vacancy.grade})</h4>
+        <h4 className={vacanciesCard.name}>
+          {vacancy.title} ({vacancy.grade})
+        </h4>
         <div className={vacanciesCard.settings}>
           <div className={vacanciesCard.edit} onClick={() => {}} />
           <div className={vacanciesCard.delete} onClick={() => {}} />
@@ -20,7 +22,9 @@ const VacanciesCard = ({ vacancy }: VacanciesCardProps) => {
       <p className={vacanciesCard.status}>Откликнулось: 0</p>
       <div className={vacanciesCard.dataInfo}>
         <div className={vacanciesCard.dataTitle}>Дата публикации</div>
-        <div className={vacanciesCard.dataCreate}>{formatFullDate(vacancy.pubDate)}</div>
+        <div className={vacanciesCard.dataCreate}>
+          {formatFullDate(vacancy.pubDate)}
+        </div>
       </div>
     </section>
   );
