@@ -65,4 +65,22 @@ export type applicant = {
   workStatus: string; // опыт работы
 };
 
+export type TApplicant = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  avatar_url: "http://example.com";
+  is_winner: true;
+  city: string;
+  age: number;
+  course: string;
+  graduation_date: string;
+  schedule: string;
+  work_status: string;
+  edu_status: string;
+  response_count: string;
+  test_task_count: string;
+  interview_count: string;
+};
+
 export type applicantsList = Array<applicant>;

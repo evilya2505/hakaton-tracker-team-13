@@ -8,8 +8,15 @@ import Vacancies from "../main/vacancies";
 import Statistics from "../main/statistics";
 import Planer from "../main/planer";
 import Settings from "../main/settings";
+import mainApi from "../../utils/MainApi";
 
 function App() {
+  React.useEffect(() => {
+    mainApi
+      .getApplicants()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <Routes>
