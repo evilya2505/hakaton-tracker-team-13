@@ -1,14 +1,19 @@
-import { TApplicant } from "./types";
+interface TOptions {
+  baseUrl: string;
+  headers: Headers;
+}
 
 class MainApi {
-  constructor(options) {
+  _baseUrl: string;
+  _headers: Headers;
+  constructor(options: TOptions) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
   }
 
-  _getRequestResult(res) {
+  _getRequestResult(res: Response) {
     if (res.ok) {
-      console.log(true);
+      console.log(res);
       return res.json();
     } else {
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -210,12 +215,13 @@ class MainApi {
   // }
 }
 
+const requestHeaders: HeadersInit = new Headers();
+requestHeaders.set('Content-Type', 'application/json');
+
 // Создание экземпляра класса Api
 const mainApi = new MainApi({
   baseUrl: "http://130.193.38.180/api",
-  // headers: {
-  //   "Content-Type": "application/json",
-  // },
+  headers: requestHeaders
 });
 
 export default mainApi;

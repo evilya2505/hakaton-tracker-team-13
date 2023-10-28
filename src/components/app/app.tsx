@@ -21,7 +21,7 @@ function App() {
     mainApi
       .getApplicants()
       .then((res) => {
-        console.log(res.results);
+        console.log(res);
         dispatch(setApplicants(res.results));
       })
       .catch((err) => console.log(err));
