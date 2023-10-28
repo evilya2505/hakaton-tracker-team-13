@@ -1,16 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AddVacancyFormValues } from "../../utils/types";
+import { TVacancy } from "../../utils/types";
 
 export interface TVacaniesListState {
   currentVacancy: AddVacancyFormValues | null;
   isPreviewModalVisible: boolean;
   isAddVacancyModalVisible: boolean;
+  vacancies: Array<TVacancy>;
 }
 
 export const initialState: TVacaniesListState = {
   currentVacancy: null,
   isPreviewModalVisible: false,
   isAddVacancyModalVisible: false,
+  vacancies: [],
 };
 
 const vacanciesSlice = createSlice({
@@ -35,10 +38,20 @@ const vacanciesSlice = createSlice({
     ) {
       state.isAddVacancyModalVisible = action.payload;
     },
+    setVacancies(
+      state: TVacaniesListState,
+      action: PayloadAction<Array<TVacancy>>
+    ) {
+      state.vacancies = action.payload;
+    },
   },
 });
 
-export const { setCurrentVacancyData, setModalVisibility, setAddVacancyModalVisibility } =
-  vacanciesSlice.actions;
+export const {
+  setCurrentVacancyData,
+  setModalVisibility,
+  setAddVacancyModalVisibility,
+  setVacancies,
+} = vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;

@@ -94,3 +94,26 @@ export type TApplicant = {
 };
 
 export type applicantsList = Array<applicant>;
+
+export type TVacancy = {
+  title: string; // название вакансии
+  city: string; // город
+  expirience: number; // опыт работы
+  grade: string; // грейд
+  lang: string; // язык
+  langLevel: string; // уровень владения языком
+  salaryFrom: number; // зп от
+  salaryTo: number; // зп до
+  workFormat: string; // формат работы
+  schedule: string; // график работы
+  isRemote: boolean; // чекбокс удаленки
+  about: string; // о вакансии
+  resp: string; // обязанности
+  reqsObl: string; // обязательные требования
+  reqsOpt: string; // необязательные требования
+  conditions: string; // условия работы
+  stages: string; // этапы отбора
+  // добавила поля
+  archive: boolean; // добавлена ли в архив
+  pubDate: Date; // дата публикации
+};

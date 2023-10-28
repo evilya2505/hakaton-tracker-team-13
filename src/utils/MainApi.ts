@@ -13,7 +13,6 @@ class MainApi {
 
   _getRequestResult(res: Response) {
     if (res.ok) {
-      console.log(res);
       return res.json();
     } else {
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -22,6 +21,16 @@ class MainApi {
 
   getApplicants() {
     return fetch(`${this._baseUrl}/applicants/`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer `,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
+
+  getVacancies() {
+    return fetch(`${this._baseUrl}/vacancies/`, {
       method: "GET",
       headers: {
         ...this._headers,
