@@ -10,8 +10,22 @@ import Planer from "../main/planer";
 import Vacancy from "../main/vacancies/vacancy";
 import EditVacancy from "../main/vacancies/vacancy/edit-vacancy/inex";
 import Settings from "../main/settings";
+import mainApi from "../../utils/MainApi";
+import { useDispatch } from "../../services/hooks";
+import { setApplicants } from "../../services/reducers/applicants";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    mainApi
+      .getApplicants()
+      .then((res) => {
+        console.log(res);
+        dispatch(setApplicants(res.results));
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <Routes>

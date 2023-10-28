@@ -6,31 +6,33 @@ import ActivityScale from "./activity-scale";
 import { TogglingButton } from "./toggling-button";
 import { formatDate } from "../../../../utils/formatDate";
 import { useState } from "react";
+import { TApplicant } from "../../../../utils/types";
 
 interface ApplicantsCardProps {
-  applicant: applicant;
+  applicant: TApplicant;
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
-  const [isAdded, setIsAdded] = useState(applicant.responseStatus === 'Кандидат');
-  
+  // const [isAdded, setIsAdded] = useState(applicant.responseStatus === 'Кандидат');
+  const [isAdded, setIsAdded] = useState(false);
+
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
         <div className={applicantsCard.info}>
           <img
-            src={applicant.avatar}
+            src={applicant.avatar_url}
             className={applicantsCard.img}
             alt="Фото"
           />
           <div className={applicantsCard.profile}>
             <div className={applicantsCard.applicant}>
               <AwardsTooltip
-                isWinner={applicant.isWinner}
-                more10Responses={applicant.responses > 9}
+                isWinner={applicant.is_winner}
+                more10Responses={applicant.response_count > 9}
               />
               <h4 className={applicantsCard.name}>
-                {applicant.firstName} {applicant.lastName}
+                {applicant.first_name} {applicant.last_name}
               </h4>
             </div>
             <p className={applicantsCard.tag}>
@@ -39,9 +41,9 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           </div>
         </div>
         <ActivityScale
-          responses={applicant.responses}
-          completedTestTasks={applicant.completedTestTasks}
-          interviews={applicant.interviews}
+          responses={applicant.response_count}
+          completedTestTasks={applicant.test_task_count}
+          interviews={applicant.interview_count}
         />
         <ul className={applicantsCard.infoList}>
           <li className={applicantsCard.infoItem}>
@@ -50,11 +52,11 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Дата окончания: </span>
-            {formatDate(applicant.graduationDate)}
+            {formatDate(applicant.graduation_date)}
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Формат работы: </span>
-            {applicant.workFormat}
+            {applicant.work_status}
           </li>
         </ul>
       </div>

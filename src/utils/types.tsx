@@ -65,4 +65,32 @@ export type applicant = {
   workStatus: string; // опыт работы
 };
 
+export type TApplicant = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  avatar_url: "http://example.com";
+  is_winner: true;
+  city: string;
+  age: number;
+  course: string;
+  graduation_date: Date;
+  schedule: string;
+  work_status: string;
+  edu_status: string;
+  response_count: number;
+  test_task_count: number;
+  interview_count: number;
+  // new
+  grade: string;
+  salary: number; // зп
+  contacts: string; // контакты
+  about: string; // о себе
+  workExpirience: Array<workExp>; // массив из объектов мест работы
+  studyingStatus: string; // учебный статус
+  responseStatus: string; // статус отклика
+  workStatus: string; // опыт работы
+
+};
+
 export type applicantsList = Array<applicant>;

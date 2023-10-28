@@ -13,7 +13,7 @@ export default function MainStudentInfo() {
         <div className={mainStudentInfo.studentInfo}>
           <div className={mainStudentInfo.topInfo}>
             <h1 className={mainStudentInfo.name}>
-              {selectedCard.firstName} {selectedCard.lastName}
+              {selectedCard.first_name} {selectedCard.last_name}
             </h1>
             <p className={mainStudentInfo.city}>
               {selectedCard.city}, {ageRender(selectedCard.age)}
@@ -22,7 +22,7 @@ export default function MainStudentInfo() {
 
           <div className={mainStudentInfo.middleInfo}>
             <img
-              src={selectedCard.avatar}
+              src={selectedCard.avatar_url}
               className={mainStudentInfo.image}
               alt="изображение студента"
             />
@@ -39,13 +39,13 @@ export default function MainStudentInfo() {
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Дата окончания: </h3>
                 <p className={mainStudentInfo.text}>
-                  {formatDate(selectedCard.graduationDate)}
+                  {formatDate(selectedCard.graduation_date)}
                 </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Формат работы: </h3>
                 <p className={mainStudentInfo.text}>
-                  {selectedCard.workFormat}
+                  {selectedCard.work_status}
                 </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
@@ -82,7 +82,7 @@ export default function MainStudentInfo() {
             style={{ backgroundColor: "#FFF9D3" }}
           >
             <h3 className={mainStudentInfo.subtitle}>
-              {selectedCard.responses}
+              {selectedCard.response_count}
             </h3>
             откликов
           </li>
@@ -91,7 +91,7 @@ export default function MainStudentInfo() {
             style={{ backgroundColor: "#CCC2ED" }}
           >
             <h3 className={mainStudentInfo.subtitle}>
-              {selectedCard.completedTestTasks}
+              {selectedCard.test_task_count}
             </h3>
             тестовых
           </li>
@@ -100,7 +100,7 @@ export default function MainStudentInfo() {
             style={{ backgroundColor: "#C2E5CE" }}
           >
             <h3 className={mainStudentInfo.subtitle}>
-              {selectedCard.interviews}
+              {selectedCard.interview_count}
             </h3>
             собеседований
           </li>
