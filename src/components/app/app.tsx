@@ -55,7 +55,7 @@ function App() {
         >
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/vacancies" element={<Vacancies />}>
-            <Route path="vacancy" element={<Vacancy />}>
+            <Route path="vacancy/:id" element={<Vacancy />}>
               <Route path="edit" element={<EditVacancy />} />
             </Route>
           </Route>
