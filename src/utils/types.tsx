@@ -70,6 +70,7 @@ export type TApplicant = {
 };
 
 export type TLangLevel = {
+  id: number;
   language: string;
   level: number;
 };
