@@ -66,7 +66,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   const { errors } = formState;
 
   const onSubmit = (data: AddVacancyFormValues) => {
-    const language: TLangLevel = { level: 1, language: "Английский язык" };
+    const language: TLangLevel = { id: 0, level: 1, language: "Английский язык" };
 
     mainApi
       .addVacancy({
