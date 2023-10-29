@@ -14,6 +14,7 @@ import mainApi from "../../utils/MainApi";
 import { useDispatch } from "../../services/hooks";
 import { setApplicants } from "../../services/reducers/applicants";
 import { setVacancies } from "../../services/reducers/vacancies";
+import { TVacancy } from "../../utils/types";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
   function getVacancies() {
     mainApi.getVacancies().then((res) => {
       console.log("vacancies");
+      res.results.map((element: TVacancy) => element.id = element.author);
       console.log(res.results);
       dispatch(setVacancies(res.results));
     });

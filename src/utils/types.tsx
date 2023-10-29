@@ -75,7 +75,8 @@ export type TLangLevel = {
 };
 
 export type TVacancy = {
-  author: number; // айди
+  author: number;
+  id: number; // айди
   title: string; // название вакансии
   city: string; // город
   expirience: string; // опыт работы                            ! не приходит (1-2 года итд, смотреть в макете)

@@ -68,7 +68,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                   {vacancies.map((element: TVacancy, index: number) => {
                     return (
                       <li
-                        key={element.author}
+                        key={element.id}
                         onClick={() => {
                           handleVacancyClick(element, index);
                         }}
