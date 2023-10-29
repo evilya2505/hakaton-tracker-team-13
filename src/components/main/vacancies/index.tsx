@@ -15,6 +15,7 @@ import { setAddVacancyModalVisibility } from "../../../services/reducers/vacanci
 import { useSelector, useDispatch } from "../../../services/hooks";
 import mainApi from "../../../utils/MainApi";
 import { TVacancy } from "../../../utils/types";
+import { getNeededVacancyData } from "../../../services/actions/vacancies";
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
   const navigate = useNavigate();
@@ -40,15 +41,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
     setValue(newValue);
   };
 
-  function handleVacancyClick(vacancy: TVacancy) {
-    mainApi
-      .getVacancysApplicants(vacancy.author)
-      .then((res) => {
-        console.log("vacancysApplicants:");
-        console.log(res);
-        navigate("vacancy");
-      })
-      .catch((err) => console.log(err));
+  function handleVacancyClick(vacancy: TVacancy, index: number) {
+    dispatch(getNeededVacancyData(vacancy));
+    navigate("vacancy/" + index);
   }
 
   return (
@@ -70,12 +65,12 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
             <TabPanel className={vacanciesPage.list} value="1">
               {vacancies.length > 0 ? (
                 <ul className={vacanciesPage.list}>
-                  {vacancies.map((element: TVacancy) => {
+                  {vacancies.map((element: TVacancy, index: number) => {
                     return (
                       <li
                         key={element.author}
                         onClick={() => {
-                          handleVacancyClick(element);
+                          handleVacancyClick(element, index);
                         }}
                       >
                         <VacanciesCard vacancy={element} />

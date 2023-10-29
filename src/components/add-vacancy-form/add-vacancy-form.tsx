@@ -14,17 +14,19 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { vacancySchema } from "../../validations/add-vacancy-validations";
-import { AddVacancyFormValues } from "../../utils/types";
+import { AddVacancyFormValues, TVacancy } from "../../utils/types";
 import { useDispatch } from "../../services/hooks";
 import { setCurrentVacancyData } from "../../services/reducers/vacancies";
 import { useSelector } from "../../services/hooks";
 
 interface IAddVacancyFormProps {
   value: number;
+  defaultValues: TVacancy | null;
 }
 
 const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   value,
+  defaultValues,
 }): JSX.Element => {
   const dispatch = useDispatch();
   const isOpened: boolean = useSelector(
@@ -32,24 +34,24 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   );
   const form = useForm<AddVacancyFormValues>({
     defaultValues: {
-      name: "",
+      name: defaultValues?.title,
       experience: "1to3",
-      city: "",
+      city: defaultValues?.city,
       grade: "junior",
       languade: "english",
       languageLevel: "a1",
-      salaryFrom: 0,
-      salaryTo: 0,
-      currency: "rubles",
+      salaryFrom: defaultValues?.min_wage,
+      salaryTo: defaultValues?.max_wage,
+      currency: "RUB",
       typeOfWork: "full",
       workHours: "full",
       isRemote: true,
-      aboutVacancy: "",
-      duty: "",
-      requirmentsMandatory: "",
-      requirmentsOptional: "",
-      workConditions: "",
-      selectionStages: "",
+      aboutVacancy: defaultValues?.description,
+      duty: defaultValues?.responsibility,
+      requirmentsMandatory: defaultValues?.requirements,
+      requirmentsOptional: defaultValues?.optional_requirements,
+      workConditions: defaultValues?.conditions,
+      selectionStages: defaultValues?.selection_stages,
     },
     resolver: yupResolver(vacancySchema),
   });
@@ -369,7 +371,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {errors.salaryTo?.message || " "}
                     </label>
                   </div>
-
                 </fieldset>
               </div>
               <div className={addVacancyForm.inputSection}>
@@ -379,7 +380,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("currency")}
                   sx={{
-
                     ".MuiOutlinedInput-input": {
                       padding: "8px 12px",
                       color: "#1A1B22",
@@ -392,7 +392,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     marginTop: "4px",
                   }}
                   id="currency"
-                  defaultValue="rubles"
+                  defaultValue={defaultValues?.currency || "RUB"}
                   select
                 >
                   {currencyDropDown.map((option) => (
@@ -409,7 +409,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <label className={addVacancyForm.error}>
                   {errors.currency?.message || " "}
                 </label>
-
               </div>
             </fieldset>
             <fieldset className={addVacancyForm.fieldset}>
@@ -420,7 +419,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <TextField
                   {...register("typeOfWork")}
                   sx={{
-
                     ".MuiOutlinedInput-input": {
                       padding: "8px 12px",
                       color: "#1A1B22",
@@ -429,7 +427,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       fontWeight: "400",
                       lineHeight: "20px",
                     },
-
                   }}
                   className={addVacancyForm.input}
                   id="typeOfWork"
@@ -455,14 +452,12 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 className={addVacancyForm.inputSection}
                 style={{ marginBottom: "2px" }}
               >
-
                 <label htmlFor={"workHours"} className={addVacancyForm.label}>
                   График работы
                 </label>
                 <TextField
                   {...register("workHours")}
                   sx={{
-
                     ".MuiOutlinedInput-input": {
                       padding: "8px 12px",
                       color: "#1A1B22",
@@ -471,7 +466,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       fontWeight: "400",
                       lineHeight: "20px",
                     },
-
                   }}
                   className={addVacancyForm.input}
                   id="workHours"
@@ -492,13 +486,11 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 <label className={addVacancyForm.error}>
                   {errors.workHours?.message || " "}
                 </label>
-
               </div>
             </fieldset>
           </fieldset>
         )}
         {(value === 1 || value === 3) && (
-
           <fieldset className={addVacancyForm.fieldsetColumns}>
             <div className={addVacancyForm.column}>
               <div className={addVacancyForm.inputSection}>
@@ -510,7 +502,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </label>
                 <TextField
                   {...register("aboutVacancy")}
-
                   error={errors.aboutVacancy?.message !== undefined}
                   className={addVacancyForm.multiLineInput}
                   id="aboutVacancy"

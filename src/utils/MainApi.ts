@@ -133,6 +133,16 @@ class MainApi {
       }),
     }).then((res) => this._getRequestResult(res));
   }
+
+  getCityById(cityId: number) {
+    return fetch(`${this._baseUrl}/cities/${cityId}/`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer `,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
 }
 
 // инициализация headers

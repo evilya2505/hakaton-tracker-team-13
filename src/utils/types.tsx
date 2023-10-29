@@ -95,4 +95,6 @@ export type TVacancy = {
   is_archive: boolean; // добавлена ли в архив
   is_active: boolean; // опубликована (для черновика)
   created: Date; // дата публикации
+  applicants?: Array<TApplicant>;
+  currency?: string;
 };
