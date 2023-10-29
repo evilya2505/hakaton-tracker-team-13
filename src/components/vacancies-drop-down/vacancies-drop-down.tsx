@@ -1,9 +1,13 @@
 import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React from "react";
-import vacanciesDropDown from "./vacanvies-drop-down.module.css";
+import vacanciesDropDown from "./vacancies-drop-down.module.css";
+import { useSelector, useDispatch } from "../../services/hooks";
+import { setSelectedDropDownVacancy } from "../../services/reducers/applicants";
 
 export default function VacanciesDropDown() {
   const [vacancy, setVacancy] = React.useState([]);
+  const vacancies = useSelector((state) => state.vacancies.vacancies);
+  const dispatch = useDispatch();
 
   const handleChange = (event: { target: { value: any } }) => {
     const {
@@ -43,13 +47,18 @@ export default function VacanciesDropDown() {
         },
       }}
     >
-      {["UX/UI-дизайнер (Junior)", "Графический дизайнер (Middle)"].map(
-        (name) => (
-          <MenuItem className={vacanciesDropDown.text} key={name} value={name}>
-            {name}
-          </MenuItem>
-        )
-      )}
+      {vacancies.map((vacancy) => (
+        <MenuItem
+          className={vacanciesDropDown.text}
+          key={vacancy.id}
+          value={vacancy.title}
+          onClick={() => {
+            dispatch(setSelectedDropDownVacancy(vacancy));
+          }}
+        >
+          {vacancy.title}
+        </MenuItem>
+      ))}
     </Select>
   );
 }
