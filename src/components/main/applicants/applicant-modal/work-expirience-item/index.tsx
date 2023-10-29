@@ -1,9 +1,9 @@
 import workExpItem from "./index.module.css";
-import { workExp } from "../../../../../constants/applicantsList";
+import { TWorkExp } from "../../../../../utils/types";
 import { formatDate } from "../../../../../utils/formatDate";
 
 interface WorkExpProps {
-  workExp: workExp;
+  workExp: TWorkExp;
 }
 
 const WorkExpItem = ({ workExp }: WorkExpProps): JSX.Element => {

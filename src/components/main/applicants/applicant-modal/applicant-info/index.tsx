@@ -39,13 +39,13 @@ export default function MainStudentInfo() {
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Дата окончания: </h3>
                 <p className={mainStudentInfo.text}>
-                  {selectedCard.graduation_date.toString()}
+                  {formatDate(selectedCard.graduation_date)}
                 </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
                 <h3 className={mainStudentInfo.subtitle}>Формат работы: </h3>
                 <p className={mainStudentInfo.text}>
-                  {selectedCard.workFormat}
+                  {selectedCard.work_format}
                 </p>
               </li>
               <li className={mainStudentInfo.mainInfoElement}>
@@ -73,7 +73,7 @@ export default function MainStudentInfo() {
           </div>
           <div className={mainStudentInfo.bottomInfo}>
             <h2 className={mainStudentInfo.title}>О себе</h2>
-            <p className={mainStudentInfo.about}>{selectedCard.about}</p>
+            <p className={mainStudentInfo.about}>{selectedCard.optional_description}</p>
           </div>
         </div>
         <ul className={mainStudentInfo.statistics}>

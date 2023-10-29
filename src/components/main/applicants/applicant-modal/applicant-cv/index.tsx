@@ -2,13 +2,13 @@ import mainStudentCv from "./index.module.css";
 import downloadIcon from "../../../../../images/download.svg";
 import { useSelector } from "../../../../../services/hooks";
 import WorkExpItem from "../work-expirience-item";
-import { workExp } from "../../../../../constants/applicantsList";
+import { TWorkExp } from "../../../../../utils/types";
 
 export default function MainStudentCv() {
   const selectedCard = useSelector(
     (state) => state.applicants.selectedCardData
   );
-  const workExp: Array<workExp> = selectedCard.workExpirience;
+  const workExp: Array<TWorkExp> = selectedCard.workExpirience;
 
   return (
     <div className={mainStudentCv.wrapper}>
@@ -25,7 +25,7 @@ export default function MainStudentCv() {
         <h2 className={mainStudentCv.title}>Опыт работы:</h2>
         <ul className={mainStudentCv.experienceList}>
           {workExp
-            ? workExp.map((element: workExp, index) => {
+            ? workExp.map((element: TWorkExp, index) => {
                 return <WorkExpItem key={index} workExp={element} />;
               })
             : "Опыт работы не указан"}

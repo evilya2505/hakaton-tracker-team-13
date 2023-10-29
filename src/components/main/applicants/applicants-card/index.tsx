@@ -53,11 +53,11 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Дата окончания: </span>
-            {applicant.graduation_date.toString()}
+            {formatDate(applicant.graduation_date)}
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Формат работы: </span>
-            {applicant.workFormat}
+            {applicant.work_format}
           </li>
         </ul>
       </div>
