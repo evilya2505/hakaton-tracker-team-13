@@ -134,6 +134,20 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
+  // удаляет кандидата из вакансии
+  deleteApplicantFromVacancy(applicantId: number, vacancyId: number) {
+    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer `,
+      },
+      body: JSON.stringify({
+        applicant: applicantId,
+      }),
+    }).then((res) => this._getRequestResult(res));
+  }
+
   getCityById(cityId: number) {
     return fetch(`${this._baseUrl}/cities/${cityId}/`, {
       method: "GET",
