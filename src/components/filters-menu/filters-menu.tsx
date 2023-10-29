@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, FormControlLabel, Chip } from "@mui/material";
+import { Button, FormControlLabel, Chip } from "@mui/material";
 import settingsIcon from "../../images/settings.svg";
 import filtersMenu from "./filters-menu.module.css";
 import Menu from "@mui/material/Menu";
@@ -9,6 +9,7 @@ import arrowUpIcon from "../../images/arrow_up.svg";
 import deleteIcon from "../../images/delete.svg";
 import { Divider } from "@mui/material";
 import SearchBar from "../search-form/search-form";
+import Checkbox from '@mui/joy/Checkbox';
 
 const createCheckbox = (label: string) => {
   return (
@@ -28,13 +29,8 @@ const createCheckbox = (label: string) => {
       }}
       control={
         <Checkbox
-          sx={{
-            "& .MuiSvgIcon-root": {
-              fontSize: 30,
-              width: "0.8em",
-              height: "0.8em",
-            },
-          }}
+          variant="outlined"
+          size="lg"
         />
       }
       label={label}
@@ -114,11 +110,10 @@ const FiltersMenu = () => {
             Направление
           </Button>
           <fieldset
-            className={`${filtersMenu.checkboxes} ${
-              !isDirectionsOpened
-                ? `${filtersMenu.fieldset}`
-                : `${filtersMenu.fieldsetVisible}`
-            }`}
+            className={`${filtersMenu.checkboxes} ${!isDirectionsOpened
+              ? `${filtersMenu.fieldset}`
+              : `${filtersMenu.fieldsetVisible}`
+              }`}
           >
             {createCheckbox("Программирование")}
             {createCheckbox("Анализ данных")}
@@ -145,11 +140,10 @@ const FiltersMenu = () => {
             Город
           </Button>
           <fieldset
-            className={`${filtersMenu.city} ${
-              !isCityOpened
-                ? `${filtersMenu.fieldset}`
-                : `${filtersMenu.fieldsetVisible}`
-            }`}
+            className={`${filtersMenu.city} ${!isCityOpened
+              ? `${filtersMenu.fieldset}`
+              : `${filtersMenu.fieldsetVisible}`
+              }`}
           >
             <SearchBar text="Поиск города" />
             <Chip
@@ -186,11 +180,10 @@ const FiltersMenu = () => {
             Опыт работы
           </Button>
           <fieldset
-            className={`${filtersMenu.checkboxes} ${
-              !isExperienceOpened
-                ? `${filtersMenu.fieldset}`
-                : `${filtersMenu.fieldsetVisible}`
-            }`}
+            className={`${filtersMenu.checkboxes} ${!isExperienceOpened
+              ? `${filtersMenu.fieldset}`
+              : `${filtersMenu.fieldsetVisible}`
+              }`}
           >
             {createCheckbox("Релевантный")}
             {createCheckbox("Около-релевантный")}
@@ -215,11 +208,10 @@ const FiltersMenu = () => {
             Формат работы
           </Button>
           <fieldset
-            className={`${filtersMenu.checkboxes} ${
-              !isTypeOpened
-                ? `${filtersMenu.fieldset}`
-                : `${filtersMenu.fieldsetVisible}`
-            }`}
+            className={`${filtersMenu.checkboxes} ${!isTypeOpened
+              ? `${filtersMenu.fieldset}`
+              : `${filtersMenu.fieldsetVisible}`
+              }`}
           >
             {createCheckbox("Офис")}
             {createCheckbox("Гибрид")}
