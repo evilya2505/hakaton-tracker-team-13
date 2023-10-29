@@ -1,17 +1,16 @@
 export const formatDate = (date: Date) => {
-  const formatter = new Intl.DateTimeFormat("ru", {
+  const d: Date = new Date(date);
+  return d.toLocaleString("ru", {
     month: "long",
     year: "numeric",
   });
-  console.log(formatter.format(date))
-  return formatter.format(date);
 };
 
 export const formatFullDate = (date: Date) => {
-  const formatter = new Intl.DateTimeFormat("ru", {
+  const d: Date = new Date(date);
+  return d.toLocaleString("ru", {
     day: "2-digit",
     month: "long",
     year: "numeric",
   });
-  return formatter.format(date);
-}
+};
