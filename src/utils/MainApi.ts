@@ -71,7 +71,7 @@ class MainApi {
   }
 
   // получить массив соискателей, добавленных в вакансию
-  getVacancysApplicants(vacancyId: number) {
+  getVacancysApplicants(vacancyId: number | undefined) {
     return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
       method: "GET",
       headers: {
@@ -136,6 +136,16 @@ class MainApi {
 
   getCityById(cityId: number) {
     return fetch(`${this._baseUrl}/cities/${cityId}/`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer `,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
+
+  getCities() {
+    return fetch(`${this._baseUrl}/cities/`, {
       method: "GET",
       headers: {
         ...this._headers,

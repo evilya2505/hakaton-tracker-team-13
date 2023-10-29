@@ -2,6 +2,13 @@ export type ForgotPasswordFormValues = {
   email: string;
 };
 
+export type TCity = {
+  id: number;
+  name: string;
+  region: string;
+  country: string;
+};
+
 export type LoginFormValues = {
   email: string;
   password: string;
@@ -75,18 +82,18 @@ export type TLangLevel = {
 };
 
 export type TVacancy = {
-  author: number;
-  id: number; // айди
+  author?: number;
+  id?: number; // айди
   title: string; // название вакансии
-  city: string; // город
+  city?: string; // город
   expirience: string; // опыт работы
   grade: string; // грейд
   language: Array<TLangLevel>; // язык
   min_wage: number; // зп от
   max_wage: number; // зп до
   work_format: string; // формат работы                          ! массив
-  schedule: string; // график работы                            ! не приходит (полный день, итд смотреть в макете)
-  isRemote: boolean; // чекбокс удаленки                        ! не приходит
+  schedule?: string; // график работы                            ! не приходит (полный день, итд смотреть в макете)
+  isRemote?: boolean; // чекбокс удаленки                        ! не приходит
   description: string; // о вакансии
   responsibility: string; // обязанности
   requirements: string; // обязательные требования
@@ -95,7 +102,7 @@ export type TVacancy = {
   selection_stages: string; // этапы отбора
   is_archive: boolean; // добавлена ли в архив
   is_active: boolean; // опубликована (для черновика)
-  created: Date; // дата публикации
+  created?: Date; // дата публикации
   applicants?: Array<TApplicant>;
   currency?: string;
 };

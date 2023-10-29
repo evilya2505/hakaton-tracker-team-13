@@ -14,10 +14,13 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { vacancySchema } from "../../validations/add-vacancy-validations";
-import { AddVacancyFormValues, TVacancy } from "../../utils/types";
+import { AddVacancyFormValues, TCity, TVacancy } from "../../utils/types";
 import { useDispatch } from "../../services/hooks";
 import { setCurrentVacancyData } from "../../services/reducers/vacancies";
 import { useSelector } from "../../services/hooks";
+import mainApi from "../../utils/MainApi";
+import { slowAnimationDevices } from "@mui/x-date-pickers/internals/hooks/useDefaultReduceAnimations";
+import { TLangLevel } from "../../utils/types";
 
 interface IAddVacancyFormProps {
   value: number;
@@ -32,18 +35,19 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   const isOpened: boolean = useSelector(
     (store) => store.vacancies.isPreviewModalVisible
   );
+  const cities: TCity[] = useSelector((store) => store.cities.cities);
   const form = useForm<AddVacancyFormValues>({
     defaultValues: {
       name: defaultValues?.title,
-      experience: "1to3",
+      experience: "LOW",
       city: defaultValues?.city,
-      grade: "junior",
+      grade: "JR",
       languade: "english",
       languageLevel: "a1",
       salaryFrom: defaultValues?.min_wage,
       salaryTo: defaultValues?.max_wage,
       currency: "RUB",
-      typeOfWork: "full",
+      typeOfWork: "FD",
       workHours: "full",
       isRemote: true,
       aboutVacancy: defaultValues?.description,
@@ -60,8 +64,32 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   const { errors } = formState;
 
   const onSubmit = (data: AddVacancyFormValues) => {
-    console.log("Form data submitted:", data);
-    return data;
+    const language: TLangLevel = { level: 1, language: "Английский язык" };
+
+    mainApi
+      .addVacancy({
+        title: data.name,
+        city: cities.find((city) => city.name === data.city)?.id.toString(),
+        expirience: data.experience,
+        grade: data.grade,
+        min_wage: data.salaryFrom,
+        max_wage: data.salaryTo,
+        work_format: data.typeOfWork,
+        isRemote: data.isRemote,
+        description: data.aboutVacancy,
+        responsibility: data.duty,
+        requirements: data.requirmentsMandatory,
+        optional_requirements: data.requirmentsOptional,
+        conditions: data.workConditions,
+        selection_stages: data.selectionStages,
+        is_active: true,
+        is_archive: false,
+        currency: data.currency,
+        language: [language],
+      })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+    // return data;
   };
 
   React.useEffect(() => {
@@ -218,7 +246,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   }}
                   className={addVacancyForm.input}
                   id="grade"
-                  defaultValue="junior"
+                  defaultValue="JR"
                   select
                 >
                   {gradeDropDown.map((option) => (
