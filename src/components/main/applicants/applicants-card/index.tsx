@@ -14,7 +14,8 @@ interface ApplicantsCardProps {
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
-  const [isAdded, setIsAdded] = useState(applicant.response_status[0] === 2);
+  // const [isAdded, setIsAdded] = useState(applicant.response_status[0] === 2);
+  const [isAdded, setIsAdded] = useState(true);
 
   return (
     <div className={applicantsCard.card}>

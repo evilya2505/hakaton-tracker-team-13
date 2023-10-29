@@ -13,9 +13,14 @@ export default function StudentModal() {
     (state) => state.applicants.selectedCardData
   );
 
+  // const [isAdded, setIsAdded] = useState(
+  //   selectedCard.response_status[0] === 0
+  // );
+
   const [isAdded, setIsAdded] = useState(
-    selectedCard.response_status[0] === 0
+   false
   );
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
