@@ -1,6 +1,6 @@
 import React from "react";
 import addVacancyForm from "./add-vacancy-form.module.css";
-import { Checkbox, FormControlLabel, MenuItem, TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, MenuItem } from "@mui/material";
 import SubmitButton from "../submit-button/submit-button";
 import {
   experienceDropDown,
@@ -19,8 +19,10 @@ import { useDispatch } from "../../services/hooks";
 import { setCurrentVacancyData } from "../../services/reducers/vacancies";
 import { useSelector } from "../../services/hooks";
 import mainApi from "../../utils/MainApi";
-import { slowAnimationDevices } from "@mui/x-date-pickers/internals/hooks/useDefaultReduceAnimations";
 import { TLangLevel } from "../../utils/types";
+import InlineInput from "../inputs/inlineInput";
+import DropDownInput from "../inputs/dropDownInput";
+import MultilineInput from "../inputs/multilineInput";
 
 interface IAddVacancyFormProps {
   value: number;
@@ -47,8 +49,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
       salaryFrom: defaultValues?.min_wage,
       salaryTo: defaultValues?.max_wage,
       currency: "RUB",
-      typeOfWork: "FD",
-      workHours: "full",
+      typeOfWork: "full",
+      workHours: "FD",
       isRemote: true,
       aboutVacancy: defaultValues?.description,
       duty: defaultValues?.responsibility,
@@ -69,12 +71,13 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
     mainApi
       .addVacancy({
         title: data.name,
-        city: cities.find((city) => city.name === data.city)?.id.toString(),
+        city: data.city,
         expirience: data.experience,
         grade: data.grade,
+        created: new Date(),
         min_wage: data.salaryFrom,
         max_wage: data.salaryTo,
-        work_format: data.typeOfWork,
+        work_format: data.workHours,
         isRemote: data.isRemote,
         description: data.aboutVacancy,
         responsibility: data.duty,
@@ -87,9 +90,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
         currency: data.currency,
         language: [language],
       })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
     // return data;
+    console.log(data);
   };
 
   React.useEffect(() => {
@@ -106,67 +108,25 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
     >
       <fieldset className={addVacancyForm.mainFieldset}>
         {(value === 0 || value === 3) && (
-          <fieldset className={addVacancyForm.mainFieldset}>
+          <fieldset className={addVacancyForm.mainFieldset} style={{marginBottom: "29px"}}>
             <fieldset className={addVacancyForm.fieldset}>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"name"} className={addVacancyForm.label}>
-                  Название вакансии
-                </label>
-                <TextField
-                  error={errors.name?.message !== undefined}
-                  type="text"
-                  {...register("name")}
-                  inputProps={{
-                    style: {
-                      height: "9px",
-                      padding: "10px auto 10px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="name"
-                  variant="outlined"
-                />
+              <InlineInput placeholder="" type="default" register={register} title="Название вакансии" errorMessage={errors.name?.message} id="name"/>
+              <DropDownInput type="default" defaultValue={3} register={register} title="Город поиска" errorMessage={errors.city?.message} id="city">
+              {cities.map((option) => (
+                    <MenuItem
+                      className={addVacancyForm.dropDownList}
+                      key={option.id}
+                      value={option.id}
+                    >
+                      {option.name}
+                    </MenuItem>
+                  ))}
+              </DropDownInput>
 
-                <label className={addVacancyForm.error}>
-                  {errors.name?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"city"} className={addVacancyForm.label}>
-                  Город поиска
-                </label>
-                <TextField
-                  {...register("city")}
-                  error={errors.city?.message !== undefined}
-                  inputProps={{
-                    style: {
-                      height: "8px",
-                      padding: "10px auto 10px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="city"
-                  variant="outlined"
-                />
-
-                <label className={addVacancyForm.error}>
-                  {errors.city?.message || " "}
-                </label>
-              </div>
               <div className={addVacancyForm.checkboxWrapper}>
                 <FormControlLabel
                   sx={{
-                    ".css-g3c0gg-MuiFormControlLabel-root": {
+                    ".MuiFormControlLabel-root": {
                       marginBottom: "8px",
                       color: "#1A1B22",
                       fontFamily: "YS Text",
@@ -174,7 +134,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       fontWeight: "400",
                       lineHeight: "20px",
                     },
-                    ".css-2tnjwj-MuiButtonBase-root-MuiCheckbox-root": {
+                    ".MuiCheckbox-root": {
                       padding: "0",
                     },
                   }}
@@ -191,28 +151,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             </fieldset>
 
             <fieldset className={addVacancyForm.fieldset}>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"experience"} className={addVacancyForm.label}>
-                  Опыт работы
-                </label>
-                <TextField
-                  {...register("experience")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "8px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="experience"
-                  defaultValue="1to3"
-                  select
-                >
-                  {experienceDropDown.map((option) => (
+              <DropDownInput type="default" defaultValue={"LOW"} register={register} title="Опыт работы" errorMessage={errors.experience?.message} id="experience">
+              {experienceDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -221,35 +161,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
-
-                <label className={addVacancyForm.error}>
-                  {errors.experience?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"grade"} className={addVacancyForm.label}>
-                  Грейд
-                </label>
-                <TextField
-                  {...register("grade")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "10px 12px",
-                      height: "8px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="grade"
-                  defaultValue="JR"
-                  select
-                >
-                  {gradeDropDown.map((option) => (
+              </DropDownInput>
+              <DropDownInput type="default" defaultValue={"JR"} register={register} title="Грейд" errorMessage={errors.grade?.message} id="grade">
+              {gradeDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -258,37 +172,12 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
-
-                <label className={addVacancyForm.error}>
-                  {errors.grade?.message || " "}
-                </label>
-              </div>
+              </DropDownInput>
             </fieldset>
 
             <fieldset className={addVacancyForm.fieldset}>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"language"} className={addVacancyForm.label}>
-                  Знание языков
-                </label>
-                <TextField
-                  {...register("languade")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "8px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="language"
-                  select
-                  defaultValue="english"
-                >
-                  {languagesDropDown.map((option) => (
+              <DropDownInput type="default" defaultValue={"english"} register={register} title="Знание языков" errorMessage={errors.languade?.message} id="language">
+              {languagesDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -297,37 +186,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
-
-                <label className={addVacancyForm.error}>
-                  {errors.languade?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label
-                  htmlFor={"languageLevel"}
-                  className={addVacancyForm.label}
-                >
-                  Уровень языка
-                </label>
-                <TextField
-                  {...register("languageLevel")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "8px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="languageLevel"
-                  defaultValue="a1"
-                  select
-                >
-                  {languageLevelDropDown.map((option) => (
+              </DropDownInput>
+              <DropDownInput type="default" defaultValue={"a1"} register={register} title="Уровень языка" errorMessage={errors.languageLevel?.message} id="languageLevel">
+              {languageLevelDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -336,12 +197,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
-
-                <label className={addVacancyForm.error}>
-                  {errors.languageLevel?.message || " "}
-                </label>
-              </div>
+              </DropDownInput>
             </fieldset>
             <fieldset className={addVacancyForm.fieldset}>
               <div className={addVacancyForm.inputSection}>
@@ -349,81 +205,13 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   Уровень дохода в месяц
                 </label>
                 <fieldset className={addVacancyForm.diapason}>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <TextField
-                      type="number"
-                      {...register("salaryFrom")}
-                      error={errors.salaryFrom?.message !== undefined}
-                      inputProps={{
-                        style: {
-                          height: "9px",
-                          padding: "10px auto 10px 12px",
-                          color: "#1A1B22",
-                          fontFamily: "YS Text",
-                          fontSize: "14px",
-                          fontWeight: "400",
-                          lineHeight: "20px",
-                        },
-                      }}
-                      sx={{ width: "320px", marginRight: "12px" }}
-                      placeholder="От"
-                      id="salaryFrom"
-                      variant="outlined"
-                    />
-                    <label className={addVacancyForm.error}>
-                      {errors.salaryFrom?.message || " "}
-                    </label>
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <TextField
-                      type="number"
-                      {...register("salaryTo")}
-                      error={errors.salaryTo?.message !== undefined}
-                      inputProps={{
-                        style: {
-                          height: "9px",
-                          padding: "10px auto 10px 12px",
-                          color: "#1A1B22",
-                          fontFamily: "YS Text",
-                          fontSize: "14px",
-                          fontWeight: "400",
-                          lineHeight: "20px",
-                        },
-                      }}
-                      sx={{ width: "153px" }}
-                      placeholder="До"
-                      id="salaryTo"
-                      variant="outlined"
-                    />
-                    <label className={addVacancyForm.error}>
-                      {errors.salaryTo?.message || " "}
-                    </label>
-                  </div>
+                <InlineInput placeholder="От" type="default" register={register} title="" errorMessage={errors.salaryFrom?.message} id="salaryFrom"/>
+                <InlineInput placeholder="До" type="salaryTo" register={register} title="" errorMessage={errors.salaryTo?.message} id="salaryTo"/>
                 </fieldset>
               </div>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"currency"} className={addVacancyForm.label}>
-                  Валюта
-                </label>
-                <TextField
-                  {...register("currency")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "8px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
 
-                    marginTop: "4px",
-                  }}
-                  id="currency"
-                  defaultValue={defaultValues?.currency || "RUB"}
-                  select
-                >
-                  {currencyDropDown.map((option) => (
+              <DropDownInput type="currency"  defaultValue={"RUB"} register={register} title="Валюта" errorMessage={errors.currency?.message} id="currency">
+              {currencyDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -432,36 +220,12 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
+              </DropDownInput>
 
-                <label className={addVacancyForm.error}>
-                  {errors.currency?.message || " "}
-                </label>
-              </div>
             </fieldset>
             <fieldset className={addVacancyForm.fieldset}>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"typeOfWork"} className={addVacancyForm.label}>
-                  Тип занятости
-                </label>
-                <TextField
-                  {...register("typeOfWork")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "8px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="typeOfWork"
-                  defaultValue="full"
-                  select
-                >
-                  {typeOfWorkDropDown.map((option) => (
+            <DropDownInput type="default"  defaultValue={"full"} register={register} title="Тип занятости" errorMessage={errors.typeOfWork?.message} id="typeOfWork">
+            {typeOfWorkDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -470,37 +234,9 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
-
-                <label className={addVacancyForm.error}>
-                  {errors.typeOfWork?.message || " "}
-                </label>
-              </div>
-              <div
-                className={addVacancyForm.inputSection}
-                style={{ marginBottom: "2px" }}
-              >
-                <label htmlFor={"workHours"} className={addVacancyForm.label}>
-                  График работы
-                </label>
-                <TextField
-                  {...register("workHours")}
-                  sx={{
-                    ".MuiOutlinedInput-input": {
-                      padding: "8px 12px",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                    },
-                  }}
-                  className={addVacancyForm.input}
-                  id="workHours"
-                  defaultValue="full"
-                  select
-                >
-                  {workHoursDropDown.map((option) => (
+              </DropDownInput>
+              <DropDownInput type="default" defaultValue={"FD"} register={register} title="График работы" errorMessage={errors.workHours?.message} id="workHours">
+              {workHoursDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
                       key={option.value}
@@ -509,279 +245,21 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
-
-                <label className={addVacancyForm.error}>
-                  {errors.workHours?.message || " "}
-                </label>
-              </div>
+              </DropDownInput>
             </fieldset>
           </fieldset>
         )}
         {(value === 1 || value === 3) && (
           <fieldset className={addVacancyForm.fieldsetColumns}>
             <div className={addVacancyForm.column}>
-              <div className={addVacancyForm.inputSection}>
-                <label
-                  htmlFor={"aboutVacancy"}
-                  className={addVacancyForm.label}
-                >
-                  О Вакансии
-                </label>
-                <TextField
-                  {...register("aboutVacancy")}
-                  error={errors.aboutVacancy?.message !== undefined}
-                  className={addVacancyForm.multiLineInput}
-                  id="aboutVacancy"
-                  multiline
-                  rows={2.9}
-                  sx={{
-                    "& .MuiInputBase-root::-webkit-scrollbar": {
-                      width: "0.1rem",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-thumb": {
-                      background: "transparent",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-track": {
-                      background: "transparent",
-                    },
-                  }}
-                  InputProps={{
-                    style: {
-                      padding: "10px 12px",
-                      height: "90px",
-                      overflowY: "auto",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      textAlign: "left",
-                    },
-                  }}
-                />
-                <label className={addVacancyForm.error}>
-                  {errors.aboutVacancy?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label htmlFor={"duty"} className={addVacancyForm.label}>
-                  Обязанности
-                </label>
-                <TextField
-                  {...register("duty")}
-                  error={errors.duty?.message !== undefined}
-                  className={addVacancyForm.multiLineInput}
-                  id="duty"
-                  multiline
-                  rows={2.9}
-                  sx={{
-                    "& .MuiInputBase-root::-webkit-scrollbar": {
-                      width: "0.1rem",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-thumb": {
-                      background: "transparent",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-track": {
-                      background: "transparent",
-                    },
-                  }}
-                  InputProps={{
-                    style: {
-                      padding: "10px 12px",
-                      height: "90px",
-                      overflowY: "auto",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      textAlign: "left",
-                    },
-                  }}
-                />
-
-                <label className={addVacancyForm.error}>
-                  {errors.duty?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label
-                  htmlFor={"workConditions"}
-                  className={addVacancyForm.label}
-                >
-                  Условия
-                </label>
-                <TextField
-                  {...register("workConditions")}
-                  className={addVacancyForm.multiLineInput}
-                  error={errors.workConditions?.message !== undefined}
-                  id="workConditions"
-                  multiline
-                  rows={2.9}
-                  sx={{
-                    "& .MuiInputBase-root::-webkit-scrollbar": {
-                      width: "0.1rem",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-thumb": {
-                      background: "transparent",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-track": {
-                      background: "transparent",
-                    },
-                  }}
-                  InputProps={{
-                    style: {
-                      padding: "10px 12px",
-                      height: "90px",
-                      overflowY: "auto",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      textAlign: "left",
-                    },
-                  }}
-                />
-
-                <label className={addVacancyForm.error}>
-                  {errors.workConditions?.message || " "}
-                </label>
-              </div>
+              <MultilineInput register={register} title="О Вакансии" id="aboutVacancy" errorMessage={errors.aboutVacancy?.message} />
+              <MultilineInput register={register} title="Обязанности" id="duty" errorMessage={errors.duty?.message} />
+              <MultilineInput register={register} title="Условия" id="requirmentsMandatory" errorMessage={errors.workConditions?.message} />
             </div>
-
             <div className={addVacancyForm.column}>
-              <div className={addVacancyForm.inputSection}>
-                <label
-                  htmlFor={"requirmentsMandatory"}
-                  className={addVacancyForm.label}
-                >
-                  Требования обязательные
-                </label>
-                <TextField
-                  {...register("requirmentsMandatory")}
-                  error={errors.requirmentsMandatory?.message !== undefined}
-                  className={addVacancyForm.multiLineInput}
-                  id="requirmentsMandatory"
-                  multiline
-                  rows={2.9}
-                  sx={{
-                    "& .MuiInputBase-root::-webkit-scrollbar": {
-                      width: "0.1rem",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-thumb": {
-                      background: "transparent",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-track": {
-                      background: "transparent",
-                    },
-                  }}
-                  InputProps={{
-                    style: {
-                      padding: "10px 12px",
-                      height: "90px",
-                      overflowY: "auto",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      textAlign: "left",
-                    },
-                  }}
-                />
-
-                <label className={addVacancyForm.error}>
-                  {errors.requirmentsMandatory?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label
-                  htmlFor={"requirmentsOptional"}
-                  className={addVacancyForm.label}
-                >
-                  Требования необязательные
-                </label>
-                <TextField
-                  {...register("requirmentsOptional")}
-                  error={errors.requirmentsOptional?.message !== undefined}
-                  className={addVacancyForm.multiLineInput}
-                  id="requirmentsOptional"
-                  multiline
-                  sx={{
-                    "& .MuiInputBase-root::-webkit-scrollbar": {
-                      width: "0.1rem",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-thumb": {
-                      background: "transparent",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-track": {
-                      background: "transparent",
-                    },
-                  }}
-                  rows={2.9}
-                  InputProps={{
-                    style: {
-                      padding: "10px 12px",
-                      height: "90px",
-                      overflowY: "auto",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      textAlign: "left",
-                    },
-                  }}
-                />
-                <label className={addVacancyForm.error}>
-                  {errors.requirmentsOptional?.message || " "}
-                </label>
-              </div>
-              <div className={addVacancyForm.inputSection}>
-                <label
-                  htmlFor={"selectionStages"}
-                  className={addVacancyForm.label}
-                >
-                  Этапы отбора
-                </label>
-                <TextField
-                  {...register("selectionStages")}
-                  error={errors.selectionStages?.message !== undefined}
-                  rows={2.9}
-                  sx={{
-                    "& .MuiInputBase-root::-webkit-scrollbar": {
-                      width: "0.1rem",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-thumb": {
-                      background: "transparent",
-                    },
-                    "& .MuiInputBase-root::-webkit-scrollbar-track": {
-                      background: "transparent",
-                    },
-                  }}
-                  InputProps={{
-                    style: {
-                      padding: "10px 12px",
-                      height: "90px",
-                      overflowY: "auto",
-                      color: "#1A1B22",
-                      fontFamily: "YS Text",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      lineHeight: "20px",
-                      textAlign: "left",
-                    },
-                  }}
-                  className={addVacancyForm.multiLineInput}
-                  id="selectionStages"
-                  multiline
-                />
-                <label className={addVacancyForm.error}>
-                  {errors.selectionStages?.message || " "}
-                </label>
-              </div>
+              <MultilineInput register={register} title="Требования обязательные" id="requirmentsMandatory" errorMessage={errors.requirmentsMandatory?.message} />
+              <MultilineInput register={register} title="Требования необязательные" id="requirmentsOptional" errorMessage={errors.requirmentsOptional?.message} />
+              <MultilineInput register={register} title="Этапы отбора" id="selectionStages" errorMessage={errors.selectionStages?.message} />
             </div>
           </fieldset>
         )}
@@ -794,7 +272,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             !(
               formState.dirtyFields.name &&
               formState.dirtyFields.aboutVacancy &&
-              formState.dirtyFields.city &&
               formState.dirtyFields.duty &&
               formState.dirtyFields.requirmentsMandatory &&
               formState.dirtyFields.requirmentsOptional &&

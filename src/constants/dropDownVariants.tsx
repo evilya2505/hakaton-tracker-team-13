@@ -116,15 +116,15 @@ export const workHoursDropDown: Array<DropDownitem> = [
 export const gradeDropDown: Array<DropDownitem> = [
   {
     value: "IN",
-    label: "Junior",
+    label: "Intern",
   },
   {
     value: "JR",
-    label: "Middle",
+    label: "Junior",
   },
   {
     value: "MD",
-    label: "Middle +",
+    label: "Middle",
   },
   {
     value: "SR",

@@ -17,7 +17,7 @@ export type LoginFormValues = {
 export type AddVacancyFormValues = {
   name: string;
   experience: string;
-  city: string;
+  city: number;
   grade: string;
   languade: string;
   languageLevel: string;
@@ -85,7 +85,7 @@ export type TVacancy = {
   author?: number;
   id?: number; // айди
   title: string; // название вакансии
-  city?: string; // город
+  city?: number; // город
   expirience: string; // опыт работы
   grade: string; // грейд
   language: Array<TLangLevel>; // язык

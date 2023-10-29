@@ -83,16 +83,17 @@ class MainApi {
 
   // добавить вакансию
   addVacancy(vacancy: TVacancy) {
-    return fetch(`${this._baseUrl}/vacancies/`, {
-      method: "POST",
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer `,
-        body: JSON.stringify({
-          data: vacancy,
-        }),
-      },
-    }).then((res) => this._getRequestResult(res));
+    console.log(JSON.stringify({ data: {created: vacancy.created?.toDateString(), ...vacancy}}));
+    // return fetch(`${this._baseUrl}/vacancies/`, {
+    //   method: "POST",
+    //   headers: {
+    //     ...this._headers,
+    //     Authorization: `Bearer `,
+    //     body: JSON.stringify({
+    //       data: vacancy,
+    //     }),
+    //   },
+    // }).then((res) => this._getRequestResult(res));
   }
 
   // редактировать вакансию
