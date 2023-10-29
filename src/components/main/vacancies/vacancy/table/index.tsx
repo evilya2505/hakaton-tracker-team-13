@@ -30,307 +30,18 @@ import BasicModal from "../../../../modal/modal";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CompareApplicantsModal from "../compare-applicants-modal";
-
-const applicants = [
-  {
-    id: 1,
-    firstName: "Анна",
-    lastName: "Короткова",
-    avatar:
-      "https://images.unsplash.com/photo-1693438672953-409b661134fd?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Санкт-Петербург",
-    age: 24,
-    responses: 40,
-    completedTestTasks: 14,
-    interviews: 10,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "апрель 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    status: 3,
-    about: "Улыбаюсь и пью кофе",
-  },
-  {
-    id: 2,
-    firstName: "Алия",
-    lastName: "Шархимуллина",
-    avatar:
-      "https://images.unsplash.com/photo-1697472106815-829bad01f7b8?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Казань",
-    age: 28,
-    responses: 1,
-    completedTestTasks: 10,
-    interviews: 9,
-    course: "Web-разработчик",
-    graduationDate: "июнь 2022",
-    workFormat: "офис",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    status: 3,
-    about: "Не улыбаюсь и пью винишко",
-  },
-  {
-    id: 3,
-    firstName: "Иван",
-    lastName: "Иванов",
-    avatar:
-      "https://images.unsplash.com/photo-1696887350319-86341eda4b71?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: true,
-    city: "Москва",
-    age: 35,
-    responses: 0,
-    completedTestTasks: 0,
-    interviews: 0,
-    course: "Python-разработчик",
-    graduationDate: "август 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    status: 3,
-    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-  },
-  {
-    id: 5,
-    firstName: "Петр",
-    lastName: "Петров",
-    avatar:
-      "https://images.unsplash.com/photo-1697472925037-e38438b132b0?auto=format&fit=crop&q=80&w=1965&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Барнаул",
-    age: 30,
-    responses: 35,
-    completedTestTasks: 20,
-    interviews: 5,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "февраль 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    status: 3,
-    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-  },
-  {
-    id: 6,
-    firstName: "Александра",
-    lastName: "Александрова",
-    avatar:
-      "https://images.unsplash.com/photo-1689193504709-2ccf8bf64be1?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: true,
-    city: "Санкт-Петербург",
-    age: 24,
-    responses: 0,
-    completedTestTasks: 1,
-    interviews: 0,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "апрель 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
-    status: 3,
-  },
-  {
-    id: 7,
-    firstName: "Анна",
-    lastName: "Короткова",
-    avatar:
-      "https://images.unsplash.com/photo-1693438672953-409b661134fd?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Санкт-Петербург",
-    age: 24,
-    responses: 40,
-    completedTestTasks: 14,
-    interviews: 50,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "апрель 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
-    status: 4,
-  },
-  {
-    id: 8,
-    firstName: "Алия",
-    lastName: "Шархимуллина",
-    avatar:
-      "https://images.unsplash.com/photo-1697472106815-829bad01f7b8?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: true,
-    city: "Казань",
-    age: 28,
-    responses: 10,
-    completedTestTasks: 5,
-    interviews: 100,
-    course: "Web-разработчик",
-    graduationDate: "июнь 2022",
-    workFormat: "офис",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Не улыбаюсь и пью винишко",
-    status: 6,
-  },
-  {
-    id: 9,
-    firstName: "Анна",
-    lastName: "Короткова",
-    avatar:
-      "https://images.unsplash.com/photo-1693438672953-409b661134fd?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Санкт-Петербург",
-    age: 24,
-    responses: 40,
-    completedTestTasks: 14,
-    interviews: 10,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "апрель 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
-    status: 5,
-  },
-  {
-    id: 10,
-    firstName: "Алия",
-    lastName: "Шархимуллина",
-    avatar:
-      "https://images.unsplash.com/photo-1697472106815-829bad01f7b8?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Казань",
-    age: 28,
-    responses: 1,
-    completedTestTasks: 10,
-    interviews: 9,
-    course: "Web-разработчик",
-    graduationDate: "июнь 2022",
-    workFormat: "офис",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Не улыбаюсь и пью винишко",
-    status: 4,
-  },
-  {
-    id: 11,
-    firstName: "Иван",
-    lastName: "Иванов",
-    avatar:
-      "https://images.unsplash.com/photo-1696887350319-86341eda4b71?auto=format&fit=crop&q=80&w=1925&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: true,
-    city: "Москва",
-    age: 35,
-    responses: 0,
-    completedTestTasks: 0,
-    interviews: 0,
-    course: "Python-разработчик",
-    graduationDate: "август 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    status: 2,
-    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-  },
-  {
-    id: 12,
-    firstName: "Петр",
-    lastName: "Петров",
-    avatar:
-      "https://images.unsplash.com/photo-1697472925037-e38438b132b0?auto=format&fit=crop&q=80&w=1965&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Барнаул",
-    age: 30,
-    responses: 35,
-    completedTestTasks: 20,
-    interviews: 5,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "февраль 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    status: 1,
-    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-  },
-  {
-    id: 13,
-    firstName: "Александра",
-    lastName: "Александрова",
-    avatar:
-      "https://images.unsplash.com/photo-1689193504709-2ccf8bf64be1?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: true,
-    city: "Санкт-Петербург",
-    age: 24,
-    responses: 0,
-    completedTestTasks: 1,
-    interviews: 0,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "апрель 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
-    status: 4,
-  },
-  {
-    id: 14,
-    firstName: "Анна",
-    lastName: "Короткова",
-    avatar:
-      "https://images.unsplash.com/photo-1693438672953-409b661134fd?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: false,
-    city: "Санкт-Петербург",
-    age: 24,
-    responses: 40,
-    completedTestTasks: 14,
-    interviews: 50,
-    course: "Дизайнер интерфейсов",
-    graduationDate: "апрель 2023",
-    workFormat: "удаленный",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Улыбаюсь и пью кофе",
-    status: 3,
-  },
-  {
-    id: 15,
-    firstName: "Алия",
-    lastName: "Шархимуллина",
-    avatar:
-      "https://images.unsplash.com/photo-1697472106815-829bad01f7b8?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    isWinner: true,
-    city: "Казань",
-    age: 28,
-    responses: 10,
-    completedTestTasks: 5,
-    interviews: 100,
-    course: "Web-разработчик",
-    graduationDate: "июнь 2022",
-    workFormat: "офис",
-    grade: "Junior",
-    salary: 50000,
-    contacts: "+799999999999",
-    about: "Не улыбаюсь и пью винишко",
-    status: 1,
-  },
-];
+import { useSelector } from "../../../../../services/hooks";
+import { formatDate } from "../../../../../utils/formatDate";
 
 const CandidateTable = () => {
   const [isCompareyModalOpened, setIsCompareModalOpened] =
     React.useState<boolean>(false);
+
+  const currentVacancyApplicantsList = useSelector(
+    (state) => state.vacancies.currentVacancyApplicantsList
+  );
+
+  console.log(currentVacancyApplicantsList);
 
   function handleOpenCompareModal() {
     console.log(true);
@@ -388,12 +99,12 @@ const CandidateTable = () => {
   const handleAllCandidateSelection = () => {
     let tempArray = [...selectedCandidates];
 
-    if (selectedCandidates.length === applicants.length) {
+    if (selectedCandidates.length === currentVacancyApplicantsList.length) {
       tempArray = [];
     } else {
-      for (let i = 0; i < applicants.length; i++) {
-        if (!tempArray.includes(applicants[i].id)) {
-          tempArray.push(applicants[i].id);
+      for (let i = 0; i < currentVacancyApplicantsList.length; i++) {
+        if (!tempArray.includes(currentVacancyApplicantsList[i].id)) {
+          tempArray.push(currentVacancyApplicantsList[i].id);
         }
       }
     }
@@ -447,184 +158,199 @@ const CandidateTable = () => {
           </Button>
         )}
       </div>
-      <p className={table.choosen}>
-        Выбрано {selectedCandidates.length} / {applicants.length}
-      </p>
-      <TableContainer className={table.table} component={Paper}>
-        <Table
-          sx={{
-            width: "1888px",
-          }}
-        >
-          <TableHead>
-            <TableRow>
-              <TableCell size="small">#</TableCell>
-              <TableCell size="small">
-                <Checkbox
-                  checked={
-                    selectedCandidates.length === applicants.length
-                      ? true
-                      : false
-                  }
-                  onChange={handleAllCandidateSelection}
-                />
-              </TableCell>
-              <TableCell
-                size="small"
-                className={table.cell}
-                sx={{ width: "240px" }}
-              >
-                Кандидат
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "128px" }}
-              >
-                Контакты
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "240px" }}
-              >
-                Статус
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "172px" }}
-              >
-                Дата
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "172px" }}
-              >
-                Город
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "172px" }}
-              >
-                Формат работы
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "172px" }}
-              >
-                Учебный статус
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "172px" }}
-              >
-                Опыт работы
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "240px" }}
-              >
-                Курс
-              </TableCell>
-              <TableCell
-                className={table.cell}
-                size="small"
-                sx={{ width: "108px" }}
-              >
-                Дата выпуска
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {applicants.map((candidate, index) => (
-              <TableRow key={index}>
-                <TableCell size="small">{candidate.id}</TableCell>
-                <TableCell size="small">
-                  <Checkbox
-                    checked={selectedCandidates.includes(candidate.id)}
-                    onChange={() => handleCandidateSelection(candidate.id)}
-                  />
-                </TableCell>
-                <TableCell
-                  // onClick={handleOpenModal}
-                  className={table.cell}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <img
-                      className={table.avatar}
-                      src={candidate.avatar}
-                      alt="изображение студента"
+      {currentVacancyApplicantsList.length > 0 ? (
+        <>
+          <p className={table.choosen}>
+            Выбрано {selectedCandidates.length} /{" "}
+            {currentVacancyApplicantsList.length}
+          </p>
+          <TableContainer className={table.table} component={Paper}>
+            <Table
+              sx={{
+                width: "1888px",
+              }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell size="small">#</TableCell>
+                  <TableCell size="small">
+                    <Checkbox
+                      checked={
+                        selectedCandidates.length ===
+                        currentVacancyApplicantsList.length
+                          ? true
+                          : false
+                      }
+                      onChange={handleAllCandidateSelection}
                     />
-                    {`${candidate.firstName} ${candidate.lastName}`}
-                  </div>
-                </TableCell>
-                <TableCell className={table.cell}>
-                  <IconButton color="primary" aria-label="Изменить">
-                    <img src={telegramIcon} alt="иконка телеграмма" />
-                  </IconButton>
-                  <IconButton color="secondary" aria-label="Удалить">
-                    <img src={emailIcon} alt="иконка электронной почты" />
-                  </IconButton>
-                </TableCell>
-                <TableCell className={table.cell}>
-                  <TextField
-                    {...register("status")}
-                    sx={{
-                      backgroundColor:
-                        applicantStatuses[candidate.status].color,
-                      ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                        {
-                          padding: "8px 12px",
-                          color: "#1A1B22",
-                          fontFamily: "YS Text",
-                          fontSize: "14px",
-                          fontWeight: "400",
-                          lineHeight: "20px",
-                        },
-                    }}
-                    className={table.input}
-                    id="status"
-                    value={applicantStatuses[candidate.status].id}
-                    select
+                  </TableCell>
+                  <TableCell
+                    size="small"
+                    className={table.cell}
+                    sx={{ width: "240px" }}
                   >
-                    {applicantStatuses.map((option, index) => (
-                      <MenuItem
-                        className={table.dropDownList}
-                        key={index}
-                        value={index}
+                    Кандидат
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "128px" }}
+                  >
+                    Контакты
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "240px" }}
+                  >
+                    Статус
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "172px" }}
+                  >
+                    Дата
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "172px" }}
+                  >
+                    Город
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "172px" }}
+                  >
+                    Формат работы
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "172px" }}
+                  >
+                    Учебный статус
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "172px" }}
+                  >
+                    Опыт работы
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "240px" }}
+                  >
+                    Курс
+                  </TableCell>
+                  <TableCell
+                    className={table.cell}
+                    size="small"
+                    sx={{ width: "108px" }}
+                  >
+                    Дата выпуска
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {currentVacancyApplicantsList.map((candidate, index) => (
+                  <TableRow key={index}>
+                    <TableCell size="small">{candidate.id}</TableCell>
+                    <TableCell size="small">
+                      <Checkbox
+                        checked={selectedCandidates.includes(candidate.id)}
+                        onChange={() => handleCandidateSelection(candidate.id)}
+                      />
+                    </TableCell>
+                    <TableCell
+                      // onClick={handleOpenModal}
+                      className={table.cell}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
                       >
-                        {option.name}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </TableCell>
-                <TableCell className={table.cell}>test</TableCell>
-                <TableCell className={table.cell}>{candidate.city}</TableCell>
-                <TableCell className={table.cell}>
-                  {candidate.workFormat}
-                </TableCell>
-                <TableCell className={table.cell}>test</TableCell>
-                <TableCell className={table.cell}>test</TableCell>
-                <TableCell className={table.cell}>{candidate.course}</TableCell>
-                <TableCell className={table.cell}>
-                  {candidate.graduationDate}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                        <img
+                          className={table.avatar}
+                          src={candidate.avatar_url}
+                          alt="изображение студента"
+                        />
+                        {`${candidate.first_name} ${candidate.last_name}`}
+                      </div>
+                    </TableCell>
+                    <TableCell className={table.cell}>
+                      <IconButton color="primary" aria-label="Изменить">
+                        <img src={telegramIcon} alt="иконка телеграмма" />
+                      </IconButton>
+                      <IconButton color="secondary" aria-label="Удалить">
+                        <img src={emailIcon} alt="иконка электронной почты" />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell className={table.cell}>
+                      <TextField
+                        {...register("status")}
+                        sx={{
+                          backgroundColor:
+                            applicantStatuses[candidate.response_status[0]]
+                              .color,
+                          ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+                            {
+                              padding: "8px 12px",
+                              color: "#1A1B22",
+                              fontFamily: "YS Text",
+                              fontSize: "14px",
+                              fontWeight: "400",
+                              lineHeight: "20px",
+                            },
+                        }}
+                        className={table.input}
+                        id="status"
+                        value={
+                          applicantStatuses[candidate.response_status[0]].id
+                        }
+                        select
+                      >
+                        {applicantStatuses.map((option, index) => (
+                          <MenuItem
+                            className={table.dropDownList}
+                            key={index}
+                            value={index}
+                          >
+                            {option.name}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </TableCell>
+                    <TableCell className={table.cell}>test</TableCell>
+                    <TableCell className={table.cell}>
+                      {candidate.city}
+                    </TableCell>
+                    <TableCell className={table.cell}>
+                      {candidate.work_format}
+                    </TableCell>
+                    <TableCell className={table.cell}>test</TableCell>
+                    <TableCell className={table.cell}>test</TableCell>
+                    <TableCell className={table.cell}>
+                      {candidate.course}
+                    </TableCell>
+                    <TableCell className={table.cell}>
+                      {formatDate(candidate.graduation_date)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      ) : (
+        <div>Нет добавленных или откликнувшихся кандидатов</div>
+      )}
       {/* <BasicModal
         isVisible={isUserModalOpened}
         closePopup={handleCloseModal}

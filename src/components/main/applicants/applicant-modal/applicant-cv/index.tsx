@@ -8,7 +8,7 @@ export default function MainStudentCv() {
   const selectedCard = useSelector(
     (state) => state.applicants.selectedCardData
   );
-  const workExp: Array<TWorkExp> = selectedCard.workExpirience;
+  const workExp: Array<TWorkExp> = selectedCard.expirience;
 
   return (
     <div className={mainStudentCv.wrapper}>

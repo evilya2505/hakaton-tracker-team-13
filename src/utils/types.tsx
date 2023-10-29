@@ -34,11 +34,11 @@ export type TAwardsProps = {
 };
 
 export type TWorkExp = {
-  workStart: Date; // начало работы
-  workEnd: Date; // конец работы
-  companyName: string; // название компании
-  position: string; // должность
-  resp: string; // обязанности
+  date_start: Date; // начало работы
+  date_end: Date; // конец работы
+  company: string; // название компании
+  title: string; // должность
+  description: string; // обязанности
 };
 
 export type TApplicant = {
@@ -64,8 +64,8 @@ export type TApplicant = {
   optional_description: string; // о себе
   edu_Status: string; // учебный статус
   // не приходят данные
-  workExpirience: Array<TWorkExp>; // массив из объектов мест работы            ! не приходит (смотреть выше тип TWorkExp)
-  responseStatus: string; // статус отклика                                     ! не приходит ( очень много полей выбора, Отклик/Кандидат/Собес итд, макет)
+  expirience: Array<TWorkExp>; // массив из объектов мест работы            ! не приходит (смотреть выше тип TWorkExp)
+  response_status: Array<number>; // статус отклика                                     ! не приходит ( очень много полей выбора, Отклик/Кандидат/Собес итд, макет)
   work_format: string; // формат работы: удаленка офис итд
 };
 
@@ -79,19 +79,19 @@ export type TVacancy = {
   id: number; // айди
   title: string; // название вакансии
   city: string; // город
-  expirience: string; // опыт работы                            ! не приходит (1-2 года итд, смотреть в макете)
-  grade: string; // грейд                                       ! не приходит (Middle итд, макет!)
+  expirience: string; // опыт работы
+  grade: string; // грейд
   language: Array<TLangLevel>; // язык
   min_wage: number; // зп от
   max_wage: number; // зп до
-  workFormat: string; // формат работы                          ! не приходит (удаленный, офис итд смотреть в макете)
+  work_format: string; // формат работы                          ! массив
   schedule: string; // график работы                            ! не приходит (полный день, итд смотреть в макете)
   isRemote: boolean; // чекбокс удаленки                        ! не приходит
   description: string; // о вакансии
   responsibility: string; // обязанности
   requirements: string; // обязательные требования
   optional_requirements: string; // необязательные требования
-  conditions: string; // условия работы                          ! не приходит
+  conditions: string; // условия работы
   selection_stages: string; // этапы отбора
   is_archive: boolean; // добавлена ли в архив
   is_active: boolean; // опубликована (для черновика)

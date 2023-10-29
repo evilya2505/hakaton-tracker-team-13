@@ -13,7 +13,6 @@ import VacanciesModal from "../../vacancies-modal/vacancies-modal";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { setAddVacancyModalVisibility } from "../../../services/reducers/vacancies";
 import { useSelector, useDispatch } from "../../../services/hooks";
-import mainApi from "../../../utils/MainApi";
 import { TVacancy } from "../../../utils/types";
 import { getNeededVacancyData } from "../../../services/actions/vacancies";
 
