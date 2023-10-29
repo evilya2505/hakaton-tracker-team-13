@@ -1,12 +1,12 @@
 import tooltip from "./index.module.css";
 import CustomTooltip from "../tooltip";
 import { awardsList } from "../../../../../constants/awardsList";
-import { awardsProps } from "../../../../../utils/types";
+import { TAwardsProps } from "../../../../../utils/types";
 
 const AwardsTooltip = ({
   isWinner,
   more10Responses,
-}: awardsProps): JSX.Element => {
+}: TAwardsProps): JSX.Element => {
   return (
     <>
       {isWinner && (

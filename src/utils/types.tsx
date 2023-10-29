@@ -28,41 +28,75 @@ export type AddVacancyFormValues = {
   selectionStages: string;
 };
 
-export type awardsProps = {
+export type TAwardsProps = {
   isWinner: boolean;
   more10Responses: boolean;
 };
 
-export type workExp = {
-  workStart: Date; // начало работы
-  workEnd: Date; // конец работы
-  companyName: string; // название компании
-  position: string; // должность
-  resp: string; // обязанности
+export type TWorkExp = {
+  date_start: Date; // начало работы
+  date_end: Date; // конец работы
+  company: string; // название компании
+  title: string; // должность
+  description: string; // обязанности
 };
 
-export type applicant = {
-  firstName: string; // имя
-  lastName: string; // фамилия
-  avatar: string; // ссылка на аватар в формате url
-  isWinner: boolean; // победитель хакатона?
+export type TApplicant = {
+  id: number; // айди
+  first_name: string; // имя
+  last_name: string; // фамилия
+  avatar_url: string; // ссылка
+  is_winner: true; // победитель хакатона?
   city: string; // город
   age: number; // возраст
-  responses: number; // длина массива откликов
-  completedTestTasks: number; // длина массива тестовых
-  interviews: number; // длина массива собеседований
-  course: string; // название оконченного курса
-  graduationDate: Date; // дата окончания (строка формата 'апрель 2023')
-  workFormat: string; // формат работы
-  // добавила новые поля
-  grade: string; // грейд
+  course: string; // курс
+  graduation_date: Date; // дата выпуска
+  schedule: string; // график работы
+  edu_status: string; // статус Студент/Выпускник
+  response_count: number; // кол-во откликов
+  test_task_count: number; // кол-во тестовых
+  interview_count: number; // кол-во интервью
+  work_status: string; // опыт работы
+  // new
+  grade: string;
   salary: number; // зп
   contacts: string; // контакты
-  about: string; // о себе
-  workExpirience: Array<workExp>; // массив из объектов мест работы
-  studyingStatus: string; // учебный статус
-  responseStatus: string; // статус отклика
-  workStatus: string; // опыт работы
+  optional_description: string; // о себе
+  edu_Status: string; // учебный статус
+  // не приходят данные
+  expirience: Array<TWorkExp>; // массив из объектов мест работы            ! не приходит (смотреть выше тип TWorkExp)
+  response_status: Array<number>; // статус отклика                                     ! не приходит ( очень много полей выбора, Отклик/Кандидат/Собес итд, макет)
+  work_format: string; // формат работы: удаленка офис итд
 };
 
-export type applicantsList = Array<applicant>;
+export type TLangLevel = {
+  id: number;
+  language: string;
+  level: number;
+};
+
+export type TVacancy = {
+  author: number;
+  id: number; // айди
+  title: string; // название вакансии
+  city: string; // город
+  expirience: string; // опыт работы
+  grade: string; // грейд
+  language: Array<TLangLevel>; // язык
+  min_wage: number; // зп от
+  max_wage: number; // зп до
+  work_format: string; // формат работы                          ! массив
+  schedule: string; // график работы                            ! не приходит (полный день, итд смотреть в макете)
+  isRemote: boolean; // чекбокс удаленки                        ! не приходит
+  description: string; // о вакансии
+  responsibility: string; // обязанности
+  requirements: string; // обязательные требования
+  optional_requirements: string; // необязательные требования
+  conditions: string; // условия работы
+  selection_stages: string; // этапы отбора
+  is_archive: boolean; // добавлена ли в архив
+  is_active: boolean; // опубликована (для черновика)
+  created: Date; // дата публикации
+  applicants?: Array<TApplicant>;
+  currency?: string;
+};

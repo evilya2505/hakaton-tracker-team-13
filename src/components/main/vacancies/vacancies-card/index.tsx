@@ -1,9 +1,9 @@
 import vacanciesCard from "./index.module.css";
-import { vacancy } from "../../../../constants/vacanciesList";
+import { TVacancy } from "../../../../utils/types";
 import { formatFullDate } from "../../../../utils/formatDate";
 
 interface VacanciesCardProps {
-  vacancy: vacancy;
+  vacancy: TVacancy;
 }
 
 const VacanciesCard = ({ vacancy }: VacanciesCardProps) => {
@@ -23,7 +23,7 @@ const VacanciesCard = ({ vacancy }: VacanciesCardProps) => {
       <div className={vacanciesCard.dataInfo}>
         <div className={vacanciesCard.dataTitle}>Дата публикации</div>
         <div className={vacanciesCard.dataCreate}>
-          {formatFullDate(vacancy.pubDate)}
+          {formatFullDate(vacancy.created)}
         </div>
       </div>
     </section>

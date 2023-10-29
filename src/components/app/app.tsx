@@ -10,8 +10,40 @@ import Planer from "../main/planer";
 import Vacancy from "../main/vacancies/vacancy";
 import EditVacancy from "../main/vacancies/vacancy/edit-vacancy/inex";
 import Settings from "../main/settings";
+import mainApi from "../../utils/MainApi";
+import { useDispatch } from "../../services/hooks";
+import { setApplicants } from "../../services/reducers/applicants";
+import { setVacancies } from "../../services/reducers/vacancies";
+import { TVacancy } from "../../utils/types";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    getVacancies();
+    getApplicants();
+  }, []);
+
+  function getVacancies() {
+    mainApi.getVacancies().then((res) => {
+      console.log("vacancies");
+      res.results.map((element: TVacancy) => element.id = element.author);
+      console.log(res.results);
+      dispatch(setVacancies(res.results));
+    });
+  }
+
+  function getApplicants() {
+    mainApi
+      .getApplicants()
+      .then((res) => {
+        console.log("applicants");
+        console.log(res.results);
+        dispatch(setApplicants(res.results));
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <>
       <Routes>
@@ -25,7 +57,7 @@ function App() {
         >
           <Route path="/applicants" element={<Applicants />} />
           <Route path="/vacancies" element={<Vacancies />}>
-            <Route path="vacancy" element={<Vacancy />}>
+            <Route path="vacancy/:id" element={<Vacancy />}>
               <Route path="edit" element={<EditVacancy />} />
             </Route>
           </Route>

@@ -5,8 +5,8 @@ import arrowDownIcon from "../../../../../images/arrow_down_blue.svg";
 import arrowUpIcon from "../../../../../images/arrow_up_blue.svg";
 
 interface IDropDownProps {
-  title: string;
-  text: string;
+  title?: string;
+  text?: string;
 }
 
 export default function DropDown({ title, text }: IDropDownProps) {
