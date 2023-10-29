@@ -7,6 +7,7 @@ import { TogglingButton } from "./toggling-button";
 import { formatDate } from "../../../../utils/formatDate";
 import { useState } from "react";
 import { TApplicant } from "../../../../utils/types";
+import avatar from '../../../../images/avatar.png';
 
 interface ApplicantsCardProps {
   applicant: TApplicant;
@@ -21,7 +22,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
       <div className={applicantsCard.description}>
         <div className={applicantsCard.info}>
           <img
-            src={applicant.avatar_url}
+            src={applicant.avatar_url ? applicant.avatar_url : avatar}
             className={applicantsCard.img}
             alt="Фото"
           />
@@ -52,11 +53,11 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Дата окончания: </span>
-            {formatDate(applicant.graduation_date)}
+            {applicant.graduation_date.toString()}
           </li>
           <li className={applicantsCard.infoItem}>
             <span className={applicantsCard.span}>Формат работы: </span>
-            {applicant.work_status}
+            {applicant.workFormat}
           </li>
         </ul>
       </div>
