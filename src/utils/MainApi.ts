@@ -71,7 +71,7 @@ class MainApi {
   }
 
   // получить массив соискателей, добавленных в вакансию
-  getVacancysApplicants(vacancyId: number) {
+  getVacancysApplicants(vacancyId: number | undefined) {
     return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
       method: "GET",
       headers: {
@@ -83,16 +83,17 @@ class MainApi {
 
   // добавить вакансию
   addVacancy(vacancy: TVacancy) {
-    return fetch(`${this._baseUrl}/vacancies/`, {
-      method: "POST",
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer `,
-        body: JSON.stringify({
-          data: vacancy,
-        }),
-      },
-    }).then((res) => this._getRequestResult(res));
+    console.log(JSON.stringify({ data: {created: vacancy.created?.toDateString(), ...vacancy}}));
+    // return fetch(`${this._baseUrl}/vacancies/`, {
+    //   method: "POST",
+    //   headers: {
+    //     ...this._headers,
+    //     Authorization: `Bearer `,
+    //     body: JSON.stringify({
+    //       data: vacancy,
+    //     }),
+    //   },
+    // }).then((res) => this._getRequestResult(res));
   }
 
   // редактировать вакансию
@@ -150,6 +151,16 @@ class MainApi {
 
   getCityById(cityId: number) {
     return fetch(`${this._baseUrl}/cities/${cityId}/`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer `,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
+
+  getCities() {
+    return fetch(`${this._baseUrl}/cities/`, {
       method: "GET",
       headers: {
         ...this._headers,

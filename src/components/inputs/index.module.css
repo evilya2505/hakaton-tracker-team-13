@@ -1,0 +1,41 @@
+.error {
+  margin-top: 4px;
+  height: 12px;
+  color: var(--main-red, #ff0200);
+  font-family: "YS Text";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+}
+
+.label {
+  color: var(--main-black-900);
+  font-family: "YS Text";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-bottom: 4px;
+}
+
+.inputSection {
+  margin-right: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputSectionSalaryTo {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  color: var(--main-black-900);
+  font-family: "YS Text";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 4px !important;
+}

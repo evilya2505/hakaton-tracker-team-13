@@ -5,19 +5,19 @@ export type DropDownitem = {
 
 export const experienceDropDown: Array<DropDownitem> = [
   {
-    value: "noExperience",
+    value: "LOW",
     label: "Нет опыта",
   },
   {
-    value: "1to3",
+    value: "MED",
     label: "От 1 года до 3 лет",
   },
   {
-    value: "3to6",
+    value: "HI",
     label: "От 3 до 6 лет",
   },
   {
-    value: "more6",
+    value: "HIP",
     label: "Больше 6 лет",
   },
 ];
@@ -96,38 +96,38 @@ export const typeOfWorkDropDown: Array<DropDownitem> = [
 
 export const workHoursDropDown: Array<DropDownitem> = [
   {
-    value: "full",
+    value: "FD",
     label: "Полный день",
   },
   {
-    value: "hybrid",
+    value: "HB",
     label: "Гибрид",
   },
   {
-    value: "remote",
+    value: "RM",
     label: "Удаленная работа",
   },
   {
-    value: "flexible",
+    value: "FX",
     label: "Гибкий график",
   },
 ];
 
 export const gradeDropDown: Array<DropDownitem> = [
   {
-    value: "junior",
+    value: "IN",
+    label: "Intern",
+  },
+  {
+    value: "JR",
     label: "Junior",
   },
   {
-    value: "middle",
+    value: "MD",
     label: "Middle",
   },
   {
-    value: "middlePlus",
-    label: "Middle +",
-  },
-  {
-    value: "senior",
+    value: "SR",
     label: "Senior",
   },
 ];

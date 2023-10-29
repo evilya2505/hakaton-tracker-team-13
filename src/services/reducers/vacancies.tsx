@@ -83,7 +83,7 @@ export const {
   setModalVisibility,
   setAddVacancyModalVisibility,
   setVacancies,
-  setCurrentVacancyApplicantsList
+  setCurrentVacancyApplicantsList,
 } = vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;
