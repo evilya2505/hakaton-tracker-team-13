@@ -1,5 +1,4 @@
 import applicantsCard from "./index.module.css";
-import { applicant } from "../../../../constants/applicantsList";
 import ageRender from "../../../../utils/ageRender";
 import AwardsTooltip from "./awards-tooltip";
 import ActivityScale from "./activity-scale";
@@ -15,7 +14,7 @@ interface ApplicantsCardProps {
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
   // const [isAdded, setIsAdded] = useState(applicant.response_status[0] === 2);
-  const [isAdded, setIsAdded] = useState(true);
+  const [isAdded, setIsAdded] = useState(false);
 
   return (
     <div className={applicantsCard.card}>
@@ -68,7 +67,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
       >
         Добавить
       </CustomButton> */}
-      <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded}/>
+      <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded} applicant={applicant} />
     </div>
   );
 };

@@ -5,6 +5,17 @@ interface TOptions {
   headers: Headers;
 }
 
+interface applicantInVacancyProps {
+  applicantId: number;
+  vacancyId: number;
+  status: string;
+}
+
+interface delApplicantInVacancyProps {
+  applicantId: number;
+  vacancyId: number;
+}
+
 class MainApi {
   _baseUrl: string;
   _headers: Headers;
@@ -70,20 +81,13 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
-  // получить массив соискателей, добавленных в вакансию
-  getVacancysApplicants(vacancyId: number | undefined) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
-      method: "GET",
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer `,
-      },
-    }).then((res) => this._getRequestResult(res));
-  }
-
   // добавить вакансию
   addVacancy(vacancy: TVacancy) {
-    console.log(JSON.stringify({ data: {created: vacancy.created?.toDateString(), ...vacancy}}));
+    console.log(
+      JSON.stringify({
+        data: { created: vacancy.created?.toDateString(), ...vacancy },
+      })
+    );
     // return fetch(`${this._baseUrl}/vacancies/`, {
     //   method: "POST",
     //   headers: {
@@ -121,32 +125,90 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
-  // добавляет кандидата в вакансию
-  addApplicantToVacancy(applicantId: number, vacancyId: number) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
+  // ОТКЛИКИ
+
+  // получить массив соискателей, добавленных в вакансию
+  getVacancysApplicants(vacancyId: number | undefined) {
+    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/responses/`, {
       method: "GET",
       headers: {
         ...this._headers,
-        Authorization: `Bearer `,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
+
+  // добавить соискателя в вакансию
+
+  addApplicantToVacancy({
+    applicantId,
+    vacancyId,
+    status,
+  }: applicantInVacancyProps) {
+    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/responses/`, {
+      method: "POST",
+      headers: {
+        ...this._headers,
       },
       body: JSON.stringify({
         applicant: applicantId,
+        vacancy: vacancyId,
+        status: status,
       }),
     }).then((res) => this._getRequestResult(res));
   }
 
-  // удаляет кандидата из вакансии
-  deleteApplicantFromVacancy(applicantId: number, vacancyId: number) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
-      method: "GET",
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer `,
-      },
-      body: JSON.stringify({
-        applicant: applicantId,
-      }),
-    }).then((res) => this._getRequestResult(res));
+  // получить статус соискателя в вакансии
+
+  getApplicantStatus({ applicantId, vacancyId }: delApplicantInVacancyProps) {
+    return fetch(
+      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}`,
+      {
+        method: "GET",
+        headers: {
+          ...this._headers,
+        },
+      }
+    ).then((res) => this._getRequestResult(res));
+  }
+
+  // обновить статус соискателя в вакансии
+
+  updateApplicantStatus({
+    applicantId,
+    vacancyId,
+    status,
+  }: applicantInVacancyProps) {
+    return fetch(
+      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}/`,
+      {
+        method: "PUT",
+        headers: {
+          ...this._headers,
+        },
+        body: JSON.stringify({
+          applicant: applicantId,
+          vacancy: vacancyId,
+          status: status,
+        }),
+      }
+    ).then((res) => this._getRequestResult(res));
+  }
+
+  // удаляет соискателя из вакансии
+
+  deleteApplicantFromVacancy({
+    applicantId,
+    vacancyId,
+  }: delApplicantInVacancyProps) {
+    return fetch(
+      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}`,
+      {
+        method: "DELETE",
+        headers: {
+          ...this._headers,
+        },
+      }
+    ).then((res) => this._getRequestResult(res));
   }
 
   getCityById(cityId: number) {
