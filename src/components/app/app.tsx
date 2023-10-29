@@ -25,8 +25,8 @@ function App() {
 
   function getVacancies() {
     mainApi.getVacancies().then((res) => {
-      console.log("vacancies");
-      console.log(res.results);
+      // console.log("vacancies");
+      // console.log(res.results);
       dispatch(setVacancies(res.results));
     });
   }
@@ -35,8 +35,8 @@ function App() {
     mainApi
       .getApplicants()
       .then((res) => {
-        console.log("applicants");
-        console.log(res.results);
+        // console.log("applicants");
+        // console.log(res.results);
         dispatch(setApplicants(res.results));
       })
       .catch((err) => console.log(err));

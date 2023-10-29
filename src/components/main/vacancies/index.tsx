@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import vacanciesPage from "./index.module.css";
 import page from "../index.module.css";
 import { Tab } from "@mui/material";
@@ -11,9 +11,10 @@ import AddIcon from "@mui/icons-material/Add";
 import CreateVacancyButton from "./create-button";
 import VacanciesModal from "../../vacancies-modal/vacancies-modal";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import { vacancies, vacancy } from "../../../constants/vacanciesList";
 import { setAddVacancyModalVisibility } from "../../../services/reducers/vacancies";
 import { useSelector, useDispatch } from "../../../services/hooks";
+import mainApi from "../../../utils/MainApi";
+import { TVacancy } from "../../../utils/types";
 
 const Vacancies: React.FC<{}> = (): JSX.Element => {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
   const isAddVacancyModalVisible = useSelector(
     (state) => state.vacancies.isAddVacancyModalVisible
   );
+
+  const vacancies = useSelector((state) => state.vacancies.vacancies);
 
   function handleOpenVacancyModal() {
     dispatch(setAddVacancyModalVisibility(true));
@@ -37,8 +40,15 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
     setValue(newValue);
   };
 
-  function handleCardClick() {
-    navigate("vacancy");
+  function handleVacancyClick(vacancy: TVacancy) {
+    mainApi
+      .getVacancysApplicants(vacancy.author)
+      .then((res) => {
+        console.log("vacancysApplicants:");
+        console.log(res);
+        navigate("vacancy");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -60,9 +70,14 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
             <TabPanel className={vacanciesPage.list} value="1">
               {vacancies.length > 0 ? (
                 <ul className={vacanciesPage.list}>
-                  {vacancies.map((element: vacancy, index) => {
+                  {vacancies.map((element: TVacancy) => {
                     return (
-                      <li key={index} onClick={handleCardClick}>
+                      <li
+                        key={element.author}
+                        onClick={() => {
+                          handleVacancyClick(element);
+                        }}
+                      >
                         <VacanciesCard vacancy={element} />
                       </li>
                     );

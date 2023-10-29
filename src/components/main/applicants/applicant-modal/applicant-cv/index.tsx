@@ -24,9 +24,11 @@ export default function MainStudentCv() {
       <div className={mainStudentCv.experience}>
         <h2 className={mainStudentCv.title}>Опыт работы:</h2>
         <ul className={mainStudentCv.experienceList}>
-          {workExp.map((element: workExp, index) => {
-            return <WorkExpItem key={index} workExp={element} />;
-          })}
+          {workExp
+            ? workExp.map((element: workExp, index) => {
+                return <WorkExpItem key={index} workExp={element} />;
+              })
+            : "Опыт работы не указан"}
         </ul>
       </div>
     </div>
