@@ -5,6 +5,7 @@ import {
   getCityApplicantsInfo,
   getCityApplicantsInfoFailed,
   getCityApplicantsInfoSuccess,
+  setCurrentVacancyApplicantsList,
 } from "../reducers/vacancies";
 
 export const getNeededVacancyData = (vacancy: TVacancy) => {
@@ -13,8 +14,9 @@ export const getNeededVacancyData = (vacancy: TVacancy) => {
     let vacancyTemp = { ...vacancy };
 
     mainApi
-      .getVacancysApplicants(vacancy.author)
+      .getVacancysApplicants(vacancy.id)
       .then((resApplicants) => {
+        dispatch(setCurrentVacancyApplicantsList(resApplicants));
         mainApi
           .getCityById(parseInt(vacancy.city))
           .then((res) => {
