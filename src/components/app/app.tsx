@@ -15,6 +15,7 @@ import { useDispatch } from "../../services/hooks";
 import { setApplicants, setShownApplicants } from "../../services/reducers/applicants";
 import { setVacancies } from "../../services/reducers/vacancies";
 import { getCities } from "../../services/actions/cities";
+import { getLanguages } from "../../services/actions/languages";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
     getVacancies();
     getApplicants();
     dispatch(getCities());
+    dispatch(getLanguages());
   }, []);
 
   function getVacancies() {

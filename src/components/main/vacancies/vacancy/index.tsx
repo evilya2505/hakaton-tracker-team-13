@@ -10,6 +10,7 @@ import VacancyInfo from "./vacany-info";
 import editIcon from "../../../../images/edit.svg";
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "../../../../services/hooks";
+import { gradeDropDown, workHoursDropDown } from "../../../../constants/dropDownVariants";
 
 const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
   const vacancyObject = useSelector(
@@ -83,10 +84,10 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
             <Chip className={main.chip} label="Полная занятость" />
           </li>
           <li className={main.tag}>
-            <Chip className={main.chip} label="Офис" />
+            <Chip className={main.chip} label={workHoursDropDown.find(workHours => workHours.value == vacancyObject?.work_format)?.label} />
           </li>
           <li className={main.tag}>
-            <Chip className={main.chip} label="Junior" />
+            <Chip className={main.chip} label={gradeDropDown.find(grade => grade.value == vacancyObject?.grade)?.label} />
           </li>
         </ul>
         {value === "1" && (

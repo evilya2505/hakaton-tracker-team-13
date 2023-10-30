@@ -12,6 +12,9 @@ export interface TVacaniesListState {
   neededDataRequest: boolean;
   neededDataFailed: boolean;
   currentVacancyApplicantsList: Array<TApplicant>;
+  addNewVacancyRequest: boolean;
+  addNewVacancyFailed: boolean;
+  editVacancyRequest: boolean;
 }
 
 export const initialState: TVacaniesListState = {
@@ -23,6 +26,9 @@ export const initialState: TVacaniesListState = {
   neededDataRequest: false,
   neededDataFailed: false,
   currentVacancyApplicantsList: [],
+  addNewVacancyRequest: false,
+  addNewVacancyFailed: false,
+  editVacancyRequest: false,
 };
 
 const vacanciesSlice = createSlice({
@@ -72,10 +78,47 @@ const vacanciesSlice = createSlice({
     ) {
       state.vacancies = action.payload;
     },
+    addNewVacancyRequest(state: TVacaniesListState) {
+      state.addNewVacancyRequest = true;
+      state.addNewVacancyFailed = false;
+    },
+    addNewVacancyFailed(state: TVacaniesListState) {
+      state.editVacancyRequest = false;
+      state.addNewVacancyRequest = false;
+      state.addNewVacancyFailed = true;
+    },
+    addNewVacancySuccess(state: TVacaniesListState, action: PayloadAction<TVacancy>) {
+      state.vacancies = [action.payload, ...state.vacancies]
+      state.addNewVacancyRequest =  false;
+      state.addNewVacancyFailed = false;
+    },
+    editVacancyRequest(state: TVacaniesListState) {
+      state.editVacancyRequest = true;
+      state.addNewVacancyFailed = false;
+    },
+    editVacancySuccess(state: TVacaniesListState, action: PayloadAction<TVacancy>) {
+      const updatedVacancy = action.payload;
+
+      state.vacancies = state.vacancies.map(vacancy => {
+        if (vacancy.id === updatedVacancy.id) {
+          return updatedVacancy;
+        }
+        return vacancy;
+      });
+
+      state.currentVacancyPage = action.payload;
+      state.editVacancyRequest =  false;
+      state.addNewVacancyFailed = false;
+    }
   },
 });
 
 export const {
+  editVacancyRequest,
+  editVacancySuccess,
+  addNewVacancyRequest,
+  addNewVacancyFailed,
+  addNewVacancySuccess,
   setCurrentVacancyData,
   getCityApplicantsInfo,
   getCityApplicantsInfoFailed,

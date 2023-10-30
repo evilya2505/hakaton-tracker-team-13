@@ -5,7 +5,7 @@ export const vacancySchema = yup.object({
   experience: yup.string().required("Поле обязательное."),
   city: yup.number().required("Поле обязательное."),
   grade: yup.string().required("Поле обязательное."),
-  languade: yup.string().required("Поле обязательное."),
+  languade: yup.number().required("Поле обязательное."),
   languageLevel: yup.string().required("Поле обязательное."),
   salaryFrom: yup
     .number()
