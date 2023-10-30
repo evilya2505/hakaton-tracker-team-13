@@ -6,6 +6,7 @@ export default function EditVacancy() {
   const vacancyObject = useSelector(
     (store) => store.vacancies.currentVacancyPage
   );
+
   return (
     <div className={editVacancy.container}>
       <AddVacancyForm value={3} defaultValues={vacancyObject} />

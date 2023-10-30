@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, FormControlLabel, Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import settingsIcon from "../../images/settings.svg";
 import filtersMenu from "./filters-menu.module.css";
 import Menu from "@mui/material/Menu";
@@ -9,47 +9,27 @@ import arrowUpIcon from "../../images/arrow_up.svg";
 import deleteIcon from "../../images/delete.svg";
 import { Divider } from "@mui/material";
 import SearchBar from "../search-form/search-form";
-
-const createCheckbox = (label: string) => {
-  return (
-    <FormControlLabel
-      sx={{
-        ".MuiFormControlLabel-root": {
-          marginBottom: "8px",
-          color: "#1A1B22",
-          fontFamily: "YS Text",
-          fontSize: "14px",
-          fontWeight: "400",
-          lineHeight: "20px",
-        },
-        ".MuiCheckbox-root": {
-          padding: "0 10px 0 0",
-        },
-      }}
-      control={
-        <Checkbox
-          sx={{
-            "& .MuiSvgIcon-root": {
-              fontSize: 30,
-              width: "0.8em",
-              height: "0.8em",
-            },
-          }}
-        />
-      }
-      label={label}
-    />
-  );
-};
+import { useForm } from "react-hook-form";
+import { FilterApplicantsValues } from "../../utils/types";
+import CheckboxCustomized from "./checkbox";
+import mainApi from "../../utils/MainApi";
+import { useDispatch,useSelector } from "../../services/hooks";
+import { setApplicants, setChecked, setShownApplicants, unsetChecked } from "../../services/reducers/applicants";
 
 const FiltersMenu = () => {
+  const dispatch = useDispatch();
   const [isDirectionsOpened, setIsDirectionsOpened] =
     React.useState<boolean>(false);
   const [isCityOpened, setIsCityOpened] = React.useState<boolean>(false);
   const [isExperienceOpened, setIsExperienceOpened] =
     React.useState<boolean>(false);
   const [isTypeOpened, setIsTypeOpened] = React.useState<boolean>(false);
+  const checkedList = useSelector((state) => state.applicants.checked);
+  const applicants = useSelector((state) => state.applicants.applicants);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const form = useForm<FilterApplicantsValues>();
+  const [choosenCities, setChoosenCities] = React.useState(["Москва"]);
+  const { register, getValues } = form;
 
   const handleMainMenuClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -58,6 +38,50 @@ const FiltersMenu = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const setNewCity = (city: string) => {
+    let filters = [...checkedList];
+
+    console.log(filters);
+
+    filters.push({key: "province", value: city})
+
+    dispatch(setChecked({key: "province", value: city}));
+
+      mainApi.getFilteresApplicants(filters)
+    .then(data => {
+      dispatch(setShownApplicants(data.results));
+    })
+    .catch(err => console.log(err))
+
+    setChoosenCities([city, ...choosenCities]);
+  }
+
+  function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const filter = e.target.name;
+    let filters = [...checkedList];
+
+    if(['HB','FD','RM'].includes(filter)) {
+      if (e.target.checked) {
+        filters.push({key: "work_format", value: filter})
+        dispatch(setChecked({key: "work_format", value: filter}));
+      } else {
+        dispatch(unsetChecked({key: "work_format", value: filter}));
+        filters =  checkedList.filter(item => item.value !== filter);
+
+      }
+    }
+
+    if (filters.length == 0) {
+      dispatch(setShownApplicants(applicants));
+    } else {
+      mainApi.getFilteresApplicants(filters)
+    .then(data => {
+      dispatch(setShownApplicants(data.results));
+    })
+    .catch(err => console.log(err))
+    }
+  }
 
   function handleFilterClick(filter: string) {
     switch (filter) {
@@ -78,12 +102,27 @@ const FiltersMenu = () => {
     }
   }
 
-  const handleDelete = () => {
-    // Обработчик удаления
+  const handleDelete = (clickedCity: string) => {
+    const filter = clickedCity;
+    const filters =  checkedList.filter(item => item.value !== filter);
+
+    dispatch(unsetChecked({key: "province", value: filter}));
+    setChoosenCities(choosenCities.filter((city) => city !== clickedCity))
+
+    if (filters.length == 0) {
+      dispatch(setShownApplicants(applicants));
+    } else {
+      mainApi.getFilteresApplicants(filters)
+    .then(data => {
+      dispatch(setShownApplicants(data.results));
+    })
+    .catch(err => console.log(err))
+    }
+
   };
 
   return (
-    <form>
+    <form noValidate>
       <Button
         variant="text"
         onClick={handleMainMenuClick}
@@ -120,11 +159,11 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            {createCheckbox("Программирование")}
-            {createCheckbox("Анализ данных")}
-            {createCheckbox("Дизайн")}
-            {createCheckbox("Менеджмент")}
-            {createCheckbox("Маркетинг")}
+            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Программирование" id="isProgramming" register={register}/>
+            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Анализ данных" id="isDataAnalysis" register={register}/>
+            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Дизайн" id="isDesign" register={register}/>
+            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange}label="Менеджмент" id="isManagment" register={register}/>
+            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Маркетинг" id="isMarketing" register={register}/>
           </fieldset>
         </MenuItem>
         <Divider />
@@ -151,21 +190,31 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            <SearchBar text="Поиск города" />
-            <Chip
-              sx={{
-                ".MuiChip-label": {
-                  color: "#1D6BF3",
-                  fontFamily: "YS Text",
-                  fontSize: "13px",
-                  fontWeight: "400",
-                  lineHeight: "26px",
-                },
-              }}
-              className={filtersMenu.chip}
-              label="Москва, Россия"
-              onDelete={handleDelete}
-            />
+            <SearchBar addCity={setNewCity} type="city" text="Поиск города" />
+            <ul className={filtersMenu.list}>
+            {choosenCities.map((city, index) => {
+              return (
+                <li key={index} className={filtersMenu.item}>
+                <Chip
+                sx={{
+                  ".MuiChip-label": {
+                    color: "#1D6BF3",
+                    fontFamily: "YS Text",
+                    fontSize: "13px",
+                    fontWeight: "400",
+                    lineHeight: "26px",
+                  },
+                }}
+                className={filtersMenu.chip}
+                label={city}
+                onDelete={() => handleDelete(city)}
+              />
+                </li>
+              )
+            })}
+            </ul>
+
+
           </fieldset>
         </MenuItem>
         <Divider />
@@ -192,9 +241,10 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            {createCheckbox("Релевантный")}
+
+            {/* {createCheckbox("Релевантный")}
             {createCheckbox("Около-релевантный")}
-            {createCheckbox("Учебный")}
+            {createCheckbox("Учебный")} */}
           </fieldset>
         </MenuItem>
         <Divider />
@@ -221,9 +271,9 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            {createCheckbox("Офис")}
-            {createCheckbox("Гибрид")}
-            {createCheckbox("Удаленный")}
+            <CheckboxCustomized isChecked={checkedList.some((item:{key:string, value:string}) => item.value === "FD")} handleCheckboxChange={handleCheckboxChange} label="Офис" id="FD" register={register}/>
+            <CheckboxCustomized isChecked={checkedList.some((item:{key:string, value:string}) => item.value === "HB")} handleCheckboxChange={handleCheckboxChange} label="Гибрид" id="HB" register={register}/>
+            <CheckboxCustomized isChecked={checkedList.some((item:{key:string, value:string}) => item.value === "RM")} handleCheckboxChange={handleCheckboxChange} label="Удаленная работа" id="RM" register={register}/>
           </fieldset>
         </MenuItem>
         <Divider />

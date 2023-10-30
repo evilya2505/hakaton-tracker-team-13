@@ -19,6 +19,7 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
   );
 
   const applicants = useSelector((state) => state.applicants.applicants);
+  const shownApplicants = useSelector((state) => state.applicants.shownApplicants);
 
   function closeUserModal() {
     dispatch(setUserModalVisibility(false));
@@ -34,7 +35,7 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
       <ApplicantsFilter />
       {applicants.length > 0 ? (
         <ul className={applicantsPage.list}>
-          {applicants.map((element: TApplicant) => {
+          {shownApplicants.map((element: TApplicant) => {
             return (
               <li key={element.id} onClick={() => openUserModal(element)}>
                 <ApplicantsCard applicant={element} />

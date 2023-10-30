@@ -68,7 +68,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
       >
         Добавить
       </CustomButton> */}
-      <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded}/>
+      {/* <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded}/> */}
     </div>
   );
 };

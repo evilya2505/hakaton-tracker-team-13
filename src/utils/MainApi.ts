@@ -1,4 +1,4 @@
-import { TVacancy } from "./types";
+import { TCity, TVacancy } from "./types";
 
 interface TOptions {
   baseUrl: string;
@@ -46,6 +46,27 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
+    // получить отфильтрованные данные кандидатов
+    getFilteresApplicants(filters: {key: string, value: string}[]){
+      let filter:string = "";
+      for (let i = 0; i < filters.length ; i++) {
+        if (i !== filters.length - 1) {
+          filter += `${filters[i].key}=${filters[i].value}&`;
+        } else {
+          filter += `${filters[i].key}=${filters[i].value}`;
+        }
+
+      }
+      console.log(`${this._baseUrl}/applicants/?${filter}`)
+      return fetch(`${this._baseUrl}/applicants/?${filter}`, {
+        method: "GET",
+        headers: {
+          ...this._headers,
+        },
+      }).then((res) => this._getRequestResult(res));
+    }
+
+
   // ВАКАНСИИ:
 
   // получить массив вакансий компании
@@ -72,7 +93,7 @@ class MainApi {
 
   // получить массив соискателей, добавленных в вакансию
   getVacancysApplicants(vacancyId: number | undefined) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
+    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/responses/`, {
       method: "GET",
       headers: {
         ...this._headers,
@@ -98,16 +119,17 @@ class MainApi {
 
   // редактировать вакансию
   partlyEditVacancy(vacancy: TVacancy) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancy.author}/`, {
-      method: "PATCH",
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer `,
-        body: JSON.stringify({
-          data: vacancy,
-        }),
-      },
-    }).then((res) => this._getRequestResult(res));
+    console.log(JSON.stringify({ data: {created: vacancy.created?.toDateString(), ...vacancy}}));
+    // return fetch(`${this._baseUrl}/vacancies/${vacancy.author}/`, {
+    //   method: "PATCH",
+    //   headers: {
+    //     ...this._headers,
+    //     Authorization: `Bearer `,
+    //     body: JSON.stringify({
+    //       data: vacancy,
+    //     }),
+    //   },
+    // }).then((res) => this._getRequestResult(res));
   }
 
   // удалить вакансию
@@ -149,7 +171,7 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
-  getCityById(cityId: number) {
+  getCityById(cityId: number | undefined | TCity) {
     return fetch(`${this._baseUrl}/cities/${cityId}/`, {
       method: "GET",
       headers: {

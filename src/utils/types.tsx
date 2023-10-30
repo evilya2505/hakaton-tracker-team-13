@@ -14,6 +14,17 @@ export type LoginFormValues = {
   password: string;
 };
 
+export type FilterApplicantsValues = {
+  isProgramming?: boolean;
+  isDataAnalysis?: boolean;
+  isDesign?: boolean;
+  isManagment?: boolean;
+  isMarketing?: boolean;
+  FD?: boolean;
+  HB?: boolean;
+  RM?: boolean;
+}
+
 export type AddVacancyFormValues = {
   name: string;
   experience: string;

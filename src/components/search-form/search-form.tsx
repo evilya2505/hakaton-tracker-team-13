@@ -1,25 +1,37 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import searchIcon from "../../images/search.svg";
 import searchBar from "./search-form.module.css";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import { InputAdornment } from "@mui/material";
-
+import { useForm } from "react-hook-form";
 interface ISearchBarProps {
   text: string;
+  type?: string;
+  addCity?: (city:string) => void;
 }
 
-const SearchBar: React.FC<ISearchBarProps> = ({ text }): JSX.Element => {
+const SearchBar: React.FC<ISearchBarProps> = ({ addCity, type, text }): JSX.Element => {
+
+  const form = useForm<{keyWord: string}>();
+
+  const { register, handleSubmit, getValues} = form;
+
+  const onSubmit = (data:{keyWord: string}) => {
+    if (addCity !== undefined) addCity(data.keyWord);
+  };
+
   return (
-    <form className={searchBar.form}>
+    <form className={searchBar.form} noValidate onSubmit={handleSubmit(onSubmit)}>
       <TextField
         id="search-bar"
         className={searchBar.textField}
         variant="outlined"
         placeholder={text}
         size="small"
+        {...register("keyWord")}
         sx={{
-          ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+          ".MuiOutlinedInput-input":
             {
               color: "#1A1B22",
               fontFamily: "YS Text",
@@ -27,10 +39,10 @@ const SearchBar: React.FC<ISearchBarProps> = ({ text }): JSX.Element => {
               fontWeight: "400",
               lineHeight: "20px",
             },
-          ".css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root": {
+          ".MuiOutlinedInput-root": {
             paddingLeft: "12px",
           },
-          ".css-1ua80n0-MuiInputBase-input-MuiOutlinedInput-input::placeholder":
+          ".MuiOutlinedInput-input::placeholder":
             {
               opacity: 1,
               color: "#797981",

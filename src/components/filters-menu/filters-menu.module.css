@@ -61,7 +61,7 @@
 
 .chip {
   margin-top: 10px !important;
-  width: 141px !important;
+  width: 100px !important;
   background-color: var(--main-blue-bg) !important;
 }
 
@@ -79,4 +79,12 @@
 .deleteIcon {
   width: 16px;
   height: 16px;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
 }
