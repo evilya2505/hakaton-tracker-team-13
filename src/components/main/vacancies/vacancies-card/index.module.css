@@ -6,12 +6,12 @@
   border-radius: 16px;
   box-shadow: 2px 0px 12px 0px #83828240;
   cursor: pointer;
-  transition: box-shadow 0.2s, opacity 0.2s linear;
+  transition: border 0.2s, opacity 0.2s linear;
   position: relative;
 }
 
 .card:hover {
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--main-black-300);
 }
 
 .vacancy {
