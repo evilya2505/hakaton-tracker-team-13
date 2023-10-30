@@ -17,10 +17,11 @@
   max-width: 98%;
   display: flex;
   justify-content: space-between;
-  align-items:flex-start ;
+  align-items: flex-start;
 }
 
 .list {
+  width: 100%;
   list-style: none;
   padding: 0;
   display: flex;
