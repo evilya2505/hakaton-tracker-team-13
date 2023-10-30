@@ -73,6 +73,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                       <AddIcon />
                     </Fab>
                   </div>
+                  {/* <div className={vacanciesPage.listArea}> */}
                   <ul className={vacanciesPage.list}>
                     {vacancies.map((element: TVacancy, index: number) => {
                       return (
@@ -87,6 +88,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                       );
                     })}
                   </ul>
+                  {/* </div> */}
                 </>
               ) : (
                 <div className={vacanciesPage.activeVacancies}>

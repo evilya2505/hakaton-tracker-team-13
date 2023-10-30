@@ -1,3 +1,7 @@
+.container {
+  /* margin: 0; */
+}
+
 .title {
   margin: 0;
   margin-bottom: 40px;
@@ -20,18 +24,33 @@
   align-items: flex-start;
 }
 
+
 .list {
   width: 100%;
+  max-height: 70vh;
   list-style: none;
-  padding: 0;
+  padding: 8px 0 8px 8px;
+  margin: 0 0 32px 0;
   display: flex;
   gap: 30px;
-  align-items: center;
   flex-wrap: wrap;
+  overflow-y: scroll;
+  justify-self: flex-start;
 }
 
 .buttonFixed {
   position: fixed;
   right: 60px;
   bottom: 60px;
+  z-index: 1;
+}
+
+.list::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background: rgba(26, 27, 34, 0.2);
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
 }
