@@ -1,4 +1,4 @@
-import { TVacancy } from "./types";
+import { TCity, TVacancy } from "./types";
 
 interface applicantInVacancyProps {
   applicantId: number;
@@ -47,6 +47,27 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
+    // получить отфильтрованные данные кандидатов
+    getFilteresApplicants(filters: {key: string, value: string}[]){
+      let filter:string = "";
+      for (let i = 0; i < filters.length ; i++) {
+        if (i !== filters.length - 1) {
+          filter += `${filters[i].key}=${filters[i].value}&`;
+        } else {
+          filter += `${filters[i].key}=${filters[i].value}`;
+        }
+
+      }
+      console.log(`${this._baseUrl}/applicants/?${filter}`)
+      return fetch(`${this._baseUrl}/applicants/?${filter}`, {
+        method: "GET",
+        headers: {
+          ...this._headers,
+        },
+      }).then((res) => this._getRequestResult(res));
+    }
+
+
   // ВАКАНСИИ:
 
   // получить массив вакансий компании
@@ -71,7 +92,6 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
-  // добавить вакансию
   addVacancy(vacancy: TVacancy) {
     // console.log(
     //   JSON.stringify({
@@ -91,16 +111,17 @@ class MainApi {
 
   // редактировать вакансию
   partlyEditVacancy(vacancy: TVacancy) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancy.id}/`, {
-      method: "PATCH",
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer `,
-        body: JSON.stringify({
-          data: vacancy,
-        }),
-      },
-    }).then((res) => this._getRequestResult(res));
+    console.log(JSON.stringify({ data: {created: vacancy.created?.toDateString(), ...vacancy}}));
+    // return fetch(`${this._baseUrl}/vacancies/${vacancy.author}/`, {
+    //   method: "PATCH",
+    //   headers: {
+    //     ...this._headers,
+    //     Authorization: `Bearer `,
+    //     body: JSON.stringify({
+    //       data: vacancy,
+    //     }),
+    //   },
+    // }).then((res) => this._getRequestResult(res));
   }
 
   // удалить вакансию

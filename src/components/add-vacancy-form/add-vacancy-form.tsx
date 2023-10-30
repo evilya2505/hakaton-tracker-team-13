@@ -23,6 +23,7 @@ import { TLangLevel } from "../../utils/types";
 import InlineInput from "../inputs/inlineInput";
 import DropDownInput from "../inputs/dropDownInput";
 import MultilineInput from "../inputs/multilineInput";
+import { useLocation } from "react-router-dom";
 
 interface IAddVacancyFormProps {
   value: number;
@@ -38,11 +39,13 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
     (store) => store.vacancies.isPreviewModalVisible
   );
   const cities: TCity[] = useSelector((store) => store.cities.cities);
+  const cityId: number | undefined = cities.find((city) => city.name === defaultValues?.city?.toString())?.id;
+  const pathname = useLocation().pathname;
   const form = useForm<AddVacancyFormValues>({
     defaultValues: {
       name: defaultValues?.title,
       experience: "LOW",
-      city: defaultValues?.city,
+      city: 3,
       grade: "JR",
       languade: "english",
       languageLevel: "a1",
@@ -68,7 +71,32 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   const onSubmit = (data: AddVacancyFormValues) => {
     const language: TLangLevel = { id: 0, level: 1, language: "Английский язык" };
 
-    mainApi
+    if (pathname.includes("edit")) {
+      mainApi
+      .partlyEditVacancy({
+        author: defaultValues?.author,
+        title: data.name,
+        city: data.city,
+        expirience: data.experience,
+        grade: data.grade,
+        created: new Date(),
+        min_wage: data.salaryFrom,
+        max_wage: data.salaryTo,
+        work_format: data.workHours,
+        isRemote: data.isRemote,
+        description: data.aboutVacancy,
+        responsibility: data.duty,
+        requirements: data.requirmentsMandatory,
+        optional_requirements: data.requirmentsOptional,
+        conditions: data.workConditions,
+        selection_stages: data.selectionStages,
+        is_active: true,
+        is_archive: false,
+        currency: data.currency,
+        language: [language],
+      })
+    } else {
+      mainApi
       .addVacancy({
         title: data.name,
         city: data.city,
@@ -90,6 +118,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
         currency: data.currency,
         language: [language],
       })
+    }
+
     // return data;
     console.log(data);
   };
@@ -111,7 +141,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
           <fieldset className={addVacancyForm.mainFieldset} style={{marginBottom: "29px"}}>
             <fieldset className={addVacancyForm.fieldset}>
               <InlineInput placeholder="" type="default" register={register} title="Название вакансии" errorMessage={errors.name?.message} id="name"/>
-              <DropDownInput type="default" defaultValue={3} register={register} title="Город поиска" errorMessage={errors.city?.message} id="city">
+              <DropDownInput type="default" defaultValue={cityId || 3} register={register} title="Город поиска" errorMessage={errors.city?.message} id="city">
               {cities.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -254,7 +284,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             <div className={addVacancyForm.column}>
               <MultilineInput register={register} title="О Вакансии" id="aboutVacancy" errorMessage={errors.aboutVacancy?.message} />
               <MultilineInput register={register} title="Обязанности" id="duty" errorMessage={errors.duty?.message} />
-              <MultilineInput register={register} title="Условия" id="requirmentsMandatory" errorMessage={errors.workConditions?.message} />
+              <MultilineInput register={register} title="Условия" id="workConditions" errorMessage={errors.workConditions?.message} />
             </div>
             <div className={addVacancyForm.column}>
               <MultilineInput register={register} title="Требования обязательные" id="requirmentsMandatory" errorMessage={errors.requirmentsMandatory?.message} />
@@ -268,8 +298,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
         <SubmitButton
           isFullWidth={true}
           text="Сохранить"
-          isDisabled={
-            !(
+          isDisabled={pathname.includes("edit") ? false :
+          !(
               formState.dirtyFields.name &&
               formState.dirtyFields.aboutVacancy &&
               formState.dirtyFields.duty &&

@@ -12,7 +12,7 @@ import EditVacancy from "../main/vacancies/vacancy/edit-vacancy/inex";
 import Settings from "../main/settings";
 import mainApi from "../../utils/MainApi";
 import { useDispatch } from "../../services/hooks";
-import { setApplicants } from "../../services/reducers/applicants";
+import { setApplicants, setShownApplicants } from "../../services/reducers/applicants";
 import { setVacancies } from "../../services/reducers/vacancies";
 import { getCities } from "../../services/actions/cities";
 
@@ -40,9 +40,8 @@ function App() {
     mainApi
       .getApplicants()
       .then((res) => {
-        console.log("applicants");
-        console.log(res.results);
         dispatch(setApplicants(res.results));
+        dispatch(setShownApplicants(res.results));
       })
       .catch((err) => console.log(err));
   }
