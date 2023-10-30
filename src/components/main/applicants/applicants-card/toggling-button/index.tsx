@@ -55,7 +55,10 @@ export const TogglingButton = ({ applicant }: togglingButtonProps) => {
   }
 
   useEffect(() => {
-    if (selectedDropDownVacancy.id) getApplicantStatus();
+    if (selectedDropDownVacancy.id) {
+      setIsCandidate(false);
+      getApplicantStatus();
+    }
   }, [selectedDropDownVacancy]);
 
   function toggleState(e: SyntheticEvent) {
