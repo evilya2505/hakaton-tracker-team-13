@@ -61,41 +61,44 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
               <Tab label="Черновики" value="2" />
               <Tab label="Архив" value="3" />
             </TabList>
-            <TabPanel className={vacanciesPage.list} value="1">
+            <TabPanel value="1">
               {vacancies.length > 0 ? (
-                <ul className={vacanciesPage.list}>
-                  {vacancies.map((element: TVacancy, index: number) => {
-                    return (
-                      <li
-                        key={element.id}
-                        onClick={() => {
-                          handleVacancyClick(element, index);
-                        }}
-                      >
-                        <VacanciesCard vacancy={element} />
-                      </li>
-                    );
-                  })}
-                </ul>
+                <>
+                  <div className={vacanciesPage.buttonFixed}>
+                    <Fab
+                      color="primary"
+                      aria-label="add"
+                      onClick={handleOpenVacancyModal}
+                    >
+                      <AddIcon />
+                    </Fab>
+                  </div>
+                  <ul className={vacanciesPage.list}>
+                    {vacancies.map((element: TVacancy, index: number) => {
+                      return (
+                        <li
+                          key={element.id}
+                          onClick={() => {
+                            handleVacancyClick(element, index);
+                          }}
+                        >
+                          <VacanciesCard vacancy={element} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </>
               ) : (
                 <div className={vacanciesPage.activeVacancies}>
                   <p>Вы еще не создали ни одной вакансии</p>
+                  <CreateVacancyButton />
                 </div>
               )}
-              <div className={vacanciesPage.buttonFixed}>
-                <Fab
-                  color="primary"
-                  aria-label="add"
-                  onClick={handleOpenVacancyModal}
-                >
-                  <AddIcon />
-                </Fab>
-              </div>
+
             </TabPanel>
             <TabPanel value="2">
               <div className={vacanciesPage.activeVacancies}>
                 <p>Вы еще не создали ни одного черновика</p>
-
                 <CreateVacancyButton />
               </div>
             </TabPanel>
