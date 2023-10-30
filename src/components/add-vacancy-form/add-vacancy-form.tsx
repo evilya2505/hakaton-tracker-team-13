@@ -13,7 +13,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { vacancySchema } from "../../validations/add-vacancy-validations";
-import { AddVacancyFormValues, TCity, TLanguage, TVacancy } from "../../utils/types";
+import { AddVacancyFormValues, TApplicant, TCity, TLanguage, TVacancy } from "../../utils/types";
 import { useDispatch } from "../../services/hooks";
 import { setCurrentVacancyData } from "../../services/reducers/vacancies";
 import { useSelector } from "../../services/hooks";
@@ -34,6 +34,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   value,
   defaultValues,
 }): JSX.Element => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const isOpened: boolean = useSelector(
     (store) => store.vacancies.isPreviewModalVisible
@@ -53,14 +54,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   const cityId: number | undefined = cities.find((city) => city.name === defaultValues?.city?.toString())?.id;
   const pathname = useLocation().pathname;
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
-  const form = useForm<AddVacancyFormValues>({
+  const form: any = useForm<AddVacancyFormValues>({
     defaultValues: {
       name: defaultValues?.title,
       experience: defaultValues?.expirience || "LOW",
       city: cityId || 1,
       grade: defaultValues?.grade || "JR",
-      languade: defaultValues?.language[0].id || 1,
-      languageLevel: defaultValues?.language[0].level || "A1",
+      languade: defaultValues?.language[0]?.id || 1,
+      languageLevel: defaultValues?.language[0]?.level || "A1",
       salaryFrom: defaultValues?.min_wage,
       salaryTo: defaultValues?.max_wage,
       currency: defaultValues?.currency || "RUB",
@@ -82,7 +83,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
 
   const onSubmit = (data: AddVacancyFormValues) => {
     const language: TLangLevel = { id: data.languade, level: data.languageLevel };
-    const dataToSend = {
+    let dataToSend = {
       title: data.name,
       city: data.city,
       expirience: data.experience,
@@ -112,7 +113,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
 
     setIsSubmitted(true);
 
-    !isError && reset()
+    !location.pathname.includes("edit") && (!isError && reset());
   };
 
   React.useEffect(() => {
@@ -137,7 +138,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
         {(value === 0 || value === 3) && (
           <fieldset className={addVacancyForm.mainFieldset} style={{marginBottom: "29px"}}>
             <fieldset className={addVacancyForm.fieldset}>
-              <InlineInput placeholder="" type="default" register={register} title="Название вакансии" errorMessage={errors.name?.message} id="name"/>
+              <InlineInput defaultValue={defaultValues?.title || ""} placeholder="" type="default" register={register} title="Название вакансии" errorMessage={errors.name?.message} id="name"/>
               <DropDownInput type="default" defaultValue={cityId || 1} register={register} title="Город поиска" errorMessage={errors.city?.message} id="city">
               {cities.map((option) => (
                     <MenuItem
@@ -178,7 +179,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             </fieldset>
 
             <fieldset className={addVacancyForm.fieldset}>
-              <DropDownInput type="default" defaultValue={defaultValues?.expirience || "LOW"} register={register} title="Опыт работы" errorMessage={errors.experience?.message} id="experience">
+              <DropDownInput type="default" defaultValue={defaultValues?.expirience|| "LOW"} register={register} title="Опыт работы" errorMessage={errors.experience?.message} id="experience">
               {experienceDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -203,7 +204,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             </fieldset>
 
             <fieldset className={addVacancyForm.fieldset}>
-              <DropDownInput type="default" defaultValue={defaultValues?.language[0].id || 1} register={register} title="Знание языков" errorMessage={errors.languade?.message} id="language">
+              <DropDownInput type="default" defaultValue={defaultValues?.language[0]?.id || 1} register={register} title="Знание языков" errorMessage={errors.languade?.message} id="language">
               {languages.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -214,7 +215,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
               </DropDownInput>
-              <DropDownInput type="default" defaultValue={defaultValues?.language[0].level || "A1"} register={register} title="Уровень языка" errorMessage={errors.languageLevel?.message} id="languageLevel">
+              <DropDownInput type="default" defaultValue={defaultValues?.language[0]?.level || "A1"} register={register} title="Уровень языка" errorMessage={errors.languageLevel?.message} id="languageLevel">
               {languageLevelDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -232,8 +233,8 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                   Уровень дохода в месяц
                 </label>
                 <fieldset className={addVacancyForm.diapason}>
-                <InlineInput placeholder="От" type="default" register={register} title="" errorMessage={errors.salaryFrom?.message} id="salaryFrom"/>
-                <InlineInput placeholder="До" type="salaryTo" register={register} title="" errorMessage={errors.salaryTo?.message} id="salaryTo"/>
+                <InlineInput defaultValue={defaultValues?.min_wage || ""} placeholder="От" type="default" register={register} title="" errorMessage={errors.salaryFrom?.message} id="salaryFrom"/>
+                <InlineInput defaultValue={defaultValues?.min_wage || ""}  placeholder="До" type="salaryTo" register={register} title="" errorMessage={errors.salaryTo?.message} id="salaryTo"/>
                 </fieldset>
               </div>
 
@@ -279,14 +280,14 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
         {(value === 1 || value === 3) && (
           <fieldset className={addVacancyForm.fieldsetColumns}>
             <div className={addVacancyForm.column}>
-              <MultilineInput register={register} title="О Вакансии" id="aboutVacancy" errorMessage={errors.aboutVacancy?.message} />
-              <MultilineInput register={register} title="Обязанности" id="duty" errorMessage={errors.duty?.message} />
-              <MultilineInput register={register} title="Условия" id="workConditions" errorMessage={errors.workConditions?.message} />
+              <MultilineInput defaultValue={defaultValues?.description || ""}  register={register} title="О Вакансии" id="aboutVacancy" errorMessage={errors.aboutVacancy?.message} />
+              <MultilineInput defaultValue={defaultValues?.responsibility || ""}  register={register} title="Обязанности" id="duty" errorMessage={errors.duty?.message} />
+              <MultilineInput defaultValue={defaultValues?.conditions || ""}  register={register} title="Условия" id="workConditions" errorMessage={errors.workConditions?.message} />
             </div>
             <div className={addVacancyForm.column}>
-              <MultilineInput register={register} title="Требования обязательные" id="requirmentsMandatory" errorMessage={errors.requirmentsMandatory?.message} />
-              <MultilineInput register={register} title="Требования необязательные" id="requirmentsOptional" errorMessage={errors.requirmentsOptional?.message} />
-              <MultilineInput register={register} title="Этапы отбора" id="selectionStages" errorMessage={errors.selectionStages?.message} />
+              <MultilineInput defaultValue={defaultValues?.requirements || ""}  register={register} title="Требования обязательные" id="requirmentsMandatory" errorMessage={errors.requirmentsMandatory?.message} />
+              <MultilineInput defaultValue={defaultValues?.optional_requirements || ""}  register={register} title="Требования необязательные" id="requirmentsOptional" errorMessage={errors.requirmentsOptional?.message} />
+              <MultilineInput defaultValue={defaultValues?.selection_stages || ""}  register={register} title="Этапы отбора" id="selectionStages" errorMessage={errors.selectionStages?.message} />
             </div>
           </fieldset>
         )}
@@ -322,7 +323,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             )
           }
         /> }
-
       </div>
       </div>
 

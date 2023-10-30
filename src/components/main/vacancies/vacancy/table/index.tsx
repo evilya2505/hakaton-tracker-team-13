@@ -18,33 +18,28 @@ import table from "./index.module.css";
 import telegramIcon from "../../../../../images/telegram.svg";
 import emailIcon from "../../../../../images/email.svg";
 import { applicantStatuses } from "../../../../../constants/applicantStatuses";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import SearchBar from "../../../../search-form/search-form";
 import VacancyDropDown from "../vacancy-drop-down";
 import FiltersMenu from "../../../../filters-menu/filters-menu";
 import calndarIcon from "../../../../../images/Calendar.svg";
 import compareIcon from "../../../../../images/compare.svg";
 import BasicModal from "../../../../modal/modal";
-import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CompareApplicantsModal from "../compare-applicants-modal";
-import { useSelector } from "../../../../../services/hooks";
-import { formatDate } from "../../../../../utils/formatDate";
-
+import { useSelector, useDispatch } from "../../../../../services/hooks";
+import { editCandidateStatus } from "../../../../../services/actions/vacancies";
 const CandidateTable = () => {
+  const dispatch = useDispatch();
   const [isCompareyModalOpened, setIsCompareModalOpened] =
     React.useState<boolean>(false);
 
   const currentVacancyApplicantsList = useSelector(
     (state) => state.vacancies.currentVacancyApplicantsList
   );
-
-  console.log(currentVacancyApplicantsList);
+  const currentVacancy = useSelector(
+    (state) => state.vacancies.currentVacancyPage
+  );
 
   function handleOpenCompareModal() {
-    console.log(true);
     setIsCompareModalOpened(true);
   }
 
@@ -63,28 +58,15 @@ const CandidateTable = () => {
     setAnchorEl(null);
   };
 
-  const tableSchema = yup.object({
-    status: yup.number().required(),
-  });
-
-  type TableValues = {
-    status: number;
-  };
   const [selectedCandidates, setSelectedCandidates] = React.useState<number[]>(
     []
   );
 
-  const form = useForm<TableValues>({
-    resolver: yupResolver(tableSchema),
-  });
-
-  const { register, handleSubmit, formState, getValues } = form;
-  const { errors } = formState;
-
-  const onSubmit = (data: TableValues) => {
-    console.log("Form data submitted:", data);
-    return data;
-  };
+  const handleStatusChange = (candidateId:number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (applicantStatuses.find((status) => status.id == parseInt(e.target.value))?.name !== undefined) {
+      dispatch(editCandidateStatus({applicantId: candidateId, vacancyId: currentVacancy?.id, status: applicantStatuses.find((status) => status.id == parseInt(e.target.value))?.name}))
+    }
+  }
 
   const handleCandidateSelection = (candidateId: number) => {
     if (selectedCandidates.includes(candidateId)) {
@@ -108,6 +90,7 @@ const CandidateTable = () => {
         }
       }
     }
+
     setSelectedCandidates(tempArray);
   };
   return (
@@ -123,7 +106,7 @@ const CandidateTable = () => {
           </div>
           <FiltersMenu />
         </div>
-        {selectedCandidates.length === 1 && (
+        {/* {selectedCandidates.length === 1 && (
           <>
             <Button
               onClick={handleMainMenuClick}
@@ -135,7 +118,7 @@ const CandidateTable = () => {
             </Button>
             <Menu
               sx={{
-                ".css-6hp17o-MuiList-root-MuiMenu-list": { padding: "16px" },
+                ".MuiMenu-list": { padding: "16px" },
               }}
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
@@ -146,7 +129,7 @@ const CandidateTable = () => {
               </LocalizationProvider>
             </Menu>
           </>
-        )}
+        )} */}
         {selectedCandidates.length === 2 && (
           <Button
             onClick={handleOpenCompareModal}
@@ -205,13 +188,13 @@ const CandidateTable = () => {
                   >
                     Статус
                   </TableCell>
-                  <TableCell
+                  {/* <TableCell
                     className={table.cell}
                     size="small"
                     sx={{ width: "172px" }}
                   >
                     Дата
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell
                     className={table.cell}
                     size="small"
@@ -257,16 +240,18 @@ const CandidateTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {currentVacancyApplicantsList.map((candidate, index) => (
+                {currentVacancyApplicantsList.map((candidate,index) => {
+                  console.log(candidate)
+                  return (
                   <TableRow key={index}>
-                    <TableCell size="small">{candidate.id}</TableCell>
-                    <TableCell size="small">
+                  <TableCell size="small">{candidate.id}</TableCell>
+                  <TableCell size="small">
                       <Checkbox
                         checked={selectedCandidates.includes(candidate.id)}
                         onChange={() => handleCandidateSelection(candidate.id)}
                       />
-                    </TableCell>
-                    <TableCell
+                  </TableCell>
+                  <TableCell
                       // onClick={handleOpenModal}
                       className={table.cell}
                     >
@@ -294,12 +279,9 @@ const CandidateTable = () => {
                     </TableCell>
                     <TableCell className={table.cell}>
                       <TextField
-                        {...register("status")}
                         sx={{
-                          backgroundColor:
-                            applicantStatuses[candidate.response_status[0]]
-                              .color,
-                          ".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+                          backgroundColor: applicantStatuses.find((status) => status.name == candidate.response_status)?.color,
+                          ".MuiOutlinedInput-input":
                             {
                               padding: "8px 12px",
                               color: "#1A1B22",
@@ -309,11 +291,10 @@ const CandidateTable = () => {
                               lineHeight: "20px",
                             },
                         }}
+                        onChange={(e) => handleStatusChange(candidate.id, e)}
                         className={table.input}
                         id="status"
-                        value={
-                          applicantStatuses[candidate.response_status[0]].id
-                        }
+                        value={applicantStatuses.find((status) => status.name == candidate.response_status)?.id}
                         select
                       >
                         {applicantStatuses.map((option, index) => (
@@ -327,23 +308,24 @@ const CandidateTable = () => {
                         ))}
                       </TextField>
                     </TableCell>
-                    <TableCell className={table.cell}>test</TableCell>
+                    {/* <TableCell className={table.cell}>test</TableCell> */}
                     <TableCell className={table.cell}>
                       {candidate.city}
                     </TableCell>
                     <TableCell className={table.cell}>
                       {candidate.work_format}
                     </TableCell>
-                    <TableCell className={table.cell}>test</TableCell>
-                    <TableCell className={table.cell}>test</TableCell>
+                    <TableCell className={table.cell}>{candidate.edu_status}</TableCell>
+                    <TableCell className={table.cell}>{candidate.work_status}</TableCell>
                     <TableCell className={table.cell}>
                       {candidate.course}
                     </TableCell>
-                    <TableCell className={table.cell}>
-                      {formatDate(candidate.graduation_date)}
+                    <TableCell className={table.cell} sx={{width: '200px'}}>
+                      {candidate?.graduation_date.toString()}
                     </TableCell>
                   </TableRow>
-                ))}
+                  )
+                }) }
               </TableBody>
             </Table>
           </TableContainer>
@@ -362,7 +344,7 @@ const CandidateTable = () => {
         isVisible={isCompareyModalOpened}
         closePopup={handleCloseCompareModal}
       >
-        <CompareApplicantsModal />
+        <CompareApplicantsModal studentFirst={currentVacancyApplicantsList.find(applicant => applicant.id === selectedCandidates[0])}studentSecond={currentVacancyApplicantsList.find(applicant => applicant.id === selectedCandidates[1])}/>
       </BasicModal>
     </>
   );

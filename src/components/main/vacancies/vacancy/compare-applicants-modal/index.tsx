@@ -3,8 +3,13 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import compareApplicantsModal from "./index.module.css";
 import MainInfoModal from "../main-info-modal";
+import { TApplicant } from "../../../../../utils/types";
 
-export default function CompareApplicantsModal() {
+interface ICompareApplicantsModalProps {
+  studentFirst?: TApplicant | undefined;
+  studentSecond?: TApplicant | undefined;
+}
+export default function CompareApplicantsModal({studentFirst, studentSecond} : ICompareApplicantsModalProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -23,7 +28,7 @@ export default function CompareApplicantsModal() {
           <Tab label="Резюме" />
         </Tabs>
       </div>
-      {value === 0 && <MainInfoModal />}
+      {value === 0 && <MainInfoModal studentFirst={studentFirst} studentSecond={studentSecond}/>}
       {/* {value === 1 && <MainStudentCv selectedCard={selectedCard} />} */}
     </div>
   );

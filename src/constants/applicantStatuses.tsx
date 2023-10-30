@@ -30,7 +30,7 @@ export const applicantStatuses: Array<{
   },
   {
     id: 5,
-    name: "Тех собеседование",
+    name: "Тех. собеседование",
     color: "#ACCCFF",
   },
   {

@@ -11,10 +11,14 @@ import editIcon from "../../../../images/edit.svg";
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "../../../../services/hooks";
 import { gradeDropDown, workHoursDropDown } from "../../../../constants/dropDownVariants";
+import { TCity } from "../../../../utils/types";
 
 const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
   const vacancyObject = useSelector(
     (store) => store.vacancies.currentVacancyPage
+  );
+  const cities = useSelector(
+    (store) => store.cities.cities
   );
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
@@ -58,9 +62,8 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
     navigate(-1);
   }
 
-  React.useEffect(() => {
-    console.log(vacancyObject);
-  }, []);
+  // React.useEffect(() => {console.log(cities, vacancyObject)}, [])
+
   return (
     <main className={main.page}>
       <Button
@@ -78,7 +81,7 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
       <div className={main.section} style={{ minHeight: "40px" }}>
         <ul className={main.tagsList}>
           <li className={main.tag}>
-            <Chip className={main.chip} label={vacancyObject?.city} />
+            <Chip className={main.chip} label={vacancyObject?.city}/>
           </li>
           <li className={main.tag}>
             <Chip className={main.chip} label="Полная занятость" />

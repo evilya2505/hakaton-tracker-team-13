@@ -15,6 +15,9 @@ export interface TVacaniesListState {
   addNewVacancyRequest: boolean;
   addNewVacancyFailed: boolean;
   editVacancyRequest: boolean;
+
+  editApplicantStatusRequest: boolean;
+  editApplicantStatusFailed: boolean;
 }
 
 export const initialState: TVacaniesListState = {
@@ -29,6 +32,9 @@ export const initialState: TVacaniesListState = {
   addNewVacancyRequest: false,
   addNewVacancyFailed: false,
   editVacancyRequest: false,
+
+  editApplicantStatusRequest: false,
+  editApplicantStatusFailed: false,
 };
 
 const vacanciesSlice = createSlice({
@@ -109,11 +115,39 @@ const vacanciesSlice = createSlice({
       state.currentVacancyPage = action.payload;
       state.editVacancyRequest =  false;
       state.addNewVacancyFailed = false;
+    },
+    setApplicantsStatusFailed(state: TVacaniesListState) {
+      state.editApplicantStatusRequest = false;
+      state.editApplicantStatusFailed = true;
+    },
+    setApplicantStatusRequest(state: TVacaniesListState) {
+      state.editApplicantStatusRequest = true;
+      state.editApplicantStatusRequest = false;
+    },
+    setApplicantStatusSuccess(state: TVacaniesListState, action: PayloadAction<{applicant: number, vacancy: string, status: string}>) {
+      if (action.payload.status !== undefined) {
+        state.currentVacancyApplicantsList = state.currentVacancyApplicantsList.map(applicant => {
+          if (applicant.id === action.payload.applicant) {
+            return {
+              ...applicant,
+              response_status: action.payload.status
+            };
+          } else {
+            return applicant;
+          }
+        });
+      }
+      console.log(state.currentVacancyApplicantsList);
+      state.editApplicantStatusRequest = false;
+      state.editApplicantStatusRequest = false;
     }
   },
 });
 
 export const {
+  setApplicantStatusRequest,
+  setApplicantStatusSuccess,
+  setApplicantsStatusFailed,
   editVacancyRequest,
   editVacancySuccess,
   addNewVacancyRequest,
