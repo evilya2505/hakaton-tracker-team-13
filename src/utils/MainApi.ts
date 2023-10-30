@@ -92,36 +92,28 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
+  // добавление вакансии
   addVacancy(vacancy: TVacancy) {
-    // console.log(
-    //   JSON.stringify({
-    //     data: { created: vacancy.created?.toDateString(), ...vacancy },
-    //   })
-    // );
     return fetch(`${this._baseUrl}/vacancies/`, {
       method: "POST",
       headers: {
         ...this._headers,
-        body: JSON.stringify({
-          data: vacancy,
-        }),
       },
+      body: JSON.stringify(
+        { created: vacancy.created?.toDateString(), ...vacancy },
+      ),
     }).then((res) => this._getRequestResult(res));
   }
 
   // редактировать вакансию
-  partlyEditVacancy(vacancy: TVacancy) {
-    console.log(JSON.stringify({ data: {created: vacancy.created?.toDateString(), ...vacancy}}));
-    // return fetch(`${this._baseUrl}/vacancies/${vacancy.author}/`, {
-    //   method: "PATCH",
-    //   headers: {
-    //     ...this._headers,
-    //     Authorization: `Bearer `,
-    //     body: JSON.stringify({
-    //       data: vacancy,
-    //     }),
-    //   },
-    // }).then((res) => this._getRequestResult(res));
+  partlyEditVacancy(vacancy: TVacancy, id: number | undefined) {
+    return fetch(`${this._baseUrl}/vacancies/${id}`, {
+      method: "PATCH",
+      headers: {
+        ...this._headers,
+      },
+      body: JSON.stringify(vacancy),
+    }).then((res) => this._getRequestResult(res));
   }
 
   // удалить вакансию
@@ -225,6 +217,16 @@ class MainApi {
 
   getCities() {
     return fetch(`${this._baseUrl}/cities/`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer `,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
+
+  getLanguages() {
+    return fetch(`${this._baseUrl}/languages/`, {
       method: "GET",
       headers: {
         ...this._headers,

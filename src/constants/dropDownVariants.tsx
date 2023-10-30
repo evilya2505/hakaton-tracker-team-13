@@ -22,48 +22,29 @@ export const experienceDropDown: Array<DropDownitem> = [
   },
 ];
 
-export const languagesDropDown: Array<DropDownitem> = [
-  {
-    value: "english",
-    label: "Английский язык",
-  },
-  {
-    value: "german",
-    label: "Немецкий язык",
-  },
-  {
-    value: "french",
-    label: "Французский язык",
-  },
-  {
-    value: "chinese",
-    label: "Китайский язык",
-  },
-];
-
 export const languageLevelDropDown: Array<DropDownitem> = [
   {
-    value: "a1",
+    value: "A1",
     label: "A1 (Базовый)",
   },
   {
-    value: "a2",
+    value: "A2",
     label: "A2 (Ниже среднего)",
   },
   {
-    value: "b1",
+    value: "B1",
     label: "B1 (Средний)",
   },
   {
-    value: "b2",
+    value: "B2",
     label: "B2 (Выше среднего)",
   },
   {
-    value: "c1",
+    value: "C1",
     label: "C1 (Продвинутый)",
   },
   {
-    value: "c2",
+    value: "C2",
     label: "C2 (Носитель языка)",
   },
 ];

@@ -4,7 +4,6 @@ import { Checkbox, FormControlLabel, MenuItem } from "@mui/material";
 import SubmitButton from "../submit-button/submit-button";
 import {
   experienceDropDown,
-  languagesDropDown,
   currencyDropDown,
   workHoursDropDown,
   typeOfWorkDropDown,
@@ -14,16 +13,17 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { vacancySchema } from "../../validations/add-vacancy-validations";
-import { AddVacancyFormValues, TCity, TVacancy } from "../../utils/types";
+import { AddVacancyFormValues, TCity, TLanguage, TVacancy } from "../../utils/types";
 import { useDispatch } from "../../services/hooks";
 import { setCurrentVacancyData } from "../../services/reducers/vacancies";
 import { useSelector } from "../../services/hooks";
-import mainApi from "../../utils/MainApi";
 import { TLangLevel } from "../../utils/types";
 import InlineInput from "../inputs/inlineInput";
 import DropDownInput from "../inputs/dropDownInput";
 import MultilineInput from "../inputs/multilineInput";
 import { useLocation } from "react-router-dom";
+import { addNewVacancy, editVacancy } from "../../services/actions/vacancies";
+import { LoadingButton } from "@mui/lab";
 
 interface IAddVacancyFormProps {
   value: number;
@@ -38,23 +38,35 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
   const isOpened: boolean = useSelector(
     (store) => store.vacancies.isPreviewModalVisible
   );
+  const isLoadingAdding: boolean = useSelector(
+    (store) => store.vacancies.addNewVacancyRequest
+  ) ;
+  const isLoadingEditing: boolean = useSelector(
+    (store) => store.vacancies.editVacancyRequest
+  ) ;
+  const isLoading: boolean = isLoadingAdding || isLoadingEditing;
+  const isError: boolean = useSelector(
+    (store) => store.vacancies.addNewVacancyFailed
+  );
   const cities: TCity[] = useSelector((store) => store.cities.cities);
+  const languages: TLanguage[] = useSelector((store) => store.languages.languages);
   const cityId: number | undefined = cities.find((city) => city.name === defaultValues?.city?.toString())?.id;
   const pathname = useLocation().pathname;
+  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const form = useForm<AddVacancyFormValues>({
     defaultValues: {
       name: defaultValues?.title,
-      experience: "LOW",
-      city: 3,
-      grade: "JR",
-      languade: "english",
-      languageLevel: "a1",
+      experience: defaultValues?.expirience || "LOW",
+      city: cityId || 1,
+      grade: defaultValues?.grade || "JR",
+      languade: defaultValues?.language[0].id || 1,
+      languageLevel: defaultValues?.language[0].level || "A1",
       salaryFrom: defaultValues?.min_wage,
       salaryTo: defaultValues?.max_wage,
-      currency: "RUB",
+      currency: defaultValues?.currency || "RUB",
       typeOfWork: "full",
-      workHours: "FD",
-      isRemote: true,
+      workHours: defaultValues?.work_format || "FD",
+      isRemote: defaultValues?.isRemote || true,
       aboutVacancy: defaultValues?.description,
       duty: defaultValues?.responsibility,
       requirmentsMandatory: defaultValues?.requirements,
@@ -65,62 +77,42 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
     resolver: yupResolver(vacancySchema),
   });
 
-  const { register, handleSubmit, formState, getValues } = form;
+  const { reset, register, handleSubmit, formState, getValues } = form;
   const { errors } = formState;
 
   const onSubmit = (data: AddVacancyFormValues) => {
-    const language: TLangLevel = { id: 0, level: 1, language: "Английский язык" };
+    const language: TLangLevel = { id: data.languade, level: data.languageLevel };
+    const dataToSend = {
+      title: data.name,
+      city: data.city,
+      expirience: data.experience,
+      grade: data.grade,
+      created: new Date(),
+      min_wage: data.salaryFrom,
+      max_wage: data.salaryTo,
+      work_format: data.workHours,
+      isRemote: data.isRemote,
+      description: data.aboutVacancy,
+      responsibility: data.duty,
+      requirements: data.requirmentsMandatory,
+      optional_requirements: data.requirmentsOptional,
+      conditions: data.workConditions,
+      selection_stages: data.selectionStages,
+      is_active: true,
+      is_archive: false,
+      currency: data.currency,
+      language: [language],
+    };
 
     if (pathname.includes("edit")) {
-      mainApi
-      .partlyEditVacancy({
-        title: data.name,
-        city: data.city,
-        expirience: data.experience,
-        grade: data.grade,
-        created: new Date(),
-        min_wage: data.salaryFrom,
-        max_wage: data.salaryTo,
-        work_format: data.workHours,
-        isRemote: data.isRemote,
-        description: data.aboutVacancy,
-        responsibility: data.duty,
-        requirements: data.requirmentsMandatory,
-        optional_requirements: data.requirmentsOptional,
-        conditions: data.workConditions,
-        selection_stages: data.selectionStages,
-        is_active: true,
-        is_archive: false,
-        currency: data.currency,
-        language: [language],
-      })
+      dispatch(editVacancy(dataToSend, defaultValues?.id));
     } else {
-      mainApi
-      .addVacancy({
-        title: data.name,
-        city: data.city,
-        expirience: data.experience,
-        grade: data.grade,
-        created: new Date(),
-        min_wage: data.salaryFrom,
-        max_wage: data.salaryTo,
-        work_format: data.workHours,
-        isRemote: data.isRemote,
-        description: data.aboutVacancy,
-        responsibility: data.duty,
-        requirements: data.requirmentsMandatory,
-        optional_requirements: data.requirmentsOptional,
-        conditions: data.workConditions,
-        selection_stages: data.selectionStages,
-        is_active: true,
-        is_archive: false,
-        currency: data.currency,
-        language: [language],
-      })
+      dispatch(addNewVacancy(dataToSend));
     }
 
-    // return data;
-    console.log(data);
+    setIsSubmitted(true);
+
+    !isError && reset()
   };
 
   React.useEffect(() => {
@@ -128,6 +120,12 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
       dispatch(setCurrentVacancyData(getValues()));
     }
   }, [isOpened, dispatch, getValues]);
+
+  React.useEffect(() => {
+    console.log(defaultValues);
+
+  }, []);
+
 
   return (
     <form
@@ -140,7 +138,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
           <fieldset className={addVacancyForm.mainFieldset} style={{marginBottom: "29px"}}>
             <fieldset className={addVacancyForm.fieldset}>
               <InlineInput placeholder="" type="default" register={register} title="Название вакансии" errorMessage={errors.name?.message} id="name"/>
-              <DropDownInput type="default" defaultValue={cityId || 3} register={register} title="Город поиска" errorMessage={errors.city?.message} id="city">
+              <DropDownInput type="default" defaultValue={cityId || 1} register={register} title="Город поиска" errorMessage={errors.city?.message} id="city">
               {cities.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -171,7 +169,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     <Checkbox
                       {...register("isRemote")}
                       sx={{ "& .MuiSvgIcon-root": { fontSize: 30 } }}
-                      defaultChecked
+                      defaultChecked={defaultValues?.isRemote || true}
                     />
                   }
                   label="Удаленная работа"
@@ -180,7 +178,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             </fieldset>
 
             <fieldset className={addVacancyForm.fieldset}>
-              <DropDownInput type="default" defaultValue={"LOW"} register={register} title="Опыт работы" errorMessage={errors.experience?.message} id="experience">
+              <DropDownInput type="default" defaultValue={defaultValues?.expirience || "LOW"} register={register} title="Опыт работы" errorMessage={errors.experience?.message} id="experience">
               {experienceDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -191,7 +189,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
               </DropDownInput>
-              <DropDownInput type="default" defaultValue={"JR"} register={register} title="Грейд" errorMessage={errors.grade?.message} id="grade">
+              <DropDownInput type="default" defaultValue={defaultValues?.grade || "JR"} register={register} title="Грейд" errorMessage={errors.grade?.message} id="grade">
               {gradeDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -205,18 +203,18 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
             </fieldset>
 
             <fieldset className={addVacancyForm.fieldset}>
-              <DropDownInput type="default" defaultValue={"english"} register={register} title="Знание языков" errorMessage={errors.languade?.message} id="language">
-              {languagesDropDown.map((option) => (
+              <DropDownInput type="default" defaultValue={defaultValues?.language[0].id || 1} register={register} title="Знание языков" errorMessage={errors.languade?.message} id="language">
+              {languages.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
-                      key={option.value}
-                      value={option.value}
+                      key={option.id}
+                      value={option.id}
                     >
-                      {option.label}
+                      {option.language}
                     </MenuItem>
                   ))}
               </DropDownInput>
-              <DropDownInput type="default" defaultValue={"a1"} register={register} title="Уровень языка" errorMessage={errors.languageLevel?.message} id="languageLevel">
+              <DropDownInput type="default" defaultValue={defaultValues?.language[0].level || "A1"} register={register} title="Уровень языка" errorMessage={errors.languageLevel?.message} id="languageLevel">
               {languageLevelDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -239,7 +237,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                 </fieldset>
               </div>
 
-              <DropDownInput type="currency"  defaultValue={"RUB"} register={register} title="Валюта" errorMessage={errors.currency?.message} id="currency">
+              <DropDownInput type="currency"  defaultValue={defaultValues?.currency || "RUB"} register={register} title="Валюта" errorMessage={errors.currency?.message} id="currency">
               {currencyDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -264,7 +262,7 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
                     </MenuItem>
                   ))}
               </DropDownInput>
-              <DropDownInput type="default" defaultValue={"FD"} register={register} title="График работы" errorMessage={errors.workHours?.message} id="workHours">
+              <DropDownInput type="default" defaultValue={defaultValues?.work_format || "FD"} register={register} title="График работы" errorMessage={errors.workHours?.message} id="workHours">
               {workHoursDropDown.map((option) => (
                     <MenuItem
                       className={addVacancyForm.dropDownList}
@@ -293,8 +291,21 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
           </fieldset>
         )}
       </fieldset>
-      <div className={addVacancyForm.buttonWrapper}>
-        <SubmitButton
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: "center"}}>
+          {(isSubmitted && !isError) &&       <p className={addVacancyForm.label} style={{color: 'green'}}>
+                  Вакансия {!pathname.includes("edit") ? "добавлена" : "изменена"} успешно.
+            </p>}
+            <div className={addVacancyForm.buttonWrapper}>
+        {isLoading ?         <LoadingButton
+          color="secondary"
+          disabled={true}
+          fullWidth
+          loading={isLoading}
+          loadingPosition="start"
+          variant="contained"
+        >
+          <span>Сохранить</span>
+        </LoadingButton> :         <SubmitButton
           isFullWidth={true}
           text="Сохранить"
           isDisabled={pathname.includes("edit") ? false :
@@ -310,8 +321,11 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
               formState.dirtyFields.workConditions
             )
           }
-        />
+        /> }
+
       </div>
+      </div>
+
     </form>
   );
 };

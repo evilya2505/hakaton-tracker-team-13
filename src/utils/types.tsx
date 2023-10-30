@@ -30,7 +30,7 @@ export type AddVacancyFormValues = {
   experience: string;
   city: number;
   grade: string;
-  languade: string;
+  languade: number;
   languageLevel: string;
   salaryFrom: number;
   salaryTo: number;
@@ -89,9 +89,14 @@ export type TApplicant = {
 
 export type TLangLevel = {
   id: number;
-  language: string;
-  level: number;
+  language?: string;
+  level: string;
 };
+
+export type TLanguage = {
+  id: number;
+  language: string;
+}
 
 export type TVacancy = {
   id?: number; // айди
