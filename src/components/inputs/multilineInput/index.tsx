@@ -9,9 +9,10 @@ interface IMultilineInputProps {
     title: string;
     register:UseFormRegister<any>;
     id: string;
+    defaultValue: string;
 }
 
-export default function MultilineInput({errorMessage,title, register, id}:IMultilineInputProps) {
+export default function MultilineInput({defaultValue, errorMessage,title, register, id}:IMultilineInputProps) {
   return (
     <div className={input.inputSection}>
     <label
@@ -23,6 +24,7 @@ export default function MultilineInput({errorMessage,title, register, id}:IMulti
     <TextField
       {...register(id)}
       error={errorMessage !== undefined}
+      defaultValue={defaultValue}
       className={multilineInput.multiLineInput}
       id={id}
       multiline

@@ -1,6 +1,6 @@
 import { TCity, TVacancy } from "./types";
 
-interface applicantInVacancyProps {
+export interface applicantInVacancyProps {
   applicantId: number;
   vacancyId: number | undefined;
   status?: string;
@@ -107,12 +107,15 @@ class MainApi {
 
   // редактировать вакансию
   partlyEditVacancy(vacancy: TVacancy, id: number | undefined) {
-    return fetch(`${this._baseUrl}/vacancies/${id}`, {
+    console.log(JSON.stringify(vacancy), `${this._baseUrl}/vacancies/${id}/`)
+
+    return fetch(`${this._baseUrl}/vacancies/${id}/`, {
       method: "PATCH",
       headers: {
         ...this._headers,
       },
-      body: JSON.stringify(vacancy),
+      body: JSON.stringify(vacancy)
+
     }).then((res) => this._getRequestResult(res));
   }
 
@@ -172,10 +175,15 @@ class MainApi {
     vacancyId,
     status,
   }: applicantInVacancyProps) {
+    console.log(JSON.stringify({
+      applicant: applicantId,
+      vacancy: vacancyId,
+      status: status,
+    }))
     return fetch(
       `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}/`,
       {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           ...this._headers,
         },

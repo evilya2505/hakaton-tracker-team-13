@@ -16,9 +16,10 @@ interface IInputProps {
   id: string;
   type: 'default' | 'salaryTo';
   placeholder: string;
+  defaultValue: string | number;
 }
 
-export default function InlineInput({placeholder, type, title, errorMessage, register, id }:IInputProps) {
+export default function InlineInput({placeholder, type, title, errorMessage, register, id, defaultValue }:IInputProps) {
   return (
     <div className={type ===  'default' ? input.inputSection : input.inputSectionSalaryTo}>
     <label htmlFor={id} className={input.label}>
@@ -39,6 +40,7 @@ export default function InlineInput({placeholder, type, title, errorMessage, reg
           lineHeight: "20px",
         },
       }}
+      defaultValue={defaultValue}
       className={inlineInput.input}
       placeholder={placeholder}
       id={id}
