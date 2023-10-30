@@ -1,13 +1,18 @@
 import { InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import vacanciesDropDown from "./vacancies-drop-down.module.css";
 import { useSelector, useDispatch } from "../../services/hooks";
 import { setSelectedDropDownVacancy } from "../../services/reducers/applicants";
+import { TVacancy } from "../../utils/types";
 
 export default function VacanciesDropDown() {
   const [vacancy, setVacancy] = React.useState([]);
   const vacancies = useSelector((state) => state.vacancies.vacancies);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSelectedDropDownVacancy({} as TVacancy));
+  }, []);
 
   const handleChange = (event: { target: { value: any } }) => {
     const {
