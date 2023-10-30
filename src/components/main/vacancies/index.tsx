@@ -3,6 +3,7 @@ import vacanciesPage from "./index.module.css";
 import page from "../index.module.css";
 import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { tabStyle } from "../../../utils/tabStyle"
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
 import BasicPopover from "./notify-modal";
@@ -56,10 +57,18 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
             <BasicPopover />
           </div>
           <TabContext value={value}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Активные" value="1" />
-              <Tab label="Черновики" value="2" />
-              <Tab label="Архив" value="3" />
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+              sx={{
+                height: '2px',
+                indicatorColor:
+                  'var(--main-blue-main)',
+              }}
+            >
+              <Tab label="Активные" value="1" sx={tabStyle} />
+              <Tab label="Черновики" value="2" sx={tabStyle} />
+              <Tab label="Архив" value="3" sx={tabStyle} />
             </TabList>
             <TabPanel value="1">
               {vacancies.length > 0 ? (
@@ -118,8 +127,9 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
             <VacanciesModal />
           </BasicModal>
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
