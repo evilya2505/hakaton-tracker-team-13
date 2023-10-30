@@ -1,11 +1,9 @@
 import applicantsCard from "./index.module.css";
-import { applicant } from "../../../../constants/applicantsList";
 import ageRender from "../../../../utils/ageRender";
 import AwardsTooltip from "./awards-tooltip";
 import ActivityScale from "./activity-scale";
 import { TogglingButton } from "./toggling-button";
 import { formatDate } from "../../../../utils/formatDate";
-import { useState } from "react";
 import { TApplicant } from "../../../../utils/types";
 import avatar from '../../../../images/avatar.png';
 
@@ -14,9 +12,6 @@ interface ApplicantsCardProps {
 }
 
 const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
-  // const [isAdded, setIsAdded] = useState(applicant.response_status[0] === 2);
-  const [isAdded, setIsAdded] = useState(true);
-
   return (
     <div className={applicantsCard.card}>
       <div className={applicantsCard.description}>
@@ -68,7 +63,7 @@ const ApplicantsCard = ({ applicant }: ApplicantsCardProps): JSX.Element => {
       >
         Добавить
       </CustomButton> */}
-      {/* <TogglingButton isAdded={isAdded} setIsAdded={setIsAdded}/> */}
+      <TogglingButton applicant={applicant} />
     </div>
   );
 };

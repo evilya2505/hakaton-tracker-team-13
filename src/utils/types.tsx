@@ -94,7 +94,6 @@ export type TLangLevel = {
 };
 
 export type TVacancy = {
-  author?: number;
   id?: number; // айди
   title: string; // название вакансии
   city?: number; // город
@@ -118,3 +117,4 @@ export type TVacancy = {
   applicants?: Array<TApplicant>;
   currency?: string;
 };
+
