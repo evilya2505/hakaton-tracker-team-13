@@ -1,7 +1,6 @@
 import togglingButton from "./index.module.css";
-import { SetStateAction, SyntheticEvent } from "react";
+import { SyntheticEvent } from "react";
 import Button from "@mui/material/Button";
-import { Dispatch } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
@@ -10,8 +9,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { useSelector } from "../../../../../services/hooks";
 import mainApi from "../../../../../utils/MainApi";
-import { TApplicant } from "../../../../../utils/types";
-import { setSelectedCardData } from "../../../../../services/reducers/applicants";
+import { TApplicant, TVacancy } from "../../../../../utils/types";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -48,7 +46,11 @@ export const TogglingButton = ({ applicant }: togglingButtonProps) => {
       })
       .then((res) => {
         console.log(res);
-        if (res.response_status) setIsCandidate(true);
+        if (res.response_status) {
+          setIsCandidate(true);
+        } else {
+          setIsCandidate(false);
+        }
         console.log(isCandidate);
       })
       .catch((err) => console.log(err));
@@ -56,10 +58,9 @@ export const TogglingButton = ({ applicant }: togglingButtonProps) => {
 
   useEffect(() => {
     if (selectedDropDownVacancy.id) {
-      setIsCandidate(false);
       getApplicantStatus();
     }
-  }, [selectedDropDownVacancy]);
+  }, [selectedDropDownVacancy, isCandidate]);
 
   function toggleState(e: SyntheticEvent) {
     e.stopPropagation();
@@ -115,7 +116,7 @@ export const TogglingButton = ({ applicant }: togglingButtonProps) => {
 
   return (
     <div className={togglingButton.container}>
-      {isCandidate === false ? (
+      {!isCandidate ? (
         <Button
           type="button"
           className={togglingButton.addButton}

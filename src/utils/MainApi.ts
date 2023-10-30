@@ -246,7 +246,7 @@ class MainApi {
 
 // Создание экземпляра класса Api
 const mainApi = new MainApi({
-  baseUrl: "http://130.193.38.180/api",
+  baseUrl: "https://aboba.pro/api",
   headers: {
     "Content-Type": "application/json",
   },

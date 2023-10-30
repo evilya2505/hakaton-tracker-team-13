@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "../../../services/hooks";
 import {
   setSelectedCardData,
@@ -10,7 +10,8 @@ import ApplicantsCard from "./applicants-card";
 import BasicModal from "../../modal/modal";
 import StudentModal from "./applicant-modal";
 import ApplicantsFilter from "./applicants-filter";
-import { TApplicant } from "../../../utils/types";
+import { TApplicant, TVacancy } from "../../../utils/types";
+import { setSelectedDropDownVacancy } from "../../../services/reducers/applicants";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -18,8 +19,14 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
     (state) => state.applicants.isUserModalVisible
   );
 
+  useEffect(() => {
+    dispatch(setSelectedDropDownVacancy({} as TVacancy));
+  }, []);
+
   const applicants = useSelector((state) => state.applicants.applicants);
-  const shownApplicants = useSelector((state) => state.applicants.shownApplicants);
+  const shownApplicants = useSelector(
+    (state) => state.applicants.shownApplicants
+  );
 
   function closeUserModal() {
     dispatch(setUserModalVisibility(false));
@@ -44,7 +51,9 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
           })}
         </ul>
       ) : (
-        <div className={applicantsPage.notFoundContainer}>Ничего не найдено</div>
+        <div className={applicantsPage.notFoundContainer}>
+          Ничего не найдено
+        </div>
       )}
       <BasicModal closePopup={closeUserModal} isVisible={isUserModalVisible}>
         <StudentModal />
