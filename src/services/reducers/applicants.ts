@@ -20,6 +20,7 @@ const applicantsSlice = createSlice({
       state.selectedCardData = action.payload;
     },
     setApplicants(state, action: PayloadAction<Array<TApplicant>>) {
+      console.log(action.payload)
       state.applicants = action.payload;
     },
     setSelectedDropDownVacancy(state, action: PayloadAction<TVacancy>) {

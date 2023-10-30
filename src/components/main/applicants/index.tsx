@@ -10,18 +10,13 @@ import ApplicantsCard from "./applicants-card";
 import BasicModal from "../../modal/modal";
 import StudentModal from "./applicant-modal";
 import ApplicantsFilter from "./applicants-filter";
-import { TApplicant, TVacancy } from "../../../utils/types";
-import { setSelectedDropDownVacancy } from "../../../services/reducers/applicants";
+import { TApplicant } from "../../../utils/types";
 
 const Applicants: React.FC<{}> = (): JSX.Element => {
   const dispatch = useDispatch();
   const isUserModalVisible = useSelector(
     (state) => state.applicants.isUserModalVisible
   );
-
-  useEffect(() => {
-    dispatch(setSelectedDropDownVacancy({} as TVacancy));
-  }, []);
 
   const applicants = useSelector((state) => state.applicants.applicants);
   const shownApplicants = useSelector(
