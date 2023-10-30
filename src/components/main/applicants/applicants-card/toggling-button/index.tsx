@@ -45,19 +45,18 @@ export const TogglingButton = ({ applicant }: togglingButtonProps) => {
         vacancyId: selectedDropDownVacancy.id,
       })
       .then((res) => {
-        console.log(res);
         if (res.response_status) {
           setIsCandidate(true);
         } else {
           setIsCandidate(false);
         }
-        console.log(isCandidate);
       })
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    if (selectedDropDownVacancy.id) {
+    console.log(selectedDropDownVacancy.id)
+    if (selectedDropDownVacancy.id !== undefined) {
       getApplicantStatus();
     }
   }, [selectedDropDownVacancy, isCandidate]);

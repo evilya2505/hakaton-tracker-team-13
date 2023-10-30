@@ -24,7 +24,7 @@ export default function MainStudentCv() {
       <div className={mainStudentCv.experience}>
         <h2 className={mainStudentCv.title}>Опыт работы:</h2>
         <ul className={mainStudentCv.experienceList}>
-          {workExp
+          {workExp.length > 0
             ? workExp.map((element: TWorkExp, index) => {
                 return <WorkExpItem key={index} workExp={element} />;
               })
