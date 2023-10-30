@@ -6,7 +6,9 @@ const Main: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
   return (
     <main className={main.page}>
       <Navigation />
-      {children}
+      <div className={main.mainPage}>
+        {children}
+      </div>
     </main>
   );
 };
