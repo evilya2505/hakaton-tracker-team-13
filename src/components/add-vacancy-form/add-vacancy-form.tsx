@@ -74,7 +74,6 @@ const AddVacancyForm: React.FC<IAddVacancyFormProps> = ({
     if (pathname.includes("edit")) {
       mainApi
       .partlyEditVacancy({
-        author: defaultValues?.author,
         title: data.name,
         city: data.city,
         expirience: data.experience,
