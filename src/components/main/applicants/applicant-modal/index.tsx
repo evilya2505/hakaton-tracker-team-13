@@ -13,12 +13,6 @@ export default function StudentModal() {
     (state) => state.applicants.selectedCardData
   );
 
-  // const [isAdded, setIsAdded] = useState(
-  //   selectedCard.response_status[0] === 0
-  // );
-
-  const [isAdded, setIsAdded] = useState(false);
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -38,11 +32,7 @@ export default function StudentModal() {
       {value === 0 && <MainStudentInfo />}
       {value === 1 && <MainStudentCv />}
       <div className={studentModal.test}>
-        <TogglingButton
-          isAdded={isAdded}
-          setIsAdded={setIsAdded}
-          applicant={selectedCard}
-        />
+        <TogglingButton applicant={selectedCard} />
       </div>
     </div>
   );

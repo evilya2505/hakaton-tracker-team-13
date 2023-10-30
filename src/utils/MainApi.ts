@@ -1,25 +1,15 @@
 import { TVacancy } from "./types";
 
-interface TOptions {
-  baseUrl: string;
-  headers: Headers;
-}
-
 interface applicantInVacancyProps {
   applicantId: number;
-  vacancyId: number;
-  status: string;
-}
-
-interface delApplicantInVacancyProps {
-  applicantId: number;
-  vacancyId: number;
+  vacancyId: number | undefined;
+  status?: string;
 }
 
 class MainApi {
-  _baseUrl: string;
-  _headers: Headers;
-  constructor(options: TOptions) {
+  private _baseUrl: string;
+  private _headers: Record<string, string>;
+  constructor(options: { baseUrl: string; headers: Record<string, string> }) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
   }
@@ -83,26 +73,25 @@ class MainApi {
 
   // добавить вакансию
   addVacancy(vacancy: TVacancy) {
-    console.log(
-      JSON.stringify({
-        data: { created: vacancy.created?.toDateString(), ...vacancy },
-      })
-    );
-    // return fetch(`${this._baseUrl}/vacancies/`, {
-    //   method: "POST",
-    //   headers: {
-    //     ...this._headers,
-    //     Authorization: `Bearer `,
-    //     body: JSON.stringify({
-    //       data: vacancy,
-    //     }),
-    //   },
-    // }).then((res) => this._getRequestResult(res));
+    // console.log(
+    //   JSON.stringify({
+    //     data: { created: vacancy.created?.toDateString(), ...vacancy },
+    //   })
+    // );
+    return fetch(`${this._baseUrl}/vacancies/`, {
+      method: "POST",
+      headers: {
+        ...this._headers,
+        body: JSON.stringify({
+          data: vacancy,
+        }),
+      },
+    }).then((res) => this._getRequestResult(res));
   }
 
   // редактировать вакансию
   partlyEditVacancy(vacancy: TVacancy) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancy.author}/`, {
+    return fetch(`${this._baseUrl}/vacancies/${vacancy.id}/`, {
       method: "PATCH",
       headers: {
         ...this._headers,
@@ -116,7 +105,7 @@ class MainApi {
 
   // удалить вакансию
   deleteVacancy(vacancyId: number) {
-    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants`, {
+    return fetch(`${this._baseUrl}/vacancies/${vacancyId}/applicants/`, {
       method: "DELETE",
       headers: {
         ...this._headers,
@@ -139,29 +128,21 @@ class MainApi {
 
   // добавить соискателя в вакансию
 
-  addApplicantToVacancy({
-    applicantId,
-    vacancyId,
-    status,
-  }: applicantInVacancyProps) {
+  addApplicantToVacancy({ applicantId, vacancyId }: applicantInVacancyProps) {
     return fetch(`${this._baseUrl}/vacancies/${vacancyId}/responses/`, {
       method: "POST",
       headers: {
         ...this._headers,
       },
-      body: JSON.stringify({
-        applicant: applicantId,
-        vacancy: vacancyId,
-        status: status,
-      }),
+      body: JSON.stringify({ applicant: applicantId, vacancy: vacancyId }),
     }).then((res) => this._getRequestResult(res));
   }
 
   // получить статус соискателя в вакансии
 
-  getApplicantStatus({ applicantId, vacancyId }: delApplicantInVacancyProps) {
+  getApplicantStatus({ applicantId, vacancyId }: applicantInVacancyProps) {
     return fetch(
-      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}`,
+      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}/`,
       {
         method: "GET",
         headers: {
@@ -199,16 +180,16 @@ class MainApi {
   deleteApplicantFromVacancy({
     applicantId,
     vacancyId,
-  }: delApplicantInVacancyProps) {
+  }: applicantInVacancyProps) {
     return fetch(
-      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}`,
+      `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}/`,
       {
         method: "DELETE",
         headers: {
           ...this._headers,
         },
       }
-    ).then((res) => this._getRequestResult(res));
+    ).then((res) => console.log(res));
   }
 
   getCityById(cityId: number) {
@@ -232,14 +213,12 @@ class MainApi {
   }
 }
 
-// инициализация headers
-const requestHeaders: HeadersInit = new Headers();
-requestHeaders.set("Content-Type", "application/json");
-
 // Создание экземпляра класса Api
 const mainApi = new MainApi({
   baseUrl: "http://130.193.38.180/api",
-  headers: requestHeaders,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export default mainApi;

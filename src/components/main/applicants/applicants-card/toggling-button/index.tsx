@@ -11,6 +11,7 @@ import LinearProgress, {
 import { useSelector } from "../../../../../services/hooks";
 import mainApi from "../../../../../utils/MainApi";
 import { TApplicant } from "../../../../../utils/types";
+import { setSelectedCardData } from "../../../../../services/reducers/applicants";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -27,41 +28,66 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 type togglingButtonProps = {
-  isAdded: boolean;
-  setIsAdded: Dispatch<SetStateAction<boolean>>;
   applicant: TApplicant;
 };
 
-export const TogglingButton = ({
-  isAdded,
-  setIsAdded,
-  applicant,
-}: togglingButtonProps) => {
+export const TogglingButton = ({ applicant }: togglingButtonProps) => {
   const selectedDropDownVacancy = useSelector(
     (state) => state.applicants.selectedDropDownVacancy
   );
 
   const [openSnackbar, setOpenSnackBar] = useState(false);
   const [progress, setProgress] = useState(100);
+  const [isCandidate, setIsCandidate] = useState(false);
+
+  function getApplicantStatus() {
+    mainApi
+      .getApplicantStatus({
+        applicantId: applicant.id,
+        vacancyId: selectedDropDownVacancy.id,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.response_status) setIsCandidate(true);
+        console.log(isCandidate);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    if (selectedDropDownVacancy.id) getApplicantStatus();
+  }, [selectedDropDownVacancy]);
 
   function toggleState(e: SyntheticEvent) {
     e.stopPropagation();
-    setOpenSnackBar(true);
-    setProgress(100);
     if (selectedDropDownVacancy.id) {
-      if (!isAdded) {
-        mainApi.updateApplicantStatus({
-          applicantId: selectedDropDownVacancy.id,
-          vacancyId: applicant.id,
-          status: "Кандидат"
-        });
+      if (!isCandidate) {
+        mainApi
+          .addApplicantToVacancy({
+            applicantId: applicant.id,
+            vacancyId: selectedDropDownVacancy.id,
+          })
+          .then(() => {
+            setOpenSnackBar(true);
+            setProgress(100);
+            setIsCandidate(true);
+          })
+          .catch((err) => console.log(err));
       } else {
-        mainApi.deleteApplicantFromVacancy({
-          applicantId: selectedDropDownVacancy.id,
-          vacancyId: applicant.id,
-        });
-        setIsAdded(!isAdded);
+        mainApi
+          .deleteApplicantFromVacancy({
+            applicantId: applicant.id,
+            vacancyId: selectedDropDownVacancy.id,
+          })
+          .then(() => {
+            setOpenSnackBar(true);
+            setProgress(100);
+            setIsCandidate(false);
+          })
+          .catch((err) => console.log(err));
       }
+    } else {
+      setOpenSnackBar(true);
     }
   }
 
@@ -82,12 +108,11 @@ export const TogglingButton = ({
 
   useEffect(() => {
     setProgress(progress - 100);
-    console.log(selectedDropDownVacancy.title);
-  }, [isAdded]);
+  }, [isCandidate]);
 
   return (
     <div className={togglingButton.container}>
-      {!isAdded ? (
+      {isCandidate === false ? (
         <Button
           type="button"
           className={togglingButton.addButton}
@@ -120,7 +145,7 @@ export const TogglingButton = ({
               <p className={togglingButton.snackTitle}>
                 {!selectedDropDownVacancy.id
                   ? "Выберите вакансию"
-                  : snackbarMsg(isAdded)}
+                  : snackbarMsg(isCandidate)}
               </p>
               <p className={togglingButton.snackTarget}>
                 {selectedDropDownVacancy.title}
