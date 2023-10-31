@@ -23,7 +23,7 @@ export type FilterApplicantsValues = {
   FD?: boolean;
   HB?: boolean;
   RM?: boolean;
-}
+};
 
 export type AddVacancyFormValues = {
   name: string;
@@ -96,7 +96,7 @@ export type TLangLevel = {
 export type TLanguage = {
   id: number;
   language: string;
-}
+};
 
 export type TVacancy = {
   id?: number; // айди
@@ -121,5 +121,6 @@ export type TVacancy = {
   created?: Date; // дата публикации
   applicants?: Array<TApplicant>;
   currency?: string;
+  suitable_candidates_count?: number;
+  response_count?: number;
 };
-

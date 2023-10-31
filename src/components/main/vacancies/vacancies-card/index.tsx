@@ -18,8 +18,15 @@ const VacanciesCard = ({ vacancy }: VacanciesCardProps) => {
           <div className={vacanciesCard.delete} onClick={() => {}} />
         </div>
       </div>
-      <p className={vacanciesCard.status}>Подходящие кандидаты: 54</p>
-      <p className={vacanciesCard.status}>Откликнулось: 0</p>
+      <p className={vacanciesCard.status}>
+        Подходящие кандидаты: {' '}
+        {vacancy.suitable_candidates_count
+          ? vacancy.suitable_candidates_count
+          : "0"}
+      </p>
+      <p className={vacanciesCard.status}>
+        Откликнулось: {vacancy.response_count ? vacancy.response_count : '0'}
+      </p>
       <div className={vacanciesCard.dataInfo}>
         <div className={vacanciesCard.dataTitle}>Дата публикации</div>
         <div className={vacanciesCard.dataCreate}>
