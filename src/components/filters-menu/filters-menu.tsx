@@ -153,8 +153,8 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
       }
     }
 
-    if (filters.length == 0) {
-      if (type == "applicants") {
+    if (filters.length === 0) {
+      if (type === "applicants") {
         dispatch(setShownApplicants(applicants));
       } else {
         dispatch(
@@ -165,7 +165,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
         );
       }
     } else {
-      if (type == "applicants") {
+      if (type === "applicants") {
         console.log(true);
         mainApi
           .getFilteresApplicants(filters)
@@ -221,7 +221,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
     dispatch(unsetChecked({ key: "province", value: filter }));
     setChoosenCities(choosenCities.filter((city) => city !== clickedCity));
 
-    if (filters.length == 0) {
+    if (filters.length === 0) {
       dispatch(setShownApplicants(applicants));
     } else {
       mainApi
@@ -234,7 +234,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
   };
 
   function clearFilters() {
-    if (type == "applicants") {
+    if (type === "applicants") {
       dispatch(setShownApplicants(applicants));
     } else {
       setCurrentVacancyApplicantsList({
@@ -290,8 +290,8 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {type == "applicants" && (
-          <>
+        {type === "applicants" && (
+          <div>
             <MenuItem className={filtersMenu.menuItem}>
               <Button
                 onClick={() => handleFilterClick("directions")}
@@ -389,7 +389,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               </fieldset>
             </MenuItem>
             <Divider />
-          </>
+          </div>
         )}
 
         <MenuItem className={filtersMenu.menuItem}>
@@ -431,14 +431,14 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
           </Button>
           <fieldset
             className={`${
-              type == "applicant" ? filtersMenu.city : filtersMenu.checkboxes
+              type === "applicant" ? filtersMenu.city : filtersMenu.checkboxes
             } ${
               !isCityOpened
                 ? `${filtersMenu.fieldset}`
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            {type == "applicants" ? (
+            {type === "applicants" ? (
               <>
                 <SearchBar
                   addCity={setNewCity}
@@ -469,7 +469,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
                 </ul>
               </>
             ) : (
-              <li
+              <ul
                 className={filtersMenu.list}
                 style={{
                   rowGap: "10px",
@@ -493,7 +493,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
                     </li>
                   );
                 })}
-              </li>
+              </ul>
             )}
           </fieldset>
         </MenuItem>
@@ -568,7 +568,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               id="2"
               register={register}
               disabled={
-                !(type == "vacancy"
+                !(type === "vacancy"
                   ? infoForVacancyApplicantsFilters.expiriences.includes(
                       "Релевантный"
                     )
@@ -584,7 +584,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               id="3"
               register={register}
               disabled={
-                !(type == "vacancy"
+                !(type === "vacancy"
                   ? infoForVacancyApplicantsFilters.expiriences.includes(
                       "Около-релевантный"
                     )
@@ -647,7 +647,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               label="Офис"
               id="FD"
               disabled={
-                !(type == "vacancy"
+                !(type === "vacancy"
                   ? infoForVacancyApplicantsFilters.work_formats.includes(
                       "Полный день"
                     )
@@ -664,7 +664,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               id="HB"
               register={register}
               disabled={
-                !(type == "vacancy"
+                !(type === "vacancy"
                   ? infoForVacancyApplicantsFilters.work_formats.includes(
                       "Гибрид"
                     )
@@ -680,7 +680,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               id="RM"
               register={register}
               disabled={
-                !(type == "vacancy"
+                !(type === "vacancy"
                   ? infoForVacancyApplicantsFilters.work_formats.includes(
                       "Удалённая работа"
                     )
@@ -691,7 +691,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
         </MenuItem>
         <Divider />
 
-        {type == "vacancy" && (
+        {type === "vacancy" && (
           <div>
             <MenuItem className={filtersMenu.menuItem}>
               <Button
@@ -748,7 +748,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
                   register={register}
                   disabled={
                     !(
-                      type == "vacancy" &&
+                      type === "vacancy" &&
                       infoForVacancyApplicantsFilters.edu_statuses.includes(
                         "Студент"
                       )
@@ -766,7 +766,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
                   register={register}
                   disabled={
                     !(
-                      type == "vacancy" &&
+                      type === "vacancy" &&
                       infoForVacancyApplicantsFilters.edu_statuses.includes(
                         "Выпускник"
                       )
