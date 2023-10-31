@@ -12,12 +12,21 @@ export interface TVacaniesListState {
   neededDataRequest: boolean;
   neededDataFailed: boolean;
   currentVacancyApplicantsList: Array<TApplicant>;
+  currentVacancyApplicantsListNotFiltered: Array<TApplicant>;
   addNewVacancyRequest: boolean;
   addNewVacancyFailed: boolean;
   editVacancyRequest: boolean;
 
   editApplicantStatusRequest: boolean;
   editApplicantStatusFailed: boolean;
+
+  infoForFilters: {
+    cities: string[];
+    expiriences: string[];
+    work_formats: string[];
+    edu_statuses: string[];
+    courses: string[];
+  };
 }
 
 export const initialState: TVacaniesListState = {
@@ -29,12 +38,20 @@ export const initialState: TVacaniesListState = {
   neededDataRequest: false,
   neededDataFailed: false,
   currentVacancyApplicantsList: [],
+  currentVacancyApplicantsListNotFiltered: [],
   addNewVacancyRequest: false,
   addNewVacancyFailed: false,
   editVacancyRequest: false,
 
   editApplicantStatusRequest: false,
   editApplicantStatusFailed: false,
+  infoForFilters: {
+    cities: [],
+    expiriences: [],
+    work_formats: [],
+    edu_statuses: [],
+    courses: [],
+  },
 };
 
 const vacanciesSlice = createSlice({
@@ -60,11 +77,81 @@ const vacanciesSlice = createSlice({
     ) {
       state.currentVacancy = action.payload;
     },
-    setCurrentVacancyApplicantsList(
+    setCurrentVacancyApplicantsListNotFiltered(
       state: TVacaniesListState,
       action: PayloadAction<Array<TApplicant>>
     ) {
-      state.currentVacancyApplicantsList = action.payload;
+      state.currentVacancyApplicantsListNotFiltered = action.payload;
+    },
+    setCurrentVacancyApplicantsList(
+      state: TVacaniesListState,
+      action: PayloadAction<{ data: Array<TApplicant>; isChecked: boolean }>
+    ) {
+      const applicants: TApplicant[] = action.payload.data;
+      state.currentVacancyApplicantsList = action.payload.data;
+      if (!action.payload.isChecked) {
+        state.infoForFilters = {
+          cities: [],
+          expiriences: [],
+          work_formats: [],
+          edu_statuses: [],
+          courses: [],
+        };
+        for (let i = 0; i < applicants.length; i++) {
+          const workFormat = applicants[i].work_format;
+          const city = applicants[i].city;
+          const work_status = applicants[i].work_status;
+          const edu_status = applicants[i].edu_status;
+          const course = applicants[i].course;
+
+          if (!state.infoForFilters.work_formats.includes(workFormat)) {
+            const newData = [...state.infoForFilters.work_formats, workFormat];
+            const updatedInfoForFilters = {
+              ...state.infoForFilters,
+              work_formats: newData,
+            };
+            state.infoForFilters = updatedInfoForFilters;
+          }
+
+          if (!state.infoForFilters.cities.includes(city)) {
+            const newData = [...state.infoForFilters.cities, city];
+            const updatedInfoForFilters = {
+              ...state.infoForFilters,
+              cities: newData,
+            };
+            state.infoForFilters = updatedInfoForFilters;
+          }
+
+          if (!state.infoForFilters.expiriences.includes(work_status)) {
+            const newData = [...state.infoForFilters.expiriences, work_status];
+            const updatedInfoForFilters = {
+              ...state.infoForFilters,
+              expiriences: newData,
+            };
+            state.infoForFilters = updatedInfoForFilters;
+          }
+
+          if (!state.infoForFilters.edu_statuses.includes(edu_status)) {
+            const newData = [...state.infoForFilters.edu_statuses, edu_status];
+            const updatedInfoForFilters = {
+              ...state.infoForFilters,
+              edu_statuses: newData,
+            };
+            state.infoForFilters = updatedInfoForFilters;
+          }
+
+          if (!state.infoForFilters.courses.includes(course)) {
+            const newData = [...state.infoForFilters.courses, course];
+            const updatedInfoForFilters = {
+              ...state.infoForFilters,
+              courses: newData,
+            };
+            state.infoForFilters = updatedInfoForFilters;
+          }
+        }
+
+        console.log(state.infoForFilters);
+      }
     },
     setModalVisibility(
       state: TVacaniesListState,
@@ -93,19 +180,25 @@ const vacanciesSlice = createSlice({
       state.addNewVacancyRequest = false;
       state.addNewVacancyFailed = true;
     },
-    addNewVacancySuccess(state: TVacaniesListState, action: PayloadAction<TVacancy>) {
-      state.vacancies = [action.payload, ...state.vacancies]
-      state.addNewVacancyRequest =  false;
+    addNewVacancySuccess(
+      state: TVacaniesListState,
+      action: PayloadAction<TVacancy>
+    ) {
+      state.vacancies = [action.payload, ...state.vacancies];
+      state.addNewVacancyRequest = false;
       state.addNewVacancyFailed = false;
     },
     editVacancyRequest(state: TVacaniesListState) {
       state.editVacancyRequest = true;
       state.addNewVacancyFailed = false;
     },
-    editVacancySuccess(state: TVacaniesListState, action: PayloadAction<TVacancy>) {
+    editVacancySuccess(
+      state: TVacaniesListState,
+      action: PayloadAction<TVacancy>
+    ) {
       const updatedVacancy = action.payload;
 
-      state.vacancies = state.vacancies.map(vacancy => {
+      state.vacancies = state.vacancies.map((vacancy) => {
         if (vacancy.id === updatedVacancy.id) {
           return updatedVacancy;
         }
@@ -113,7 +206,7 @@ const vacanciesSlice = createSlice({
       });
 
       state.currentVacancyPage = action.payload;
-      state.editVacancyRequest =  false;
+      state.editVacancyRequest = false;
       state.addNewVacancyFailed = false;
     },
     setApplicantsStatusFailed(state: TVacaniesListState) {
@@ -124,23 +217,31 @@ const vacanciesSlice = createSlice({
       state.editApplicantStatusRequest = true;
       state.editApplicantStatusRequest = false;
     },
-    setApplicantStatusSuccess(state: TVacaniesListState, action: PayloadAction<{applicant: number, vacancy: string, status: string}>) {
+    setApplicantStatusSuccess(
+      state: TVacaniesListState,
+      action: PayloadAction<{
+        applicant: number;
+        vacancy: string;
+        status: string;
+      }>
+    ) {
       if (action.payload.status !== undefined) {
-        state.currentVacancyApplicantsList = state.currentVacancyApplicantsList.map(applicant => {
-          if (applicant.id === action.payload.applicant) {
-            return {
-              ...applicant,
-              response_status: action.payload.status
-            };
-          } else {
-            return applicant;
-          }
-        });
+        state.currentVacancyApplicantsList =
+          state.currentVacancyApplicantsList.map((applicant) => {
+            if (applicant.id === action.payload.applicant) {
+              return {
+                ...applicant,
+                response_status: action.payload.status,
+              };
+            } else {
+              return applicant;
+            }
+          });
       }
       console.log(state.currentVacancyApplicantsList);
       state.editApplicantStatusRequest = false;
       state.editApplicantStatusRequest = false;
-    }
+    },
   },
 });
 
@@ -161,6 +262,7 @@ export const {
   setAddVacancyModalVisibility,
   setVacancies,
   setCurrentVacancyApplicantsList,
+  setCurrentVacancyApplicantsListNotFiltered,
 } = vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;

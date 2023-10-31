@@ -9,6 +9,7 @@ interface ICheckboxCustomizedProps {
   register: UseFormRegister<any>;
   handleCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isChecked?: boolean;
+  disabled?: boolean;
 }
 
 export default function CheckboxCustomized({
@@ -17,6 +18,7 @@ export default function CheckboxCustomized({
   id,
   label,
   register,
+  disabled,
 }: ICheckboxCustomizedProps) {
   return (
     <FormControlLabel
@@ -40,6 +42,7 @@ export default function CheckboxCustomized({
           onChange={(e) => handleCheckboxChange(e)}
           variant="outlined"
           size="lg"
+          disabled={disabled}
         />
       }
       label={label}

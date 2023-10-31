@@ -23,7 +23,7 @@ const ApplicantsFilter: React.FC<{}> = (): JSX.Element => {
         <SearchBar text="Поиск" />
       </div>
       <VacanciesDropDown />
-      <FiltersMenu />
+      <FiltersMenu type={"applicants"} />
       <FilterModal closePopup={closeModal} isVisible={isFilterModalVisible} />
     </div>
   );
