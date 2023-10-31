@@ -13,7 +13,8 @@ import {
   setCurrentVacancyApplicantsList,
   setApplicantsStatusFailed,
   setApplicantStatusRequest,
-  setApplicantStatusSuccess
+  setApplicantStatusSuccess,
+  setCurrentVacancyApplicantsListNotFiltered,
 } from "../reducers/vacancies";
 
 export const getNeededVacancyData = (vacancy: TVacancy) => {
@@ -32,7 +33,15 @@ export const getNeededVacancyData = (vacancy: TVacancy) => {
     mainApi
       .getVacancysApplicants(vacancy.id)
       .then((resApplicants) => {
-        dispatch(setCurrentVacancyApplicantsList(resApplicants.results));
+        dispatch(
+          setCurrentVacancyApplicantsList({
+            data: resApplicants.results,
+            isChecked: false,
+          })
+        );
+        dispatch(
+          setCurrentVacancyApplicantsListNotFiltered(resApplicants.results)
+        );
         mainApi
           .getCityById(city)
           .then((res) => {
@@ -52,14 +61,14 @@ export const addNewVacancy = (vacancy: TVacancy) => {
   return function (dispatch: AppDispatch) {
     dispatch(addNewVacancyRequest());
     mainApi
-    .addVacancy(vacancy)
-    .then(data => {
-      dispatch(addNewVacancySuccess(data));
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch(addNewVacancyFailed());
-    });
+      .addVacancy(vacancy)
+      .then((data) => {
+        dispatch(addNewVacancySuccess(data));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(addNewVacancyFailed());
+      });
   };
 };
 
@@ -68,42 +77,45 @@ export const editVacancy = (newInfo: TVacancy, id: number | undefined) => {
     dispatch(editVacancyRequest());
 
     mainApi
-    .partlyEditVacancy(newInfo, id)
-    .then(data => {
-      let vacancyTemp = { ...data };
+      .partlyEditVacancy(newInfo, id)
+      .then((data) => {
+        let vacancyTemp = { ...data };
 
-      mainApi
-      .getCityById(data.city)
-      .then((res) => {
-        vacancyTemp.applicants = data;
-        vacancyTemp.city = res.name;
-        dispatch(getCityApplicantsInfoSuccess(vacancyTemp));
-        dispatch(editVacancySuccess(vacancyTemp));
+        mainApi
+          .getCityById(data.city)
+          .then((res) => {
+            vacancyTemp.applicants = data;
+            vacancyTemp.city = res.name;
+            dispatch(getCityApplicantsInfoSuccess(vacancyTemp));
+            dispatch(editVacancySuccess(vacancyTemp));
+          })
+          .catch((err) => {
+            dispatch(getCityApplicantsInfoFailed());
+          });
       })
       .catch((err) => {
-        dispatch(getCityApplicantsInfoFailed());
+        console.log(err);
+        dispatch(addNewVacancyFailed());
       });
-
-    })
-    .catch(err => {
-      console.log(err);
-      dispatch(addNewVacancyFailed());
-    });
   };
 };
 
-
-export const editCandidateStatus = ({applicantId, vacancyId, status}: applicantInVacancyProps) => {
+export const editCandidateStatus = ({
+  applicantId,
+  vacancyId,
+  status,
+}: applicantInVacancyProps) => {
   return function (dispatch: AppDispatch) {
     dispatch(setApplicantStatusRequest());
 
-      mainApi.updateApplicantStatus({applicantId, vacancyId, status})
-      .then(data => {
+    mainApi
+      .updateApplicantStatus({ applicantId, vacancyId, status })
+      .then((data) => {
         dispatch(setApplicantStatusSuccess(data));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         dispatch(setApplicantsStatusFailed());
-      })
+      });
   };
 };

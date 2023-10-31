@@ -21,7 +21,6 @@ const applicantsSlice = createSlice({
       state.selectedCardData = action.payload;
     },
     setApplicants(state, action: PayloadAction<Array<TApplicant>>) {
-      // console.log(action.payload);
       state.applicants = action.payload;
     },
     setSelectedDropDownVacancy(state, action: PayloadAction<TVacancy>) {
@@ -39,6 +38,9 @@ const applicantsSlice = createSlice({
     setShownApplicants(state, action: PayloadAction<Array<TApplicant>>) {
       state.shownApplicants = action.payload;
     },
+    clearChecked(state) {
+      state.checked = [];
+    },
     setApplicantsSearchResults(
       state,
       action: PayloadAction<Array<TApplicant>>
@@ -50,6 +52,7 @@ const applicantsSlice = createSlice({
 });
 
 export const {
+  clearChecked,
   setShownApplicants,
   unsetChecked,
   setChecked,

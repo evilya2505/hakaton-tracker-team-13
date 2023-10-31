@@ -12,7 +12,10 @@ import EditVacancy from "../main/vacancies/vacancy/edit-vacancy/inex";
 import Settings from "../main/settings";
 import mainApi from "../../utils/MainApi";
 import { useDispatch } from "../../services/hooks";
-import { setApplicants, setShownApplicants } from "../../services/reducers/applicants";
+import {
+  setApplicants,
+  setShownApplicants,
+} from "../../services/reducers/applicants";
 import { setVacancies } from "../../services/reducers/vacancies";
 import { getCities } from "../../services/actions/cities";
 import { getLanguages } from "../../services/actions/languages";

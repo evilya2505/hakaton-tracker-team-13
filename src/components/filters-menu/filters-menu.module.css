@@ -21,7 +21,8 @@
 .checkboxes {
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  border: none;
+  row-gap: 10px;
   padding: 12px 10px 0px !important;
 }
 

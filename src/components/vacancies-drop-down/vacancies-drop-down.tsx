@@ -45,7 +45,7 @@ export default function VacanciesDropDown() {
       inputProps={{ "aria-label": "Without label" }}
       sx={{
         ".MuiOutlinedInput-input": {
-          padding: "10px 12px",
+          padding: "8.5px 12px",
           color: "#1A1B22",
           fontFamily: "YS Text",
           fontSize: "14px",

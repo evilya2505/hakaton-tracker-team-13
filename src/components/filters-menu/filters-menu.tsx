@@ -1,12 +1,8 @@
 import React from "react";
 import { Button, Chip } from "@mui/material";
-import settingsIcon from "../../images/settings.svg";
 import filtersMenu from "./filters-menu.module.css";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import arrowDownIcon from "../../images/arrow_down.svg";
-import arrowUpIcon from "../../images/arrow_up.svg";
-import deleteIcon from "../../images/delete.svg";
 import { Divider } from "@mui/material";
 import SearchBar from "../search-form/search-form";
 import { useForm } from "react-hook-form";
@@ -15,26 +11,42 @@ import CheckboxCustomized from "./checkbox";
 import mainApi from "../../utils/MainApi";
 import { useDispatch, useSelector } from "../../services/hooks";
 import {
-  setApplicants,
   setChecked,
   setShownApplicants,
   unsetChecked,
 } from "../../services/reducers/applicants";
+import { clearChecked } from "../../services/reducers/applicants";
+import { setCurrentVacancyApplicantsList } from "../../services/reducers/vacancies";
 
-const FiltersMenu = () => {
+
+interface IFiltersMenuProps {
+  type: string;
+}
+
+const FiltersMenu = ({ type }: IFiltersMenuProps) => {
   const dispatch = useDispatch();
   const [isDirectionsOpened, setIsDirectionsOpened] =
     React.useState<boolean>(false);
   const [isCityOpened, setIsCityOpened] = React.useState<boolean>(false);
   const [isExperienceOpened, setIsExperienceOpened] =
     React.useState<boolean>(false);
+  const [isCourseOpened, setIsCourseOpened] = React.useState<boolean>(false);
+  const [isEduStatusOpened, setIsEduStatusOpened] =
+    React.useState<boolean>(false);
   const [isTypeOpened, setIsTypeOpened] = React.useState<boolean>(false);
   const checkedList = useSelector((state) => state.applicants.checked);
   const applicants = useSelector((state) => state.applicants.applicants);
+  const infoForVacancyApplicantsFilters = useSelector(
+    (state) => state.vacancies.infoForFilters
+  );
+  const currentVacancyApplicantsList = useSelector(
+    (state) => state.vacancies.currentVacancyApplicantsListNotFiltered
+  );
+  const vacancy = useSelector((state) => state.vacancies.currentVacancyPage);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const form = useForm<FilterApplicantsValues>();
-  const [choosenCities, setChoosenCities] = React.useState(["Москва"]);
-  const { register, getValues } = form;
+  const [choosenCities, setChoosenCities] = React.useState<string[]>([]);
+  const { register } = form;
 
   const handleMainMenuClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -46,8 +58,6 @@ const FiltersMenu = () => {
 
   const setNewCity = (city: string) => {
     let filters = [...checkedList];
-
-    console.log(filters);
 
     filters.push({ key: "province", value: city });
 
@@ -77,15 +87,107 @@ const FiltersMenu = () => {
       }
     }
 
+    if (infoForVacancyApplicantsFilters.courses.includes(filter)) {
+      if (e.target.checked) {
+        filters.push({ key: "course", value: filter });
+        dispatch(setChecked({ key: "course", value: filter }));
+      } else {
+        dispatch(unsetChecked({ key: "course", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
+      }
+    }
+
+    if (["1", "2", "3"].includes(filter)) {
+      if (e.target.checked) {
+        filters.push({ key: "work_status", value: filter });
+        dispatch(setChecked({ key: "work_status", value: filter }));
+      } else {
+        dispatch(unsetChecked({ key: "work_status", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
+      }
+    }
+
+    if (
+      ["Разработчик", "Аналитик", "Дизайн", "Менеджер", "Маркетолог"].includes(
+        filter
+      )
+    ) {
+      if (e.target.checked) {
+        filters.push({ key: "course", value: filter });
+        dispatch(setChecked({ key: "course", value: filter }));
+      } else {
+        dispatch(unsetChecked({ key: "course", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
+      }
+    }
+
+    if (infoForVacancyApplicantsFilters.cities.includes(filter)) {
+      if (e.target.checked) {
+        filters.push({ key: "province", value: filter });
+        dispatch(setChecked({ key: "province", value: filter }));
+      } else {
+        dispatch(unsetChecked({ key: "province", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
+      }
+    }
+
+    if (infoForVacancyApplicantsFilters.edu_statuses.includes(filter)) {
+      if (e.target.checked) {
+        filters.push({
+          key: "edu_status",
+          value: filter == "Студент" ? "1" : "2",
+        });
+        dispatch(
+          setChecked({
+            key: "edu_status",
+            value: filter == "Студент" ? "1" : "2",
+          })
+        );
+      } else {
+        dispatch(
+          unsetChecked({
+            key: "edu_status",
+            value: filter == "Студент" ? "1" : "2",
+          })
+        );
+        filters = checkedList.filter(
+          (item) => item.value !== (filter == "Студент" ? "1" : "2")
+        );
+      }
+    }
+
     if (filters.length == 0) {
-      dispatch(setShownApplicants(applicants));
+      if (type == "applicants") {
+        dispatch(setShownApplicants(applicants));
+      } else {
+        dispatch(
+          setCurrentVacancyApplicantsList({
+            data: currentVacancyApplicantsList,
+            isChecked: true,
+          })
+        );
+      }
     } else {
-      mainApi
-        .getFilteresApplicants(filters)
-        .then((data) => {
-          dispatch(setShownApplicants(data.results));
-        })
-        .catch((err) => console.log(err));
+      if (type == "applicants") {
+        mainApi
+          .getFilteresApplicants(filters)
+          .then((data) => {
+            dispatch(setShownApplicants(data.results));
+          })
+          .catch((err) => console.log(err));
+      } else {
+        mainApi
+          .getFilteredVacabcyApplicants(filters, vacancy?.id)
+          .then((data) => {
+            dispatch(
+              setCurrentVacancyApplicantsList({
+                data: data.results,
+                isChecked: true,
+              })
+            );
+          })
+          .catch((err) => console.log(err));
+      }
     }
   }
 
@@ -102,6 +204,12 @@ const FiltersMenu = () => {
         break;
       case "experience":
         setIsExperienceOpened(!isExperienceOpened);
+        break;
+      case "edu_status":
+        setIsEduStatusOpened(!isEduStatusOpened);
+        break;
+      case "course":
+        setIsCourseOpened(!isCityOpened);
         break;
       default:
         break;
@@ -127,6 +235,19 @@ const FiltersMenu = () => {
     }
   };
 
+  function clearFilters() {
+    if (type == "applicants") {
+      dispatch(setShownApplicants(applicants));
+    } else {
+      setCurrentVacancyApplicantsList({
+        data: currentVacancyApplicantsList,
+        isChecked: true,
+      });
+    }
+    setChoosenCities([]);
+    dispatch(clearChecked());
+  }
+
   return (
     <form noValidate>
       <Button
@@ -140,7 +261,7 @@ const FiltersMenu = () => {
             viewBox="0 0 20 20"
             fill="none"
           >
-            <g clip-path="url(#clip0_695_22701)">
+            <g clipPath="url(#clip0_695_20056)">
               <path
                 d="M0.833333 3.95806H3.11333C3.2922 4.61617 3.68264 5.19714 4.22444 5.61134C4.76623 6.02553 5.42927 6.24994 6.11125 6.24994C6.79323 6.24994 7.45627 6.02553 7.99806 5.61134C8.53986 5.19714 8.9303 4.61617 9.10917 3.95806H19.1667C19.3877 3.95806 19.5996 3.87026 19.7559 3.71398C19.9122 3.5577 20 3.34574 20 3.12473C20 2.90371 19.9122 2.69175 19.7559 2.53547C19.5996 2.37919 19.3877 2.29139 19.1667 2.29139H9.10917C8.9303 1.63328 8.53986 1.05232 7.99806 0.638118C7.45627 0.223921 6.79323 -0.000488281 6.11125 -0.000488281C5.42927 -0.000488281 4.76623 0.223921 4.22444 0.638118C3.68264 1.05232 3.2922 1.63328 3.11333 2.29139H0.833333C0.61232 2.29139 0.400358 2.37919 0.244078 2.53547C0.0877974 2.69175 0 2.90371 0 3.12473C0 3.34574 0.0877974 3.5577 0.244078 3.71398C0.400358 3.87026 0.61232 3.95806 0.833333 3.95806ZM6.11083 1.66639C6.39926 1.66639 6.68122 1.75192 6.92104 1.91217C7.16086 2.07241 7.34778 2.30017 7.45816 2.56665C7.56854 2.83312 7.59742 3.12635 7.54115 3.40923C7.48488 3.69212 7.34598 3.95197 7.14203 4.15592C6.93808 4.35988 6.67823 4.49877 6.39534 4.55504C6.11245 4.61131 5.81923 4.58243 5.55275 4.47205C5.28628 4.36167 5.05852 4.17476 4.89827 3.93493C4.73803 3.69511 4.6525 3.41316 4.6525 3.12473C4.65294 2.73809 4.80673 2.36741 5.08012 2.09402C5.35352 1.82062 5.72419 1.66684 6.11083 1.66639Z"
                 fill="#1D6BF3"
@@ -155,7 +276,7 @@ const FiltersMenu = () => {
               />
             </g>
             <defs>
-              <clipPath id="clip0_695_22701">
+              <clipPath id="clip0_695_20056">
                 <rect width="20" height="20" fill="white" />
               </clipPath>
             </defs>
@@ -171,83 +292,108 @@ const FiltersMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={filtersMenu.menuItem}>
-          <Button
-            onClick={() => handleFilterClick("directions")}
-            className={`${filtersMenu.menuButton} ${filtersMenu.button}`}
-            variant="text"
-            endIcon={
-              !isDirectionsOpened ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M18.707 8.28578C18.5193 8.10279 18.2647 8 17.9993 8C17.7339 8 17.4794 8.10279 17.2917 8.28578L12.7016 12.762C12.5113 12.9401 12.2577 13.0396 11.994 13.0396C11.7302 13.0396 11.4766 12.9401 11.2863 12.762L6.69623 8.28578C6.50746 8.10798 6.25463 8.0096 5.9922 8.01182C5.72977 8.01405 5.47873 8.1167 5.29316 8.29767C5.10758 8.47864 5.00232 8.72345 5.00004 8.97937C4.99776 9.23529 5.09864 9.48185 5.28096 9.66594L9.87006 14.1422C10.1489 14.4141 10.4799 14.6299 10.8443 14.7771C11.2086 14.9242 11.5991 15 11.9935 15C12.3878 15 12.7783 14.9242 13.1427 14.7771C13.507 14.6299 13.838 14.4141 14.1169 14.1422L18.707 9.66594C18.8946 9.4829 19 9.23467 19 8.97586C19 8.71704 18.8946 8.46882 18.707 8.28578Z"
-                    fill="#797981"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M17.9993 15C17.7339 14.9999 17.4793 14.8967 17.2917 14.7129L12.7016 10.2185C12.5113 10.0397 12.2577 9.93984 11.994 9.93984C11.7302 9.93984 11.4766 10.0397 11.2863 10.2185L6.69623 14.7129C6.50746 14.8914 6.25463 14.9902 5.9922 14.9879C5.72977 14.9857 5.47873 14.8826 5.29316 14.7009C5.10758 14.5192 5.00232 14.2734 5.00004 14.0165C4.99776 13.7595 5.09864 13.512 5.28096 13.3271L9.87106 8.83282C10.4432 8.29825 11.2036 8 11.9945 8C12.7853 8 13.5457 8.29825 14.1179 8.83282L18.707 13.3271C18.8469 13.4642 18.9422 13.6388 18.9808 13.8289C19.0194 14.0189 18.9996 14.216 18.9238 14.395C18.8481 14.574 18.7198 14.7271 18.5553 14.8348C18.3907 14.9425 18.1972 15 17.9993 15Z"
-                    fill="#797981"
-                  />
-                </svg>
-              )
-            }
-          >
-            Направление
-          </Button>
-          <fieldset
-            className={`${filtersMenu.checkboxes} ${
-              !isDirectionsOpened
-                ? `${filtersMenu.fieldset}`
-                : `${filtersMenu.fieldsetVisible}`
-            }`}
-          >
-            <CheckboxCustomized
-              handleCheckboxChange={handleCheckboxChange}
-              label="Программирование"
-              id="isProgramming"
-              register={register}
-            />
-            <CheckboxCustomized
-              handleCheckboxChange={handleCheckboxChange}
-              label="Анализ данных"
-              id="isDataAnalysis"
-              register={register}
-            />
-            <CheckboxCustomized
-              handleCheckboxChange={handleCheckboxChange}
-              label="Дизайн"
-              id="isDesign"
-              register={register}
-            />
-            <CheckboxCustomized
-              handleCheckboxChange={handleCheckboxChange}
-              label="Менеджмент"
-              id="isManagment"
-              register={register}
-            />
-            <CheckboxCustomized
-              handleCheckboxChange={handleCheckboxChange}
-              label="Маркетинг"
-              id="isMarketing"
-              register={register}
-            />
-          </fieldset>
-        </MenuItem>
-        <Divider />
+
+        {type == "applicants" && (
+          <>
+            <MenuItem className={filtersMenu.menuItem}>
+              <Button
+                onClick={() => handleFilterClick("directions")}
+                className={`${filtersMenu.menuButton} ${filtersMenu.button}`}
+                variant="text"
+                endIcon={
+                  !isDirectionsOpened ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.707 8.28578C18.5193 8.10279 18.2647 8 17.9993 8C17.7339 8 17.4794 8.10279 17.2917 8.28578L12.7016 12.762C12.5113 12.9401 12.2577 13.0396 11.994 13.0396C11.7302 13.0396 11.4766 12.9401 11.2863 12.762L6.69623 8.28578C6.50746 8.10798 6.25463 8.0096 5.9922 8.01182C5.72977 8.01405 5.47873 8.1167 5.29316 8.29767C5.10758 8.47864 5.00232 8.72345 5.00004 8.97937C4.99776 9.23529 5.09864 9.48185 5.28096 9.66594L9.87006 14.1422C10.1489 14.4141 10.4799 14.6299 10.8443 14.7771C11.2086 14.9242 11.5991 15 11.9935 15C12.3878 15 12.7783 14.9242 13.1427 14.7771C13.507 14.6299 13.838 14.4141 14.1169 14.1422L18.707 9.66594C18.8946 9.4829 19 9.23467 19 8.97586C19 8.71704 18.8946 8.46882 18.707 8.28578Z"
+                        fill="#797981"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.9993 15C17.7339 14.9999 17.4793 14.8967 17.2917 14.7129L12.7016 10.2185C12.5113 10.0397 12.2577 9.93984 11.994 9.93984C11.7302 9.93984 11.4766 10.0397 11.2863 10.2185L6.69623 14.7129C6.50746 14.8914 6.25463 14.9902 5.9922 14.9879C5.72977 14.9857 5.47873 14.8826 5.29316 14.7009C5.10758 14.5192 5.00232 14.2734 5.00004 14.0165C4.99776 13.7595 5.09864 13.512 5.28096 13.3271L9.87106 8.83282C10.4432 8.29825 11.2036 8 11.9945 8C12.7853 8 13.5457 8.29825 14.1179 8.83282L18.707 13.3271C18.8469 13.4642 18.9422 13.6388 18.9808 13.8289C19.0194 14.0189 18.9996 14.216 18.9238 14.395C18.8481 14.574 18.7198 14.7271 18.5553 14.8348C18.3907 14.9425 18.1972 15 17.9993 15Z"
+                        fill="#797981"
+                      />
+                    </svg>
+                  )
+                }
+              >
+                Направление
+              </Button>
+              <fieldset
+                className={`${filtersMenu.checkboxes} ${
+                  !isDirectionsOpened
+                    ? `${filtersMenu.fieldset}`
+                    : `${filtersMenu.fieldsetVisible}`
+                }`}
+              >
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) =>
+                      item.value === "Разработчик"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Программирование"
+                  id="Разработчик"
+                  register={register}
+                />
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) =>
+                      item.value === "Аналитик"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Анализ данных"
+                  id="Аналитик"
+                  register={register}
+                />
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) =>
+                      item.value === "Дизайн"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Дизайн"
+                  id="Дизайн"
+                  register={register}
+                />
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) =>
+                      item.value === "Менеджер"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Менеджмент"
+                  id="Менеджер"
+                  register={register}
+                />
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) =>
+                      item.value === "Маркетолог"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Маркетинг"
+                  id="Маркетолог"
+                  register={register}
+                />
+              </fieldset>
+            </MenuItem>
+            <Divider />
+          </>
+        )}
 
         <MenuItem className={filtersMenu.menuItem}>
           <Button
@@ -287,35 +433,71 @@ const FiltersMenu = () => {
             Город
           </Button>
           <fieldset
-            className={`${filtersMenu.city} ${
+            className={`${
+              type == "applicant" ? filtersMenu.city : filtersMenu.checkboxes
+            } ${
               !isCityOpened
                 ? `${filtersMenu.fieldset}`
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            <SearchBar addCity={setNewCity} type="city" text="Поиск города" />
-            <ul className={filtersMenu.list}>
-              {choosenCities.map((city, index) => {
-                return (
-                  <li key={index} className={filtersMenu.item}>
-                    <Chip
-                      sx={{
-                        ".MuiChip-label": {
-                          color: "#1D6BF3",
-                          fontFamily: "YS Text",
-                          fontSize: "13px",
-                          fontWeight: "400",
-                          lineHeight: "26px",
-                        },
-                      }}
-                      className={filtersMenu.chip}
-                      label={city}
-                      onDelete={() => handleDelete(city)}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+            {type == "applicants" ? (
+              <>
+                <SearchBar
+                  addCity={setNewCity}
+                  type="city"
+                  text="Поиск города"
+                />
+                <ul className={filtersMenu.list}>
+                  {choosenCities.map((city, index) => {
+                    return (
+                      <li key={index} className={filtersMenu.item}>
+                        <Chip
+                          sx={{
+                            ".MuiChip-label": {
+                              color: "#1D6BF3",
+                              fontFamily: "YS Text",
+                              fontSize: "13px",
+                              fontWeight: "400",
+                              lineHeight: "26px",
+                            },
+                          }}
+                          className={filtersMenu.chip}
+                          label={city}
+                          onDelete={() => handleDelete(city)}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            ) : (
+              <li
+                className={filtersMenu.list}
+                style={{
+                  rowGap: "10px",
+                  flexWrap: "initial",
+                  flexDirection: "column",
+                }}
+              >
+                {infoForVacancyApplicantsFilters.cities.map((city, index) => {
+                  return (
+                    <li key={index}>
+                      <CheckboxCustomized
+                        isChecked={checkedList.some(
+                          (item: { key: string; value: string }) =>
+                            item.value === city
+                        )}
+                        handleCheckboxChange={handleCheckboxChange}
+                        label={city}
+                        id={city}
+                        register={register}
+                      />
+                    </li>
+                  );
+                })}
+              </li>
+            )}
           </fieldset>
         </MenuItem>
         <Divider />
@@ -364,9 +546,54 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            {/* {createCheckbox("Релевантный")}
-            {createCheckbox("Около-релевантный")}
-            {createCheckbox("Учебный")} */}
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "1"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Учебный"
+              id="1"
+              register={register}
+              disabled={
+                !(type === "vacancy"
+                  ? infoForVacancyApplicantsFilters.expiriences.includes(
+                      "Учебный"
+                    )
+                  : true)
+              }
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "2"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Релевантный"
+              id="2"
+              register={register}
+              disabled={
+                !(type == "vacancy"
+                  ? infoForVacancyApplicantsFilters.expiriences.includes(
+                      "Релевантный"
+                    )
+                  : true)
+              }
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "3"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Около-релевантный"
+              id="3"
+              register={register}
+              disabled={
+                !(type == "vacancy"
+                  ? infoForVacancyApplicantsFilters.expiriences.includes(
+                      "Около-релевантный"
+                    )
+                  : true)
+              }
+            />
           </fieldset>
         </MenuItem>
         <Divider />
@@ -422,6 +649,13 @@ const FiltersMenu = () => {
               handleCheckboxChange={handleCheckboxChange}
               label="Офис"
               id="FD"
+              disabled={
+                !(type == "vacancy"
+                  ? infoForVacancyApplicantsFilters.work_formats.includes(
+                      "Полный день"
+                    )
+                  : true)
+              }
               register={register}
             />
             <CheckboxCustomized
@@ -432,6 +666,13 @@ const FiltersMenu = () => {
               label="Гибрид"
               id="HB"
               register={register}
+              disabled={
+                !(type == "vacancy"
+                  ? infoForVacancyApplicantsFilters.work_formats.includes(
+                      "Гибрид"
+                    )
+                  : true)
+              }
             />
             <CheckboxCustomized
               isChecked={checkedList.some(
@@ -441,10 +682,177 @@ const FiltersMenu = () => {
               label="Удаленная работа"
               id="RM"
               register={register}
+              disabled={
+                !(type == "vacancy"
+                  ? infoForVacancyApplicantsFilters.work_formats.includes(
+                      "Удалённая работа"
+                    )
+                  : true)
+              }
             />
           </fieldset>
         </MenuItem>
         <Divider />
+
+        {type == "vacancy" && (
+          <div>
+            <MenuItem className={filtersMenu.menuItem}>
+              <Button
+                onClick={() => handleFilterClick("edu_status")}
+                className={`${filtersMenu.menuButton} ${filtersMenu.button}`}
+                variant="text"
+                endIcon={
+                  !isEduStatusOpened ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.707 8.28578C18.5193 8.10279 18.2647 8 17.9993 8C17.7339 8 17.4794 8.10279 17.2917 8.28578L12.7016 12.762C12.5113 12.9401 12.2577 13.0396 11.994 13.0396C11.7302 13.0396 11.4766 12.9401 11.2863 12.762L6.69623 8.28578C6.50746 8.10798 6.25463 8.0096 5.9922 8.01182C5.72977 8.01405 5.47873 8.1167 5.29316 8.29767C5.10758 8.47864 5.00232 8.72345 5.00004 8.97937C4.99776 9.23529 5.09864 9.48185 5.28096 9.66594L9.87006 14.1422C10.1489 14.4141 10.4799 14.6299 10.8443 14.7771C11.2086 14.9242 11.5991 15 11.9935 15C12.3878 15 12.7783 14.9242 13.1427 14.7771C13.507 14.6299 13.838 14.4141 14.1169 14.1422L18.707 9.66594C18.8946 9.4829 19 9.23467 19 8.97586C19 8.71704 18.8946 8.46882 18.707 8.28578Z"
+                        fill="#797981"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.9993 15C17.7339 14.9999 17.4793 14.8967 17.2917 14.7129L12.7016 10.2185C12.5113 10.0397 12.2577 9.93984 11.994 9.93984C11.7302 9.93984 11.4766 10.0397 11.2863 10.2185L6.69623 14.7129C6.50746 14.8914 6.25463 14.9902 5.9922 14.9879C5.72977 14.9857 5.47873 14.8826 5.29316 14.7009C5.10758 14.5192 5.00232 14.2734 5.00004 14.0165C4.99776 13.7595 5.09864 13.512 5.28096 13.3271L9.87106 8.83282C10.4432 8.29825 11.2036 8 11.9945 8C12.7853 8 13.5457 8.29825 14.1179 8.83282L18.707 13.3271C18.8469 13.4642 18.9422 13.6388 18.9808 13.8289C19.0194 14.0189 18.9996 14.216 18.9238 14.395C18.8481 14.574 18.7198 14.7271 18.5553 14.8348C18.3907 14.9425 18.1972 15 17.9993 15Z"
+                        fill="#797981"
+                      />
+                    </svg>
+                  )
+                }
+              >
+                Учебный статус
+              </Button>
+              <fieldset
+                className={`${filtersMenu.checkboxes} ${
+                  !isEduStatusOpened
+                    ? `${filtersMenu.fieldset}`
+                    : `${filtersMenu.fieldsetVisible}`
+                }`}
+              >
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) => item.value === "1"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Студент"
+                  id="Студент"
+                  register={register}
+                  disabled={
+                    !(
+                      type == "vacancy" &&
+                      infoForVacancyApplicantsFilters.edu_statuses.includes(
+                        "Студент"
+                      )
+                    )
+                  }
+                />
+                <CheckboxCustomized
+                  isChecked={checkedList.some(
+                    (item: { key: string; value: string }) => item.value === "2"
+                  )}
+                  handleCheckboxChange={handleCheckboxChange}
+                  label="Выпускник"
+                  id="Выпускник"
+                  register={register}
+                  disabled={
+                    !(
+                      type == "vacancy" &&
+                      infoForVacancyApplicantsFilters.edu_statuses.includes(
+                        "Выпускник"
+                      )
+                    )
+                  }
+                />
+              </fieldset>
+            </MenuItem>
+            <Divider />
+            <MenuItem className={filtersMenu.menuItem}>
+              <Button
+                onClick={() => handleFilterClick("course")}
+                className={`${filtersMenu.menuButton} ${filtersMenu.button}`}
+                variant="text"
+                endIcon={
+                  !isCourseOpened ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.707 8.28578C18.5193 8.10279 18.2647 8 17.9993 8C17.7339 8 17.4794 8.10279 17.2917 8.28578L12.7016 12.762C12.5113 12.9401 12.2577 13.0396 11.994 13.0396C11.7302 13.0396 11.4766 12.9401 11.2863 12.762L6.69623 8.28578C6.50746 8.10798 6.25463 8.0096 5.9922 8.01182C5.72977 8.01405 5.47873 8.1167 5.29316 8.29767C5.10758 8.47864 5.00232 8.72345 5.00004 8.97937C4.99776 9.23529 5.09864 9.48185 5.28096 9.66594L9.87006 14.1422C10.1489 14.4141 10.4799 14.6299 10.8443 14.7771C11.2086 14.9242 11.5991 15 11.9935 15C12.3878 15 12.7783 14.9242 13.1427 14.7771C13.507 14.6299 13.838 14.4141 14.1169 14.1422L18.707 9.66594C18.8946 9.4829 19 9.23467 19 8.97586C19 8.71704 18.8946 8.46882 18.707 8.28578Z"
+                        fill="#797981"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M17.9993 15C17.7339 14.9999 17.4793 14.8967 17.2917 14.7129L12.7016 10.2185C12.5113 10.0397 12.2577 9.93984 11.994 9.93984C11.7302 9.93984 11.4766 10.0397 11.2863 10.2185L6.69623 14.7129C6.50746 14.8914 6.25463 14.9902 5.9922 14.9879C5.72977 14.9857 5.47873 14.8826 5.29316 14.7009C5.10758 14.5192 5.00232 14.2734 5.00004 14.0165C4.99776 13.7595 5.09864 13.512 5.28096 13.3271L9.87106 8.83282C10.4432 8.29825 11.2036 8 11.9945 8C12.7853 8 13.5457 8.29825 14.1179 8.83282L18.707 13.3271C18.8469 13.4642 18.9422 13.6388 18.9808 13.8289C19.0194 14.0189 18.9996 14.216 18.9238 14.395C18.8481 14.574 18.7198 14.7271 18.5553 14.8348C18.3907 14.9425 18.1972 15 17.9993 15Z"
+                        fill="#797981"
+                      />
+                    </svg>
+                  )
+                }
+              >
+                Курс
+              </Button>
+              <fieldset
+                className={`${filtersMenu.checkboxes} ${
+                  !isCourseOpened
+                    ? `${filtersMenu.fieldset}`
+                    : `${filtersMenu.fieldsetVisible}`
+                }`}
+              >
+                <ul
+                  className={filtersMenu.list}
+                  style={{
+                    rowGap: "10px",
+                    flexWrap: "initial",
+                    flexDirection: "column",
+                  }}
+                >
+                  {infoForVacancyApplicantsFilters.courses.map(
+                    (course, index) => {
+                      return (
+                        <li key={index}>
+                          <CheckboxCustomized
+                            isChecked={checkedList.some(
+                              (item: { key: string; value: string }) =>
+                                item.value === course
+                            )}
+                            handleCheckboxChange={handleCheckboxChange}
+                            label={course}
+                            id={course}
+                            register={register}
+                          />
+                        </li>
+                      );
+                    }
+                  )}
+                </ul>
+              </fieldset>
+            </MenuItem>
+            <Divider />
+          </div>
+        )}
         <Button
           variant="text"
           startIcon={
@@ -469,6 +877,7 @@ const FiltersMenu = () => {
               />
             </svg>
           }
+          onClick={clearFilters}
           className={filtersMenu.buttonDelete}
         >
           Очистить фильтры

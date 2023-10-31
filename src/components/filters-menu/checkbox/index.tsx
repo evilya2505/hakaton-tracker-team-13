@@ -1,6 +1,7 @@
-import { Checkbox, FormControlLabel } from '@mui/material';
-import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { FormControlLabel } from "@mui/material";
+import React from "react";
+import { UseFormRegister } from "react-hook-form";
+import Checkbox from "@mui/joy/Checkbox";
 
 interface ICheckboxCustomizedProps {
   id: string;
@@ -8,9 +9,17 @@ interface ICheckboxCustomizedProps {
   register: UseFormRegister<any>;
   handleCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isChecked?: boolean;
+  disabled?: boolean;
 }
 
-export default function CheckboxCustomized({isChecked = false, handleCheckboxChange, id, label, register}:ICheckboxCustomizedProps) {
+export default function CheckboxCustomized({
+  isChecked = false,
+  handleCheckboxChange,
+  id,
+  label,
+  register,
+  disabled,
+}: ICheckboxCustomizedProps) {
   return (
     <FormControlLabel
       sx={{
@@ -28,19 +37,15 @@ export default function CheckboxCustomized({isChecked = false, handleCheckboxCha
       }}
       control={
         <Checkbox
-        {...register(id)}
+          {...register(id)}
           checked={isChecked}
           onChange={(e) => handleCheckboxChange(e)}
-          sx={{
-            "& .MuiSvgIcon-root": {
-              fontSize: 30,
-              width: "0.8em",
-              height: "0.8em",
-            },
-          }}
+          variant="outlined"
+          size="lg"
+          disabled={disabled}
         />
       }
       label={label}
     />
   );
-};
+}

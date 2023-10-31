@@ -7,7 +7,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Checkbox,
   MenuItem,
   IconButton,
   TextField,
@@ -27,6 +26,8 @@ import BasicModal from "../../../../modal/modal";
 import CompareApplicantsModal from "../compare-applicants-modal";
 import { useSelector, useDispatch } from "../../../../../services/hooks";
 import { editCandidateStatus } from "../../../../../services/actions/vacancies";
+import Checkbox from "@mui/joy/Checkbox";
+
 const CandidateTable = () => {
   const dispatch = useDispatch();
   const [isCompareyModalOpened, setIsCompareModalOpened] =
@@ -118,32 +119,8 @@ const CandidateTable = () => {
             <p className={table.text}>Статус</p>
             <VacancyDropDown />
           </div>
-          <FiltersMenu />
+          <FiltersMenu type={"vacancy"} />
         </div>
-        {/* {selectedCandidates.length === 1 && (
-          <>
-            <Button
-              onClick={handleMainMenuClick}
-              className={`${table.button}`}
-              variant="contained"
-              startIcon={<img src={calndarIcon} alt="иконка пригласить" />}
-            >
-              Пригласить
-            </Button>
-            <Menu
-              sx={{
-                ".MuiMenu-list": { padding: "16px" },
-              }}
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <StaticDatePicker orientation="landscape" />
-              </LocalizationProvider>
-            </Menu>
-          </>
-        )} */}
         {selectedCandidates.length === 2 && (
           <Button
             onClick={handleOpenCompareModal}
@@ -179,6 +156,8 @@ const CandidateTable = () => {
                           : false
                       }
                       onChange={handleAllCandidateSelection}
+                      variant="outlined"
+                      size="lg"
                     />
                   </TableCell>
                   <TableCell
@@ -202,13 +181,6 @@ const CandidateTable = () => {
                   >
                     Статус
                   </TableCell>
-                  {/* <TableCell
-                    className={table.cell}
-                    size="small"
-                    sx={{ width: "172px" }}
-                  >
-                    Дата
-                  </TableCell> */}
                   <TableCell
                     className={table.cell}
                     size="small"
@@ -255,12 +227,13 @@ const CandidateTable = () => {
               </TableHead>
               <TableBody>
                 {currentVacancyApplicantsList.map((candidate, index) => {
-                  console.log(candidate);
                   return (
                     <TableRow key={index}>
                       <TableCell size="small">{candidate.id}</TableCell>
                       <TableCell size="small">
                         <Checkbox
+                          variant="outlined"
+                          size="lg"
                           checked={selectedCandidates.includes(candidate.id)}
                           onChange={() =>
                             handleCandidateSelection(candidate.id)
@@ -353,7 +326,6 @@ const CandidateTable = () => {
                           ))}
                         </TextField>
                       </TableCell>
-                      {/* <TableCell className={table.cell}>test</TableCell> */}
                       <TableCell className={table.cell}>
                         {candidate.city}
                       </TableCell>

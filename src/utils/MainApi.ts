@@ -47,28 +47,50 @@ class MainApi {
     }).then((res) => this._getRequestResult(res));
   }
 
-    // получить отфильтрованные данные кандидатов
-    getFilteresApplicants(filters: {key: string, value: string}[]){
-      let filter:string = "";
-      for (let i = 0; i < filters.length ; i++) {
-        if (i !== filters.length - 1) {
-          filter += `${filters[i].key}=${filters[i].value}&`;
-        } else {
-          filter += `${filters[i].key}=${filters[i].value}`;
-        }
-
+  // получить отфильтрованные данные кандидатов
+  getFilteresApplicants(filters: { key: string; value: string }[]) {
+    let filter: string = "";
+    for (let i = 0; i < filters.length; i++) {
+      if (i !== filters.length - 1) {
+        filter += `${filters[i].key}=${filters[i].value}&`;
+      } else {
+        filter += `${filters[i].key}=${filters[i].value}`;
       }
-      console.log(`${this._baseUrl}/applicants/?${filter}`)
-      return fetch(`${this._baseUrl}/applicants/?${filter}`, {
+    }
+    return fetch(`${this._baseUrl}/applicants/?${filter}`, {
+      method: "GET",
+      headers: {
+        ...this._headers,
+      },
+    }).then((res) => this._getRequestResult(res));
+  }
+
+  // ВАКАНСИИ:
+
+  // получить отфильтрованные данные кандидатов в вакансии
+  getFilteredVacabcyApplicants(
+    filters: { key: string; value: string }[],
+    vacancyId: number | undefined
+  ) {
+    let filter: string = "";
+    for (let i = 0; i < filters.length; i++) {
+      if (i !== filters.length - 1) {
+        filter += `${filters[i].key}=${filters[i].value}&`;
+      } else {
+        filter += `${filters[i].key}=${filters[i].value}`;
+      }
+    }
+    console.log(`${this._baseUrl}/vacancies/${vacancyId}/responses/?${filter}`);
+    return fetch(
+      `${this._baseUrl}/vacancies/${vacancyId}/responses/?${filter}`,
+      {
         method: "GET",
         headers: {
           ...this._headers,
         },
-      }).then((res) => this._getRequestResult(res));
-    }
-
-
-  // ВАКАНСИИ:
+      }
+    ).then((res) => this._getRequestResult(res));
+  }
 
   // получить массив вакансий компании
   getVacancies() {
@@ -99,23 +121,23 @@ class MainApi {
       headers: {
         ...this._headers,
       },
-      body: JSON.stringify(
-        { created: vacancy.created?.toDateString(), ...vacancy },
-      ),
+      body: JSON.stringify({
+        created: vacancy.created?.toDateString(),
+        ...vacancy,
+      }),
     }).then((res) => this._getRequestResult(res));
   }
 
   // редактировать вакансию
   partlyEditVacancy(vacancy: TVacancy, id: number | undefined) {
-    console.log(JSON.stringify(vacancy), `${this._baseUrl}/vacancies/${id}/`)
+    console.log(JSON.stringify(vacancy), `${this._baseUrl}/vacancies/${id}/`);
 
     return fetch(`${this._baseUrl}/vacancies/${id}/`, {
       method: "PATCH",
       headers: {
         ...this._headers,
       },
-      body: JSON.stringify(vacancy)
-
+      body: JSON.stringify(vacancy),
     }).then((res) => this._getRequestResult(res));
   }
 
@@ -175,11 +197,13 @@ class MainApi {
     vacancyId,
     status,
   }: applicantInVacancyProps) {
-    console.log(JSON.stringify({
-      applicant: applicantId,
-      vacancy: vacancyId,
-      status: status,
-    }))
+    console.log(
+      JSON.stringify({
+        applicant: applicantId,
+        vacancy: vacancyId,
+        status: status,
+      })
+    );
     return fetch(
       `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}/`,
       {

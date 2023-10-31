@@ -21,7 +21,7 @@
 }
 
 .cell {
-  padding: 0 !important;
+  padding: 12px 0 11px !important;
 }
 
 .input {
@@ -31,7 +31,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  margin-top: 4px !important;
   width: 199px;
 }
 
