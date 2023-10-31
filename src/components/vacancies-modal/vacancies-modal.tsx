@@ -1,6 +1,7 @@
 import React from "react";
 import vacanciesModal from "./vacancies-modal.module.css";
 import { Tab, Tabs } from "@mui/material";
+import { tabStyle } from "../../constants/tabStyle";
 import AddVacancyForm from "../add-vacancy-form/add-vacancy-form";
 import AddVacancyPreviewModal from "../add-vacany-preview-modal/add-vacancy-preview-modal";
 import { useDispatch } from "../../services/hooks";
@@ -27,9 +28,14 @@ const VacanciesModal: React.FC<{}> = (): JSX.Element => {
             value={value}
             onChange={handleChange}
             aria-label="Модальное окно создания вакансий"
+            sx={{
+              height: '2px',
+              indicatorColor:
+                'var(--main-blue-main)',
+            }}
           >
-            <Tab label="Основная информация" />
-            <Tab label="Описание вакансии" />
+            <Tab label="Основная информация" sx={tabStyle} />
+            <Tab label="Описание вакансии" sx={tabStyle} />
           </Tabs>
           <p onClick={handleClick} className={vacanciesModal.linkText}>
             Предпросмотр

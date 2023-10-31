@@ -7,7 +7,7 @@
   max-width: 1025px;
   background-color: var(--main-white);
   display: flex;
-  overflow-y: auto;
+  overflow-y: scroll;
   justify-content: space-between;
 }
 

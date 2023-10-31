@@ -3,7 +3,7 @@ import vacanciesPage from "./index.module.css";
 import page from "../index.module.css";
 import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { tabStyle } from "../../../utils/tabStyle"
+import { tabStyle } from "../../../constants/tabStyle"
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
 import BasicPopover from "./notify-modal";
@@ -82,8 +82,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                       <AddIcon />
                     </Fab>
                   </div>
-                  {/* <div className={vacanciesPage.listArea}> */}
-                  <ul className={vacanciesPage.list}>
+                    <ul className={vacanciesPage.list}>
                     {vacancies.map((element: TVacancy, index: number) => {
                       return (
                         <li
@@ -97,7 +96,6 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                       );
                     })}
                   </ul>
-                  {/* </div> */}
                 </>
               ) : (
                 <div className={vacanciesPage.activeVacancies}>
