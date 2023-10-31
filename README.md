@@ -8,7 +8,7 @@
 
 ## Ссылка на Vercel
 
-- https://hakaton-tracker-team-13.vercel.app/applicants
+https://hakaton-tracker-team-13.vercel.app/applicants
 
 ## Сведения о команде и роль каждого участника команды
 Роль каждого участника команды фронтов распределялась так:
