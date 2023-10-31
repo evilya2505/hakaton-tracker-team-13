@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "../../../services/hooks";
 import {
   setSelectedCardData,
@@ -20,7 +20,6 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
   const searchResult = useSelector(
     (state) => state.applicants.applicantsSearchResults
   );
-  const applicants = useSelector((state) => state.applicants.applicants);
   const shownApplicants = useSelector(
     (state) => state.applicants.shownApplicants
   );
@@ -34,9 +33,6 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
     dispatch(setSelectedCardData(card));
   }
 
-  React.useEffect(() => {
-    console.log(searchResult);
-  }, []);
   return (
     <div className={`${page.pageElement} ${applicantsPage.container}`}>
       <h2 className={applicantsPage.title}>Соискатели</h2>
@@ -51,6 +47,8 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
                   <ApplicantsCard applicant={element} />
                 </li>
               );
+            } else {
+              return <li></li>;
             }
           })}
         </ul>
@@ -66,7 +64,7 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
         </ul>
       )}
 
-      {searchResult.length === 0 && shownApplicants.length == 0 && (
+      {searchResult.length === 0 && shownApplicants.length === 0 && (
         <div className={applicantsPage.notFoundContainer}>
           Ничего не найдено
         </div>
