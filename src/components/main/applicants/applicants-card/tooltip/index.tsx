@@ -4,6 +4,13 @@ import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]
+    : {
+    "&:before": {
+      border: "1px solid var(--main-blue-bg)"
+    },
+    color: "var(--main-blue-bg)"
+  },
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: "var(--main-blue-bg)",
     color: "var(--main-black-900)",
