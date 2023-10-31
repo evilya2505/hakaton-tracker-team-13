@@ -1,8 +1,6 @@
 import * as React from "react";
 import vacancyInfoDropDown from "./index.module.css";
 import Button from "../../../applicants/applicants-card/button";
-import arrowDownIcon from "../../../../../images/arrow_down_blue.svg";
-import arrowUpIcon from "../../../../../images/arrow_up_blue.svg";
 
 interface IDropDownProps {
   title?: string;
