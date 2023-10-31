@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Проект в рамках хакатона Карьерного трекера Яндекс.Практикума: Реализация функциональности для личного кабинета компании-партнера
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Ссылка на макет
+[Макет в Figma](https://www.figma.com/file/zLFSqGhwSutBBE4s1Ll5Lx/%D0%9A%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0-%E2%84%9613-%22%D0%9F%D1%8F%D1%82%D0%BD%D0%B8%D1%86%D0%B0-13%22)
 
-## Available Scripts
+## Ссылка на репозиторий
+[Команда Пятница 13](https://github.com/evilya2505/hakaton-tracker-team-13)
 
-In the project directory, you can run:
+## Ссылка на Vercel
 
-### `npm start`
+https://hakaton-tracker-team-13.vercel.app/applicants
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Сведения о команде и роль каждого участника команды
+Роль каждого участника команды фронтов распределялась так:
+  - Эвелина [(Github)](https://github.com/evilya2505/):
+    
+    создание репо и установка зависимостей; выполнение самых сложных задач; реализация функционала поиска и фильтрации кандидатов; верстка сложных компонентов; валидация форм; страница логина полностью; подключение репо к Vercel; код-ревью других участников.
+  - Владимир [(Github)](https://github.com/Vova-iz-Tambova):
+    
+    верстка отдельных компонентов; использование и стилизация MUI-компонентов; генерация БД для бэка.
+  - Анна [(Github)](https://github.com/arrayumi):
+    
+    коммуникация с бэками и дизайнерами; определение приоритетности задач; распределение на доске github задач по силам каждому из участников; создание моделей сущностей, приходящих с бэка; сборка страниц из компонентов, сделанных Вовой; работа с задачами средней сложности и тех, которые нерационально давать другим участникам.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Инструкция по установке
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Перейдите в каталог проекта в командной строке (терминале) и убедитесь, что у вас установлен Node.js и npm. Затем выполните команду для установки зависимостей проекта:
 
-### `npm run build`
+### npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Запустите проект:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### npm run start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Сборка для продакшена:
 
-### `npm run eject`
+### npm run build
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Стек технологий
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Typescript
+- React
+- React Router
+- Redux Toolkit
+- Material UI
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Описание выполненной работы
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- В проекте использовались следующие технологии: TypeScript, React, Redux toolkit, а также библиотека MUI. В процессе работы мы также пользовались канбан-доской Github, чтобы распределять задачи и видеть, что уже сделано, а что сделать еще предстоит. Ближе к дедлайну задачи стали распределять еще и по приоритизации.
+  
+#### Страница кандидатов:
 
-## Learn More
+* Подгрузка массива кандидатов с сервера
+* Кнопка для добавления/удаления кандидата в/из вакансии
+* Поиск по ключевому слову
+* Фильтрация кандидатов по query-параметрам
+* Модальное окно с полной информацией о кандидате при клике на его карточку
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Страница вакансий:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Подгрузка с сервера активных вакансий, опубликованных компанией
+- Кнопка добавления вакансии
+- Кнопка редактирования вакансии
+- Кнопка уведомлений (колокольчик), при открытии - модальное окно
+- При нажатии на карточку вакансии открывается страница с инфо вакансии, также при переключении таба появляется таблица пользователей, добавленных/откликнувшихся в/на вакансию
+- Фильтрация кандидатов в вакансии по query-параметрам
+- Поиск по ключевому слову
+- Модальное окно с полной информацией о кандидате при клике на его строку в таблице
+- Если отмечены 2 чекбокса, появляется кнопка "сравнить кандидатов", при нажатии на которую можно сравнить информацию об обоих
+
+#### Страница логина:
+
+- Полностью реализована, осталось прикрутить апи.
+- Страница восстановления пароля
+- При успешном восстановлении - сообщение об успешной отправке письма на почту
+
+На страницы, которые не успели реализовать, поставлена заглушка "страница в разработке"

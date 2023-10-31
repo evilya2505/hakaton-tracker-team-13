@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "../../../services/hooks";
 import {
   setSelectedCardData,
@@ -17,8 +17,9 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
   const isUserModalVisible = useSelector(
     (state) => state.applicants.isUserModalVisible
   );
-
-  const applicants = useSelector((state) => state.applicants.applicants);
+  const searchResult = useSelector(
+    (state) => state.applicants.applicantsSearchResults
+  );
   const shownApplicants = useSelector(
     (state) => state.applicants.shownApplicants
   );
@@ -31,11 +32,27 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
     dispatch(setUserModalVisibility(true));
     dispatch(setSelectedCardData(card));
   }
+
   return (
     <div className={`${page.pageElement} ${applicantsPage.container}`}>
       <h2 className={applicantsPage.title}>Соискатели</h2>
       <ApplicantsFilter />
-      {applicants.length > 0 ? (
+
+      {searchResult.length > 0 ? (
+        <ul className={applicantsPage.list}>
+          {searchResult.map((element: TApplicant | undefined) => {
+            if (element !== undefined) {
+              return (
+                <li key={element?.id} onClick={() => openUserModal(element)}>
+                  <ApplicantsCard applicant={element} />
+                </li>
+              );
+            } else {
+              return <li></li>;
+            }
+          })}
+        </ul>
+      ) : (
         <ul className={applicantsPage.list}>
           {shownApplicants.map((element: TApplicant) => {
             return (
@@ -45,7 +62,9 @@ const Applicants: React.FC<{}> = (): JSX.Element => {
             );
           })}
         </ul>
-      ) : (
+      )}
+
+      {searchResult.length === 0 && shownApplicants.length === 0 && (
         <div className={applicantsPage.notFoundContainer}>
           Ничего не найдено
         </div>

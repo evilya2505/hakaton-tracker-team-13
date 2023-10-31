@@ -17,7 +17,6 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
   const vacancyObject = useSelector(
     (store) => store.vacancies.currentVacancyPage
   );
-  const cities = useSelector((store) => store.cities.cities);
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
   const [value, setValue] = React.useState("1");
@@ -77,16 +76,16 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
             <path
               d="M22.5 13.75H6"
               stroke="#1A1B22"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M12.75 7L6 13.75L12.75 20.5"
               stroke="#1A1B22"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         }
@@ -110,7 +109,7 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
               className={main.chip}
               label={
                 workHoursDropDown.find(
-                  (workHours) => workHours.value == vacancyObject?.work_format
+                  (workHours) => workHours.value === vacancyObject?.work_format
                 )?.label
               }
             />
@@ -120,7 +119,7 @@ const Vacancy: React.FC<PropsWithChildren> = ({ children }): JSX.Element => {
               className={main.chip}
               label={
                 gradeDropDown.find(
-                  (grade) => grade.value == vacancyObject?.grade
+                  (grade) => grade.value === vacancyObject?.grade
                 )?.label
               }
             />
