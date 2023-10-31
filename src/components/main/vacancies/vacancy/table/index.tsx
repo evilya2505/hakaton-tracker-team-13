@@ -246,7 +246,7 @@ const CandidateTable = () => {
               <TableBody>
                 {dataToShow.map((candidate, index) => {
                   return (
-                    <TableRow key={index}>
+                    <TableRow key={index+1}>
                       <TableCell size="small">{candidate?.id}</TableCell>
                       <TableCell size="small">
                         <Checkbox
