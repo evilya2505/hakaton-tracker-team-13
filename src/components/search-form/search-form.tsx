@@ -1,10 +1,14 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import searchIcon from "../../images/search.svg";
 import searchBar from "./search-form.module.css";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import { InputAdornment } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { getSearchResults } from "../../utils/getSearchResults";
+import { useSelector, useDispatch } from "../../services/hooks";
+import { setApplicantsSearchResults } from "../../services/reducers/applicants";
+
 interface ISearchBarProps {
   text: string;
   type?: string;
@@ -20,15 +24,29 @@ const SearchBar: React.FC<ISearchBarProps> = ({
 
   const { register, handleSubmit, getValues } = form;
 
-  const onSubmit = (data: { keyWord: string }) => {
-    if (addCity !== undefined) addCity(data.keyWord);
-  };
+  const applicants = useSelector((state) => state.applicants.applicants);
+  const dispatch = useDispatch();
+
+  // const onSubmit = (data: { keyWord: string }) => {
+  //   if (addCity !== undefined) addCity(data.keyWord);
+  // };
+
+  useEffect(() => {getSearchResults('пол', applicants)},[applicants])
+
+  function submit(data: { keyWord: string }) {
+      console.log(`submit ${applicants}`)
+      // applicants не передаются
+  //     dispatch(
+  //       setApplicantsSearchResults(getSearchResults(data.keyWord, applicants))
+  //     );
+  }
 
   return (
     <form
       className={searchBar.form}
       noValidate
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(submit)}
     >
       <TextField
         id="search-bar"
