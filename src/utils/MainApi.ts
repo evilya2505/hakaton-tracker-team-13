@@ -1,4 +1,4 @@
-import { TCity, TVacancy } from "./types";
+import { TVacancy } from "./types";
 
 export interface applicantInVacancyProps {
   applicantId: number;
@@ -75,28 +75,27 @@ class MainApi {
     let filter: string = "";
     for (let i = 0; i < filters.length; i++) {
       if (i !== filters.length - 1) {
-        if (filters[i].value == "Студент") filter += `${filters[i].key}=1&`;
-        if (filters[i].value == "Выпускник") filter += `${filters[i].key}=2&`;
+        if (filters[i].value === "Студент") filter += `${filters[i].key}=1&`;
+        if (filters[i].value === "Выпускник") filter += `${filters[i].key}=2&`;
 
         if (
-          !(filters[i].value == "Студент") &&
-          !(filters[i].value == "Выпускник")
+          !(filters[i].value === "Студент") &&
+          !(filters[i].value === "Выпускник")
         ) {
           filter += `${filters[i].key}=${filters[i].value}&`;
         }
       } else {
-        if (filters[i].value == "Студент") filter += `${filters[i].key}=1`;
-        if (filters[i].value == "Выпускник") filter += `${filters[i].key}=2`;
+        if (filters[i].value === "Студент") filter += `${filters[i].key}=1`;
+        if (filters[i].value === "Выпускник") filter += `${filters[i].key}=2`;
 
         if (
-          !(filters[i].value == "Студент") &&
-          !(filters[i].value == "Выпускник")
+          !(filters[i].value === "Студент") &&
+          !(filters[i].value === "Выпускник")
         ) {
           filter += `${filters[i].key}=${filters[i].value}`;
         }
       }
     }
-    console.log(`${this._baseUrl}/vacancies/${vacancyId}/responses/?${filter}`);
     return fetch(
       `${this._baseUrl}/vacancies/${vacancyId}/responses/?${filter}`,
       {
@@ -146,8 +145,6 @@ class MainApi {
 
   // редактировать вакансию
   partlyEditVacancy(vacancy: TVacancy, id: number | undefined) {
-    console.log(JSON.stringify(vacancy), `${this._baseUrl}/vacancies/${id}/`);
-
     return fetch(`${this._baseUrl}/vacancies/${id}/`, {
       method: "PATCH",
       headers: {
@@ -213,13 +210,6 @@ class MainApi {
     vacancyId,
     status,
   }: applicantInVacancyProps) {
-    console.log(
-      JSON.stringify({
-        applicant: applicantId,
-        vacancy: vacancyId,
-        status: status,
-      })
-    );
     return fetch(
       `${this._baseUrl}/vacancies/${vacancyId}/responses/${applicantId}/`,
       {

@@ -1,5 +1,4 @@
 import React from "react";
-import app from "./app.module.css";
 import { Routes, Route, Outlet } from "react-router-dom";
 import Main from "../main";
 import Login from "../login";
@@ -28,14 +27,12 @@ function App() {
     getApplicants();
     dispatch(getCities());
     dispatch(getLanguages());
-  }, []);
+  }, [dispatch, getApplicants, getVacancies]);
 
   function getVacancies() {
     mainApi
       .getVacancies()
       .then((res) => {
-        console.log("vacancies");
-        console.log(res.results);
         dispatch(setVacancies(res.results));
       })
       .catch((err) => console.log(err));

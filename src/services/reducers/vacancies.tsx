@@ -153,8 +153,6 @@ const vacanciesSlice = createSlice({
             state.infoForFilters = updatedInfoForFilters;
           }
         }
-
-        console.log(state.infoForFilters);
       }
     },
     setModalVisibility(
@@ -242,7 +240,6 @@ const vacanciesSlice = createSlice({
             }
           });
       }
-      console.log(state.currentVacancyApplicantsList);
       state.editApplicantStatusRequest = false;
       state.editApplicantStatusRequest = false;
     },
