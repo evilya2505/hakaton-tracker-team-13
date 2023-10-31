@@ -43,7 +43,7 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
 
   function handleVacancyClick(vacancy: TVacancy, index: number) {
     dispatch(getNeededVacancyData(vacancy));
-    navigate("vacancy/" + index);
+    navigate("vacancy/" + vacancy.id);
   }
 
   return (
