@@ -6,8 +6,8 @@
 }
 
 .table::-webkit-scrollbar {
-  width: 4px !important;
-  height: 4px !important;
+  width: 10px !important;
+  height: 10px !important;
   background: rgba(26, 27, 34, 0.2) !important;
 }
 

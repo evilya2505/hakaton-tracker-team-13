@@ -6,11 +6,13 @@
   border-radius: 20px;
   background-color: var(--main-white);
   position: relative;
+  border: none;
 }
 
 .overlay {
   height: 100vh;
   display: flex;
+  border: none;
 }
 
 .button {
