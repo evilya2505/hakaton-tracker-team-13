@@ -11,7 +11,9 @@ export default function VacanciesDropDown() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setSelectedDropDownVacancy({} as TVacancy));
+    return () => {
+      dispatch(setSelectedDropDownVacancy({} as TVacancy));
+    };
   }, []);
 
   const handleChange = (event: { target: { value: any } }) => {

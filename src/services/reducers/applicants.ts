@@ -11,6 +11,7 @@ const applicantsSlice = createSlice({
     selectedDropDownVacancy: {} as TVacancy,
     checked: [] as { key: string; value: string }[],
     shownApplicants: [] as Array<TApplicant>,
+    applicantsSearchResults: [] as Array<TApplicant>,
   },
   reducers: {
     setUserModalVisibility(state, action: PayloadAction<boolean>) {
@@ -20,7 +21,6 @@ const applicantsSlice = createSlice({
       state.selectedCardData = action.payload;
     },
     setApplicants(state, action: PayloadAction<Array<TApplicant>>) {
-      console.log(action.payload);
       state.applicants = action.payload;
     },
     setSelectedDropDownVacancy(state, action: PayloadAction<TVacancy>) {
@@ -41,6 +41,13 @@ const applicantsSlice = createSlice({
     clearChecked(state) {
       state.checked = [];
     },
+    setApplicantsSearchResults(
+      state,
+      action: PayloadAction<Array<TApplicant>>
+    ) {
+      console.log(action.payload);
+      state.applicants = action.payload;
+    },
   },
 });
 
@@ -53,6 +60,7 @@ export const {
   setSelectedCardData,
   setApplicants,
   setSelectedDropDownVacancy,
+  setApplicantsSearchResults,
 } = applicantsSlice.actions;
 
 export default applicantsSlice.reducer;

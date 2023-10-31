@@ -18,6 +18,7 @@ import {
 import { clearChecked } from "../../services/reducers/applicants";
 import { setCurrentVacancyApplicantsList } from "../../services/reducers/vacancies";
 
+
 interface IFiltersMenuProps {
   type: string;
 }
@@ -291,6 +292,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+
         {type == "applicants" && (
           <>
             <MenuItem className={filtersMenu.menuItem}>
