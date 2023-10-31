@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+## Сведения о команде и роль каждого участника команды
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Роль каждого участника команды фронтов распределялась так:
+  Эвелина: создание репо и установка зависимостей; выполнение самых сложных задач; реализация функционала поиска и фильтрации кандидатов; верстка сложных компонентов; валидация форм; страница логина полностью; подключение репо к Vercel; код-ревью других участников.
+  Владимир: верстка отдельных компонентов; использование и стилизация MUI-компонентов; генерация БД для бэка.
+  Анна: коммуникация с бэками и дизайнерами; определение приоритетности задач; распределение на доске github задач по силам каждому из участников; создание моделей сущностей, приходящих с бэка; сборка страниц из компонентов, сделанных Вовой; работа с задачами средней сложности и тех, которые нерационально давать другим участникам.
 
-## Available Scripts
+## Ссылка на Vercel
 
-In the project directory, you can run:
+- https://hakaton-tracker-team-13.vercel.app/applicants
 
-### `npm start`
+## Инструкция по установке
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Перейдите в каталог проекта в командной строке (терминале) и убедитесь, что у вас установлен Node.js и npm. Затем выполните команду для установки зависимостей проекта:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### npm install
 
-### `npm test`
+2. Запустите проект:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### npm run start
 
-### `npm run build`
+3. Сборка для продакшена:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### npm run build
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Стек технологий
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- React
+- Typescript
+- Redux Toolkit
+- Material UI
 
-### `npm run eject`
+## Описание выполненной работы
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- В проекте использовались следующие технологии: TypeScript, React, Redux toolkit, а также библиотека MUI. В процессе работы мы также пользовались канбан-доской Github, чтобы распределять задачи и видеть, что уже сделано, а что сделать еще предстоит. Ближе к дедлайну задачи стали распределять еще и по приоритизации.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Что сделано:
+  Страница кандидатов:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Подгрузка массива кандидатов с сервера
+* Кнопка для добавления/удаления кандидата в/из вакансии
+* Поиск по ключевому слову
+* Фильтрация кандидатов по query-параметрам
+* Модальное окно с полной информацией о кандидате при клике на его карточку
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Страница вакансий:
 
-## Learn More
+- Подгрузка с сервера активных вакансий, опубликованных компанией
+- Кнопка добавления вакансии
+- Кнопка редактирования вакансии
+- Кнопка уведомлений (колокольчик), при открытии - модальное окно
+- При нажатии на карточку вакансии открывается страница с инфо вакансии, также при переключении таба появляется таблица пользователей, добавленных/откликнувшихся в/на вакансию
+- Фильтрация кандидатов в вакансии по query-параметрам
+- Поиск по ключевому слову
+- Модальное окно с полной информацией о кандидате при клике на его строку в таблице
+- Если отмечены 2 чекбокса, появляется кнопка "сравнить кандидатов", при нажатии на которую можно сравнить информацию об обоих
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Страница логина:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Полностью реализована, осталось прикрутить апи.
+- Страница восстановления пароля
+- При успешном восстановлении - сообщение об успешной отправке письма на почту
+
+На страницы, которые не успели реализовать, поставлена заглушка "страница в разработке"
