@@ -3,7 +3,7 @@ import vacanciesPage from "./index.module.css";
 import page from "../index.module.css";
 import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { tabStyle } from "../../../utils/tabStyle"
+import { tabStyle } from "../../../constants/tabStyle"
 import VacanciesCard from "./vacancies-card";
 import BasicModal from "../../modal/modal";
 import BasicPopover from "./notify-modal";
@@ -70,7 +70,12 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
               <Tab label="Черновики" value="2" sx={tabStyle} />
               <Tab label="Архив" value="3" sx={tabStyle} />
             </TabList>
-            <TabPanel value="1">
+            <TabPanel
+              sx={{
+                paddingLeft: "0",
+                marginLeft: "0"
+              }}
+              value="1">
               {vacancies.length > 0 ? (
                 <>
                   <div className={vacanciesPage.buttonFixed}>
@@ -82,7 +87,6 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                       <AddIcon />
                     </Fab>
                   </div>
-                  {/* <div className={vacanciesPage.listArea}> */}
                   <ul className={vacanciesPage.list}>
                     {vacancies.map((element: TVacancy, index: number) => {
                       return (
@@ -97,7 +101,6 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
                       );
                     })}
                   </ul>
-                  {/* </div> */}
                 </>
               ) : (
                 <div className={vacanciesPage.activeVacancies}>
@@ -107,13 +110,23 @@ const Vacancies: React.FC<{}> = (): JSX.Element => {
               )}
 
             </TabPanel>
-            <TabPanel value="2">
+            <TabPanel value="2"
+              sx={{
+                paddingLeft: "0",
+                marginLeft: "0"
+              }}
+            >
               <div className={vacanciesPage.activeVacancies}>
                 <p>Вы еще не создали ни одного черновика</p>
                 <CreateVacancyButton />
               </div>
             </TabPanel>
-            <TabPanel value="3">
+            <TabPanel value="3"
+              sx={{
+                paddingLeft: "0",
+                marginLeft: "0"
+              }}
+            >
               <div className={vacanciesPage.activeVacancies}>
                 <p>Нет ни одной вакансии в архиве</p>
               </div>

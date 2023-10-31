@@ -1,3 +1,15 @@
+.page {
+  height: 100%;
+}
+
+.mainHeader {
+  max-width: 1211px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .title {
   color: var(--main-black-900);
   font-family: "YS Display";
@@ -7,18 +19,18 @@
   line-height: 32px;
 }
 
-.button {
+.returnButton {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  width: 187px !important;
+  width: 170px !important;
   text-transform: initial !important;
   color: var(--main-black-900) !important;
   font-family: "YS Display" !important;
   font-size: 20px !important;
   font-style: normal !important;
   font-weight: 500 !important;
-  line-height: 24px !important;
+  line-height: 0 !important;
 }
 
 .tagsList {
@@ -38,11 +50,19 @@
 }
 
 .section {
-  margin: 36px 0 27px;
-  max-width: 1211px;
+  width: 100%;
+  margin-top: 36px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+.subSection {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
 }
 
 .date {
@@ -52,4 +72,5 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+
 }
