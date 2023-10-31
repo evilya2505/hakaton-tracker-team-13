@@ -13,9 +13,13 @@ import { useForm } from "react-hook-form";
 import { FilterApplicantsValues } from "../../utils/types";
 import CheckboxCustomized from "./checkbox";
 import mainApi from "../../utils/MainApi";
-import { useDispatch,useSelector } from "../../services/hooks";
-import { setApplicants, setChecked, setShownApplicants, unsetChecked } from "../../services/reducers/applicants";
-
+import { useDispatch, useSelector } from "../../services/hooks";
+import {
+  setChecked,
+  setShownApplicants,
+  unsetChecked,
+} from "../../services/reducers/applicants";
+import { clearChecked } from "../../services/reducers/applicants";
 const FiltersMenu = () => {
   const dispatch = useDispatch();
   const [isDirectionsOpened, setIsDirectionsOpened] =
@@ -28,8 +32,8 @@ const FiltersMenu = () => {
   const applicants = useSelector((state) => state.applicants.applicants);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const form = useForm<FilterApplicantsValues>();
-  const [choosenCities, setChoosenCities] = React.useState(["Москва"]);
-  const { register, getValues } = form;
+  const [choosenCities, setChoosenCities] = React.useState<string[]>([]);
+  const { register } = form;
 
   const handleMainMenuClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -44,42 +48,67 @@ const FiltersMenu = () => {
 
     console.log(filters);
 
-    filters.push({key: "province", value: city})
+    filters.push({ key: "province", value: city });
 
-    dispatch(setChecked({key: "province", value: city}));
+    dispatch(setChecked({ key: "province", value: city }));
 
-      mainApi.getFilteresApplicants(filters)
-    .then(data => {
-      dispatch(setShownApplicants(data.results));
-    })
-    .catch(err => console.log(err))
+    mainApi
+      .getFilteresApplicants(filters)
+      .then((data) => {
+        dispatch(setShownApplicants(data.results));
+      })
+      .catch((err) => console.log(err));
 
     setChoosenCities([city, ...choosenCities]);
-  }
+  };
 
   function handleCheckboxChange(e: React.ChangeEvent<HTMLInputElement>) {
     const filter = e.target.name;
     let filters = [...checkedList];
 
-    if(['HB','FD','RM'].includes(filter)) {
+    if (["HB", "FD", "RM"].includes(filter)) {
       if (e.target.checked) {
-        filters.push({key: "work_format", value: filter})
-        dispatch(setChecked({key: "work_format", value: filter}));
+        filters.push({ key: "work_format", value: filter });
+        dispatch(setChecked({ key: "work_format", value: filter }));
       } else {
-        dispatch(unsetChecked({key: "work_format", value: filter}));
-        filters =  checkedList.filter(item => item.value !== filter);
+        dispatch(unsetChecked({ key: "work_format", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
+      }
+    }
 
+    if (["1", "2", "3"].includes(filter)) {
+      if (e.target.checked) {
+        filters.push({ key: "work_status", value: filter });
+        dispatch(setChecked({ key: "work_status", value: filter }));
+      } else {
+        dispatch(unsetChecked({ key: "work_status", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
+      }
+    }
+
+    if (
+      ["Разработчик", "Аналитик", "Дизайн", "Менеджер", "Маркетолог"].includes(
+        filter
+      )
+    ) {
+      if (e.target.checked) {
+        filters.push({ key: "course", value: filter });
+        dispatch(setChecked({ key: "course", value: filter }));
+      } else {
+        dispatch(unsetChecked({ key: "course", value: filter }));
+        filters = checkedList.filter((item) => item.value !== filter);
       }
     }
 
     if (filters.length == 0) {
       dispatch(setShownApplicants(applicants));
     } else {
-      mainApi.getFilteresApplicants(filters)
-    .then(data => {
-      dispatch(setShownApplicants(data.results));
-    })
-    .catch(err => console.log(err))
+      mainApi
+        .getFilteresApplicants(filters)
+        .then((data) => {
+          dispatch(setShownApplicants(data.results));
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -104,22 +133,28 @@ const FiltersMenu = () => {
 
   const handleDelete = (clickedCity: string) => {
     const filter = clickedCity;
-    const filters =  checkedList.filter(item => item.value !== filter);
+    const filters = checkedList.filter((item) => item.value !== filter);
 
-    dispatch(unsetChecked({key: "province", value: filter}));
-    setChoosenCities(choosenCities.filter((city) => city !== clickedCity))
+    dispatch(unsetChecked({ key: "province", value: filter }));
+    setChoosenCities(choosenCities.filter((city) => city !== clickedCity));
 
     if (filters.length == 0) {
       dispatch(setShownApplicants(applicants));
     } else {
-      mainApi.getFilteresApplicants(filters)
-    .then(data => {
-      dispatch(setShownApplicants(data.results));
-    })
-    .catch(err => console.log(err))
+      mainApi
+        .getFilteresApplicants(filters)
+        .then((data) => {
+          dispatch(setShownApplicants(data.results));
+        })
+        .catch((err) => console.log(err));
     }
-
   };
+
+  function clearFilters() {
+    dispatch(setShownApplicants(applicants));
+    setChoosenCities([]);
+    dispatch(clearChecked());
+  }
 
   return (
     <form noValidate>
@@ -159,11 +194,56 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Программирование" id="isProgramming" register={register}/>
-            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Анализ данных" id="isDataAnalysis" register={register}/>
-            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Дизайн" id="isDesign" register={register}/>
-            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange}label="Менеджмент" id="isManagment" register={register}/>
-            <CheckboxCustomized handleCheckboxChange={handleCheckboxChange} label="Маркетинг" id="isMarketing" register={register}/>
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) =>
+                  item.value === "Разработчик"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Программирование"
+              id="Разработчик"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) =>
+                  item.value === "Аналитик"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Анализ данных"
+              id="Аналитик"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) =>
+                  item.value === "Дизайн"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Дизайн"
+              id="Дизайн"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) =>
+                  item.value === "Менеджер"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Менеджмент"
+              id="Менеджер"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) =>
+                  item.value === "Маркетолог"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Маркетинг"
+              id="Маркетолог"
+              register={register}
+            />
           </fieldset>
         </MenuItem>
         <Divider />
@@ -192,29 +272,27 @@ const FiltersMenu = () => {
           >
             <SearchBar addCity={setNewCity} type="city" text="Поиск города" />
             <ul className={filtersMenu.list}>
-            {choosenCities.map((city, index) => {
-              return (
-                <li key={index} className={filtersMenu.item}>
-                <Chip
-                sx={{
-                  ".MuiChip-label": {
-                    color: "#1D6BF3",
-                    fontFamily: "YS Text",
-                    fontSize: "13px",
-                    fontWeight: "400",
-                    lineHeight: "26px",
-                  },
-                }}
-                className={filtersMenu.chip}
-                label={city}
-                onDelete={() => handleDelete(city)}
-              />
-                </li>
-              )
-            })}
+              {choosenCities.map((city, index) => {
+                return (
+                  <li key={index} className={filtersMenu.item}>
+                    <Chip
+                      sx={{
+                        ".MuiChip-label": {
+                          color: "#1D6BF3",
+                          fontFamily: "YS Text",
+                          fontSize: "13px",
+                          fontWeight: "400",
+                          lineHeight: "26px",
+                        },
+                      }}
+                      className={filtersMenu.chip}
+                      label={city}
+                      onDelete={() => handleDelete(city)}
+                    />
+                  </li>
+                );
+              })}
             </ul>
-
-
           </fieldset>
         </MenuItem>
         <Divider />
@@ -241,10 +319,33 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-
-            {/* {createCheckbox("Релевантный")}
-            {createCheckbox("Около-релевантный")}
-            {createCheckbox("Учебный")} */}
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "1"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Релевантный"
+              id="1"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "2"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Около-релевантный"
+              id="2"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "3"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Около-релевантный"
+              id="3"
+              register={register}
+            />
           </fieldset>
         </MenuItem>
         <Divider />
@@ -271,9 +372,33 @@ const FiltersMenu = () => {
                 : `${filtersMenu.fieldsetVisible}`
             }`}
           >
-            <CheckboxCustomized isChecked={checkedList.some((item:{key:string, value:string}) => item.value === "FD")} handleCheckboxChange={handleCheckboxChange} label="Офис" id="FD" register={register}/>
-            <CheckboxCustomized isChecked={checkedList.some((item:{key:string, value:string}) => item.value === "HB")} handleCheckboxChange={handleCheckboxChange} label="Гибрид" id="HB" register={register}/>
-            <CheckboxCustomized isChecked={checkedList.some((item:{key:string, value:string}) => item.value === "RM")} handleCheckboxChange={handleCheckboxChange} label="Удаленная работа" id="RM" register={register}/>
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "FD"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Офис"
+              id="FD"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "HB"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Гибрид"
+              id="HB"
+              register={register}
+            />
+            <CheckboxCustomized
+              isChecked={checkedList.some(
+                (item: { key: string; value: string }) => item.value === "RM"
+              )}
+              handleCheckboxChange={handleCheckboxChange}
+              label="Удаленная работа"
+              id="RM"
+              register={register}
+            />
           </fieldset>
         </MenuItem>
         <Divider />
@@ -286,6 +411,7 @@ const FiltersMenu = () => {
               className={filtersMenu.deleteIcon}
             />
           }
+          onClick={clearFilters}
           className={filtersMenu.buttonDelete}
         >
           Очистить фильтры

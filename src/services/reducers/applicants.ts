@@ -9,7 +9,7 @@ const applicantsSlice = createSlice({
     selectedCardData: {} as TApplicant,
     applicants: [] as Array<TApplicant>,
     selectedDropDownVacancy: {} as TVacancy,
-    checked: [] as {key: string, value: string}[],
+    checked: [] as { key: string; value: string }[],
     shownApplicants: [] as Array<TApplicant>,
   },
   reducers: {
@@ -20,26 +20,39 @@ const applicantsSlice = createSlice({
       state.selectedCardData = action.payload;
     },
     setApplicants(state, action: PayloadAction<Array<TApplicant>>) {
-      console.log(action.payload)
+      console.log(action.payload);
       state.applicants = action.payload;
     },
     setSelectedDropDownVacancy(state, action: PayloadAction<TVacancy>) {
       state.selectedDropDownVacancy = action.payload;
     },
-    setChecked(state, action: PayloadAction<{key: string, value: string}>) {
-      state.checked = [action.payload, ...state.checked]
+    setChecked(state, action: PayloadAction<{ key: string; value: string }>) {
+      state.checked = [action.payload, ...state.checked];
     },
-    unsetChecked(state, action: PayloadAction<{key: string, value: string}>) {
+    unsetChecked(state, action: PayloadAction<{ key: string; value: string }>) {
       console.log(action.payload);
-      state.checked = state.checked.filter(item => item.value !== action.payload.value);
+      state.checked = state.checked.filter(
+        (item) => item.value !== action.payload.value
+      );
     },
     setShownApplicants(state, action: PayloadAction<Array<TApplicant>>) {
       state.shownApplicants = action.payload;
     },
+    clearChecked(state) {
+      state.checked = [];
+    },
   },
 });
 
-export const { setShownApplicants, unsetChecked, setChecked, setUserModalVisibility, setSelectedCardData, setApplicants, setSelectedDropDownVacancy } =
-  applicantsSlice.actions;
+export const {
+  clearChecked,
+  setShownApplicants,
+  unsetChecked,
+  setChecked,
+  setUserModalVisibility,
+  setSelectedCardData,
+  setApplicants,
+  setSelectedDropDownVacancy,
+} = applicantsSlice.actions;
 
 export default applicantsSlice.reducer;
