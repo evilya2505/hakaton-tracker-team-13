@@ -229,7 +229,7 @@ const CandidateTable = () => {
                 {currentVacancyApplicantsList.map((candidate, index) => {
                   return (
                     <TableRow key={index}>
-                      <TableCell size="small">{candidate.id}</TableCell>
+                      <TableCell size="small">{index}</TableCell>
                       <TableCell size="small">
                         <Checkbox
                           variant="outlined"
