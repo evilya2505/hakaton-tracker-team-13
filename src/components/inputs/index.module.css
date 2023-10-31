@@ -25,7 +25,8 @@
   flex-direction: column;
 }
 
-.inputSectionSalaryTo {
+.inputSectionSalary {
+  margin-right: 15px;
   display: flex;
   flex-direction: column;
 }

@@ -1,8 +1,8 @@
 .form {
-  margin: 20px 0 0;
-  padding: 0;
-  height: 100%;
-  width: 924px;
+  margin: 28px 0 0;
+  width: 945px;
+  display: flex;
+  flex-direction: column;
 }
 
 .fieldset {
@@ -10,13 +10,11 @@
   padding: 0;
   margin: 0;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
 }
 
 /* добавлено */
 .inputSection {
-  margin-right: 24px;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
 }
@@ -41,19 +39,19 @@
 }
 
 .buttonWrapper {
+  margin: 0;
+  padding: 0;
   width: 250px;
   margin: 30px auto 0;
 }
 
 .mainFieldset {
-  margin: 0;
+  width: 100%;
   padding: 0;
   border: none;
-
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .fieldsetColumns {
@@ -61,7 +59,6 @@
   margin: 0;
   padding: 0;
   border: none;
-  /* column-gap: 24px; */
 }
 
 .multiLineInput {
@@ -72,6 +69,7 @@
 .column {
   display: flex;
   flex-direction: column;
+
 }
 
 /* добавлено */
@@ -98,6 +96,7 @@
   font-weight: 400 !important;
   line-height: 20px !important;
 }
+
 /* добавлено */
 .error {
   margin-top: 4px;

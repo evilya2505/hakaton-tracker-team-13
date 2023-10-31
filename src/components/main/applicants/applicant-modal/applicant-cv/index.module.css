@@ -47,7 +47,7 @@
   max-width: 1005px;
   margin: 0;
   padding: 0;
-  overflow-y: auto;
+  overflow-y: scroll;
   height: 392px;
 }
 

@@ -6,7 +6,7 @@ import { UseFormRegister } from 'react-hook-form';
 
 const sizes = {
   "default" : '320px',
-  "salaryTo" : '153px',
+  "salary" : '153px',
 }
 
 interface IInputProps {
@@ -14,14 +14,14 @@ interface IInputProps {
   errorMessage: string | undefined;
   register: UseFormRegister<any>;
   id: string;
-  type: 'default' | 'salaryTo';
+  type: 'default' | 'salary';
   placeholder: string;
   defaultValue: string | number;
 }
 
 export default function InlineInput({placeholder, type, title, errorMessage, register, id, defaultValue }:IInputProps) {
   return (
-    <div className={type ===  'default' ? input.inputSection : input.inputSectionSalaryTo}>
+    <div className={type ===  'default' ? input.inputSection : input.inputSectionSalary}>
     <label htmlFor={id} className={input.label}>
       {title}
     </label>
