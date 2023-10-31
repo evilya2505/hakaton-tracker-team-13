@@ -11,7 +11,7 @@ const applicantsSlice = createSlice({
     selectedDropDownVacancy: {} as TVacancy,
     checked: [] as { key: string; value: string }[],
     shownApplicants: [] as Array<TApplicant>,
-    applicantsSearchResults: [] as Array<TApplicant>,
+    applicantsSearchResults: [] as Array<TApplicant | undefined>,
   },
   reducers: {
     setUserModalVisibility(state, action: PayloadAction<boolean>) {
@@ -43,10 +43,11 @@ const applicantsSlice = createSlice({
     },
     setApplicantsSearchResults(
       state,
-      action: PayloadAction<Array<TApplicant>>
+      action: PayloadAction<Array<TApplicant | undefined>>
     ) {
       console.log(action.payload);
-      state.applicants = action.payload;
+      if (action.payload !== undefined)
+        state.applicantsSearchResults = action.payload;
     },
   },
 });

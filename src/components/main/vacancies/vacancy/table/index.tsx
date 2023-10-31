@@ -27,8 +27,12 @@ import CompareApplicantsModal from "../compare-applicants-modal";
 import { useSelector, useDispatch } from "../../../../../services/hooks";
 import { editCandidateStatus } from "../../../../../services/actions/vacancies";
 import Checkbox from "@mui/joy/Checkbox";
+import { TApplicant } from "../../../../../utils/types";
 
 const CandidateTable = () => {
+  const [dataToShow, setDataToShow] = React.useState<
+    Array<TApplicant | undefined>
+  >([]);
   const dispatch = useDispatch();
   const [isCompareyModalOpened, setIsCompareModalOpened] =
     React.useState<boolean>(false);
@@ -36,6 +40,7 @@ const CandidateTable = () => {
   const currentVacancyApplicantsList = useSelector(
     (state) => state.vacancies.currentVacancyApplicantsList
   );
+  const searchResult = useSelector((state) => state.vacancies.searchResults);
   const currentVacancy = useSelector(
     (state) => state.vacancies.currentVacancyPage
   );
@@ -64,32 +69,37 @@ const CandidateTable = () => {
   );
 
   const handleStatusChange = (
-    candidateId: number,
+    candidateId: number | undefined,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    if (
-      applicantStatuses.find((status) => status.id == parseInt(e.target.value))
-        ?.name !== undefined
-    ) {
-      dispatch(
-        editCandidateStatus({
-          applicantId: candidateId,
-          vacancyId: currentVacancy?.id,
-          status: applicantStatuses.find(
-            (status) => status.id == parseInt(e.target.value)
-          )?.name,
-        })
-      );
+    if (candidateId !== undefined) {
+      if (
+        applicantStatuses.find(
+          (status) => status.id == parseInt(e.target.value)
+        )?.name !== undefined
+      ) {
+        dispatch(
+          editCandidateStatus({
+            applicantId: candidateId,
+            vacancyId: currentVacancy?.id,
+            status: applicantStatuses.find(
+              (status) => status.id == parseInt(e.target.value)
+            )?.name,
+          })
+        );
+      }
     }
   };
 
-  const handleCandidateSelection = (candidateId: number) => {
-    if (selectedCandidates.includes(candidateId)) {
-      setSelectedCandidates(
-        selectedCandidates.filter((id) => id !== candidateId)
-      );
-    } else {
-      setSelectedCandidates([...selectedCandidates, candidateId]);
+  const handleCandidateSelection = (candidateId: number | undefined) => {
+    if (candidateId !== undefined) {
+      if (selectedCandidates.includes(candidateId)) {
+        setSelectedCandidates(
+          selectedCandidates.filter((id) => id !== candidateId)
+        );
+      } else {
+        setSelectedCandidates([...selectedCandidates, candidateId]);
+      }
     }
   };
 
@@ -108,12 +118,20 @@ const CandidateTable = () => {
 
     setSelectedCandidates(tempArray);
   };
+
+  React.useEffect(() => {
+    if (searchResult.length > 0) {
+      setDataToShow(searchResult);
+    } else {
+      setDataToShow(currentVacancyApplicantsList);
+    }
+  }, [searchResult, currentVacancyApplicantsList]);
   return (
     <>
       <div className={table.filterContainer}>
         <div className={table.filtersWrapper}>
           <div className={table.wrapper}>
-            <SearchBar text="Поиск по имени" />
+            <SearchBar text="Поиск по имени" type="vacancy" />
           </div>
           <div>
             <p className={table.text}>Статус</p>
@@ -226,17 +244,20 @@ const CandidateTable = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {currentVacancyApplicantsList.map((candidate, index) => {
+                {dataToShow.map((candidate, index) => {
                   return (
                     <TableRow key={index}>
-                      <TableCell size="small">{candidate.id}</TableCell>
+                      <TableCell size="small">{candidate?.id}</TableCell>
                       <TableCell size="small">
                         <Checkbox
                           variant="outlined"
                           size="lg"
-                          checked={selectedCandidates.includes(candidate.id)}
+                          checked={
+                            candidate?.id !== undefined &&
+                            selectedCandidates.includes(candidate?.id)
+                          }
                           onChange={() =>
-                            handleCandidateSelection(candidate.id)
+                            handleCandidateSelection(candidate?.id)
                           }
                         />
                       </TableCell>
@@ -252,10 +273,10 @@ const CandidateTable = () => {
                         >
                           <img
                             className={table.avatar}
-                            src={candidate.avatar_url}
+                            src={candidate?.avatar_url}
                             alt="изображение студента"
                           />
-                          {`${candidate.first_name} ${candidate.last_name}`}
+                          {`${candidate?.first_name} ${candidate?.last_name}`}
                         </div>
                       </TableCell>
                       <TableCell className={table.cell}>
@@ -293,7 +314,7 @@ const CandidateTable = () => {
                           sx={{
                             backgroundColor: applicantStatuses.find(
                               (status) =>
-                                status.name == candidate.response_status
+                                status.name == candidate?.response_status
                             )?.color,
                             ".MuiOutlinedInput-input": {
                               padding: "8px 12px",
@@ -304,13 +325,13 @@ const CandidateTable = () => {
                               lineHeight: "20px",
                             },
                           }}
-                          onChange={(e) => handleStatusChange(candidate.id, e)}
+                          onChange={(e) => handleStatusChange(candidate?.id, e)}
                           className={table.input}
                           id="status"
                           value={
                             applicantStatuses.find(
                               (status) =>
-                                status.name == candidate.response_status
+                                status.name == candidate?.response_status
                             )?.id
                           }
                           select
@@ -327,19 +348,19 @@ const CandidateTable = () => {
                         </TextField>
                       </TableCell>
                       <TableCell className={table.cell}>
-                        {candidate.city}
+                        {candidate?.city}
                       </TableCell>
                       <TableCell className={table.cell}>
-                        {candidate.work_format}
+                        {candidate?.work_format}
                       </TableCell>
                       <TableCell className={table.cell}>
-                        {candidate.edu_status}
+                        {candidate?.edu_status}
                       </TableCell>
                       <TableCell className={table.cell}>
-                        {candidate.work_status}
+                        {candidate?.work_status}
                       </TableCell>
                       <TableCell className={table.cell}>
-                        {candidate.course}
+                        {candidate?.course}
                       </TableCell>
                       <TableCell className={table.cell} sx={{ width: "200px" }}>
                         {candidate?.graduation_date.toString()}

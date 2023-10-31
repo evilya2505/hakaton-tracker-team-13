@@ -166,6 +166,7 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
       }
     } else {
       if (type == "applicants") {
+        console.log(true);
         mainApi
           .getFilteresApplicants(filters)
           .then((data) => {

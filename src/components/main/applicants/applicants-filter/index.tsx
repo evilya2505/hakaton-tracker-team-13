@@ -20,7 +20,7 @@ const ApplicantsFilter: React.FC<{}> = (): JSX.Element => {
   return (
     <div className={applicantsFilter.container}>
       <div className={applicantsFilter.searchWrapper}>
-        <SearchBar text="Поиск" />
+        <SearchBar text="Поиск" type="applicants" />
       </div>
       <VacanciesDropDown />
       <FiltersMenu type={"applicants"} />
