@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { getSearchResults } from "../../utils/getSearchResults";
 import { useSelector, useDispatch } from "../../services/hooks";
 import { setApplicantsSearchResults } from "../../services/reducers/applicants";
+import { setSearchResult } from "../../services/reducers/vacancies";
 
 interface ISearchBarProps {
   text: string;
@@ -26,27 +27,38 @@ const SearchBar: React.FC<ISearchBarProps> = ({
 
   const applicants = useSelector((state) => state.applicants.applicants);
   const dispatch = useDispatch();
+  const applicantsVacancy = useSelector(
+    (state) => state.vacancies.currentVacancyApplicantsListNotFiltered
+  );
+  const onSubmit = (data: { keyWord: string }) => {
+    if (addCity !== undefined) addCity(data.keyWord);
 
-  // const onSubmit = (data: { keyWord: string }) => {
-  //   if (addCity !== undefined) addCity(data.keyWord);
-  // };
+    if (type !== undefined && type === "applicants") {
+      if (data.keyWord.trim() !== "") {
+        dispatch(
+          setApplicantsSearchResults(getSearchResults(data.keyWord, applicants))
+        );
+      } else {
+        dispatch(setApplicantsSearchResults([]));
+      }
+    }
 
-  useEffect(() => {getSearchResults('пол', applicants)},[applicants])
-
-  function submit(data: { keyWord: string }) {
-      console.log(`submit ${applicants}`)
-      // applicants не передаются
-  //     dispatch(
-  //       setApplicantsSearchResults(getSearchResults(data.keyWord, applicants))
-  //     );
-  }
+    if (type !== undefined && type === "vacancy") {
+      if (data.keyWord.trim() !== "") {
+        dispatch(
+          setSearchResult(getSearchResults(data.keyWord, applicantsVacancy))
+        );
+      } else {
+        dispatch(setSearchResult([]));
+      }
+    }
+  };
 
   return (
     <form
       className={searchBar.form}
       noValidate
-      // onSubmit={handleSubmit(onSubmit)}
-      onSubmit={handleSubmit(submit)}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <TextField
         id="search-bar"

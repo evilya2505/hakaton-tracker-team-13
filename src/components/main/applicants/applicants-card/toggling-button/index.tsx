@@ -9,7 +9,8 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { useSelector, useDispatch } from "../../../../../services/hooks";
 import mainApi from "../../../../../utils/MainApi";
-import { TApplicant } from "../../../../../utils/types";
+import { TApplicant, TVacancy } from "../../../../../utils/types";
+import { setSelectedDropDownVacancy } from "../../../../../services/reducers/applicants";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -34,6 +35,7 @@ export const TogglingButton = ({ applicant }: togglingButtonProps) => {
     (state) => state.applicants.selectedDropDownVacancy
   );
 
+  const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackBar] = useState(false);
   const [progress, setProgress] = useState(100);
   const [isCandidate, setIsCandidate] = useState(false);

@@ -16,29 +16,27 @@ function replacer(query: string) {
 }
 
 // принимает строку из инпута и текущий массив кандидатов
-
 export const getSearchResults = (
   query: string,
   applicants: Array<TApplicant>
 ) => {
-  // обрабатываем строку запроса
   query = replacer(query).toLowerCase();
-  let results: Array<TApplicant | undefined>;
 
-  // фильтруем массив кандидатов
+  let results: Array<TApplicant>;
+
   results = applicants.filter((applicant) => {
-    // ищем совпадения в массиве значений всех ключей объекта кандидата
-    let values = Object.values(applicant);
-    values = values
-      .filter((value) => typeof value === "string" || typeof value === "number")
-      .map((value) => {
-        return value.toString().toLowerCase();
-      });
-    // оставляем в массиве только те значения, которые совпали с запросом
-    values = values.filter((value) => value.toString().includes(query));
-    // если массив не пуст, то оставляем кандидата в массиве
-    if (values.length > 0) return applicant;
+    if (applicant.hasOwnProperty("first_name")) {
+      const name = applicant.first_name.toString().toLowerCase();
+      if (applicant.hasOwnProperty("first_name")) {
+        const surname = applicant.last_name.toString().toLowerCase();
+        if (name.includes(query) || surname.includes(query)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   });
-  console.log(results);
+
   return results;
 };

@@ -27,6 +27,8 @@ export interface TVacaniesListState {
     edu_statuses: string[];
     courses: string[];
   };
+
+  searchResults: Array<TApplicant | undefined>;
 }
 
 export const initialState: TVacaniesListState = {
@@ -52,6 +54,8 @@ export const initialState: TVacaniesListState = {
     edu_statuses: [],
     courses: [],
   },
+
+  searchResults: [],
 };
 
 const vacanciesSlice = createSlice({
@@ -149,8 +153,6 @@ const vacanciesSlice = createSlice({
             state.infoForFilters = updatedInfoForFilters;
           }
         }
-
-        console.log(state.infoForFilters);
       }
     },
     setModalVisibility(
@@ -238,14 +240,20 @@ const vacanciesSlice = createSlice({
             }
           });
       }
-      console.log(state.currentVacancyApplicantsList);
       state.editApplicantStatusRequest = false;
       state.editApplicantStatusRequest = false;
+    },
+    setSearchResult(
+      state: TVacaniesListState,
+      action: PayloadAction<Array<TApplicant | undefined>>
+    ) {
+      state.searchResults = action.payload;
     },
   },
 });
 
 export const {
+  setSearchResult,
   setApplicantStatusRequest,
   setApplicantStatusSuccess,
   setApplicantsStatusFailed,
