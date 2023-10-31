@@ -18,7 +18,6 @@ import {
 import { clearChecked } from "../../services/reducers/applicants";
 import { setCurrentVacancyApplicantsList } from "../../services/reducers/vacancies";
 
-
 interface IFiltersMenuProps {
   type: string;
 }
@@ -135,24 +134,22 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
       if (e.target.checked) {
         filters.push({
           key: "edu_status",
-          value: filter == "Студент" ? "1" : "2",
+          value: filter,
         });
         dispatch(
           setChecked({
             key: "edu_status",
-            value: filter == "Студент" ? "1" : "2",
+            value: filter,
           })
         );
       } else {
         dispatch(
           unsetChecked({
             key: "edu_status",
-            value: filter == "Студент" ? "1" : "2",
+            value: filter,
           })
         );
-        filters = checkedList.filter(
-          (item) => item.value !== (filter == "Студент" ? "1" : "2")
-        );
+        filters = checkedList.filter((item) => item.value !== filter);
       }
     }
 
@@ -292,7 +289,6 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-
         {type == "applicants" && (
           <>
             <MenuItem className={filtersMenu.menuItem}>
@@ -742,7 +738,8 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
               >
                 <CheckboxCustomized
                   isChecked={checkedList.some(
-                    (item: { key: string; value: string }) => item.value === "1"
+                    (item: { key: string; value: string }) =>
+                      item.value === "Студент"
                   )}
                   handleCheckboxChange={handleCheckboxChange}
                   label="Студент"
@@ -759,7 +756,8 @@ const FiltersMenu = ({ type }: IFiltersMenuProps) => {
                 />
                 <CheckboxCustomized
                   isChecked={checkedList.some(
-                    (item: { key: string; value: string }) => item.value === "2"
+                    (item: { key: string; value: string }) =>
+                      item.value === "Выпускник"
                   )}
                   handleCheckboxChange={handleCheckboxChange}
                   label="Выпускник"
